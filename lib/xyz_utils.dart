@@ -20,4 +20,5 @@ export 'src/util_post_destructor.dart';
 export 'src/util_regex.dart';
 export 'src/util_replace_handlebars.dart';
 export 'src/util_silly_value.dart';
+export 'src/util_string_cases.dart';
 export 'src/util_version.dart';
