@@ -8,6 +8,12 @@ import 'dart:convert';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+T? letAs<T>(dynamic input) {
+  return input is T ? input : null;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
 /// Converts any [input] to `T` if possible. Returns `null` if not possible.
 T? let<T>(dynamic input) {
   if (input == null) return null;
