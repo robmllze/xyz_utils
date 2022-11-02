@@ -22,13 +22,7 @@ linter:
     require_trailing_commas: true
     unnecessary_this: false
     camel_case_types: false
-    library_private_types_in_public_api: false
-    
-analyzer:
-  exclude: 
-    - build/**
-    - lib/**.g.dart  
-  strong-mode:
+    library_private_types_in_public_api: false  
   errors:
     prefer_final_in_for_each: error
     unnecessary_new: error
