@@ -22,9 +22,4 @@ linter:
     require_trailing_commas: true
     unnecessary_this: false
     camel_case_types: false
-    library_private_types_in_public_api: false  
-  errors:
-    prefer_final_in_for_each: error
-    unnecessary_new: error
-    use_key_in_widget_constructors: error
-    prefer_relative_imports: error
+    library_private_types_in_public_api: false
