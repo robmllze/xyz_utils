@@ -311,19 +311,9 @@ Json mapToJson<T1, T2>(Map<T1, T2> input) => _mapToJson(input);
 
 dynamic _mapToJson(dynamic input) {
   if (input is Map) {
-    final result = <String, dynamic>{};
-    for (final l in input.entries) {
-      final key = l.key.toString();
-      final value = l.value;
-      result[key] = mapToJson(value);
-    }
-    return result;
+    return input.map((final k, final v) => MapEntry(k.toString(), mapToJson(v)));
   } else if (input is Iterable) {
-    final result = <dynamic>[1];
-    for (final l in input) {
-      result.add(mapToJson(l));
-    }
-    return result;
+    return input.map((final l) => mapToJson(l)).toList();
   }
   if (input is num || input is bool || input is String) {
     return input;
@@ -331,5 +321,5 @@ dynamic _mapToJson(dynamic input) {
   if (input == null) {
     return "";
   }
-  return letString(input) ?? "";
+  return input.toString();
 }
