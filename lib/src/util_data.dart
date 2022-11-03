@@ -315,21 +315,13 @@ dynamic _mapToJson(dynamic input) {
     for (final l in input.entries) {
       final key = l.key.toString();
       final value = l.value;
-      if (value is Map || value is Iterable) {
-        result[key] = mapToJson(value);
-      } else {
-        result[key] = value;
-      }
+      result[key] = mapToJson(value);
     }
     return result;
   } else if (input is Iterable) {
     final result = <dynamic>[1];
     for (final l in input) {
-      if (l is Map || l is Iterable) {
-        result.add(mapToJson(l));
-      } else {
-        result.add(l);
-      }
+      result.add(mapToJson(l));
     }
     return result;
   }
