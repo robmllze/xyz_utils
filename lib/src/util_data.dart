@@ -9,6 +9,8 @@
 export 'dart:collection';
 import 'package:collection/collection.dart' show mergeMaps;
 
+import '../xyz_utils.dart';
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Map<T1, T2>? maybeAddToMap<T1, T2>(Map<T1, T2>? source, Map<T1, T2>? add) {
@@ -300,3 +302,42 @@ final dynamic map = _VarArgsFunction<Map>((final args1, final args2) {
   final l2 = args2.entries;
   return Map.fromEntries(l1.followedBy(l2));
 });
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+typedef Json = Map<String, dynamic>;
+
+Json mapToJson<T1, T2>(Map<T1, T2> input) => _mapToJson(input);
+
+dynamic _mapToJson(dynamic input) {
+  if (input is Map) {
+    final result = <String, dynamic>{};
+    for (final l in input.entries) {
+      final key = l.key.toString();
+      final value = l.value;
+      if (value is Map || value is Iterable) {
+        result[key] = mapToJson(value);
+      } else {
+        result[key] = value;
+      }
+    }
+    return result;
+  } else if (input is Iterable) {
+    final result = <dynamic>[1];
+    for (final l in input) {
+      if (l is Map || l is Iterable) {
+        result.add(mapToJson(l));
+      } else {
+        result.add(l);
+      }
+    }
+    return result;
+  }
+  if (input is num || input is bool || input is String) {
+    return input;
+  }
+  if (input == null) {
+    return "";
+  }
+  return letString(input) ?? "";
+}
