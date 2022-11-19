@@ -51,8 +51,8 @@ T mergeListsOrSets<T extends Iterable>(T a, dynamic b) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Iterable mergeIterables(dynamic a, dynamic b) {
-  final aa = a is Iterable ? a: [a];
-  final bb = b is Iterable ? b: [b];
+  final aa = a is Iterable ? a : [a];
+  final bb = b is Iterable ? b : [b];
   return aa.followedBy(bb);
 }
 
@@ -313,15 +313,30 @@ final dynamic map = _VarArgsFunction<Map>((final args1, final args2) {
 
 typedef Json = Map<String, dynamic>;
 
-Json mapToJson<T1, T2>(Map<T1, T2> input) => _mapToJson(input);
+Json mapToJson<T1, T2>(
+  Map<T1, T2> input, {
+  Set<Type> typesAllowed = const {},
+}) {
+  return _mapToJson(input, typesAllowed);
+}
 
-dynamic _mapToJson(dynamic input) {
+dynamic _mapToJson(
+  dynamic input,
+  Set<Type> typesAllowed,
+) {
   if (input is Map) {
-    return input.map((final k, final v) => MapEntry(k.toString(), _mapToJson(v)));
+    return input.map((final k, final v) => MapEntry(k.toString(), _mapToJson(v, typesAllowed)));
   } else if (input is Iterable) {
-    return input.map((final l) => _mapToJson(l)).toList();
+    return input.map((final l) => _mapToJson(l, typesAllowed)).toList();
   }
-  if (input is num || input is bool || input is String) {
+  if ({
+    bool,
+    String,
+    int,
+    double,
+    num,
+    ...typesAllowed,
+  }.contains(input.runtimeType)) {
     return input;
   }
   if (input == null) {
