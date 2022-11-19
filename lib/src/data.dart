@@ -58,26 +58,6 @@ Iterable mergeIterables(dynamic a, dynamic b) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-T mergeListsOrSets<T extends Iterable>(T a, dynamic b) {
-  final aa = a is List
-      ? List.of(a)
-      : a is Set
-          ? Set.of(a)
-          : null;
-  final bb = b is List
-      ? List.of(b)
-      : b is Set
-          ? Set.of(b)
-          : null;
-  if (aa == null) {
-    // TODO: Describe this error.
-    throw Error();
-  }
-  return bb == null ? ((aa as dynamic)..add(b)) : ((aa as dynamic)..addAll(bb));
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 dynamic mergeDataDeep(
   dynamic a,
   dynamic b, [
@@ -348,4 +328,22 @@ dynamic _mapToJson(dynamic input) {
     return "";
   }
   return input.toString();
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+String mapToCsv(Map input) {
+  var output = "";
+  for (final entry in input.entries) {
+    final key = entry.key;
+    dynamic value = entry.value;
+    if (value is Map) {
+      value = mapToCsv(value);
+    } else if (value is List) {
+      final s = value.toString();
+      value = s.substring(1, s.length - 1);
+    }
+    output += "\"$key\",\"$value\"\n";
+  }
+  return output;
 }

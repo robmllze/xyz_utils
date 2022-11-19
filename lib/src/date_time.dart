@@ -6,7 +6,7 @@
 
 import 'package:intl/intl.dart';
 
-import 'util_duration_formatted.dart';
+import 'duration_formatted.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
