@@ -17,14 +17,14 @@ void _debugLog({
   required String icon,
   required Object? message,
   required AnsiStyle color,
-  required Rec? note,
+  required Rec? rec,
   AnsiStyle? style,
 }) {
   assert(
     () {
       final s0 = AnsiStyle.italic + color;
       final s1 = AnsiStyle.bold + color;
-      final path = (note?.code != null ? "/${note!.code}" : "").withAnsiStyle(s0);
+      final path = (rec?.code != null ? "/${rec!.code}" : "").withAnsiStyle(s0);
       final title = "[Xyz Engine".withAnsiStyle(s1) + path + "]".withAnsiStyle(s1);
       final m = message.toString();
       final mStyled = m.withAnsiStyle(style);
@@ -42,67 +42,67 @@ void _debugLog({
 
 void debugLog(
   Object? message, [
-  Rec? note,
+  Rec? rec,
 ]) =>
     _debugLog(
       message: message,
       icon: "⚪️",
-      note: note,
+      rec: rec,
       color: AnsiStyle.fgLightBlack,
     );
 
 void debugLogError(
   Object? message, [
-  Rec? note,
+  Rec? rec,
 ]) =>
     _debugLog(
       message: message,
       icon: "🔴",
-      note: note,
+      rec: rec,
       color: AnsiStyle.fgLightBlack,
     );
 
 void debugLogAlert(
   Object? message, [
-  Rec? note,
+  Rec? rec,
 ]) =>
     _debugLog(
       message: message,
       icon: "🟠",
-      note: note,
+      rec: rec,
       color: AnsiStyle.fgLightBlack,
     );
 
 void debugLogIgnore(
   Object? message, [
-  Rec? note,
+  Rec? rec,
 ]) =>
     _debugLog(
       message: message,
       icon: "🟡",
-      note: note,
+      rec: rec,
       color: AnsiStyle.fgLightBlack,
       style: AnsiStyle.strikethrough,
     );
 
 void debugLogSuccess(
   Object? message, [
-  Rec? note,
+  Rec? rec,
 ]) =>
     _debugLog(
       message: message,
       icon: "🟢",
-      note: note,
+      rec: rec,
       color: AnsiStyle.fgLightBlack,
     );
 
 void debugLogBegin(
   Object? message, [
-  Rec? note,
+  Rec? rec,
 ]) =>
     _debugLog(
       message: message,
       icon: "🔵",
-      note: note,
+      rec: rec,
       color: AnsiStyle.fgLightBlack,
     );
