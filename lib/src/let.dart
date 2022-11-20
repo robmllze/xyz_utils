@@ -220,10 +220,10 @@ DateTime? letDateTime(
   if (input == null) return null;
   if (input is DateTime) return input;
   switch (input.runtimeType) {
-    case double:
-      return DateTime.fromMicrosecondsSinceEpoch((input as double).round());
     case int:
       return DateTime.fromMicrosecondsSinceEpoch(input);
+    case double:
+      return DateTime.fromMicrosecondsSinceEpoch((input as double).round());
   }
   if (input is String) {
     final result = DateTime.tryParse(input);
