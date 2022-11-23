@@ -35,6 +35,7 @@ class Rec {
   //
 
   final String? code;
+  final Symbol group;
   final RecOptions options;
 
   //
@@ -43,6 +44,7 @@ class Rec {
 
   const Rec([
     this.code = "",
+    this.group = #debug,
     this.options = const RecOptions({}),
   ]);
 
@@ -52,6 +54,7 @@ class Rec {
 
   Rec call([
     String? code,
+    Symbol? group,
     RecOptions options = const RecOptions({}),
   ]) {
     return Rec(
@@ -60,6 +63,7 @@ class Rec {
               ? "${this.code}.$code"
               : null
           : this.code,
+      group ?? this.group,
       this.options + options,
     );
   }
@@ -99,28 +103,103 @@ class Rec {
   //
   //
 
-  void debugLog([Object? message]) {
-    util_debug_log.debugLog(message ?? this.message(onError: (_) => "..."), this);
+  void debugLog([
+    Object? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLog(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
   }
 
-  void debugLogAlert([String? message]) {
-    util_debug_log.debugLogAlert(message ?? this.message(onError: (_) => "..."), this);
+  void debugLogError([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogError(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
   }
 
-  void debugLogIgnore([String? message]) {
-    util_debug_log.debugLogIgnore(message ?? this.message(onError: (_) => "..."), this);
+  void debugLogAlert([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogAlert(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
   }
 
-  void debugLogError([String? message]) {
-    util_debug_log.debugLogError(message ?? this.message(onError: (_) => "..."), this);
+  void debugLogIgnore([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogIgnore(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
   }
 
-  void debugLogInfo([String? message]) {
-    util_debug_log.debugLogBegin(message ?? this.message(onError: (_) => "..."), this);
+  void debugLogSuccess([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogSuccess(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
   }
 
-  void debugLogSuccess([String? message]) {
-    util_debug_log.debugLogSuccess(message ?? this.message(onError: (_) => "..."), this);
+  void debugLogStart([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogStart(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogStop([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogStop(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogInfo([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogInfo(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogMessage([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogMessage(
+      message ?? this.message(onError: (_) => "..."),
+      group ?? this.group,
+      this,
+    );
   }
 
   //

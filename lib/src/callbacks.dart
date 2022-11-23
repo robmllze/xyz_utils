@@ -51,9 +51,10 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
 
   void Function() add(TCallback<T1> callback, {dynamic key}) {
-    this._callbacks[key ?? callback] = callback;
+    final k = key ?? callback;
+    this._callbacks[k] = callback;
     return () {
-      this._callbacks.remove(callback);
+      this._callbacks.remove(k);
     };
   }
 
@@ -95,12 +96,51 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
-  FutureOr<bool> executeTogether(T1 param) async {
-    final all = this._callbacks.entries.map((final l) => l.value(l.key, param));
-    if (all.isNotEmpty) {
-      await Future.wait(all.map((final l) async => await l));
-      return true;
+  FutureOr<void> executeAll(
+    T1 param, {
+    CallbacksExecutionMethod executionMethod = CallbacksExecutionMethod.FAST,
+    CallbacksErrorMethod errorMethod = CallbacksErrorMethod.THROW_LAST,
+  }) async {
+    final errors = [];
+    final $handleCatch = errorMethod == //
+            CallbacksErrorMethod.THROW_LAST
+        ? (e) => errors.add(e)
+        : (e) => throw e;
+    if (executionMethod == CallbacksExecutionMethod.FAST) {
+      final callbacks = this._callbacks.entries.map(
+        (final l) async {
+          final key = l.key;
+          final callback = l.value;
+          try {
+            await callback(key, param);
+          } catch (e) {
+            $handleCatch(e);
+          }
+        },
+      );
+      if (callbacks.isNotEmpty) {
+        await Future.wait(callbacks);
+      }
+    } else {
+      for (final l in this._callbacks.entries) {
+        final key = l.key;
+        final callback = l.value;
+        try {
+          await callback(key, param);
+        } catch (e) {
+          $handleCatch(e);
+        }
+      }
     }
-    return false;
+
+    for (final e in errors) {
+      throw e;
+    }
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+enum CallbacksExecutionMethod { FAST, IN_SEQUENCE }
+
+enum CallbacksErrorMethod { THROW_LAST, THROW_IMMEDIATELY }
