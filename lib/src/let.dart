@@ -31,9 +31,9 @@ T? let<T>(dynamic input) {
   if (T == String || t == "String?") {
     return letString(input) as T?;
   }
-  if (T == Map || (t == "Map?" || (t.startsWith("Map<") && t.endsWith("?")))) {
-    return letMap(input) as T?;
-  }
+  // if (T == Map || (t == "Map?" || (t.startsWith("Map<") && t.endsWith("?")))) {
+  //   return _letMap(input) as T?;
+  // }
   if (T == Set || (t == "Set?" || (t.startsWith("Set<") && t.endsWith("?")))) {
     return letSet(input) as T?;
   }
@@ -134,16 +134,16 @@ String? letString(dynamic input) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Converts any [input] to a `Map` if possible. Returns `null` if not possible.
-Map<T1, T2>? letMap<T1, T2>(dynamic input) {
+Map<T1, T2>? _letMap<T1, T2>(dynamic input) {
   if (input == null) return null;
-  // if (input is String) {
-  //   try {
-  //     return letMap<T1, T2>(jsonDecode(input) as Map);
-  //   } catch (_) {
-  //     assert(false, "letMap cannot convert ${input.runtimeType} to Map (1)");
-  //     return null;
-  //   }
-  // }
+  if (input is String) {
+    try {
+      return _letMap<T1, T2>(jsonDecode(input) as Map);
+    } catch (_) {
+      assert(false, "letMap cannot convert ${input.runtimeType} to Map (1)");
+      return null;
+    }
+  }
   if (input is Map) {
     try {
       final a = input.map((final key, final value) {
