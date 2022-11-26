@@ -29,7 +29,7 @@ extension Norm on num {
 /// Combines two hashCode values.
 /// Reference: https://stackoverflow.com/questions/26648628/dart-is-xoring-two-hashcodes-always-going-to-return-a-new-unique-hashcode
 int combineHashCodes(final int hash, final int value) {
-  int h = 0x1fffffff & (hash + value);
+  var h = 0x1fffffff & (hash + value);
   h = 0x1fffffff & (h + ((0x0007ffff & h) << 10));
   return h ^ (h >> 6);
 }

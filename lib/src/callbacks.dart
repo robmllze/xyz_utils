@@ -6,7 +6,7 @@
 
 import 'dart:async';
 
-typedef TCallback<T> = FutureOr<void> Function(dynamic key, T param);
+typedef TCallback<T> = Future<void> Function(dynamic key, T param);
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -53,9 +53,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   void Function() add(TCallback<T1> callback, {dynamic key}) {
     final k = key ?? callback;
     this._callbacks[k] = callback;
-    return () {
-      this._callbacks.remove(k);
-    };
+    return () => this._callbacks.remove(k);
   }
 
   //
@@ -86,7 +84,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
-  FutureOr<bool> execute(dynamic key, T1 param) async {
+  Future<bool> execute(dynamic key, T1 param) async {
     final callback = this._callbacks[key];
     await callback?.call(key, param);
     return callback != null;
@@ -96,9 +94,9 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
-  FutureOr<void> executeAll(
+  Future<void> executeAll(
     T1 param, {
-    CallbacksExecutionMethod executionMethod = CallbacksExecutionMethod.FAST,
+    CallbacksExecutionMethod executionMethod = CallbacksExecutionMethod.IN_SEQUENCE,
     CallbacksErrorMethod errorMethod = CallbacksErrorMethod.THROW_LAST,
   }) async {
     final errors = [];
@@ -106,7 +104,17 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
             CallbacksErrorMethod.THROW_LAST
         ? (e) => errors.add(e)
         : (e) => throw e;
-    if (executionMethod == CallbacksExecutionMethod.FAST) {
+    if (executionMethod == CallbacksExecutionMethod.IN_SEQUENCE) {
+      for (final l in this._callbacks.entries) {
+        final key = l.key;
+        final callback = l.value;
+        try {
+          await callback(key, param);
+        } catch (e) {
+          $handleCatch(e);
+        }
+      }
+    } else {
       final callbacks = this._callbacks.entries.map(
         (final l) async {
           final key = l.key;
@@ -120,16 +128,6 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
       );
       if (callbacks.isNotEmpty) {
         await Future.wait(callbacks);
-      }
-    } else {
-      for (final l in this._callbacks.entries) {
-        final key = l.key;
-        final callback = l.value;
-        try {
-          await callback(key, param);
-        } catch (e) {
-          $handleCatch(e);
-        }
       }
     }
 
