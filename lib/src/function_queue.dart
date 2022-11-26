@@ -17,22 +17,22 @@ class FunctionQueue {
   //
   //
 
-  Future<T?> add<T>(
+  Future<T> add<T>(
     Future<T> Function() f, {
     Duration? buffer,
   }) async {
-    final f1 = _Queueable<T>(
+    final q = _Queueable<T>(
       buffer == null
           ? f
-          : (await Future.wait([
-              f(),
-              Future.delayed(buffer),
-            ]))
-              .first,
+          : () async => (await Future.wait([
+                f(),
+                Future.delayed(buffer),
+              ]))
+                  .first,
     );
-    this._queue.add(f1);
+    this._queue.add(q);
     await execute();
-    return f1._completer.future;
+    return q._completer.future;
   }
 
   //
@@ -40,13 +40,15 @@ class FunctionQueue {
   //
 
   Future<void> execute() async {
-    this._queue.removeWhere((final l) => l._status == _QueueableStatus.RAN);
-    for (final l in this._queue) {
+    for (final l in this._queue
+      ..removeWhere(
+        (final l) => l._status == _QueueableStatus.RAN,
+      )) {
       final status = l._status;
       if (status == _QueueableStatus.RUNNING) break;
       if (status == _QueueableStatus.READY) {
         l._status = _QueueableStatus.RUNNING;
-        l._completer.complete(await l._function());
+        l._completer.complete(l._function());
         l._status = _QueueableStatus.RAN;
         await execute();
         break;

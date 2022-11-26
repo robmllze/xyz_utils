@@ -6,7 +6,7 @@
 
 import 'dart:async';
 
-typedef TCallback<T> = Future<void> Function(dynamic key, T param);
+typedef TCallback<T> = Future<dynamic> Function(dynamic key, T param);
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -84,7 +84,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
-  Future<bool> execute(dynamic key, T1 param) async {
+  Future<bool> call(dynamic key, T1 param) async {
     final callback = this._callbacks[key];
     await callback?.call(key, param);
     return callback != null;
@@ -94,51 +94,55 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
-  Future<void> executeAll(
+  Future<Map<dynamic, dynamic>?> callAll(
+    T1 param, [
+    dynamic Function(Object e)? onError,
+  ]) async {
+    final results = <dynamic, dynamic>{};
+    for (final l in this._callbacks.entries) {
+      final key = l.key;
+      final callback = l.value;
+      try {
+        results[key] = await callback(key, param);
+      } catch (e) {
+        if (onError != null) {
+          results[key] = onError(e);
+        } else {
+          rethrow;
+        }
+      }
+    }
+    return results;
+  }
+
+  //
+  //
+  //
+
+  Future<Map<dynamic, dynamic>?> callAllSimultaneously(
     T1 param, {
-    CallbacksExecutionMethod executionMethod = CallbacksExecutionMethod.IN_SEQUENCE,
-    CallbacksErrorMethod errorMethod = CallbacksErrorMethod.THROW_LAST,
+    dynamic Function(Object e)? onError,
   }) async {
-    final errors = [];
-    final $handleCatch = errorMethod == //
-            CallbacksErrorMethod.THROW_LAST
-        ? (e) => errors.add(e)
-        : (e) => throw e;
-    if (executionMethod == CallbacksExecutionMethod.IN_SEQUENCE) {
-      for (final l in this._callbacks.entries) {
+    final results = <dynamic, dynamic>{};
+    final callbacks = this._callbacks.entries.map(
+      (final l) async {
         final key = l.key;
         final callback = l.value;
         try {
-          await callback(key, param);
+          results[key] = await callback(key, param);
         } catch (e) {
-          $handleCatch(e);
-        }
-      }
-    } else {
-      final callbacks = this._callbacks.entries.map(
-        (final l) async {
-          final key = l.key;
-          final callback = l.value;
-          try {
-            await callback(key, param);
-          } catch (e) {
-            $handleCatch(e);
+          if (onError != null) {
+            results[key] = onError(e);
+          } else {
+            rethrow;
           }
-        },
-      );
-      if (callbacks.isNotEmpty) {
-        await Future.wait(callbacks);
-      }
+        }
+      },
+    );
+    if (callbacks.isNotEmpty) {
+      await Future.wait(callbacks);
+      return results;
     }
-
-    for (final e in errors) {
-      throw e;
-    }
+    return null;
   }
 }
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-enum CallbacksExecutionMethod { FAST, IN_SEQUENCE }
-
-enum CallbacksErrorMethod { THROW_LAST, THROW_IMMEDIATELY }
