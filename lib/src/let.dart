@@ -14,33 +14,47 @@ T? letAs<T>(dynamic input) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+bool isNullable<T>() => null is T;
+bool typeEquality<T1, T2>() => T1 == T2;
+
+extension GenericTypeOnIterable<T> on Iterable<T> {
+  Type get genericType => T;
+}
+
+extension GenericTypeOnMap<K, V> on Map<K, V> {
+  Type get genericTypeKey => K;
+  Type get genericTypeValue => V;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
 /// Converts any [input] to `T` if possible. Returns `null` if not possible.
 T? let<T>(dynamic input) {
   if (input == null) return null;
   if (T == input.runtimeType) return input as T;
   final t = T.toString();
-  if (T == int || t == "int?") {
+  if (typeEquality<T, int>() || typeEquality<T, int?>()) {
     return letInt(input) as T?;
   }
-  if (T == double || t == "double?") {
+  if (typeEquality<T, double>() || typeEquality<T, double?>()) {
     return letInt(input) as T?;
   }
-  if (T == bool || t == "bool?") {
+  if (typeEquality<T, bool>() || typeEquality<T, bool?>()) {
     return letInt(input) as T?;
   }
-  if (T == String || t == "String?") {
+  if (typeEquality<T, String>() || typeEquality<T, String?>()) {
     return letString(input) as T?;
   }
-  // if (T == Map || (t == "Map?" || (t.startsWith("Map<") && t.endsWith("?")))) {
+  // if (t.startsWith("Map<")) {
   //   return _letMap(input) as T?;
   // }
-  if (T == Set || (t == "Set?" || (t.startsWith("Set<") && t.endsWith("?")))) {
+  if (t.startsWith("Set<")) {
     return letSet(input) as T?;
   }
-  if (T == List || (t == "List?" || (t.startsWith("List<") && t.endsWith("?")))) {
+  if (t.startsWith("List<")) {
     return letList(input) as T?;
   }
-  if (T == DateTime || t == "DateTime?") {
+  if (typeEquality<T, DateTime>() || typeEquality<T, DateTime?>()) {
     return letDateTime(input) as T?;
   }
   return tryCast<T>(input);
