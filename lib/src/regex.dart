@@ -4,21 +4,27 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
+/// Email, e.g. `foo@bar.com` or `foo@bar` (without `.com`)
 /// Source: https://html.spec.whatwg.org/multipage/input.html#e-mail-state-%28type=email%29
-const REG_EXP_EMAIL = r"^[a-zA-Z\d.!#$%&'*+/=?^_`{|}~-]+"
+const REG_EXP_EMAIL_0 = r"^[a-zA-Z\d.!#$%&'*+/=?^_`{|}~-]+"
     r"@"
     r"[a-zA-Z\d]"
     r"(?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?"
     r"(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?)*$";
 
-const REG_EXP_EMAIL_MODIFIED = r"^[a-zA-Z\d.!#$%&'*+/=?^_`{|}~-]+"
+/// Email, e.g. `foo@bar.com`.
+const REG_EXP_EMAIL = r"^[a-zA-Z\d.!#$%&'*+/=?^_`{|}~-]+"
     r"@"
     r"[a-zA-Z\d]"
     r"(?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?"
     r"(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?)+$";
 
-const REG_EXP_EMAIL_OR_EMPTY =
-    r"^([a-zA-Z\d.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?)+)?$";
+// Email, e.g. `foo@bar.com`.
+const REG_EXP_EMAIL_OR_EMPTY = r"^([a-zA-Z\d.!#$%&'*+/=?^_`{|}~-]+"
+    r"@"
+    r"[a-zA-Z\d]"
+    r"(?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?"
+    r"(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,253}[a-zA-Z\d])?)+)?$";
 
 /// Minimum eight characters, at least one letter and one number.
 const REG_EXP_PASSWORD_STRENGTH_0 = r"^((?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,})?$";
@@ -37,8 +43,11 @@ const REG_EXP_PASSWORD_STRENGTH_3 =
 /// Minimim of two words without any special characters
 const REG_EXP_FULL_NAME_OR_EMPTY = r"^([a-zA-Z]+([ ]+[a-zA-Z]+)+)?$";
 
+/// Home or mobile phone number, e.g. `+14041234567` or `0412345678`
+const REG_EXP_PHONE = r"^((\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})?$";
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 bool isValidEmail(String expression) {
-  return RegExp(REG_EXP_EMAIL).hasMatch(expression);
+  return RegExp(REG_EXP_EMAIL_0).hasMatch(expression);
 }
