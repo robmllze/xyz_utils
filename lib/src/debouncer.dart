@@ -61,6 +61,21 @@ class Debouncer {
   //
   //
 
+  void finalize({void Function()? onWaited}) {
+    if (this._timer != null) {
+      if (this._timer!.isActive) {
+        this._timer!.cancel();
+        this._timer = null;
+        this.onWaited?.call();
+        onWaited?.call();
+      }
+    }
+  }
+
+  //
+  //
+  //
+
   void cancel() {
     this._timer?.cancel();
   }
