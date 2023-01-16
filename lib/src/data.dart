@@ -195,6 +195,15 @@ extension SetNullIfEmpty<T> on Set<T> {
   }
 }
 
+T? nullIfEmpty<T>(T value) {
+  if (value is String) return value.nullIfEmpty() as T?;
+  if (value is Map) return value.nullIfEmpty() as T?;
+  if (value is Iterable) return value.nullIfEmpty() as T?;
+  if (value is List) return value.nullIfEmpty() as T?;
+  if (value is Set) return value.nullIfEmpty() as T?;
+  return value;
+}
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Set<T> getSetDifference<T>(Set<T> before, Set<T> after) {
