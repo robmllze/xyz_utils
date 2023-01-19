@@ -46,18 +46,17 @@ class Debouncer {
   //
   //
   //
-  
 
   void call({
     void Function()? onWaited,
     void Function()? onCall,
   }) async {
-     this.onCall?.call();
-     onCall?.call();
+    this.onCall?.call();
+    onCall?.call();
     this._timer?.cancel();
     this._timer = Timer(delay, () async {
-       this.onWaited?.call();
-       onWaited?.call();
+      this.onWaited?.call();
+      onWaited?.call();
     });
   }
 
@@ -70,8 +69,8 @@ class Debouncer {
       if (this._timer!.isActive) {
         this._timer!.cancel();
         this._timer = null;
-         this.onWaited?.call();
-         onWaited?.call();
+        this.onWaited?.call();
+        onWaited?.call();
       }
     }
   }
@@ -80,7 +79,14 @@ class Debouncer {
   //
   //
 
-  void cancel() {
-    this._timer?.cancel();
+  bool cancel() {
+    final timer = this._timer;
+    if (timer != null) {
+      if (timer.isActive) {
+        timer.cancel();
+        return true;
+      }
+    }
+    return false;
   }
 }
