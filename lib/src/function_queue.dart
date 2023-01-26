@@ -31,7 +31,7 @@ class FunctionQueue {
                   .first,
     );
     this._queue.add(q);
-    await execute();
+    await this._execute();
     return q._completer.future;
   }
 
@@ -39,7 +39,7 @@ class FunctionQueue {
   //
   //
 
-  Future<void> execute() async {
+  Future<void> _execute() async {
     for (final l in this._queue
       ..removeWhere(
         (final l) => l._status == _QueueableStatus.RAN,
@@ -50,7 +50,7 @@ class FunctionQueue {
         l._status = _QueueableStatus.RUNNING;
         l._completer.complete(l._function());
         l._status = _QueueableStatus.RAN;
-        await execute();
+        await this._execute();
         break;
       }
     }
