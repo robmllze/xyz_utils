@@ -4,12 +4,20 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-import 'dart:convert';
+import 'data.dart' show MapNullKeysAndValuesRemoved;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 T? letAs<T>(dynamic input) {
   return input is T ? input : null;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+Map<String, dynamic>? letAsKeyMap(dynamic input) {
+  return letAs<Map>(input)?.map((final k, final v) {
+    return MapEntry(k?.toString(), v);
+  }).nullsRemoved();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -147,30 +155,31 @@ String? letString(dynamic input) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+// TODO: Potentially dangerous. Needs further testing.
 /// Converts any [input] to a `Map` if possible. Returns `null` if not possible.
-Map<T1, T2>? _letMap<T1, T2>(dynamic input) {
-  if (input == null) return null;
-  if (input is String) {
-    try {
-      return _letMap<T1, T2>(jsonDecode(input) as Map);
-    } catch (_) {
-      assert(false, "letMap cannot convert ${input.runtimeType} to Map (1)");
-      return null;
-    }
-  }
-  if (input is Map) {
-    try {
-      final a = input.map((final key, final value) {
-        return MapEntry<T1?, T2?>(let<T1>(key), let<T2>(value));
-      });
-      return nullFilterableMap<T1, T2>(a);
-    } catch (_) {
-      assert(false, "letMap cannot convert ${input.runtimeType} to Map (2)");
-      return null;
-    }
-  }
-  return null;
-}
+// Map<T1, T2>? letMap<T1, T2>(dynamic input) {
+//   if (input == null) return null;
+//   if (input is String) {
+//     try {
+//       return letMap<T1, T2>(jsonDecode(input) as Map);
+//     } catch (_) {
+//       assert(false, "letMap cannot convert ${input.runtimeType} to Map (1)");
+//       return null;
+//     }
+//   }
+//   if (input is Map) {
+//     try {
+//       final a = input.map((final key, final value) {
+//         return MapEntry<T1?, T2?>(let<T1>(key), let<T2>(value));
+//       });
+//       return nullFilterableMap<T1, T2>(a);
+//     } catch (_) {
+//       assert(false, "letMap cannot convert ${input.runtimeType} to Map (2)");
+//       return null;
+//     }
+//   }
+//   return null;
+// }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
