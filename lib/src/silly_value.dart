@@ -54,7 +54,7 @@ abstract class _SillyValue<T> {
   //
   //
 
-  bool get idDisposed {
+  bool get isDisposed {
     return _SillyValue._values[this._key!] == _Empty.instance;
   }
 
