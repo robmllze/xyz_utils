@@ -112,6 +112,91 @@ dynamic tryCallingOnObject_toMap(dynamic object) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+extension TryFirstWhereIterable<T> on Iterable<T> {
+  T? tryFirstWhere(bool Function(T) test) {
+    try {
+      return this.firstWhere(test);
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+extension TryFirstWhereList<T> on List<T> {
+  T? tryFirstWhere(bool Function(T) test) {
+    try {
+      return this.firstWhere(test);
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+extension TryFirstWhereSet<T> on Set<T> {
+  T? tryFirstWhere(bool Function(T) test) {
+    try {
+      return this.firstWhere(test);
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+extension IterableToMap<K, V> on Iterable<MapEntry<K, V>> {
+  Map<K, V> toMap() {
+    return Map.fromEntries(this);
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension IterableMapI<A> on Iterable<A> {
+  Iterable<B> mapi<B, C>(B Function(A x, int index, C? option) mapper,
+      {List<C> options = const []}) {
+    var index = 0;
+    return this.map((final x) {
+      final option = options.length > index ? options[index] : null;
+      return mapper(x, index++, option);
+    });
+  }
+}
+
+extension ListMapI<A> on List<A> {
+  Iterable<B> mapi<B, C>(B Function(A x, int index, C? option) mapper,
+      {List<C> options = const []}) {
+    var index = 0;
+    return this.map((final x) {
+      final option = options.length > index ? options[index] : null;
+      return mapper(x, index++, option);
+    });
+  }
+}
+
+extension SetMapI<A> on Set<A> {
+  Iterable<B> mapi<B, C>(B Function(A x, int index, C? option) mapper,
+      {List<C> options = const []}) {
+    var index = 0;
+    return this.map((final x) {
+      final option = options.length > index ? options[index] : null;
+      return mapper(x, index++, option);
+    });
+  }
+}
+
+extension MapMapI<A1, A2> on Map<A1, A2> {
+  Map<B1, B2> mapi<B1, B2, C>(MapEntry<B1, B2> Function(A1 x1, A2 x2, int index, C? option) mapper,
+      {List<C> options = const []}) {
+    var index = 0;
+    return this.map((final x1, final x2) {
+      final option = options.length > index ? options[index] : null;
+      return mapper(x1, x2, index++, option);
+    });
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
 extension MapNullKeysAndValuesRemoved<T1, T2> on Map<T1?, T2?> {
   Map<T1, T2> nullsRemoved() {
     return Map<T1, T2>.fromEntries(
@@ -397,4 +482,16 @@ String mapToCsv(Map input) {
     output += "\"$key\",\"$value\"\n";
   }
   return output;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension TryReduceIterable<T> on Iterable<Iterable<T>> {
+  Iterable<T>? tryReduce([Iterable<T> Function(Iterable<T>, Iterable<T>)? merge]) {
+    try {
+      return this.reduce(merge ?? (final a, final b) => <T>[...a, ...b]);
+    } catch (_) {
+      return null;
+    }
+  }
 }
