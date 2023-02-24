@@ -47,4 +47,20 @@ extension StringCases on String {
   String toCamelCaseCapitalized() {
     return this.toCamelCase().capitalize();
   }
+
+  //
+  //
+  //
+
+  String lineToLength(int length) {
+    return (this.length > length ? "${this.substring(0, length).trim()}..." : this);
+  }
+
+  //
+  //
+  //
+
+  String paragraphToLength(int length) {
+    return this.lineToLength(length).replaceAll("\n", " ");
+  }
 }
