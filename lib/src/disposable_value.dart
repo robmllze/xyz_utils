@@ -4,14 +4,9 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-class _Empty {
-  _Empty._();
-  static final instance = _Empty._();
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-abstract class _DisposableValue<T> {
+/// Manages disposal of DisposableValue instances by tracking values in a list,
+/// with disposal and check methods.
+abstract class DisposableValue<T> {
   //
   //
   //
@@ -47,7 +42,7 @@ abstract class _DisposableValue<T> {
   //
 
   void dispose() {
-    _DisposableValue._values[this._key!] = _Empty.instance;
+    DisposableValue._values[this._key!] = _Empty.instance;
   }
 
   //
@@ -55,33 +50,34 @@ abstract class _DisposableValue<T> {
   //
 
   bool get isDisposed {
-    return _DisposableValue._values[this._key!] == _Empty.instance;
+    return DisposableValue._values[this._key!] == _Empty.instance;
   }
 
   //
   //
   //
 
-  _DisposableValue get pass;
+  DisposableValue<T> get pass;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class DisposableValue<T> extends _DisposableValue<T> {
+/// Holds a value that can be disposed when no longer needed.
+class ManualDisposableValue<T> extends DisposableValue<T> {
   //
   //
   //
 
-  factory DisposableValue(T value) {
-    _DisposableValue._values.add(value);
-    return DisposableValue._(_DisposableValue._i++);
+  factory ManualDisposableValue(T value) {
+    DisposableValue._values.add(value);
+    return ManualDisposableValue._(DisposableValue._i++);
   }
 
   //
   //
   //
 
-  DisposableValue._(int key) {
+  ManualDisposableValue._(int key) {
     this._key = key;
   }
 
@@ -90,33 +86,34 @@ class DisposableValue<T> extends _DisposableValue<T> {
   //
 
   @override
-  DisposableValue<T> get pass {
-    return DisposableValue<T>._(this._key!);
+  ManualDisposableValue<T> get pass {
+    return ManualDisposableValue<T>._(this._key!);
   }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class DisposableValueAuto<T> extends _DisposableValue<T> {
+/// Holds a value that is automatically disposed when no longer needed.
+class AutoDisposableValue<T> extends DisposableValue<T> {
   //
   //
   //
 
-  factory DisposableValueAuto(T value) {
-    _DisposableValue._values.add(value);
-    return DisposableValueAuto._(_DisposableValue._i++);
+  factory AutoDisposableValue(T value) {
+    DisposableValue._values.add(value);
+    return AutoDisposableValue._(DisposableValue._i++);
   }
 
   //
   //
   //
 
-  DisposableValueAuto._(int key) {
+  AutoDisposableValue._(int key) {
     this._key = key;
-    _DisposableValue._finalizer.attach(
+    DisposableValue._finalizer.attach(
       this,
       () {
-        _DisposableValue._values[key] = _Empty.instance;
+        DisposableValue._values[key] = _Empty.instance;
       },
       detach: this,
     );
@@ -127,9 +124,16 @@ class DisposableValueAuto<T> extends _DisposableValue<T> {
   //
 
   @override
-  DisposableValueAuto<T> get pass {
-    final a = DisposableValueAuto<T>._(this._key!);
-    _DisposableValue._finalizer.detach(this);
+  AutoDisposableValue<T> get pass {
+    final a = AutoDisposableValue<T>._(this._key!);
+    DisposableValue._finalizer.detach(this);
     return a;
   }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class _Empty {
+  _Empty._();
+  static final instance = _Empty._();
 }
