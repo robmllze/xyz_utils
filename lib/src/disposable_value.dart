@@ -11,7 +11,7 @@ class _Empty {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class _SillyValue<T> {
+abstract class _DisposableValue<T> {
   //
   //
   //
@@ -47,7 +47,7 @@ abstract class _SillyValue<T> {
   //
 
   void dispose() {
-    _SillyValue._values[this._key!] = _Empty.instance;
+    _DisposableValue._values[this._key!] = _Empty.instance;
   }
 
   //
@@ -55,33 +55,33 @@ abstract class _SillyValue<T> {
   //
 
   bool get isDisposed {
-    return _SillyValue._values[this._key!] == _Empty.instance;
+    return _DisposableValue._values[this._key!] == _Empty.instance;
   }
 
   //
   //
   //
 
-  _SillyValue get pass;
+  _DisposableValue get pass;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class SillyValue<T> extends _SillyValue<T> {
+class DisposableValue<T> extends _DisposableValue<T> {
   //
   //
   //
 
-  factory SillyValue(T value) {
-    _SillyValue._values.add(value);
-    return SillyValue._(_SillyValue._i++);
+  factory DisposableValue(T value) {
+    _DisposableValue._values.add(value);
+    return DisposableValue._(_DisposableValue._i++);
   }
 
   //
   //
   //
 
-  SillyValue._(int key) {
+  DisposableValue._(int key) {
     this._key = key;
   }
 
@@ -90,33 +90,33 @@ class SillyValue<T> extends _SillyValue<T> {
   //
 
   @override
-  SillyValue<T> get pass {
-    return SillyValue<T>._(this._key!);
+  DisposableValue<T> get pass {
+    return DisposableValue<T>._(this._key!);
   }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class SillyValueAuto<T> extends _SillyValue<T> {
+class DisposableValueAuto<T> extends _DisposableValue<T> {
   //
   //
   //
 
-  factory SillyValueAuto(T value) {
-    _SillyValue._values.add(value);
-    return SillyValueAuto._(_SillyValue._i++);
+  factory DisposableValueAuto(T value) {
+    _DisposableValue._values.add(value);
+    return DisposableValueAuto._(_DisposableValue._i++);
   }
 
   //
   //
   //
 
-  SillyValueAuto._(int key) {
+  DisposableValueAuto._(int key) {
     this._key = key;
-    _SillyValue._finalizer.attach(
+    _DisposableValue._finalizer.attach(
       this,
       () {
-        _SillyValue._values[key] = _Empty.instance;
+        _DisposableValue._values[key] = _Empty.instance;
       },
       detach: this,
     );
@@ -127,9 +127,9 @@ class SillyValueAuto<T> extends _SillyValue<T> {
   //
 
   @override
-  SillyValueAuto<T> get pass {
-    final a = SillyValueAuto<T>._(this._key!);
-    _SillyValue._finalizer.detach(this);
+  DisposableValueAuto<T> get pass {
+    final a = DisposableValueAuto<T>._(this._key!);
+    _DisposableValue._finalizer.detach(this);
     return a;
   }
 }

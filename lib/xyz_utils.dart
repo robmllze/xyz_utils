@@ -23,7 +23,7 @@ export 'src/rec.dart';
 export 'src/regex.dart';
 export 'src/replace_handlebars.dart';
 export 'src/screen_calculator.dart';
-export 'src/silly_value.dart';
+export 'src/disposable_value.dart';
 export 'src/string_cases.dart';
 export 'src/version.dart';
 
