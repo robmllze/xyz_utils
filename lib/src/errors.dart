@@ -2,7 +2,7 @@
 //
 // Medikinect
 //
-// Copyright Ⓒ 2022-2023, N Sanchez Medical Research Corporation
+// Copyright Ⓒ 2023-2025, N Sanchez Medical Research Corporation
 // See LICENSE.txt for more information
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
