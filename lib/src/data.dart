@@ -338,8 +338,8 @@ class _VarArgsFunction<T> {
       inv.positionalArguments,
       inv.namedArguments.map(
         (final key, final value) {
-          final key_ = key.toString();
-          return MapEntry(key_.substring(_OFFSET, key_.length - 2), value);
+          final keyAsString = key.toString();
+          return MapEntry(keyAsString.substring(_OFFSET, keyAsString.length - 2), value);
         },
       ),
     );

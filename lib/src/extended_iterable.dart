@@ -50,7 +50,7 @@ extension ExtendedList<T> on Iterable<T> {
   //
 
   T? tryElementAtReversed(int index) {
-    final length_ = this.length;
-    return this.tryElementAt(length_ - index);
+    final length = this.length;
+    return this.tryElementAt(length - index);
   }
 }
