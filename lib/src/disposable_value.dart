@@ -1,139 +1,108 @@
-// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // XYZ Utils
 //
-// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-/// Manages disposal of DisposableValue instances by tracking values in a list,
+import 'dart:collection';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// Manages disposal of DisposableValue instances by tracking values in a map,
 /// with disposal and check methods.
-abstract class DisposableValue<T> {
+class DisposableValue<T> {
   //
   //
   //
 
-  static final _finalizer = Finalizer<void Function()>((final a) => a());
-  static final _values = <dynamic>[];
+  static final _weakRefs = HashSet<WeakReference<DisposableValue>>();
+  static final _values = <int, dynamic>{};
   static var _i = 0;
 
   //
   //
   //
 
-  int? _key;
+  final int _key;
 
   //
   //
   //
 
-  T get value {
-    return _values[this._key!];
+  DisposableValue._(this._key);
+
+  factory DisposableValue(T value) {
+    _values[_i] = value;
+    final instance = DisposableValue<T>._(_i);
+    _i++;
+    _weakRefs.add(WeakReference(instance));
+    return instance;
   }
 
   //
   //
   //
 
-  set value(T value) {
-    _values[this._key!] = value;
+  T get value => _values[this._key]; // Note that T may be Null.
+
+  set value(T value) => _values[this._key] = value;
+
+  void dispose() => _values.remove(this._key);
+
+  // void disposeAndGarbageCollect() {
+  //   this.dispose();
+  //   _weakRefs.removeWhere((final ref) => ref.target?._key == this._key);
+  // }
+
+  bool get isDisposed => !_values.containsKey(this._key);
+
+  //
+  //
+  //
+
+  /// Returns a new instance of the same type with the same internal key value,
+  /// but without any finalizer or weak reference attached to it.
+  ///
+  /// The primary purpose of the `pass` method is to allow you to pass a
+  /// `DisposableValue` instance to a function or another object, while ensuring
+  /// that the original instance is not disposed of prematurely. The new instance
+  /// returned by `pass` can be passed around freely, and when it is eventually
+  /// disposed of, it will automatically dispose of the original instance as
+  /// well.
+  ///
+  /// Example:
+  /// ```dart
+  /// final a = ManualDisposableValue('hello');
+  /// final b = a.pass;
+  /// print(b.value); // Prints "hello"
+  /// a.dispose();
+  /// print(b.value); // Throws an exception, because a was disposed
+  /// ```
+  DisposableValue<T> get pass => DisposableValue<T>._(this._key);
+
+  /// Removes any weak references to disposed `AutoDisposableValue` instances
+  /// from the internal weak reference set and disposes of their associated
+  /// values in the internal value map.
+  ///
+  /// Since `AutoDisposableValue` instances are automatically disposed of when
+  /// they are no longer needed, you may end up with many instances that have
+  /// been disposed of but whose weak references are still taking up memory. By
+  /// calling `garbageCollect`, you can remove these weak references and free up
+  /// memory.
+  ///
+  /// It's recommended to call `garbageCollect` periodically, such as during
+  /// idle periods in your application, to keep memory usage under control.
+  static void garbageCollect() {
+    _weakRefs.removeWhere((ref) {
+      final instance = ref.target;
+      if (instance == null) {
+        return true;
+      }
+      if (instance.isDisposed) {
+        _values.remove(instance._key);
+        return true;
+      }
+      return false;
+    });
   }
-
-  //
-  //
-  //
-
-  void dispose() {
-    DisposableValue._values[this._key!] = _Empty.instance;
-  }
-
-  //
-  //
-  //
-
-  bool get isDisposed {
-    return DisposableValue._values[this._key!] == _Empty.instance;
-  }
-
-  //
-  //
-  //
-
-  DisposableValue<T> get pass;
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-/// Holds a value that can be disposed when no longer needed.
-class ManualDisposableValue<T> extends DisposableValue<T> {
-  //
-  //
-  //
-
-  factory ManualDisposableValue(T value) {
-    DisposableValue._values.add(value);
-    return ManualDisposableValue._(DisposableValue._i++);
-  }
-
-  //
-  //
-  //
-
-  ManualDisposableValue._(int key) {
-    this._key = key;
-  }
-
-  //
-  //
-  //
-
-  @override
-  ManualDisposableValue<T> get pass {
-    return ManualDisposableValue<T>._(this._key!);
-  }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-/// Holds a value that is automatically disposed when no longer needed.
-class AutoDisposableValue<T> extends DisposableValue<T> {
-  //
-  //
-  //
-
-  factory AutoDisposableValue(T value) {
-    DisposableValue._values.add(value);
-    return AutoDisposableValue._(DisposableValue._i++);
-  }
-
-  //
-  //
-  //
-
-  AutoDisposableValue._(int key) {
-    this._key = key;
-    DisposableValue._finalizer.attach(
-      this,
-      () {
-        DisposableValue._values[key] = _Empty.instance;
-      },
-      detach: this,
-    );
-  }
-
-  //
-  //
-  //
-
-  @override
-  AutoDisposableValue<T> get pass {
-    final a = AutoDisposableValue<T>._(this._key!);
-    DisposableValue._finalizer.detach(this);
-    return a;
-  }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-class _Empty {
-  _Empty._();
-  static final instance = _Empty._();
 }
