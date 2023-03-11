@@ -43,16 +43,16 @@ class DisposableValue<T> {
   //
   //
 
-  T get value => _values[this._key]; // Note that T may be Null.
+  T get value => _values[this._key]; // Note that T may be Null
 
   set value(T value) => _values[this._key] = value;
 
-  void dispose() => _values.remove(this._key);
-
-  // void disposeAndGarbageCollect() {
-  //   this.dispose();
-  //   _weakRefs.removeWhere((final ref) => ref.target?._key == this._key);
-  // }
+  void dispose([bool garbageCollect = false]) {
+    _values.remove(this._key);
+    if (garbageCollect) {
+      _weakRefs.removeWhere((final ref) => ref.target?._key == this._key);
+    }
+  }
 
   bool get isDisposed => !_values.containsKey(this._key);
 
