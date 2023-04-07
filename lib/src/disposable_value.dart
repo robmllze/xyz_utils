@@ -79,6 +79,7 @@ class DisposableValue<T> {
   /// print(b.value); // Throws an exception, because a was disposed
   /// ```
   DisposableValue<T> get pass => DisposableValue<T>._(this._key);
+  DisposableValue<C> passAs<C>() => DisposableValue<C>._(this._key);
 
   /// Removes any weak references to disposed `AutoDisposableValue` instances
   /// from the internal weak reference set and disposes of their associated
