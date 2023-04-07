@@ -66,7 +66,9 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
     T1 param, [
     dynamic Function(Object e)? onError,
   ]) async {
-    await this._completer?.future;
+    if (this._completer != null && !this._completer!.isCompleted) {
+      await this._completer!.future;
+    }
     this._completer = Completer();
     try {
       final results = <dynamic, dynamic>{};
@@ -98,7 +100,9 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
     T1 param, {
     dynamic Function(Object e)? onError,
   }) async {
-    await this._completer?.future;
+    if (this._completer != null && !this._completer!.isCompleted) {
+      await this._completer!.future;
+    }
     this._completer = Completer();
     try {
       final results = <dynamic, dynamic>{};
