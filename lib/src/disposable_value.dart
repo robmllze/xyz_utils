@@ -1,10 +1,18 @@
-// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // XYZ Utils
 //
-// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'dart:collection';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class RefValue<T> {
+  final dynamic ref;
+  final T value;
+  const RefValue(this.value, [this.ref]);
+}
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -16,7 +24,7 @@ class DisposableValue<T> {
   //
 
   static final _weakRefs = HashSet<WeakReference<DisposableValue>>();
-  static final _values = <int, dynamic>{};
+  static final _values = <int, RefValue>{};
   static var _i = 0;
 
   //
@@ -31,7 +39,7 @@ class DisposableValue<T> {
 
   DisposableValue._(this._key);
 
-  factory DisposableValue(T value) {
+  factory DisposableValue(RefValue<T> value) {
     _values[_i] = value;
     final instance = DisposableValue<T>._(_i);
     _i++;
@@ -43,9 +51,9 @@ class DisposableValue<T> {
   //
   //
 
-  T get value => _values[this._key]; // Note that T may be Null
+  RefValue<T> get value => _values[this._key] as RefValue<T>; // Note that T may be Null
 
-  set value(T value) => _values[this._key] = value;
+  set value(RefValue<T> value) => _values[this._key] = value;
 
   void dispose([bool garbageCollect = false]) {
     _values.remove(this._key);
@@ -72,7 +80,7 @@ class DisposableValue<T> {
   ///
   /// Example:
   /// ```dart
-  /// final a = ManualDisposableValue('hello');
+  /// final a = DisposableValue('hello');
   /// final b = a.pass;
   /// print(b.value); // Prints "hello"
   /// a.dispose();
