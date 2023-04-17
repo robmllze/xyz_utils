@@ -16,7 +16,7 @@ class DisposableValue<T> {
   //
 
   static final _weakRefs = HashSet<WeakReference<DisposableValue>>();
-  static final _values = <int, RefData>{};
+  static final _values = <int, dynamic>{};
   static var _i = 0;
 
   //
@@ -31,7 +31,7 @@ class DisposableValue<T> {
 
   DisposableValue._(this._key);
 
-  factory DisposableValue(RefData<T> value) {
+  factory DisposableValue(T value) {
     _values[_i] = value;
     final instance = DisposableValue<T>._(_i);
     _i++;
@@ -43,9 +43,9 @@ class DisposableValue<T> {
   //
   //
 
-  RefData<T> get value => _values[this._key] as RefData<T>;
+  T get value => _values[this._key]; // Note that T may be Null
 
-  set value(RefData<T> value) => _values[this._key] = value;
+  set value(T value) => _values[this._key] = value;
 
   void dispose([bool garbageCollect = false]) {
     _values.remove(this._key);
@@ -106,12 +106,4 @@ class DisposableValue<T> {
       return false;
     });
   }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-class RefData<T> {
-  final dynamic ref;
-  final T data;
-  const RefData(this.data, [this.ref]);
 }
