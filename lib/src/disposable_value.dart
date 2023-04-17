@@ -8,14 +8,6 @@ import 'dart:collection';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class RefValue<T> {
-  final dynamic ref;
-  final T value;
-  const RefValue(this.value, [this.ref]);
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 /// Manages disposal of DisposableValue instances by tracking values in a map,
 /// with disposal and check methods.
 class DisposableValue<T> {
@@ -51,7 +43,7 @@ class DisposableValue<T> {
   //
   //
 
-  RefValue<T> get value => _values[this._key] as RefValue<T>; // Note that T may be Null
+  RefValue<T> get value => _values[this._key] as RefValue<T>;
 
   set value(RefValue<T> value) => _values[this._key] = value;
 
@@ -114,4 +106,12 @@ class DisposableValue<T> {
       return false;
     });
   }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class RefValue<T> {
+  final dynamic ref;
+  final T value;
+  const RefValue(this.value, [this.ref]);
 }
