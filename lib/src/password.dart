@@ -16,7 +16,7 @@ import 'dart:math' show Random;
 /// The [seed] is used for deterministic randomness. This may be any positive
 /// or negative integer.
 ///
-/// The value of the character codes of the generated password will be between
+/// The values of the character codes of the generated password will be between
 /// 0 (inclusive) and [charCodeRange] (exclusive).
 ///
 /// Therefore, [charCodeRange] must be greater than 0.
