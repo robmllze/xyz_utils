@@ -9,3 +9,4 @@ library xyz_utils;
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 export '_common.dart';
+export 'src/non_web/file_system.dart';
