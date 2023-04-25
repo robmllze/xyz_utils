@@ -18,7 +18,7 @@ class RecOptions {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-typedef _Tr = T? Function<T>(String input, Map<dynamic, dynamic> args);
+typedef FTranslate = String Function(String input, Map<dynamic, dynamic> args);
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -27,8 +27,8 @@ class Rec {
   //
   //
 
-  static _Tr? _tr;
-  static void setTr(_Tr tr) => _tr = tr;
+  static FTranslate? _tr;
+  static void setTr(FTranslate tr) => _tr = tr;
 
   //
   //
@@ -91,7 +91,7 @@ class Rec {
         "code": this.code ?? "",
         ...this.options.value,
       },
-    ).to;
+    );
 
     if (keyToLowerCase == translated) {
       return onError?.call(translated) ?? translated;
