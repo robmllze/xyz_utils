@@ -70,7 +70,7 @@ class FunctionQueue {
       if (status == _QueueableStatus.RUNNING) break;
       if (status == _QueueableStatus.READY) {
         l._status = _QueueableStatus.RUNNING;
-        l._completer.complete(l._function());
+        l._completer.complete(await l._function());
         l._status = _QueueableStatus.RAN;
         await this._execute();
         break;

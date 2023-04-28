@@ -6,6 +6,8 @@
 
 import 'dart:async';
 
+import '../xyz_utils.dart';
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Provides a flexible and easy-to-use way to manage and execute a collection
@@ -23,8 +25,8 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
+  final _queue = FunctionQueue();
   final _callbacks = <dynamic, TCallback<T1>>{};
-  Completer? _completer;
 
   //
   //
@@ -49,7 +51,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
 
   /// Returns a Future which waits for all currently executing callbacks to
   /// complete.
-  Future<void> wait() async => await this._completer?.future;
+  Future<void> wait() async => await this._queue.add(() async {});
 
   /// Invokes the callback with the given [callbackKey] passing in the given
   /// [param].
@@ -62,75 +64,19 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Invokes all callbacks in the collection with the given [param] and returns
   /// a map of the results of each callback. The optional function [onError] can
   /// be passed to handle errors.
-  Future<Map<dynamic, dynamic>?> callAll(
+  Future<Map<dynamic, dynamic>> callAll(
     T1 param, [
     dynamic Function(Object e)? onError,
   ]) async {
-    if (this._completer != null && !this._completer!.isCompleted) {
-      await this._completer!.future;
-    }
-    this._completer = Completer();
-    try {
+    return _queue.add<Map<dynamic, dynamic>>(() async {
       final results = <dynamic, dynamic>{};
-      for (final l in this._callbacks.entries) {
-        final callbackKey = l.key;
-        final callback = l.value;
-        try {
-          results[callbackKey] = await callback(callbackKey, param);
-        } catch (e) {
-          if (onError != null) {
-            results[callbackKey] = onError(e);
-          } else {
-            rethrow;
-          }
-        }
+      for (final entry in this._callbacks.entries) {
+        final key = entry.key;
+        final function = entry.value;
+        results[key] = await function(key, param);
       }
       return results;
-    } catch (_) {
-      rethrow;
-    } finally {
-      this._completer!.complete();
-    }
-  }
-
-  /// Invokes all callbacks in the collection simultaneously with the given
-  /// [param] and returns a map of the results of each callback. The optional
-  /// function [onError] can be passed to handle errors.
-  Future<Map<dynamic, dynamic>?> callAllSimultaneously(
-    T1 param, {
-    dynamic Function(Object e)? onError,
-  }) async {
-    if (this._completer != null && !this._completer!.isCompleted) {
-      await this._completer!.future;
-    }
-    this._completer = Completer();
-    try {
-      final results = <dynamic, dynamic>{};
-      final callbacks = this._callbacks.entries.map(
-        (final l) async {
-          final callbackKey = l.key;
-          final callback = l.value;
-          try {
-            results[callbackKey] = await callback(callbackKey, param);
-          } catch (e) {
-            if (onError != null) {
-              results[callbackKey] = onError(e);
-            } else {
-              rethrow;
-            }
-          }
-        },
-      );
-      if (callbacks.isNotEmpty) {
-        await Future.wait(callbacks);
-        return results;
-      }
-      return null;
-    } catch (_) {
-      rethrow;
-    } finally {
-      this._completer!.complete();
-    }
+    });
   }
 }
 
