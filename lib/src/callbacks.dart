@@ -208,15 +208,15 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
     T1 param, [
     dynamic Function(Object e)? onError,
   ]) async {
-    //return _queue.add<Map<dynamic, dynamic>>(() async {
-    final results = <dynamic, dynamic>{};
-    for (final entry in this._callbacks.entries) {
-      final key = entry.key;
-      final function = entry.value;
-      results[key] = await function(key, param);
-    }
-    return results;
-    //});
+    return _queue.add<Map<dynamic, dynamic>>(() async {
+      final results = <dynamic, dynamic>{};
+      for (final entry in this._callbacks.entries) {
+        final key = entry.key;
+        final function = entry.value;
+        results[key] = await function(key, param);
+      }
+      return results;
+    });
   }
 }
 
