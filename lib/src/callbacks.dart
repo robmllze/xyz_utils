@@ -213,7 +213,15 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
       for (final entry in this._callbacks.entries) {
         final key = entry.key;
         final function = entry.value;
-        results[key] = await function(key, param);
+        try {
+          results[key] = await function(key, param);
+        } catch (e) {
+          if (onError != null) {
+            results[key] = onError(e);
+          } else {
+            rethrow;
+          }
+        }
       }
       return results;
     });
