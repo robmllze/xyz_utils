@@ -59,6 +59,12 @@ class FunctionQueue {
   //
   //
 
+  Future<void> wait() => this.add(() async {});
+
+  //
+  //
+  //
+
   /// Executes the next function in the queue, if the queue is not empty and
   /// no other function is currently running.
   Future<void> _execute() async {
