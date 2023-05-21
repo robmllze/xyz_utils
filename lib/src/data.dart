@@ -486,7 +486,17 @@ String mapToCsv(Map input) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension TryReduceIterable<T> on Iterable<Iterable<T>> {
+extension TryReduceIterable<T> on Iterable<T> {
+  T? tryReduce(T Function(T, T) combine) {
+    try {
+      return this.reduce(combine);
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+extension TryReduceIterableIterable<T> on Iterable<Iterable<T>> {
   Iterable<T>? tryReduce([Iterable<T> Function(Iterable<T>, Iterable<T>)? merge]) {
     try {
       return this.reduce(merge ?? (final a, final b) => <T>[...a, ...b]);
