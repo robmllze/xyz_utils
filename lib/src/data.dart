@@ -142,36 +142,6 @@ extension TryFirstWhereSet<T> on Set<T> {
   }
 }
 
-extension TryWhereIterable<T> on Iterable<T> {
-  Iterable<T>? tryWhere(bool Function(T) test) {
-    try {
-      return this.where(test);
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-extension TryWhereList<T> on List<T> {
-  Iterable<T>? tryWhere(bool Function(T) test) {
-    try {
-      return this.where(test);
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-extension TryWhereSet<T> on Set<T> {
-  Iterable<T>? tryWhere(bool Function(T) test) {
-    try {
-      return this.where(test);
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension IterableToMap<K, V> on Iterable<MapEntry<K, V>> {
