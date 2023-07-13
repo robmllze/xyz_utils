@@ -89,3 +89,27 @@ String timeAgo(DateTime date, String Function(String) tr, String locale) {
   }
   return tr("$K.now");
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+bool isSameDay(DateTime date1, DateTime date2) {
+  final a = date1.toUtc();
+  final b = date2.toUtc();
+  return a.year == b.year && a.month == b.month && a.day == b.day;
+}
+
+bool isSameWeek(DateTime date1, DateTime date2) {
+  final a = date1.toUtc();
+  final b = date2.toUtc();
+  final week1 =
+      DateTime.utc(a.year, a.month, a.day).difference(DateTime.utc(a.year, a.month)).inDays ~/ 7;
+  final week2 =
+      DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(b.year, b.month)).inDays ~/ 7;
+  return week1 == week2;
+}
+
+bool isSameMonth(DateTime date1, DateTime date2) {
+  final a = date1.toUtc();
+  final b = date2.toUtc();
+  return a.year == b.year && a.month == b.month;
+}
