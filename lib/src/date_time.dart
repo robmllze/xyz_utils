@@ -113,3 +113,8 @@ bool isSameMonth(DateTime date1, DateTime date2) {
   final b = date2.toUtc();
   return a.year == b.year && a.month == b.month;
 }
+
+List<DateTime> sortDates(List<DateTime> dates) {
+  final copy = List<DateTime>.from(dates);
+  return copy..sort((final a, final b) => a.compareTo(b));
+}
