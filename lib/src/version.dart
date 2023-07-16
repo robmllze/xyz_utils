@@ -27,7 +27,7 @@ class Version {
   //
 
   factory Version.parse(String input) {
-    final components = input.split(RegExp("[.+]"));
+    final components = input.split(RegExp(r"[\.\+]"));
     int p(i) => i < components.length ? (int.tryParse(components[i]) ?? 0) : 0;
     return Version(
       major: p(0),
