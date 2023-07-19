@@ -37,7 +37,7 @@
 //             })
 //             .where((final e) => e != const _Empty())
 //             .map((final e) => e as MapEntry<K, V>);
-//         return Map.fromEntries(temp.noNulls());
+//         return Map.fromEntries(temp.nonNulls;
 //       } catch (_) {
 //         return null;
 //       }

@@ -198,8 +198,8 @@ extension MapMapI<A1, A2> on Map<A1, A2> {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension MapNoNulls<T1, T2> on Map<T1?, T2?> {
-  Map<T1, T2> noNulls() {
+extension MapNonNulls<T1, T2> on Map<T1?, T2?> {
+  Map<T1, T2> get nonNulls {
     return Map<T1, T2>.fromEntries(
       this
           .entries
@@ -209,8 +209,8 @@ extension MapNoNulls<T1, T2> on Map<T1?, T2?> {
   }
 }
 
-extension MapNoNullKeys<T1, T2> on Map<T1?, T2> {
-  Map<T1, T2> noNullValues() {
+extension MapNonNullKeys<T1, T2> on Map<T1?, T2> {
+  Map<T1, T2> get nonNullKeys {
     return Map<T1, T2>.fromEntries(
       this
           .entries
@@ -220,8 +220,8 @@ extension MapNoNullKeys<T1, T2> on Map<T1?, T2> {
   }
 }
 
-extension MapNoNullValues<T1, T2> on Map<T1, T2?> {
-  Map<T1, T2> noNullKeys() {
+extension MapNonNullValues<T1, T2> on Map<T1, T2?> {
+  Map<T1, T2> get nonNullValues {
     return Map<T1, T2>.fromEntries(
       this
           .entries
@@ -231,23 +231,23 @@ extension MapNoNullValues<T1, T2> on Map<T1, T2?> {
   }
 }
 
-extension IterableNoNulls<T> on Iterable<T?> {
-  Iterable<T> noNulls() {
-    return this.where((final l) => l != null).map((final l) => l!);
-  }
-}
+// extension IterableNonNulls<T> on Iterable<T?> {
+//   Iterable<T> get nonNulls {
+//     return this.where((final l) => l != null).map((final l) => l!);
+//   }
+// }
 
-extension ListNoNulls<T> on List<T?> {
-  List<T> noNulls() {
-    return this.where((final l) => l != null).map((final l) => l!).toList();
-  }
-}
+// extension ListNonNulls<T> on List<T?> {
+//   List<T> get nonNulls {
+//     return this.where((final l) => l != null).map((final l) => l!).toList();
+//   }
+// }
 
-extension SetNoNulls<T> on Set<T?> {
-  Set<T> noNulls() {
-    return this.where((final l) => l != null).map((final l) => l!).toSet();
-  }
-}
+// extension SetNonNulls<T> on Set<T?> {
+//   Set<T> get nonNulls {
+//     return this.where((final l) => l != null).map((final l) => l!).toSet();
+//   }
+// }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
