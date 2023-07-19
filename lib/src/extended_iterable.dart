@@ -53,28 +53,4 @@ extension ExtendedList<T> on Iterable<T> {
     final length = this.length;
     return this.tryElementAt(length - index);
   }
-
-  //
-  //
-  //
-
-  T? get tryFirst {
-    try {
-      return this.first;
-    } catch (_) {
-      return null;
-    }
-  }
-
-  //
-  //
-  //
-
-  T? get tryLast {
-    try {
-      return this.first;
-    } catch (_) {
-      return null;
-    }
-  }
 }
