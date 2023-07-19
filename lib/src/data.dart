@@ -198,8 +198,8 @@ extension MapMapI<A1, A2> on Map<A1, A2> {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension MapNullKeysAndValuesRemoved<T1, T2> on Map<T1?, T2?> {
-  Map<T1, T2> nullsRemoved() {
+extension MapNoNulls<T1, T2> on Map<T1?, T2?> {
+  Map<T1, T2> noNulls() {
     return Map<T1, T2>.fromEntries(
       this
           .entries
@@ -209,42 +209,42 @@ extension MapNullKeysAndValuesRemoved<T1, T2> on Map<T1?, T2?> {
   }
 }
 
-// extension MapNullKeysRemoved<T1, T2> on Map<T1?, T2> {
-//   Map<T1, T2> nullsRemoved() {
-//     return Map<T1, T2>.fromEntries(
-//       this
-//           .entries
-//           .where((final l) => l.key != null)
-//           .map((final l) => MapEntry(l.key as T1, l.value)),
-//     );
-//   }
-// }
+extension MapNoNullKeys<T1, T2> on Map<T1?, T2> {
+  Map<T1, T2> noNullValues() {
+    return Map<T1, T2>.fromEntries(
+      this
+          .entries
+          .where((final l) => l.key != null)
+          .map((final l) => MapEntry(l.key as T1, l.value)),
+    );
+  }
+}
 
-// extension MapNullValuesRemoved<T1, T2> on Map<T1, T2?> {
-//   Map<T1, T2> nullsRemoved() {
-//     return Map<T1, T2>.fromEntries(
-//       this
-//           .entries
-//           .where((final l) => l.value != null)
-//           .map((final l) => MapEntry(l.key, l.value as T2)),
-//     );
-//   }
-// }
+extension MapNoNullValues<T1, T2> on Map<T1, T2?> {
+  Map<T1, T2> noNullKeys() {
+    return Map<T1, T2>.fromEntries(
+      this
+          .entries
+          .where((final l) => l.value != null)
+          .map((final l) => MapEntry(l.key, l.value as T2)),
+    );
+  }
+}
 
-extension IterableNullsRemoved<T> on Iterable<T?> {
-  Iterable<T> nullsRemoved() {
+extension IterableNoNulls<T> on Iterable<T?> {
+  Iterable<T> noNulls() {
     return this.where((final l) => l != null).map((final l) => l!);
   }
 }
 
-extension ListNullsRemoved<T> on List<T?> {
-  List<T> nullsRemoved() {
+extension ListNoNulls<T> on List<T?> {
+  List<T> noNulls() {
     return this.where((final l) => l != null).map((final l) => l!).toList();
   }
 }
 
-extension SetNullsRemoved<T> on Set<T?> {
-  Set<T> nullsRemoved() {
+extension SetNoNulls<T> on Set<T?> {
+  Set<T> noNulls() {
     return this.where((final l) => l != null).map((final l) => l!).toSet();
   }
 }

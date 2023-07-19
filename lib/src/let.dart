@@ -274,7 +274,7 @@ class MapConverter<K, V> extends _Converter<Map<K, V>> {
             })
             .where((final e) => e != const _Empty())
             .map((final e) => e as MapEntry<K, V>);
-        return Map.fromEntries(temp.nullsRemoved());
+        return Map.fromEntries(temp.noNulls());
       }
     } catch (_) {}
     return null;
@@ -347,7 +347,7 @@ T? letAs<T>(dynamic input) => input is T ? input : null;
 Map<String, dynamic>? letAsKeyMap(dynamic input) {
   return letAs<Map>(input)?.map((final k, final v) {
     return MapEntry(k?.toString(), v);
-  }).nullsRemoved();
+  }).noNulls();
 }
 
 bool isNullable<T>() => null is T;
