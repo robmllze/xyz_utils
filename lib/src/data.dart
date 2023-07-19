@@ -406,7 +406,7 @@ final dynamic map = _VarArgsFunction<Map>((final args1, final args2) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-typedef Json = Map<String, dynamic>;
+typedef JMap = Map<String, dynamic>;
 
 String? _defaultKeyConverter(dynamic key) {
   if (key is DateTime) {
@@ -415,15 +415,15 @@ String? _defaultKeyConverter(dynamic key) {
   return null;
 }
 
-Json mapToJson<T1, T2>(
+JMap mapToJMap<T1, T2>(
   Map<T1, T2> input, {
   Set<Type> typesAllowed = const {},
   String? Function(dynamic)? keyConverter,
 }) {
-  return _mapToJson(input, typesAllowed, keyConverter);
+  return _mapToJMap(input, typesAllowed, keyConverter);
 }
 
-dynamic _mapToJson(
+dynamic _mapToJMap(
   dynamic input,
   Set<Type> typesAllowed,
   String? Function(dynamic)? keyConverter,
@@ -432,7 +432,7 @@ dynamic _mapToJson(
     return input.map(
       (final k, final v) => MapEntry(
         keyConverter?.call(k) ?? _defaultKeyConverter(k) ?? k.toString(),
-        _mapToJson(
+        _mapToJMap(
           v,
           typesAllowed,
           keyConverter,
@@ -442,7 +442,7 @@ dynamic _mapToJson(
   } else if (input is Iterable) {
     return input
         .map(
-          (final l) => _mapToJson(
+          (final l) => _mapToJMap(
             l,
             typesAllowed,
             keyConverter,
