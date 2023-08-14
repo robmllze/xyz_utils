@@ -4,8 +4,6 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 class UnorderedDeepCollectionEquality {
   //
   //
@@ -40,7 +38,7 @@ class UnorderedDeepCollectionEquality {
       for (var item in aList) {
         int index = bList.indexWhere((e) => equals(e, item));
         if (index == -1) return false;
-        bList.removeAt(index); // Ensure duplicate items are considered.
+        bList.removeAt(index); // ensure duplicate items are considered
       }
 
       return true;
