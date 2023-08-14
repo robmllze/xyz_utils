@@ -23,6 +23,7 @@ export 'src/replace_handlebars.dart';
 export 'src/screen_calculator.dart';
 export 'src/string_cases.dart';
 export 'src/version.dart';
+export 'src/unordered_deep_collection_equality.dart';
 
 export 'src/math/base.dart';
 export 'src/math/circle.dart';
