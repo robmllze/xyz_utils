@@ -32,25 +32,25 @@ extension ExtendedStringIterable on Iterable<String> {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension ExtendedList<T> on Iterable<T> {
-  //
-  //
-  //
+// extension ExtendedList<T> on Iterable<T> {
+//   //
+//   //
+//   //
 
-  T? tryElementAt(int index) {
-    try {
-      return this.elementAt(index);
-    } catch (_) {
-      return null;
-    }
-  }
+//   T? tryElementAt(int index) {
+//     try {
+//       return this.elementAt(index);
+//     } catch (_) {
+//       return null;
+//     }
+//   }
 
-  //
-  //
-  //
+//   //
+//   //
+//   //
 
-  T? tryElementAtReversed(int index) {
-    final length = this.length;
-    return this.tryElementAt(length - index);
-  }
-}
+//   T? tryElementAtReversed(int index) {
+//     final length = this.length;
+//     return this.tryElementAt(length - index);
+//   }
+// }

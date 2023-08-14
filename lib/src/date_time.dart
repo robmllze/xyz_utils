@@ -60,7 +60,7 @@ String dayAgo(DateTime date, String Function(String) tr, String locale) {
   if (delta.inDays == 1) {
     return tr("$K.yesterday");
   }
-  return date.dMMMMy(locale);
+  return DateFormat("MMMM d, y", locale).format(date);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
