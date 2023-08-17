@@ -16,18 +16,18 @@ String getBaseXFromBase10(
   final int num10, [
   final _DigitList digits = DIGITS_BASE_10,
 ]) {
-  final int _digitsLength = digits.digits.length;
-  final _digitCount = num10 == 0 ? 0 : log(num10) ~/ log(_digitsLength);
-  String _res = "";
-  num _next = num10;
-  for (num i = _digitCount; i > 0; i--) {
-    final num _powL = pow(_digitsLength, i);
-    final int _d = _next ~/ _powL;
-    _res += digits.digits[_d];
-    _next = _next % _powL;
+  final digitsLength = digits.digits.length;
+  final digitCount = num10 == 0 ? 0 : log(num10) ~/ log(digitsLength);
+  var res = "";
+  num next = num10;
+  for (num i = digitCount; i > 0; i--) {
+    final powL = pow(digitsLength, i);
+    final d = next ~/ powL;
+    res += digits.digits[d];
+    next = next % powL;
   }
-  _res += digits.digits[_next.toInt()];
-  return _res;
+  res += digits.digits[next.toInt()];
+  return res;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -36,20 +36,20 @@ int getBase10FromBaseX(
   final String numX, [
   final _DigitList digits = DIGITS_BASE_10,
 ]) {
-  final int _digitsLength = digits.digits.length;
-  final int _numXLength = numX.length;
-  num _res = 0;
-  for (int i = 0; i < _numXLength; i++) {
-    final String _c = numX[i];
-    if (digits.digits.contains(_c)) {
-      final int _index = digits.digits.indexOf(_c);
-      final int _x = _numXLength - i - 1;
-      _res += _index * pow(_digitsLength, _x);
+  final digitsLength = digits.digits.length;
+  final numXLength = numX.length;
+  num res = 0;
+  for (var i = 0; i < numXLength; i++) {
+    final c = numX[i];
+    if (digits.digits.contains(c)) {
+      final index = digits.digits.indexOf(c);
+      final x = numXLength - i - 1;
+      res += index * pow(digitsLength, x);
     } else {
       return -1;
     }
   }
-  return _res.toInt();
+  return res.toInt();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -289,6 +289,32 @@ const _DigitList DIGITS_BASE_62 = _DigitList._([
   "7",
   "8",
   "9",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
   "a",
   "b",
   "c",
@@ -315,30 +341,4 @@ const _DigitList DIGITS_BASE_62 = _DigitList._([
   "x",
   "y",
   "z",
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z"
 ]);

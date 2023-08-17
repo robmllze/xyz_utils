@@ -4,7 +4,7 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-extension ExtendedStringIterable on Iterable<String> {
+extension XyzIterableExtensions on Iterable<String> {
   //
   //
   //

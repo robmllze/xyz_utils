@@ -4,7 +4,7 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-extension StringCases on String {
+extension XyzUtilsStringExtensions on String {
   //
   //
   //
@@ -44,7 +44,7 @@ extension StringCases on String {
   //
   //
 
-  String toCamelCaseCapitalized() {
+  String toClassCase() {
     return this.toCamelCase().capitalize();
   }
 

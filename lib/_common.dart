@@ -5,6 +5,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 export 'src/ansi_styled_string.dart';
+export 'src/base_converter.dart';
 export 'src/callbacks.dart';
 export 'src/data.dart';
 export 'src/date_time.dart';
@@ -12,7 +13,7 @@ export 'src/debouncer.dart';
 export 'src/debug_log.dart';
 export 'src/disposable_value.dart';
 export 'src/duration_formatted.dart';
-export 'src/extended_iterable.dart';
+export 'src/iterable_extensions.dart';
 export 'src/function_queue.dart';
 export 'src/let.dart';
 export 'src/password.dart';
@@ -21,9 +22,9 @@ export 'src/rec.dart';
 export 'src/regex.dart';
 export 'src/replace_handlebars.dart';
 export 'src/screen_calculator.dart';
-export 'src/string_cases.dart';
-export 'src/version.dart';
+export 'src/string_extensions.dart';
 export 'src/unordered_deep_collection_equality.dart';
+export 'src/version.dart';
 
 export 'src/math/base.dart';
 export 'src/math/circle.dart';
