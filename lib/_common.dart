@@ -12,7 +12,7 @@ export 'src/date_time.dart';
 export 'src/debouncer.dart';
 export 'src/debug_log.dart';
 export 'src/disposable_value.dart';
-export 'src/duration_formatted.dart';
+export 'src/duration_formatted_english.dart';
 export 'src/errors.dart';
 export 'src/function_queue.dart';
 export 'src/iterable_extensions.dart';

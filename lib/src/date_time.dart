@@ -6,7 +6,7 @@
 
 import 'package:intl/intl.dart';
 
-import 'duration_formatted.dart';
+import 'duration_formatted_english.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -67,7 +67,7 @@ String dayAgo(DateTime date, String Function(String) tr, String locale) {
 
 String timeAgo(DateTime date, String Function(String) tr, String locale) {
   final delta = DateTime.now().difference(date);
-  final a = DurationFormatted(delta.inMicroseconds);
+  final a = DurationFormattedEnglish(delta.inMicroseconds);
   const K = "time_ago";
   if (delta.inDays == 1) {
     return tr("$K.yesterday");

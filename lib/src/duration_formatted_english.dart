@@ -4,9 +4,9 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-class DurationFormatted {
+class DurationFormattedEnglish {
   late final int _us, _ms, _s, _m, _h, _d, _w;
-  DurationFormatted(int microseconds) {
+  DurationFormattedEnglish(int microseconds) {
     const MS = 1000, S = 1000 * MS, M = 60 * S, H = 60 * M, D = 24 * H, W = 7 * D;
     late final int tms, ts, tm, th, td, tw;
     _w = microseconds ~/ W;
