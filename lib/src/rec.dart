@@ -27,13 +27,6 @@ class Rec {
   //
   //
 
-  static FTranslate? _tr;
-  static void setTr(FTranslate tr) => _tr = tr;
-
-  //
-  //
-  //
-
   final String? code;
   final Symbol group;
   final RecOptions options;
@@ -60,7 +53,7 @@ class Rec {
     return Rec(
       code?.isNotEmpty == true
           ? this.code?.isNotEmpty == true
-              ? "${this.code}.$code"
+              ? "${this.code}/$code"
               : null
           : this.code,
       group ?? this.group,
@@ -78,48 +71,12 @@ class Rec {
   //
   //
 
-  String message({
-    String? Function(String)? onError,
-  }) {
-    const ERROR = "Error: Must set translation function via Rec.setTr() before calling .message()";
-    assert(_tr != null, ERROR);
-    if (_tr == null) throw ERROR;
-    final keyToLowerCase = this._key().toLowerCase();
-    final translated = _tr!(
-      keyToLowerCase,
-      {
-        "code": this.code ?? "",
-        ...this.options.value,
-      },
-    );
-
-    if (keyToLowerCase == translated) {
-      return onError?.call(translated) ?? translated;
-    }
-    return translated;
-  }
-
-  //
-  //
-  //
-
   void debugLog([
     Object? message,
     Symbol? group,
   ]) {
     util_debug_log.debugLog(
-      message ?? this.message(onError: (_) => "..."),
-      group ?? this.group,
-      this,
-    );
-  }
-
-  void debugLogError([
-    String? message,
-    Symbol? group,
-  ]) {
-    util_debug_log.debugLogError(
-      message ?? this.message(onError: (_) => "..."),
+      message ?? "???",
       group ?? this.group,
       this,
     );
@@ -130,7 +87,18 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogAlert(
-      message ?? this.message(onError: (_) => "..."),
+      message ?? "???",
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogError([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogError(
+      message ?? "???",
       group ?? this.group,
       this,
     );
@@ -141,40 +109,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogIgnore(
-      message ?? this.message(onError: (_) => "..."),
-      group ?? this.group,
-      this,
-    );
-  }
-
-  void debugLogSuccess([
-    String? message,
-    Symbol? group,
-  ]) {
-    util_debug_log.debugLogSuccess(
-      message ?? this.message(onError: (_) => "..."),
-      group ?? this.group,
-      this,
-    );
-  }
-
-  void debugLogStart([
-    String? message,
-    Symbol? group,
-  ]) {
-    util_debug_log.debugLogStart(
-      message ?? this.message(onError: (_) => "..."),
-      group ?? this.group,
-      this,
-    );
-  }
-
-  void debugLogStop([
-    String? message,
-    Symbol? group,
-  ]) {
-    util_debug_log.debugLogStop(
-      message ?? this.message(onError: (_) => "..."),
+      message ?? "???",
       group ?? this.group,
       this,
     );
@@ -185,7 +120,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogInfo(
-      message ?? this.message(onError: (_) => "..."),
+      message ?? "???",
       group ?? this.group,
       this,
     );
@@ -196,7 +131,40 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogMessage(
-      message ?? this.message(onError: (_) => "..."),
+      message ?? "???",
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogStart([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogStart(
+      message ?? "???",
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogStop([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogStop(
+      message ?? "???",
+      group ?? this.group,
+      this,
+    );
+  }
+
+  void debugLogSuccess([
+    String? message,
+    Symbol? group,
+  ]) {
+    util_debug_log.debugLogSuccess(
+      message ?? "???",
       group ?? this.group,
       this,
     );
@@ -207,5 +175,5 @@ class Rec {
   //
 
   @override
-  String toString() => this.message();
+  String toString() => this.code ?? "???";
 }
