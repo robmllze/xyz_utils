@@ -53,9 +53,12 @@ num? letNum(dynamic input) {
     return num.tryParse(trimmed) ?? trimmed.tryParseDuration()?.inMilliseconds;
   }
   if (input is Duration) return input.inMilliseconds;
-  if (input is _Timestamp) return input.millisecondsSinceEpoch;
   if (input is DateTime) return input.millisecondsSinceEpoch;
   if (input is bool) return input ? 1 : 0;
+  try {
+    // Assume input is a Timestamp (from Firestore package).
+    return input.millisecondsSinceEpoch;
+  } catch (_) {}
   return null;
 }
 
@@ -115,9 +118,6 @@ DateTime? letDateTime(dynamic input) {
 /// Converts the [input] to a [_Timestamp] type if possible, or returns null if
 /// the conversion cannot be performed.
 _Timestamp? letTimestamp(dynamic input) {
-  if (input is _Timestamp) {
-    return input;
-  }
   if (input is DateTime) {
     return _Timestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
@@ -136,6 +136,10 @@ _Timestamp? letTimestamp(dynamic input) {
   if (input is num) {
     return _Timestamp.fromMillisecondsSinceEpoch(input.round());
   }
+  try {
+    // Assume input is a Timestamp (from Firestore package).
+    return _Timestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
+  } catch (_) {}
   return null;
 }
 
@@ -148,9 +152,6 @@ Duration? letDuration(dynamic input) {
   if (input is int) {
     return Duration(milliseconds: input);
   }
-  if (input is _Timestamp) {
-    return Duration(milliseconds: input.millisecondsSinceEpoch);
-  }
   if (input is DateTime) {
     return Duration(milliseconds: input.millisecondsSinceEpoch);
   }
@@ -160,6 +161,10 @@ Duration? letDuration(dynamic input) {
   if (input is num) {
     return Duration(milliseconds: input.round());
   }
+  try {
+    // Assume input is a Timestamp (from Firestore package).
+    return Duration(milliseconds: input.millisecondsSinceEpoch);
+  } catch (_) {}
   return null;
 }
 
