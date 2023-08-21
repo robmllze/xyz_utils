@@ -31,7 +31,7 @@ T? let<T>(dynamic input) {
     } else if (typeEquality<T, DateTime>() || typeEquality<T, DateTime?>()) {
       return letDateTime(input) as T;
     } else if (typeEquality<T, _Timestamp>() || typeEquality<T, _Timestamp?>()) {
-      return let_Timestamp(input) as T;
+      return letTimestamp(input) as T;
     } else if (typeEquality<T, Duration>() || typeEquality<T, Duration?>()) {
       return letDuration(input) as T;
     } else if (typeEquality<T, Uri>() || typeEquality<T, Uri?>()) {
@@ -114,7 +114,7 @@ DateTime? letDateTime(dynamic input) {
 
 /// Converts the [input] to a [_Timestamp] type if possible, or returns null if
 /// the conversion cannot be performed.
-_Timestamp? let_Timestamp(dynamic input) {
+_Timestamp? letTimestamp(dynamic input) {
   if (input is _Timestamp) {
     return input;
   }
