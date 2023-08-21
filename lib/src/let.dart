@@ -7,14 +7,14 @@
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
-
 import 'data.dart';
 import 'parse_duration.dart';
 
+part '_Timestamp.dart';
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// DateTime, Duration [Timestamp], String, int, num, double, bool, Uri
+// DateTime, Duration [_Timestamp], String, int, num, double, bool, Uri
 T? let<T>(dynamic input) {
   try {
     if (T == dynamic) return input;
@@ -30,8 +30,8 @@ T? let<T>(dynamic input) {
       return letBool(input) as T;
     } else if (typeEquality<T, DateTime>() || typeEquality<T, DateTime?>()) {
       return letDateTime(input) as T;
-    } else if (typeEquality<T, Timestamp>() || typeEquality<T, Timestamp?>()) {
-      return letTimestamp(input) as T;
+    } else if (typeEquality<T, _Timestamp>() || typeEquality<T, _Timestamp?>()) {
+      return let_Timestamp(input) as T;
     } else if (typeEquality<T, Duration>() || typeEquality<T, Duration?>()) {
       return letDuration(input) as T;
     } else if (typeEquality<T, Uri>() || typeEquality<T, Uri?>()) {
@@ -53,7 +53,7 @@ num? letNum(dynamic input) {
     return num.tryParse(trimmed) ?? trimmed.tryParseDuration()?.inMilliseconds;
   }
   if (input is Duration) return input.inMilliseconds;
-  if (input is Timestamp) return input.millisecondsSinceEpoch;
+  if (input is _Timestamp) return input.millisecondsSinceEpoch;
   if (input is DateTime) return input.millisecondsSinceEpoch;
   if (input is bool) return input ? 1 : 0;
   return null;
@@ -100,7 +100,7 @@ DateTime? letDateTime(dynamic input) {
   if (input is Duration) {
     return DateTime.fromMillisecondsSinceEpoch(input.inMilliseconds);
   }
-  if (input is Timestamp) {
+  if (input is _Timestamp) {
     return DateTime.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
   if (input is int) {
@@ -112,29 +112,29 @@ DateTime? letDateTime(dynamic input) {
   return null;
 }
 
-/// Converts the [input] to a [Timestamp] type if possible, or returns null if
+/// Converts the [input] to a [_Timestamp] type if possible, or returns null if
 /// the conversion cannot be performed.
-Timestamp? letTimestamp(dynamic input) {
-  if (input is Timestamp) {
+_Timestamp? let_Timestamp(dynamic input) {
+  if (input is _Timestamp) {
     return input;
   }
   if (input is DateTime) {
-    return Timestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
+    return _Timestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
   if (input is int) {
-    return Timestamp.fromMillisecondsSinceEpoch(input);
+    return _Timestamp.fromMillisecondsSinceEpoch(input);
   }
   if (input is Duration) {
-    return Timestamp.fromMillisecondsSinceEpoch(input.inMilliseconds);
+    return _Timestamp.fromMillisecondsSinceEpoch(input.inMilliseconds);
   }
   if (input is String) {
     final date = DateTime.tryParse(input.trim());
     if (date != null) {
-      return Timestamp.fromDate(date);
+      return _Timestamp.fromDate(date);
     }
   }
   if (input is num) {
-    return Timestamp.fromMillisecondsSinceEpoch(input.round());
+    return _Timestamp.fromMillisecondsSinceEpoch(input.round());
   }
   return null;
 }
@@ -148,7 +148,7 @@ Duration? letDuration(dynamic input) {
   if (input is int) {
     return Duration(milliseconds: input);
   }
-  if (input is Timestamp) {
+  if (input is _Timestamp) {
     return Duration(milliseconds: input.millisecondsSinceEpoch);
   }
   if (input is DateTime) {
