@@ -4,6 +4,10 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
+import 'data.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
 extension XyzUtilsStringExtensions on String {
   //
   //
@@ -62,5 +66,13 @@ extension XyzUtilsStringExtensions on String {
 
   String paragraphToLength(int length) {
     return this.lineToLength(length).replaceAll("\n", " ");
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension ToTrimmedStringOrNull on dynamic {
+  String? toTrimmedStringOrNull() {
+    return this?.toString().trim().nullIfEmpty;
   }
 }

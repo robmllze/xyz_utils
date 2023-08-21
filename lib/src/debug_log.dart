@@ -21,7 +21,7 @@ abstract class DebugLog {
 void _debugLog({
   required String icon,
   Object? message,
-  Symbol group = #debug,
+  Symbol? group,
   Set<Symbol> whitelist = const {#debug},
   Rec? rec,
   AnsiStyle? color,
@@ -52,7 +52,7 @@ void _debugLog({
 
 void debugLog(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -65,7 +65,7 @@ void debugLog(
 
 void debugLogError(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -78,7 +78,7 @@ void debugLogError(
 
 void debugLogAlert(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -91,7 +91,7 @@ void debugLogAlert(
 
 void debugLogIgnore(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -105,7 +105,7 @@ void debugLogIgnore(
 
 void debugLogSuccess(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -118,7 +118,7 @@ void debugLogSuccess(
 
 void debugLogStart(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -131,7 +131,7 @@ void debugLogStart(
 
 void debugLogStop(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -144,7 +144,7 @@ void debugLogStop(
 
 void debugLogInfo(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(
@@ -157,7 +157,7 @@ void debugLogInfo(
 
 void debugLogMessage(
   Object? message, [
-  Symbol group = #debug,
+  Symbol? group,
   Rec? rec,
 ]) =>
     _debugLog(

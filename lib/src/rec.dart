@@ -28,7 +28,7 @@ class Rec {
   //
 
   final String? code;
-  final Symbol group;
+  final Symbol? group;
   final RecOptions options;
 
   //
@@ -37,7 +37,7 @@ class Rec {
 
   const Rec([
     this.code = "",
-    this.group = #debug,
+    this.group,
     this.options = const RecOptions({}),
   ]);
 
