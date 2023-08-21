@@ -497,8 +497,8 @@ extension TryReduce<T> on Iterable<T> {
   }
 }
 
-extension TryReduce2<T> on Iterable<Iterable<T>> {
-  Iterable<T>? tryReduce2([Iterable<T> Function(Iterable<T>, Iterable<T>)? merge]) {
+extension TryMerge<T> on Iterable<Iterable<T>> {
+  Iterable<T>? tryMerge([Iterable<T> Function(Iterable<T>, Iterable<T>)? merge]) {
     try {
       return this.reduce(merge ?? (final a, final b) => <T>[...a, ...b]);
     } catch (_) {
@@ -506,3 +506,5 @@ extension TryReduce2<T> on Iterable<Iterable<T>> {
     }
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

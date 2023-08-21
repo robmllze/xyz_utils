@@ -67,6 +67,12 @@ extension XyzUtilsStringExtensions on String {
   String paragraphToLength(int length) {
     return this.lineToLength(length).replaceAll("\n", " ");
   }
+
+  //
+  //
+  //
+
+  Uri? toUri() => Uri.tryParse(this);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

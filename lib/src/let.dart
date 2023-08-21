@@ -30,13 +30,13 @@ T? let<T>(dynamic input) {
     } else if (typeEquality<T, DateTime>() || typeEquality<T, DateTime?>()) {
       return letDateTime(input) as T;
     } else if (typeEquality<T, TimestampClone>() || typeEquality<T, TimestampClone?>()) {
-      return letTimestamp(input) as T;
+      return letTimestampClone(input) as T;
     } else if (typeEquality<T, Duration>() || typeEquality<T, Duration?>()) {
       return letDuration(input) as T;
     } else if (typeEquality<T, Uri>() || typeEquality<T, Uri?>()) {
       return letUri(input) as T;
     } else if (typeEquality<T, String>() || typeEquality<T, String?>()) {
-      return letString(input) as T;
+      return input?.toString() as T;
     }
     return input as T;
   } catch (_) {}
@@ -47,10 +47,15 @@ T? let<T>(dynamic input) {
 /// conversion cannot be performed.
 num? letNum(dynamic input) {
   if (input is num) return input;
-  if (input is String) return num.tryParse(input);
-  if (input is DateTime) return input.microsecondsSinceEpoch;
-  if (input is TimestampClone) return input.microsecondsSinceEpoch;
-  if (input is Duration) return input.inMicroseconds;
+  if (input is String) {
+    final trimmed = input.trim();
+    return num.tryParse(trimmed) ?? trimmed.tryParseDuration()?.inMicroseconds;
+  }
+  if (input is Duration) return input.inMilliseconds;
+  // Timestamp and DateTime.
+  try {
+    return input.millisecondsSinceEpoch;
+  } catch (_) {}
   if (input is bool) return input ? 1 : 0;
   return null;
 }
@@ -58,27 +63,13 @@ num? letNum(dynamic input) {
 /// Converts the [input] to aa [int] type if possible, or returns null if the
 /// conversion cannot be performed.
 int? letInt(dynamic input) {
-  if (input is int) return input;
-  if (input is num) return input.round();
-  if (input is String) return int.tryParse(input);
-  if (input is DateTime) return input.microsecondsSinceEpoch;
-  if (input is TimestampClone) return input.microsecondsSinceEpoch;
-  if (input is Duration) return input.inMicroseconds;
-  if (input is bool) return input ? 1 : 0;
-  return null;
+  return letNum(input)?.toInt();
 }
 
 /// Converts the [input] to a [double] type if possible, or returns null if the
 /// conversion cannot be performed.
 double? letDouble(dynamic input) {
-  if (input is double) return input;
-  if (input is num) return input.toDouble();
-  if (input is String) return double.tryParse(input);
-  if (input is DateTime) return input.microsecondsSinceEpoch.toDouble();
-  if (input is TimestampClone) return input.microsecondsSinceEpoch.toDouble();
-  if (input is Duration) return input.inMicroseconds.toDouble();
-  if (input is bool) return input ? 1.0 : 0.0;
-  return null;
+  return letNum(input)?.toDouble();
 }
 
 /// Converts the [input] to a [bool] type if possible, or returns null if the
@@ -90,20 +81,11 @@ bool? letBool(dynamic input) {
   return null;
 }
 
-/// Converts the [input] to a [nuStringm] type if possible, or returns null if
-/// the conversion cannot be performed.
-String? letString(dynamic input) {
-  if (input is String) return input;
-  if (input is DateTime) return input.toUtc().toIso8601String();
-  if (input is TimestampClone) return input.microsecondsSinceEpoch.toString();
-  return input?.toString();
-}
-
 /// Converts the [input] to a [Uri] type if possible, or returns null if the
 /// conversion cannot be performed.
 Uri? letUri(dynamic input) {
   if (input is Uri) return input;
-  if (input is String) return Uri.tryParse(input);
+  if (input is String) return Uri.tryParse(input.trim());
   return null;
 }
 
@@ -114,46 +96,46 @@ DateTime? letDateTime(dynamic input) {
     return input.toUtc();
   }
   if (input is TimestampClone) {
-    return DateTime.fromMicrosecondsSinceEpoch(input.microsecondsSinceEpoch, isUtc: true);
+    return DateTime.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
   if (input is String) {
     return DateTime.tryParse(input)?.toUtc();
   }
   if (input is Duration) {
-    return DateTime.fromMicrosecondsSinceEpoch(input.inMicroseconds, isUtc: true);
+    return DateTime.fromMillisecondsSinceEpoch(input.inMilliseconds);
   }
   if (input is int) {
-    return DateTime.fromMicrosecondsSinceEpoch(input, isUtc: true);
+    return DateTime.fromMillisecondsSinceEpoch(input);
   }
   if (input is num) {
-    return DateTime.fromMicrosecondsSinceEpoch(input.round(), isUtc: true);
+    return DateTime.fromMillisecondsSinceEpoch(input.round());
   }
   return null;
 }
 
 /// Converts the [input] to a [TimestampClone] type if possible, or returns null if
 /// the conversion cannot be performed.
-TimestampClone? letTimestamp(dynamic input) {
+TimestampClone? letTimestampClone(dynamic input) {
   if (input is TimestampClone) {
     return input;
   }
   if (input is DateTime) {
-    return TimestampClone.fromMicrosecondsSinceEpoch(input.microsecondsSinceEpoch);
+    return TimestampClone.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
   if (input is int) {
-    return TimestampClone.fromMicrosecondsSinceEpoch(input);
+    return TimestampClone.fromMillisecondsSinceEpoch(input);
   }
   if (input is Duration) {
-    return TimestampClone.fromMicrosecondsSinceEpoch(input.inMicroseconds);
+    return TimestampClone.fromMillisecondsSinceEpoch(input.inMilliseconds);
   }
   if (input is String) {
-    final date = DateTime.tryParse(input);
+    final date = DateTime.tryParse(input.trim());
     if (date != null) {
       return TimestampClone.fromDate(date);
     }
   }
   if (input is num) {
-    return TimestampClone.fromMicrosecondsSinceEpoch(input.round());
+    return TimestampClone.fromMillisecondsSinceEpoch(input.round());
   }
   return null;
 }
@@ -167,12 +149,11 @@ Duration? letDuration(dynamic input) {
   if (input is int) {
     return Duration(microseconds: input);
   }
-  if (input is DateTime) {
-    return Duration(microseconds: input.microsecondsSinceEpoch);
-  }
-  if (input is TimestampClone) {
-    return Duration(microseconds: input.microsecondsSinceEpoch);
-  }
+  try {
+    // DateTIime and Timestamp.
+    return Duration(microseconds: input.millisecondsSinceEpoch);
+  } catch (_) {}
+
   if (input is String) {
     return input.tryParseDuration();
   }
