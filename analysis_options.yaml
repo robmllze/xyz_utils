@@ -1,17 +1,20 @@
-# ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-#
-# XYZ Utils
-#
-# ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## XYZ Gen
+##
+## See: https://pub.dev/packages/lints
+##
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 include: package:lints/recommended.yaml
+
+## ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 linter:
   rules:
     always_declare_return_types: true
     avoid_renaming_method_parameters: false
     constant_identifier_names: false
-    file_names: false
     non_constant_identifier_names: false
     omit_local_variable_types: true
     prefer_const_constructors_in_immutables: true
@@ -22,22 +25,11 @@ linter:
     require_trailing_commas: true
     unnecessary_this: false
     camel_case_types: false
-    library_private_types_in_public_api: false
+
 analyzer:
+  exclude: 
+    - build/**
   errors:
     prefer_final_in_for_each: error
     unnecessary_new: error
-    use_key_in_widget_constructors: error
-    prefer_relative_imports: error
-  enable-experiment:
-    - variance
-    - value-class
-    - extension-types
-    - const-functions
-    - macros
-    - inference-update-2
-    - records
-    - patterns
-    - inline-class
-    - sealed-class
-    - class-modifiers
+    unrelated_type_equality_checks: error
