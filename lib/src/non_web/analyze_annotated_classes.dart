@@ -4,12 +4,15 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
+import 'dart:async';
 import 'dart:io';
+
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/physical_file_system.dart';
+
 import 'package:path/path.dart' as p;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -22,29 +25,29 @@ Future<void> analyzeAnnotatedClasses({
   Set<String>? classAnnotations,
   Set<String>? methodAnnotations,
   Set<String>? memberAnnotations,
-  Future<void> Function(
+  FutureOr<void> Function(
     String classAnnotationName,
     String className,
   )? onAnnotatedClass,
-  Future<void> Function(
+  FutureOr<void> Function(
     String fieldName,
     DartObject fieldValue,
   )? onClassAnnotationField,
-  Future<void> Function(
+  FutureOr<void> Function(
     String methodAnnotationName,
     String methodName,
     String methodType,
   )? onAnnotatedMethod,
-  Future<void> Function(
+  FutureOr<void> Function(
     String fieldName,
     DartObject fieldValue,
   )? onMethodAnnotationField,
-  Future<void> Function(
+  FutureOr<void> Function(
     String memberAnnotationName,
     String memberName,
     String memberType,
   )? onAnnotatedMember,
-  Future<void> Function(
+  FutureOr<void> Function(
     String fieldName,
     DartObject fieldValue,
   )? onMemberAnnotationField,
@@ -90,10 +93,10 @@ Future<void> analyzeAnnotatedClasses({
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<void> _processClassAnnotations(
+FutureOr<void> _processClassAnnotations(
   ClassElement classElement,
-  Future<void> Function(String, String)? onAnnotatedClass,
-  Future<void> Function(String, DartObject)? onClassAnnotationField,
+  FutureOr<void> Function(String, String)? onAnnotatedClass,
+  FutureOr<void> Function(String, DartObject)? onClassAnnotationField,
   Set<String>? classAnnotations,
 ) async {
   for (final metadata in classElement.metadata) {
@@ -118,11 +121,11 @@ Future<void> _processClassAnnotations(
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<void> _processMethodAnnotations(
+FutureOr<void> _processMethodAnnotations(
   ClassElement classElement,
   RegExp? methodNamePattern,
-  Future<void> Function(String, String, String)? onAnnotatedMethod,
-  Future<void> Function(String, DartObject)? onMethodAnnotationField,
+  FutureOr<void> Function(String, String, String)? onAnnotatedMethod,
+  FutureOr<void> Function(String, DartObject)? onMethodAnnotationField,
   Set<String>? methodAnnotations,
 ) async {
   for (final method in classElement.methods) {
@@ -157,11 +160,11 @@ Future<void> _processMethodAnnotations(
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<void> _processMemberAnnotations(
+FutureOr<void> _processMemberAnnotations(
   ClassElement classElement,
   RegExp? memberNamePattern,
-  Future<void> Function(String, String, String)? onAnnotatedMember,
-  Future<void> Function(String, DartObject)? onMemberAnnotationField,
+  FutureOr<void> Function(String, String, String)? onAnnotatedMember,
+  FutureOr<void> Function(String, DartObject)? onMemberAnnotationField,
   Set<String>? memberAnnotations,
 ) async {
   for (final fieldElement in classElement.fields) {
