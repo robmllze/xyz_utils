@@ -20,7 +20,7 @@ abstract class DebugLog {
 
 void _debugLog({
   required String icon,
-  Object? message,
+  dynamic message,
   Symbol? group,
   Set<Symbol> whitelist = const {#debug},
   Rec? rec,
@@ -51,7 +51,7 @@ void _debugLog({
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 void debugLog(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -64,7 +64,7 @@ void debugLog(
     );
 
 void debugLogError(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -77,7 +77,7 @@ void debugLogError(
     );
 
 void debugLogAlert(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -90,7 +90,7 @@ void debugLogAlert(
     );
 
 void debugLogIgnore(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -104,7 +104,7 @@ void debugLogIgnore(
     );
 
 void debugLogSuccess(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -117,7 +117,7 @@ void debugLogSuccess(
     );
 
 void debugLogStart(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -130,7 +130,7 @@ void debugLogStart(
     );
 
 void debugLogStop(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -143,7 +143,7 @@ void debugLogStop(
     );
 
 void debugLogInfo(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>
@@ -156,7 +156,7 @@ void debugLogInfo(
     );
 
 void debugLogMessage(
-  Object? message, [
+  dynamic message, [
   Symbol? group,
   Rec? rec,
 ]) =>

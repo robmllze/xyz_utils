@@ -72,7 +72,7 @@ class Rec {
   //
 
   void debugLog([
-    Object? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLog(
@@ -83,7 +83,7 @@ class Rec {
   }
 
   void debugLogAlert([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogAlert(
@@ -94,7 +94,7 @@ class Rec {
   }
 
   void debugLogError([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogError(
@@ -105,7 +105,7 @@ class Rec {
   }
 
   void debugLogIgnore([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogIgnore(
@@ -116,7 +116,7 @@ class Rec {
   }
 
   void debugLogInfo([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogInfo(
@@ -127,7 +127,7 @@ class Rec {
   }
 
   void debugLogMessage([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogMessage(
@@ -138,7 +138,7 @@ class Rec {
   }
 
   void debugLogStart([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogStart(
@@ -149,7 +149,7 @@ class Rec {
   }
 
   void debugLogStop([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogStop(
@@ -160,7 +160,7 @@ class Rec {
   }
 
   void debugLogSuccess([
-    String? message,
+    dynamic message,
     Symbol? group,
   ]) {
     util_debug_log.debugLogSuccess(

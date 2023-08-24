@@ -1,17 +1,22 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Gen
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-library xyz_utils;
+part of '../type_codes.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export '_common.dart';
+typedef TTypeMappers = Map<String, String Function(MapperEvent)>;
 
-export 'src/non_web/analyze_annotated_classes.dart';
-export 'src/non_web/file_system.dart';
-export 'src/non_web/fmt_dart_file.dart';
-export 'src/non_web/list_file_paths.dart';
-export 'src/non_web/list_folder_paths.dart';
+TTypeMappers newTypeMappers(TTypeMappers input) => TTypeMappers.unmodifiable(input);
+
+abstract class TypeMappers {
+  TTypeMappers get fromMappers => {...this.collectionFromMappers, ...this.objectFromMappers};
+  TTypeMappers get toMappers => {...this.collectionToMappers, ...this.objectToMappers};
+  TTypeMappers get collectionFromMappers;
+  TTypeMappers get collectionToMappers;
+  TTypeMappers get objectFromMappers;
+  TTypeMappers get objectToMappers;
+}
