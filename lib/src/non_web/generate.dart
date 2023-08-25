@@ -18,11 +18,13 @@ Future<void> generateFromTemplates({
   String begType = "",
   Set<String> pathPatterns = const {},
   bool deleteGeneratedFiles = false,
+  void Function(String filePath)? onDelete,
 }) async {
   if (deleteGeneratedFiles) {
     await deleteGeneratedDartFiles(
       rootDirPath,
       pathPatterns: pathPatterns,
+      onDelete: onDelete,
     );
   }
   final templates = <String, String>{};
