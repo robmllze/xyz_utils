@@ -152,3 +152,85 @@ extension AnsiStyledString on String {
     return style.formatted(this);
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+void printBlack(String message) {
+  final formatted = AnsiStyle.fgBlack.formatted(message);
+  print(formatted);
+}
+
+void printRed(String message) {
+  final formatted = AnsiStyle.fgRed.formatted(message);
+  print(formatted);
+}
+
+void printGreen(String message) {
+  final formatted = AnsiStyle.fgGreen.formatted(message);
+  print(formatted);
+}
+
+void printYellow(String message) {
+  final formatted = AnsiStyle.fgYellow.formatted(message);
+  print(formatted);
+}
+
+void printBlue(String message) {
+  final formatted = AnsiStyle.fgBlue.formatted(message);
+  print(formatted);
+}
+
+void printPurple(String message) {
+  final formatted = AnsiStyle.fgPurple.formatted(message);
+  print(formatted);
+}
+
+void printCyan(String message) {
+  final formatted = AnsiStyle.fgCyan.formatted(message);
+  print(formatted);
+}
+
+void printWhite(String message) {
+  final formatted = AnsiStyle.fgWhite.formatted(message);
+  print(formatted);
+}
+
+void printLightBlack(String message) {
+  final formatted = AnsiStyle.fgLightBlack.formatted(message);
+  print(formatted);
+}
+
+void printLightRed(String message) {
+  final formatted = AnsiStyle.fgLightRed.formatted(message);
+  print(formatted);
+}
+
+void printLightGreen(String message) {
+  final formatted = AnsiStyle.fgLightGreen.formatted(message);
+  print(formatted);
+}
+
+void printLightYellow(String message) {
+  final formatted = AnsiStyle.fgLightYellow.formatted(message);
+  print(formatted);
+}
+
+void printLightBlue(String message) {
+  final formatted = AnsiStyle.fgLightBlue.formatted(message);
+  print(formatted);
+}
+
+void printLightPurple(String message) {
+  final formatted = AnsiStyle.fgLightPurple.formatted(message);
+  print(formatted);
+}
+
+void printLightCyan(String message) {
+  final formatted = AnsiStyle.fgLightCyan.formatted(message);
+  print(formatted);
+}
+
+void printLightWhite(String message) {
+  final formatted = AnsiStyle.fgLightWhite.formatted(message);
+  print(formatted);
+}

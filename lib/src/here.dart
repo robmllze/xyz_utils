@@ -119,7 +119,7 @@ class Here {
   //
 
   Rec get _rec {
-    return Rec(
+    final rec = Rec(
       this.fileName,
       this._defaultGroup ?? #debug,
     )(
@@ -129,6 +129,8 @@ class Here {
     )(
       this.lineNumber,
     );
+    print(rec.group);
+    return rec;
   }
 
   //

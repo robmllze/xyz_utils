@@ -103,7 +103,6 @@ FutureOr<void> _processClassAnnotations(
     final element = metadata.element;
     final classAnnotationName = element?.displayName;
     if (classAnnotationName != null && classAnnotations?.contains(classAnnotationName) != false) {
-      await onAnnotatedClass?.call(classAnnotationName, classElement.displayName);
       if (onClassAnnotationField != null) {
         final fieldNames = element?.children.map((e) => e.displayName);
         if (fieldNames != null) {
@@ -115,6 +114,7 @@ FutureOr<void> _processClassAnnotations(
           }
         }
       }
+      await onAnnotatedClass?.call(classAnnotationName, classElement.displayName);
     }
   }
 }
