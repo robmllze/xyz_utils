@@ -5,6 +5,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'dart:io';
+import 'package:path/path.dart' as p;
 
 import '../UNSORTED.dart';
 
@@ -73,4 +74,22 @@ Future<File?> findFileByName(String fileName, String directoryPath) async {
 
   // File not found.
   return null;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+String getDesktopPath() {
+  try {
+    if (Platform.isMacOS) {
+      return p.join("Users", Platform.environment["USER"]!, "Desktop");
+    } else if (Platform.isWindows) {
+      return p.join(Platform.environment["USERPROFILE"]!, "Desktop");
+    } else if (Platform.isLinux) {
+      return p.join("home", Platform.environment["USER"]!, "Desktop");
+    } else {
+      throw false;
+    }
+  } catch (_) {
+    throw UnsupportedError("Unsupported platform");
+  }
 }
