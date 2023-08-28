@@ -508,3 +508,9 @@ extension TryMerge<T> on Iterable<Iterable<T>> {
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+String combinedOrderedStringId(List<String> ids) {
+  final sorted = ids..sort((final a, final b) => a.compareTo(b));
+  final combined = sorted.join("_");
+  return combined;
+}

@@ -51,6 +51,4 @@ export 'src/math/pair.dart';
 export 'src/math/tables.dart';
 export 'src/math/trig.dart';
 export 'src/math/utils.dart';
-export 'src/math/vec.dart';
-export 'src/math/vec2.dart';
 //export 'src/math/list_series_EXAMPLES.dart';

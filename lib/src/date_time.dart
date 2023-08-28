@@ -7,6 +7,7 @@
 import 'package:intl/intl.dart';
 
 import 'duration_formatted_english.dart';
+import 'data.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -117,4 +118,36 @@ bool isSameMonth(DateTime date1, DateTime date2) {
 List<DateTime> sortDates(List<DateTime> dates) {
   final copy = List<DateTime>.from(dates);
   return copy..sort((final a, final b) => a.compareTo(b));
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+DateTime? getLastDate(Iterable<DateTime>? dates) {
+  return dates?.tryReduce(
+    (final a, final b) {
+      return a.microsecondsSinceEpoch > b.microsecondsSinceEpoch ? a : b;
+    },
+  );
+}
+
+DateTime? getFirstDate(Iterable<DateTime>? dates) {
+  return dates?.tryReduce(
+    (final a, final b) {
+      return a.microsecondsSinceEpoch < b.microsecondsSinceEpoch ? a : b;
+    },
+  );
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension DateTimeUtilsExtension on DateTime {
+  /// e.g. August 8, 2023
+  String full(String localeCode) {
+    return DateFormat("MMMM d, y", localeCode).format(this);
+  }
+
+  /// e.g. Aug-8 23
+  String fullShort(String localeCode) {
+    return DateFormat("MMM/d/yyyy", localeCode).format(this);
+  }
 }
