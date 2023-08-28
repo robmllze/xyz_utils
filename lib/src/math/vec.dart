@@ -38,7 +38,9 @@ class Vec {
       components.map((component) => pow(component, exponent)).toList().vec;
 
   @override
-  bool operator ==(Object other) => other is Vec && hashCode == other.hashCode;
+  bool operator ==(Object other) => other is Vec && this.equals(other);
+
+  bool equals(Vec other) => _equalsIterable(this.components, other.components);
 
   num operator [](int i) => components[i];
 
@@ -55,21 +57,6 @@ class Vec {
   num theta(Vec other) => acos(dot(other) / (norm * other.norm));
 
   num alpha(Vec other) => 2.0 * pi - theta(other);
-
-  // Vec? cross(Vec other) {
-  //   if (dimension != 3 || other.dimension != 3) {
-  //     return null;
-  //   }
-
-  //   final a = components;
-  //   final b = other.components;
-
-  //   return <num>[
-  //     a[1] * b[2] - a[2] * b[1],
-  //     a[2] * b[0] - a[0] * b[2],
-  //     a[0] * b[1] - a[1] * b[0],
-  //   ].vec;
-  // }
 
   Vec renorm(num norm) => unit * norm;
 
@@ -90,6 +77,16 @@ class Vec {
       .values
       .toList()
       .vec;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+bool _equalsIterable(Iterable<num> a, Iterable<num> b) {
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a.elementAt(i) != b.elementAt(i)) return false;
+  }
+  return true;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -126,8 +123,8 @@ class Vec2 extends Vec {
   }
 
   Vec2 rotate(num angle) {
-    var cosA = cos(angle);
-    var sinA = sin(angle);
+    final cosA = cos(angle);
+    final sinA = sin(angle);
     return Vec2(
       x * cosA - y * sinA,
       x * sinA + y * cosA,
@@ -155,21 +152,19 @@ class Vec3 extends Vec {
 
   Vec3 rotate(Vec3 axis, num angle) {
     // Normalize the axis
-    var unit = axis.unit;
-    var ux = unit[0];
-    var uy = unit[1];
-    var uz = unit[2];
-
-    var cosA = cos(angle);
-    var sinA = sin(angle);
-
-    var rotatedX = (cosA + ux * ux * (1 - cosA)) * x +
+    final unit = axis.unit;
+    final ux = unit[0];
+    final uy = unit[1];
+    final uz = unit[2];
+    final cosA = cos(angle);
+    final sinA = sin(angle);
+    final rotatedX = (cosA + ux * ux * (1 - cosA)) * x +
         (ux * uy * (1 - cosA) - uz * sinA) * y +
         (ux * uz * (1 - cosA) + uy * sinA) * z;
-    var rotatedY = (uy * ux * (1 - cosA) + uz * sinA) * x +
+    final rotatedY = (uy * ux * (1 - cosA) + uz * sinA) * x +
         (cosA + uy * uy * (1 - cosA)) * y +
         (uy * uz * (1 - cosA) - ux * sinA) * z;
-    var rotatedZ = (uz * ux * (1 - cosA) - uy * sinA) * x +
+    final rotatedZ = (uz * ux * (1 - cosA) - uy * sinA) * x +
         (uz * uy * (1 - cosA) + ux * sinA) * y +
         (cosA + uz * uz * (1 - cosA)) * z;
     return Vec3(
