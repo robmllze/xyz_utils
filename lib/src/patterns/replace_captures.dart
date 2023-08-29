@@ -11,7 +11,7 @@
 ///  print(result); // Prints: "Hello there World"
 /// }
 /// ```
-String replaceCaptures(
+String replaceAllCaptures(
   String input,
   Map<String, dynamic> data, {
   String patternOpening = "{{{",
@@ -41,4 +41,25 @@ String replaceCaptures(
     });
   }
   return output;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension ReplaceCaptures on String {
+  String replaceCaptures(
+    Map<String, dynamic> data, {
+    String patternOpening = "{{{",
+    String patternClosing = "}}}",
+    String captureOpening = "{{",
+    String captureClosing = "}}",
+  }) {
+    return replaceAllCaptures(
+      this,
+      data,
+      patternOpening: patternOpening,
+      patternClosing: patternClosing,
+      captureOpening: captureOpening,
+      captureClosing: captureClosing,
+    );
+  }
 }

@@ -45,7 +45,3 @@ const REG_EXP_FULL_NAME_OR_EMPTY = r"^([a-zA-Z]+([ ]+[a-zA-Z]+)+)?$";
 
 /// Home or mobile phone number, e.g. `+14041234567` or `0412345678`
 const REG_EXP_PHONE = r"^((\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})$";
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-bool isValidEmail(String expression) => RegExp(REG_EXP_EMAIL_0).hasMatch(expression);
