@@ -5,7 +5,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
@@ -15,10 +14,43 @@ import 'package:analyzer/file_system/physical_file_system.dart';
 
 import 'package:path/path.dart' as p;
 
+import 'generate.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+AnalysisContextCollection createCollectionFromFilePaths1(Set<String> filePaths) {
+  final includedPaths = filePaths.map((e) => p.absolute(p.normalize(e))).toList();
+  return AnalysisContextCollection(
+    includedPaths: includedPaths,
+    resourceProvider: PhysicalResourceProvider.INSTANCE,
+  );
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+Future<AnalysisContextCollection> createCollectionFromRoot(
+  String rootDirPath,
+  FutureOr<bool> Function(String, String, String) onFileFound, {
+  Set<String> pathPatterns = const {},
+}) async {
+  final info = await findDartFiles(
+    rootDirPath,
+    onFileFound,
+  );
+  final filePaths = info.map((e) => e.$3);
+  final includedPaths = filePaths.map((e) => p.absolute(p.normalize(e))).toList();
+  final collection = AnalysisContextCollection(
+    includedPaths: includedPaths,
+    resourceProvider: PhysicalResourceProvider.INSTANCE,
+  );
+  return collection;
+}
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<void> analyzeAnnotatedClasses({
   required String filePath,
+  required AnalysisContextCollection collection,
   RegExp? classNamePattern,
   RegExp? methodNamePattern,
   RegExp? memberNamePattern,
@@ -52,14 +84,12 @@ Future<void> analyzeAnnotatedClasses({
     DartObject fieldValue,
   )? onMemberAnnotationField,
 }) async {
-  final file = File(filePath).absolute;
-  final normalizedFilePath = p.normalize(file.path);
-  final collection = AnalysisContextCollection(
-    includedPaths: [normalizedFilePath],
-    resourceProvider: PhysicalResourceProvider.INSTANCE,
-  );
+  final absoluteFilePath = p.absolute(filePath);
+  final normalizedFilePath = p.normalize(absoluteFilePath);
+  final fileUri = Uri.file(absoluteFilePath).toString();
+
   final context = collection.contextFor(normalizedFilePath);
-  final fileUri = file.uri.toString();
+
   final library = await context.currentSession.getLibraryByUri(fileUri);
   if (library is LibraryElementResult) {
     final classElements = library.element.topLevelElements.whereType<ClassElement>();

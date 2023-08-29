@@ -4,6 +4,7 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
+import 'dart:async';
 import 'dart:io';
 
 import '../UNSORTED.dart';
@@ -13,7 +14,7 @@ import 'non_web.dart';
 
 Future<void> generateFromTemplates({
   required String rootDirPath,
-  required Future<void> Function(String, Map<String, String>) generateForFiles,
+  required FutureOr<void> Function(String, Map<String, String>) generateForFile,
   required Set<String> templateFilePaths,
   String begType = "",
   Set<String> pathPatterns = const {},
@@ -31,17 +32,24 @@ Future<void> generateFromTemplates({
   for (final templateFilePath in templateFilePaths) {
     templates[templateFilePath] = await readDartTemplate(templateFilePath);
   }
-  await findDartFiles(
-    rootDirPath: rootDirPath,
-    pathPatterns: pathPatterns,
-    onFileFound: (final dirName, final folderName, final filePath) async {
+  final results = await findDartFiles(
+    rootDirPath,
+    (_ /*final dirName*/, __ /*final folderName*/, final filePath) {
       final a = isMatchingFileName(filePath, begType, "dart").$1;
       final b = isSourceDartFilePath(filePath);
       if (a && b) {
-        await generateForFiles(filePath, templates);
+        return true;
       }
+      return false;
     },
+    pathPatterns,
   );
+  for (final result in results) {
+    // final dirName = result.$1;
+    // final folderName = result.$2;
+    final filePath = result.$3;
+    await generateForFile(filePath, templates);
+  }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -56,26 +64,38 @@ Future<void> deleteGeneratedDartFiles(
   final filePaths = await listFilePaths(dirPath);
   if (filePaths != null) {
     for (final filePath in filePaths) {
-      final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
-      final b = isGeneratedDartFilePath(filePath);
-      final c = a && b;
-      if (c) {
-        await deleteFile(filePath);
-        onDelete?.call(filePath);
-      }
+      await deleteGeneratedDartFile(
+        filePath,
+        onDelete,
+        pathPatterns,
+      );
     }
+  }
+}
+
+Future<void> deleteGeneratedDartFile(
+  String filePath, [
+  void Function(String filePath)? onDelete,
+  Set<String> pathPatterns = const {},
+]) async {
+  if (isGeneratedDartFilePath(filePath, pathPatterns)) {
+    await deleteFile(filePath);
+    onDelete?.call(filePath);
   }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<bool> sourceAndGeneratedDartFileExists(String filePath) async {
-  if (isSourceDartFilePath(filePath)) {
+Future<bool> sourceAndGeneratedDartFileExists(
+  String filePath, [
+  Set<String> pathPatterns = const {},
+]) async {
+  if (isSourceDartFilePath(filePath, pathPatterns)) {
     final a = await fileExists(filePath);
     final b = await fileExists("${filePath.substring(0, filePath.length - ".dart".length)}.g.dart");
     return a && b;
   }
-  if (isGeneratedDartFilePath(filePath)) {
+  if (isGeneratedDartFilePath(filePath, pathPatterns)) {
     final a = await fileExists(filePath);
     final b = await fileExists("${filePath.substring(0, filePath.length - ".g.dart".length)}.dart");
     return a && b;
@@ -85,29 +105,31 @@ Future<bool> sourceAndGeneratedDartFileExists(String filePath) async {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<void> findDartFiles({
-  required String rootDirPath,
-  Set<String> pathPatterns = const {},
-  required Future<void> Function(
+Future<List<(String, String, String)>> findDartFiles(
+  String rootDirPath,
+  FutureOr<bool> Function(
     String dirPath,
     String folderName,
     String filePath,
-  ) onFileFound,
-}) async {
+  ) onFileFound, [
+  Set<String> pathPatterns = const {},
+]) async {
+  final results = <(String, String, String)>[];
   final filePaths = await listFilePaths(rootDirPath);
   if (filePaths != null) {
     filePaths.sort();
     for (final filePath in filePaths) {
-      if (isSourceDartFilePath(filePath)) {
+      if (isSourceDartFilePath(filePath, pathPatterns)) {
         final dirPath = getDirPath(filePath);
         final folderName = getBaseName(dirPath);
-        final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
-        if (a) {
-          await onFileFound(dirPath, folderName, filePath);
+        final add = await onFileFound(dirPath, folderName, filePath);
+        if (add) {
+          results.add((dirPath, folderName, filePath));
         }
       }
     }
   }
+  return results;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

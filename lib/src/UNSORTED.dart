@@ -8,19 +8,35 @@ import 'package:path/path.dart' as p;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-bool isDartFilePath(String filePath) {
-  return filePath.toLowerCase().endsWith(".dart");
+bool isDartFilePath(
+  String filePath, [
+  Set<String> pathPatterns = const {},
+]) {
+  final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
+  final b = filePath.toLowerCase().endsWith(".dart");
+  final c = a && b;
+  return c;
 }
 
-bool isSourceDartFilePath(String filePath) {
+bool isSourceDartFilePath(
+  String filePath, [
+  Set<String> pathPatterns = const {},
+]) {
   final lowerCasefilePath = filePath.toLowerCase();
-  final a = lowerCasefilePath.endsWith(".dart");
-  final b = lowerCasefilePath.endsWith(".g.dart");
-  return a && !b;
+  final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
+  final b = lowerCasefilePath.endsWith(".dart");
+  final c = lowerCasefilePath.endsWith(".g.dart");
+  return a && b && !c;
 }
 
-bool isGeneratedDartFilePath(String filePath) {
-  return filePath.toLowerCase().endsWith(".g.dart");
+bool isGeneratedDartFilePath(
+  String filePath, [
+  Set<String> pathPatterns = const {},
+]) {
+  final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
+  final b = filePath.toLowerCase().endsWith(".g.dart");
+  final c = a && b;
+  return c;
 }
 
 /// The file path without the ".g" if present.
