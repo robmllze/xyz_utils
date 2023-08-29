@@ -37,7 +37,7 @@ String? getSourcePath(String filePath) {
   return null;
 }
 
-String getFileName(String path) {
+String getBaseName(String path) {
   return p.basename(getFixedPath(path));
 }
 
@@ -73,12 +73,12 @@ String getFixedPath(String path) {
 }
 
 bool isPrivateFile(String filePath) {
-  final fileName = getFileName(filePath);
+  final fileName = getBaseName(filePath);
   return fileName.startsWith("_");
 }
 
 (bool, String) isMatchingFileName(String filePath, String begType, String endType) {
-  final fileName = getFileName(filePath);
+  final fileName = getBaseName(filePath);
   final a = begType.isEmpty ? true : fileName.startsWith("${begType.toLowerCase()}_");
   final b = endType.isEmpty ? true : fileName.endsWith(".$endType".toLowerCase());
   final c = a && b;

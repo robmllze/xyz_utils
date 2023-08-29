@@ -100,7 +100,7 @@ Future<void> findDartFiles({
     for (final filePath in filePaths) {
       if (isSourceDartFilePath(filePath)) {
         final dirName = getDirPath(filePath);
-        final folderName = getFileName(dirName);
+        final folderName = getBaseName(dirName);
         final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
         if (a) {
           await onFileFound(dirName, folderName, filePath);
