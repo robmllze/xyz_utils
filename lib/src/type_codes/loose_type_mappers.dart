@@ -134,7 +134,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^DateTime[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "(${e.name} != null ? Timestamp.fromDate(${e.name}!).toLocal(): null)";
+          return "(${e.name} != null ? Timestamp.fromDate(${e.name}!.toLocal()): null)";
         },
         r"^Duration|Uri[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
