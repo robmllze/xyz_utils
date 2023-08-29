@@ -57,7 +57,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^Iterable|List|Set[\?]?$": (e) {
           if (e is! CollectionMapperEvent) throw TypeError();
-          return "${e.name}?.map((${e.args}) => ${e.hashes},).nonNulls.nullIfEmpty.toList()";
+          return "${e.name}?.map((${e.args}) => ${e.hashes},).nonNulls.nullIfEmpty?.toList()";
         },
       });
 
@@ -109,7 +109,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^Uri[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "(${e.name} is String ? ${e.name}?.trim().nullIfEmpty.toUri(): null)";
+          return "(${e.name} is String ? ${e.name}?.trim().nullIfEmpty?.toUri(): null)";
         },
         r"^(\w+Type)[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
