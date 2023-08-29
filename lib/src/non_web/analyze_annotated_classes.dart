@@ -60,33 +60,34 @@ Future<void> analyzeAnnotatedClasses({
   );
   final context = collection.contextFor(normalizedFilePath);
   final fileUri = file.uri.toString();
-  final result = await context.currentSession.getLibraryByUri(fileUri);
-  final library = result as LibraryElementResult;
-  final classElements = library.element.topLevelElements.whereType<ClassElement>();
+  final library = await context.currentSession.getLibraryByUri(fileUri);
+  if (library is LibraryElementResult) {
+    final classElements = library.element.topLevelElements.whereType<ClassElement>();
 
-  for (final classElement in classElements) {
-    final className = classElement.displayName;
-    if (classNamePattern == null || classNamePattern.hasMatch(className)) {
-      await _processClassAnnotations(
-        classElement,
-        onAnnotatedClass,
-        onClassAnnotationField,
-        classAnnotations,
-      );
-      await _processMethodAnnotations(
-        classElement,
-        methodNamePattern,
-        onAnnotatedMethod,
-        onMethodAnnotationField,
-        methodAnnotations,
-      );
-      await _processMemberAnnotations(
-        classElement,
-        memberNamePattern,
-        onAnnotatedMember,
-        onMemberAnnotationField,
-        memberAnnotations,
-      );
+    for (final classElement in classElements) {
+      final className = classElement.displayName;
+      if (classNamePattern == null || classNamePattern.hasMatch(className)) {
+        await _processClassAnnotations(
+          classElement,
+          onAnnotatedClass,
+          onClassAnnotationField,
+          classAnnotations,
+        );
+        await _processMethodAnnotations(
+          classElement,
+          methodNamePattern,
+          onAnnotatedMethod,
+          onMethodAnnotationField,
+          methodAnnotations,
+        );
+        await _processMemberAnnotations(
+          classElement,
+          memberNamePattern,
+          onAnnotatedMember,
+          onMemberAnnotationField,
+          memberAnnotations,
+        );
+      }
     }
   }
 }
