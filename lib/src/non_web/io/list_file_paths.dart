@@ -1,18 +1,30 @@
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // XYZ Utils
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-import 'package:archive/archive_io.dart';
+import 'dart:io';
+
+import '../../UNSORTED.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<void> downloadAndExtractZip(String url, String destinationFolder) async {
-  final request = await HttpClient().getUrl(Uri.parse(url));
-  final response = await request.close();
-  final bytes = await response.fold<List<int>>([], (final a, final b) => a..addAll(b));
-  var archive = ZipDecoder().decodeBytes(bytes);
-  extractArchiveToDisk(archive, destinationFolder);
+Future<List<String>?> listFilePaths(
+  String dirPath, {
+  bool recursive = true,
+}) async {
+  final dir = Directory(getFixedPath(dirPath));
+  final filePaths = <String>[];
+  if (await dir.exists()) {
+    final entities = dir.listSync(recursive: recursive);
+    for (final entity in entities) {
+      if (entity is File) {
+        filePaths.add(entity.path);
+      }
+    }
+  } else {
+    return null;
+  }
+  return filePaths;
 }

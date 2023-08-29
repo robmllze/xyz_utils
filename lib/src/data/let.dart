@@ -8,9 +8,9 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'data.dart';
-import 'parse_duration.dart';
+import '../time/parse_duration.dart';
 
-part '_Timestamp.dart';
+part '_timestamp.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

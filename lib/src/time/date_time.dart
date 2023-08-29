@@ -7,7 +7,7 @@
 import 'package:intl/intl.dart';
 
 import 'duration_formatted_english.dart';
-import 'data.dart';
+import '../data/data.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

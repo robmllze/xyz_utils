@@ -4,19 +4,15 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-part of '../type_codes.dart';
+import 'package:archive/archive_io.dart'; // debug dependency
+import 'dart:io';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-typedef TTypeMappers = Map<String, String Function(MapperEvent)>;
-
-TTypeMappers newTypeMappers(TTypeMappers input) => TTypeMappers.unmodifiable(input);
-
-abstract class TypeMappers {
-  TTypeMappers get fromMappers => {...this.collectionFromMappers, ...this.objectFromMappers};
-  TTypeMappers get toMappers => {...this.collectionToMappers, ...this.objectToMappers};
-  TTypeMappers get collectionFromMappers;
-  TTypeMappers get collectionToMappers;
-  TTypeMappers get objectFromMappers;
-  TTypeMappers get objectToMappers;
+Future<void> downloadAndExtractZip(String url, String destinationFolder) async {
+  final request = await HttpClient().getUrl(Uri.parse(url));
+  final response = await request.close();
+  final bytes = await response.fold<List<int>>([], (final a, final b) => a..addAll(b));
+  var archive = ZipDecoder().decodeBytes(bytes);
+  extractArchiveToDisk(archive, destinationFolder);
 }

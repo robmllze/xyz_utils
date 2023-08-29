@@ -6,25 +6,25 @@
 
 import 'dart:io';
 
-import '../UNSORTED.dart';
+import '../../UNSORTED.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<List<String>?> listFilePaths(
+Future<List<String>?> listFolderPaths(
   String dirPath, {
   bool recursive = true,
 }) async {
   final dir = Directory(getFixedPath(dirPath));
-  final filePaths = <String>[];
+  final folderPaths = <String>[];
   if (await dir.exists()) {
-    final entities = dir.listSync(recursive: recursive);
-    for (final entity in entities) {
-      if (entity is File) {
-        filePaths.add(entity.path);
+    var entities = dir.listSync(recursive: recursive);
+    for (var entity in entities) {
+      if (entity is Directory) {
+        folderPaths.add(entity.path);
       }
     }
   } else {
     return null;
   }
-  return filePaths;
+  return folderPaths;
 }

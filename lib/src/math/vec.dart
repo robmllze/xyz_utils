@@ -1,12 +1,19 @@
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// XYZ Utils
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
 import 'dart:convert';
 import 'dart:math';
 
-extension ListToVec on List<num> {
-  /// Constructs an unmodifiable Vec from this List<num>.
-  Vec get vec => Vec(List<num>.unmodifiable(this));
-}
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class Vec {
+  //
+  //
+  //
+
   final List<num> components;
 
   const Vec(this.components);
@@ -21,6 +28,10 @@ class Vec {
   factory Vec.zero(int dimension) => List<num>.filled(dimension, 0).vec;
 
   factory Vec.fromString(String source) => (const JsonDecoder().convert(source) as List<num>).vec;
+
+  //
+  //
+  //
 
   int get dimension => components.length;
 
@@ -77,6 +88,17 @@ class Vec {
       .values
       .toList()
       .vec;
+
+  Vec2 get vec2 => Vec2(components[0], components[1]);
+  Vec3 get vec3 => Vec3(components[0], components[1], components[2]);
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension ListToVec on List<num> {
+  Vec get vec => Vec(List<num>.unmodifiable(this));
+  Vec2 get vec2 => Vec2(this[0], this[1]);
+  Vec3 get vec3 => Vec3(this[0], this[1], this[2]);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -106,19 +128,24 @@ int combineHashCodes(Iterable<int> hashCodes) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class Vec2 extends Vec {
+  //
+  //
+  //
+
   Vec2(num x, num y) : super([x, y]);
+
+  //
+  //
+  //
 
   num get x => this[0];
   num get y => this[1];
 
-  /// Computes the cross product magnitude (scalar).
-  num cross(Vec2 other) {
-    return x * other.y - y * other.x;
-  }
+  num cross(Vec2 other) => x * other.y - y * other.x;
 
   num get getRotation {
     var angle = atan2(y, x);
-    if (angle < 0) angle += 2 * pi; // Ensure the angle is in [0, 2π]
+    if (angle < 0) angle += 2 * pi;
     return angle;
   }
 
@@ -135,13 +162,20 @@ class Vec2 extends Vec {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class Vec3 extends Vec {
+  //
+  //
+  //
+
   Vec3(num x, num y, num z) : super([x, y, z]);
+
+  //
+  //
+  //
 
   num get x => this[0];
   num get y => this[1];
   num get z => this[2];
 
-  /// Cross product for Vec3
   Vec3 cross(Vec3 other) {
     return Vec3(
       y * other.z - z * other.y,
@@ -151,7 +185,6 @@ class Vec3 extends Vec {
   }
 
   Vec3 rotate(Vec3 axis, num angle) {
-    // Normalize the axis
     final unit = axis.unit;
     final ux = unit[0];
     final uy = unit[1];
