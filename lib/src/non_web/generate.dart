@@ -14,7 +14,7 @@ import 'non_web.dart';
 
 Future<void> generateFromTemplates({
   required String rootDirPath,
-  required FutureOr<void> Function(String, Map<String, String>) generateForFile,
+  required Future<void> Function(String, Map<String, String>) generateForFile,
   required Set<String> templateFilePaths,
   String begType = "",
   Set<String> pathPatterns = const {},
@@ -24,8 +24,8 @@ Future<void> generateFromTemplates({
   if (deleteGeneratedFiles) {
     await deleteGeneratedDartFiles(
       rootDirPath,
-      pathPatterns: pathPatterns,
-      onDelete: onDelete,
+      onDelete,
+      pathPatterns,
     );
   }
   final templates = <String, String>{};
@@ -34,7 +34,7 @@ Future<void> generateFromTemplates({
   }
   final results = await findDartFiles(
     rootDirPath,
-    (_ /*final dirName*/, __ /*final folderName*/, final filePath) {
+    (final dirName, final folderName, final filePath) {
       final a = isMatchingFileName(filePath, begType, "dart").$1;
       final b = isSourceDartFilePath(filePath);
       if (a && b) {
@@ -45,9 +45,7 @@ Future<void> generateFromTemplates({
     pathPatterns,
   );
   for (final result in results) {
-    // final dirName = result.$1;
-    // final folderName = result.$2;
-    final filePath = result.$3;
+    final filePath = result.$1;
     await generateForFile(filePath, templates);
   }
 }
@@ -57,10 +55,10 @@ Future<void> generateFromTemplates({
 /// Deletes all the .g.dart files form [dirPath] and its sub-directories if
 /// [dirPath] contains any of the [pathPatterns].
 Future<void> deleteGeneratedDartFiles(
-  String dirPath, {
-  Set<String> pathPatterns = const {},
+  String dirPath, [
   void Function(String filePath)? onDelete,
-}) async {
+  Set<String> pathPatterns = const {},
+]) async {
   final filePaths = await listFilePaths(dirPath);
   if (filePaths != null) {
     for (final filePath in filePaths) {
@@ -106,12 +104,12 @@ Future<bool> sourceAndGeneratedDartFileExists(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<List<(String, String, String)>> findDartFiles(
-  String rootDirPath,
+  String rootDirPath, [
   FutureOr<bool> Function(
     String dirPath,
     String folderName,
     String filePath,
-  ) onFileFound, [
+  )? onFileFound,
   Set<String> pathPatterns = const {},
 ]) async {
   final results = <(String, String, String)>[];
@@ -122,7 +120,7 @@ Future<List<(String, String, String)>> findDartFiles(
       if (isSourceDartFilePath(filePath, pathPatterns)) {
         final dirPath = getDirPath(filePath);
         final folderName = getBaseName(dirPath);
-        final add = await onFileFound(dirPath, folderName, filePath);
+        final add = (await onFileFound?.call(dirPath, folderName, filePath)) ?? true;
         if (add) {
           results.add((dirPath, folderName, filePath));
         }

@@ -28,15 +28,8 @@ AnalysisContextCollection createCollectionFromFilePaths1(Set<String> filePaths) 
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<AnalysisContextCollection> createCollectionFromRoot(
-  String rootDirPath,
-  FutureOr<bool> Function(String, String, String) onFileFound, {
-  Set<String> pathPatterns = const {},
-}) async {
-  final info = await findDartFiles(
-    rootDirPath,
-    onFileFound,
-  );
+Future<AnalysisContextCollection> createCollectionFromRoot(String rootDirPath) async {
+  final info = await findDartFiles(rootDirPath);
   final filePaths = info.map((e) => e.$3);
   final includedPaths = filePaths.map((e) => p.absolute(p.normalize(e))).toList();
   final collection = AnalysisContextCollection(
