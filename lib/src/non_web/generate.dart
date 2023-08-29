@@ -89,7 +89,7 @@ Future<void> findDartFiles({
   required String rootDirPath,
   Set<String> pathPatterns = const {},
   required Future<void> Function(
-    String dirName,
+    String dirPath,
     String folderName,
     String filePath,
   ) onFileFound,
@@ -99,11 +99,11 @@ Future<void> findDartFiles({
     filePaths.sort();
     for (final filePath in filePaths) {
       if (isSourceDartFilePath(filePath)) {
-        final dirName = getDirPath(filePath);
-        final folderName = getBaseName(dirName);
+        final dirPath = getDirPath(filePath);
+        final folderName = getBaseName(dirPath);
         final a = pathPatterns.isEmpty || pathContainsPatterns(filePath, pathPatterns);
         if (a) {
-          await onFileFound(dirName, folderName, filePath);
+          await onFileFound(dirPath, folderName, filePath);
         }
       }
     }

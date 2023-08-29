@@ -29,11 +29,11 @@ class LooseTypeMappers extends TypeMappers {
   TTypeMappers get collectionFromMappers => newTypeMappers({
         r"^Map[\?]?$": (e) {
           if (e is! CollectionMapperEvent) throw TypeError();
-          return "letMap(${e.name})?.map((${e.args}) => MapEntry(${e.hashes},),).nonNulls.nullIfEmpty.cast()";
+          return "letMap(${e.name})?.map((${e.args}) => MapEntry(${e.hashes},),).nonNulls.nullIfEmpty?.cast()";
         },
         r"^Iterable[\?]?$": (e) {
           if (e is! CollectionMapperEvent) throw TypeError();
-          return "letIterable(${e.name})?.map((${e.args}) => ${e.hashes},).nonNulls.nullIfEmpty.cast()";
+          return "letIterable(${e.name})?.map((${e.args}) => ${e.hashes},).nonNulls.nullIfEmpty?.cast()";
         },
         r"^List[\?]?$": (e) {
           if (e is! CollectionMapperEvent) throw TypeError();
