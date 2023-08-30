@@ -82,3 +82,24 @@ extension ToTrimmedStringOrNull on dynamic {
     return this?.toString().trim().nullIfEmpty;
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension JoinWithLastSeparator on Iterable {
+  String joinWithLastSeparator([String separator = ", ", String lastSeparator = " & "]) {
+    if (this.isEmpty) {
+      return "";
+    }
+    if (this.length == 1) {
+      return this.first;
+    }
+    if (this.length == 2) {
+      return this.toList().join(lastSeparator);
+    }
+
+    final list = this.toList();
+    final lastTwo = list.sublist(list.length - 2).join(lastSeparator);
+    final allButLastTwo = list.sublist(0, list.length - 2).join(separator);
+    return "$allButLastTwo$separator$lastTwo";
+  }
+}

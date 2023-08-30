@@ -16,8 +16,11 @@ import '/xyz_utils_non_web.dart';
 Future<void> generateFromTemplates({
   required Set<String> rootPaths,
   Set<String> subPaths = const {},
-  required Future<void> Function(AnalysisContextCollection, String, Map<String, String>)
-      generateForFile,
+  required Future<void> Function(
+    AnalysisContextCollection collection,
+    String filePath,
+    Map<String, String> templates,
+  ) generateForFile,
   required Set<String> templateFilePaths,
   String begType = "",
   Set<String> pathPatterns = const {},
@@ -125,6 +128,33 @@ Future<List<(String, String, String)>> findDartFiles(
     filePaths.sort();
     for (final filePath in filePaths) {
       if (isSourceDartFilePath(filePath, pathPatterns)) {
+        final dirPath = getDirPath(filePath);
+        final folderName = getBaseName(dirPath);
+        final add = (await onFileFound?.call(dirPath, folderName, filePath)) ?? true;
+        if (add) {
+          results.add((dirPath, folderName, filePath));
+        }
+      }
+    }
+  }
+  return results;
+}
+
+Future<List<(String, String, String)>> findGeneratedDartFiles(
+  String rootDirPath, {
+  Set<String> pathPatterns = const {},
+  FutureOr<bool> Function(
+    String dirPath,
+    String folderName,
+    String filePath,
+  )? onFileFound,
+}) async {
+  final results = <(String, String, String)>[];
+  final filePaths = await listFilePaths(rootDirPath);
+  if (filePaths != null) {
+    filePaths.sort();
+    for (final filePath in filePaths) {
+      if (isGeneratedDartFilePath(filePath, pathPatterns)) {
         final dirPath = getDirPath(filePath);
         final folderName = getBaseName(dirPath);
         final add = (await onFileFound?.call(dirPath, folderName, filePath)) ?? true;
