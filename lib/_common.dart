@@ -25,6 +25,7 @@ export 'src/data/deep_set.dart';
 export 'src/data/iterable_extensions.dart';
 export 'src/data/let.dart';
 export 'src/data/unordered_deep_collection_equality.dart';
+export 'src/paths/combine_paths.dart';
 export 'src/patterns/input_validation.dart';
 export 'src/patterns/regex.dart';
 export 'src/patterns/replace_captures.dart';

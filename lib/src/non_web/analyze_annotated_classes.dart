@@ -16,8 +16,8 @@ import 'package:path/path.dart' as p;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<AnalysisContextCollection> createCollection(Set<String> dirPaths) async {
-  final includePaths = dirPaths.map((e) => p.normalize(p.absolute(e))).toList();
+Future<AnalysisContextCollection> createCollection(Set<String> paths) async {
+  final includePaths = paths.map((e) => p.normalize(p.absolute(e))).toList();
   final collection = AnalysisContextCollection(
     includedPaths: includePaths,
     resourceProvider: PhysicalResourceProvider.INSTANCE,

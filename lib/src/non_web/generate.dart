@@ -7,46 +7,53 @@
 import 'dart:async';
 import 'dart:io';
 
-import '../UNSORTED.dart';
-import 'non_web.dart';
+import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
+
+import '/xyz_utils_non_web.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<void> generateFromTemplates({
-  required String rootDirPath,
-  required Future<void> Function(String, Map<String, String>) generateForFile,
+  required Set<String> rootPaths,
+  Set<String> subPaths = const {},
+  required Future<void> Function(AnalysisContextCollection, String, Map<String, String>)
+      generateForFile,
   required Set<String> templateFilePaths,
   String begType = "",
   Set<String> pathPatterns = const {},
   bool deleteGeneratedFiles = false,
   void Function(String filePath)? onDelete,
 }) async {
-  if (deleteGeneratedFiles) {
-    await deleteGeneratedDartFiles(
-      rootDirPath,
-      onDelete,
-      pathPatterns,
+  final combinedPaths = combinePaths([rootPaths, subPaths]);
+  final collection = await createCollection(combinedPaths);
+  for (final path in combinedPaths) {
+    if (deleteGeneratedFiles) {
+      await deleteGeneratedDartFiles(
+        path,
+        onDelete,
+        pathPatterns,
+      );
+    }
+    final templates = <String, String>{};
+    for (final templateFilePath in templateFilePaths) {
+      templates[templateFilePath] = await readDartTemplate(templateFilePath);
+    }
+    final results = await findDartFiles(
+      path,
+      pathPatterns: pathPatterns,
+      onFileFound: (final dirName, final folderName, final filePath) {
+        final a = isMatchingFileName(filePath, begType, "dart").$1;
+        final b = isSourceDartFilePath(filePath);
+        if (a && b) {
+          return true;
+        }
+        return false;
+      },
     );
-  }
-  final templates = <String, String>{};
-  for (final templateFilePath in templateFilePaths) {
-    templates[templateFilePath] = await readDartTemplate(templateFilePath);
-  }
-  final results = await findDartFiles(
-    rootDirPath,
-    pathPatterns: pathPatterns,
-    onFileFound: (final dirName, final folderName, final filePath) {
-      final a = isMatchingFileName(filePath, begType, "dart").$1;
-      final b = isSourceDartFilePath(filePath);
-      if (a && b) {
-        return true;
-      }
-      return false;
-    },
-  );
-  for (final result in results) {
-    final filePath = result.$3;
-    await generateForFile(filePath, templates);
+    for (final result in results) {
+      final filePath = result.$3;
+      await generateForFile(collection, filePath, templates);
+    }
   }
 }
 
