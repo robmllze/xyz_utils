@@ -34,7 +34,8 @@ Future<void> generateFromTemplates({
   }
   final results = await findDartFiles(
     rootDirPath,
-    (final dirName, final folderName, final filePath) {
+    pathPatterns: pathPatterns,
+    onFileFound: (final dirName, final folderName, final filePath) {
       final a = isMatchingFileName(filePath, begType, "dart").$1;
       final b = isSourceDartFilePath(filePath);
       if (a && b) {
@@ -42,10 +43,9 @@ Future<void> generateFromTemplates({
       }
       return false;
     },
-    pathPatterns,
   );
   for (final result in results) {
-    final filePath = result.$1;
+    final filePath = result.$3;
     await generateForFile(filePath, templates);
   }
 }
@@ -104,14 +104,14 @@ Future<bool> sourceAndGeneratedDartFileExists(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<List<(String, String, String)>> findDartFiles(
-  String rootDirPath, [
+  String rootDirPath, {
+  Set<String> pathPatterns = const {},
   FutureOr<bool> Function(
     String dirPath,
     String folderName,
     String filePath,
   )? onFileFound,
-  Set<String> pathPatterns = const {},
-]) async {
+}) async {
   final results = <(String, String, String)>[];
   final filePaths = await listFilePaths(rootDirPath);
   if (filePaths != null) {

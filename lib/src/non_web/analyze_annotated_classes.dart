@@ -14,26 +14,12 @@ import 'package:analyzer/file_system/physical_file_system.dart';
 
 import 'package:path/path.dart' as p;
 
-import 'generate.dart';
-
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-AnalysisContextCollection createCollectionFromFilePaths1(Set<String> filePaths) {
-  final includedPaths = filePaths.map((e) => p.absolute(p.normalize(e))).toList();
-  return AnalysisContextCollection(
-    includedPaths: includedPaths,
-    resourceProvider: PhysicalResourceProvider.INSTANCE,
-  );
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-Future<AnalysisContextCollection> createCollectionFromRoot(String rootDirPath) async {
-  final info = await findDartFiles(rootDirPath);
-  final filePaths = info.map((e) => e.$3);
-  final includedPaths = filePaths.map((e) => p.absolute(p.normalize(e))).toList();
+Future<AnalysisContextCollection> createCollection(Set<String> dirPaths) async {
+  final includePaths = dirPaths.map((e) => p.normalize(p.absolute(e))).toList();
   final collection = AnalysisContextCollection(
-    includedPaths: includedPaths,
+    includedPaths: includePaths,
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
   return collection;
@@ -80,9 +66,7 @@ Future<void> analyzeAnnotatedClasses({
   final absoluteFilePath = p.absolute(filePath);
   final normalizedFilePath = p.normalize(absoluteFilePath);
   final fileUri = Uri.file(absoluteFilePath).toString();
-
   final context = collection.contextFor(normalizedFilePath);
-
   final library = await context.currentSession.getLibraryByUri(fileUri);
   if (library is LibraryElementResult) {
     final classElements = library.element.topLevelElements.whereType<ClassElement>();
