@@ -30,8 +30,8 @@ Future<void> generateFromTemplates({
     if (deleteGeneratedFiles) {
       await deleteGeneratedDartFiles(
         path,
-        onDelete,
-        pathPatterns,
+        onDelete: onDelete,
+        pathPatterns: pathPatterns,
       );
     }
     final templates = <String, String>{};
@@ -62,27 +62,27 @@ Future<void> generateFromTemplates({
 /// Deletes all the .g.dart files form [dirPath] and its sub-directories if
 /// [dirPath] contains any of the [pathPatterns].
 Future<void> deleteGeneratedDartFiles(
-  String dirPath, [
+  String dirPath, {
   void Function(String filePath)? onDelete,
   Set<String> pathPatterns = const {},
-]) async {
+}) async {
   final filePaths = await listFilePaths(dirPath);
   if (filePaths != null) {
     for (final filePath in filePaths) {
       await deleteGeneratedDartFile(
         filePath,
-        onDelete,
-        pathPatterns,
+        onDelete: onDelete,
+        pathPatterns: pathPatterns,
       );
     }
   }
 }
 
 Future<void> deleteGeneratedDartFile(
-  String filePath, [
+  String filePath, {
   void Function(String filePath)? onDelete,
   Set<String> pathPatterns = const {},
-]) async {
+}) async {
   if (isGeneratedDartFilePath(filePath, pathPatterns)) {
     await deleteFile(filePath);
     onDelete?.call(filePath);
