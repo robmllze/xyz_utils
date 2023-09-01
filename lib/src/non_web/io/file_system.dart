@@ -13,7 +13,7 @@ import '../../UNSORTED.dart';
 
 Future<String?> readFile(String filePath) async {
   try {
-    final file = File(getFixedPath(filePath));
+    final file = File(toLocalPathFormat(filePath));
     final data = await file.readAsString();
     return data;
   } catch (_) {
@@ -26,7 +26,7 @@ Future<void> writeFile(
   String content, {
   bool append = false,
 }) async {
-  final file = File(getFixedPath(filePath));
+  final file = File(toLocalPathFormat(filePath));
   await file.parent.create(recursive: true); // ensure the parent directory exists
   await file.writeAsString(
     content,
@@ -37,21 +37,21 @@ Future<void> writeFile(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<void> clearFile(String filePath) async {
-  final file = File(getFixedPath(filePath));
+  final file = File(toLocalPathFormat(filePath));
   await file.writeAsString("");
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<void> deleteFile(String filePath) async {
-  final file = File(getFixedPath(filePath));
+  final file = File(toLocalPathFormat(filePath));
   await file.delete();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<bool> fileExists(String filePath) {
-  return File(getFixedPath(filePath)).exists();
+  return File(toLocalPathFormat(filePath)).exists();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

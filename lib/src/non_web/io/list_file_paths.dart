@@ -14,7 +14,7 @@ Future<List<String>?> listFilePaths(
   String dirPath, {
   bool recursive = true,
 }) async {
-  final dir = Directory(getFixedPath(dirPath));
+  final dir = Directory(toLocalPathFormat(dirPath));
   final filePaths = <String>[];
   if (await dir.exists()) {
     final entities = dir.listSync(recursive: recursive);

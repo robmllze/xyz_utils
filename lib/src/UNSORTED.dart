@@ -41,7 +41,7 @@ bool isGeneratedDartFilePath(
 
 /// The file path without the ".g" if present.
 String? getSourcePath(String filePath) {
-  final fixedPath = getFixedPath(filePath);
+  final fixedPath = toLocalPathFormat(filePath);
   final dirName = p.dirname(fixedPath);
   final baseName = p.basename(fixedPath);
   if (baseName.endsWith(".g.dart")) {
@@ -54,15 +54,15 @@ String? getSourcePath(String filePath) {
 }
 
 String getBaseName(String path) {
-  return p.basename(getFixedPath(path));
+  return p.basename(toLocalPathFormat(path));
 }
 
 String getDirPath(String path) {
-  return p.dirname(getFixedPath(path));
+  return p.dirname(toLocalPathFormat(path));
 }
 
 bool pathContainsComponent(String path, Set<String> components) {
-  final fixedPath = getFixedPath(path);
+  final fixedPath = toLocalPathFormat(path);
   final a = p.split(fixedPath);
   for (final component in components) {
     if (a.contains(component.toLowerCase())) {
@@ -73,7 +73,7 @@ bool pathContainsComponent(String path, Set<String> components) {
 }
 
 bool pathContainsPatterns(String path, Set<String> pathPatterns) {
-  final fixedPath = getFixedPath(path);
+  final fixedPath = toLocalPathFormat(path);
   for (final pattern in pathPatterns) {
     if (RegExp(pattern).hasMatch(fixedPath)) return true;
   }
@@ -81,10 +81,10 @@ bool pathContainsPatterns(String path, Set<String> pathPatterns) {
 }
 
 String getFileNameWithoutExtension(String filePath) {
-  return p.basenameWithoutExtension(getFixedPath(filePath));
+  return p.basenameWithoutExtension(toLocalPathFormat(filePath));
 }
 
-String getFixedPath(String path) {
+String toLocalPathFormat(String path) {
   return path.split(RegExp(r"[\\/]")).join(p.separator).toLowerCase();
 }
 
