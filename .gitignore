@@ -1,5 +1,8 @@
-.dart_tool/
-.packages
 build/
+/.dart_tool/
+*.g.dart
+.DS_Store
+.packages
 pubspec.lock
+package_config.json
 
