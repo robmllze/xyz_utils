@@ -15,6 +15,7 @@ import '/xyz_utils_non_web.dart';
 
 Future<void> generateFromTemplates({
   required Set<String> rootPaths,
+  required String fallbackDartSdkPath,
   Set<String> subPaths = const {},
   required Future<void> Function(
     AnalysisContextCollection collection,
@@ -28,7 +29,10 @@ Future<void> generateFromTemplates({
   void Function(String filePath)? onDelete,
 }) async {
   final combinedPaths = combinePaths([rootPaths, subPaths]);
-  final collection = await createCollection(combinedPaths);
+  final collection = await createCollection(
+    combinedPaths,
+    fallbackDartSdkPath,
+  );
   for (final path in combinedPaths) {
     if (deleteGeneratedFiles) {
       await deleteGeneratedDartFiles(
