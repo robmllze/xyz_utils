@@ -14,8 +14,8 @@ import '/xyz_utils_non_web.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<void> generateFromTemplates({
+  String? fallbackDartSdkPath,
   required Set<String> rootPaths,
-  required String fallbackDartSdkPath,
   Set<String> subPaths = const {},
   required Future<void> Function(
     AnalysisContextCollection collection,
