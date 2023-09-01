@@ -1,5 +1,5 @@
 build/
-/.dart_tool/
+.dart_tool/
 *.g.dart
 .DS_Store
 .packages
