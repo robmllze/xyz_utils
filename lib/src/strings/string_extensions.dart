@@ -15,8 +15,8 @@ extension XyzUtilsStringExtensions on String {
 
   String toSnakeCase() {
     final expression = RegExp(r"(?<=[a-z])[A-Z0-9]");
-    final result = this.replaceAllMapped(expression, (final l) {
-      return ("_${l.group(0)}");
+    final result = this.replaceAllMapped(expression, (e) {
+      return "_${e.group(0)}";
     }).toLowerCase();
     return result;
   }
@@ -26,11 +26,19 @@ extension XyzUtilsStringExtensions on String {
   //
 
   String toCamelCase() {
-    final expression = RegExp(r"([_])[a-zA-Z0-9]");
-    final result = this.replaceAllMapped(expression, (final l) {
-      return "${l.group(0)?[1].toUpperCase()}";
+    final expression = RegExp(r"_([a-z])");
+    final result = this.toLowerCase().replaceAllMapped(expression, (e) {
+      return e.group(1)!.toUpperCase();
     });
     return result;
+  }
+
+  //
+  //
+  //
+
+  String toPascalCase() {
+    return this.toCamelCase().capitalize();
   }
 
   //
@@ -48,8 +56,11 @@ extension XyzUtilsStringExtensions on String {
   //
   //
 
-  String toClassCase() {
-    return this.toCamelCase().capitalize();
+  String decapitalize() {
+    if (this.isEmpty) return this;
+    var result = this[0].toLowerCase();
+    if (this.length > 1) result += this.substring(1);
+    return result;
   }
 
   //
@@ -93,11 +104,11 @@ extension JoinWithLastSeparator on Iterable {
     if (this.length == 1) {
       return this.first;
     }
+    final list = this.toList();
     if (this.length == 2) {
-      return this.toList().join(lastSeparator);
+      return list.join(lastSeparator);
     }
 
-    final list = this.toList();
     final lastTwo = list.sublist(list.length - 2).join(lastSeparator);
     final allButLastTwo = list.sublist(0, list.length - 2).join(separator);
     return "$allButLastTwo$separator$lastTwo";
