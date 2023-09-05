@@ -26,10 +26,13 @@ extension XyzUtilsStringExtensions on String {
   //
 
   String toCamelCase() {
-    final expression = RegExp(r"_([a-z])");
-    final result = this.toLowerCase().replaceAllMapped(expression, (e) {
-      return e.group(1)!.toUpperCase();
-    });
+    if (this.isEmpty) return "";
+    final expression = RegExp(r"_([a-z0-9])");
+    final result = this[0].toLowerCase() +
+        this.substring(1).replaceAllMapped(
+              expression,
+              (e) => e.group(1)!.toUpperCase(),
+            );
     return result;
   }
 
@@ -47,9 +50,14 @@ extension XyzUtilsStringExtensions on String {
 
   String capitalize() {
     if (this.isEmpty) return this;
-    var result = this[0].toUpperCase();
-    if (this.length > 1) result += this.substring(1);
-    return result;
+
+    for (var n = 0; n < this.length; n++) {
+      final char = this[n];
+      if (char.toUpperCase() != char) {
+        return this.substring(0, n) + char.toUpperCase() + this.substring(n + 1);
+      }
+    }
+    return this;
   }
 
   //
@@ -58,9 +66,14 @@ extension XyzUtilsStringExtensions on String {
 
   String decapitalize() {
     if (this.isEmpty) return this;
-    var result = this[0].toLowerCase();
-    if (this.length > 1) result += this.substring(1);
-    return result;
+
+    for (var n = 0; n < this.length; n++) {
+      final char = this[n];
+      if (char.toLowerCase() != char) {
+        return this.substring(0, n) + char.toLowerCase() + this.substring(n + 1);
+      }
+    }
+    return this;
   }
 
   //
