@@ -14,6 +14,7 @@ export 'src/app/here.dart';
 export 'src/app/post_destructor.dart';
 export 'src/app/rec.dart';
 export 'src/app/screen_calculator.dart';
+export 'src/app/services.dart';
 export 'src/app/valid_object.dart';
 export 'src/app/version.dart';
 export 'src/data/base_converter.dart';
