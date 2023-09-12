@@ -14,7 +14,7 @@ extension XyzUtilsStringExtensions on String {
   //
 
   String toSnakeCase() {
-    final expression = RegExp(r"(?<=[a-z])[A-Z0-9]");
+    final expression = RegExp(r"(?<=\B|[a-z])[A-Z0-9]");
     final result = this.replaceAllMapped(expression, (e) {
       return "_${e.group(0)}";
     }).toLowerCase();
