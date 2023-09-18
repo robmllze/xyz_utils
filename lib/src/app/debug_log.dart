@@ -30,7 +30,7 @@ void _debugLog({
   assert(
     () {
       final groups = {...DebugLog.whitelist, ...whitelist};
-      if (groups.contains(group)) {
+      if (group == null || groups.contains(group)) {
         final colorPath = color != null ? AnsiStyle.italic + color : null;
         final colorTitle = color != null ? AnsiStyle.bold + color : null;
         final path = (rec?.code != null ? "${rec!.code}" : "").withAnsiStyle(colorPath);
