@@ -4,20 +4,20 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-import 'dart:html' as html;
+// import 'dart:html' as html;
 
 import '/xyz_utils.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-bool get isWeb {
-  try {
-    final _ = html.window.location.href;
-    return true;
-  } catch (_) {
-    return false;
-  }
-}
+// bool get isWeb {
+//   try {
+//     final _ = html.window.location.href;
+//     return true;
+//   } catch (_) {
+//     return false;
+//   }
+// }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -66,7 +66,7 @@ class Here {
   //
 
   factory Here([Symbol? group]) {
-    final parts = isWeb ? hereWeb(2) : here(2);
+    final parts = true ? hereWeb(2) : here(2);
     return Here._(
       parts?[0],
       parts?[1],
@@ -80,14 +80,7 @@ class Here {
   //
   //
 
-  Rec get _rec {
-    final rec = Rec(
-      this.file != null ? getBaseName(this.file!) : null,
-    )(
-      this.scope,
-    );
-    return rec;
-  }
+  Rec get _rec => Rec(this.scope, this.group);
 
   //
   //
