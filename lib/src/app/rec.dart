@@ -1,24 +1,13 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // XYZ Utils
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//./title
 
 import 'debug_log.dart' as util_debug_log;
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-class RecOptions {
-  final Map<String, String> value;
-  const RecOptions(this.value);
-  RecOptions operator +(RecOptions other) {
-    return RecOptions({...this.value, ...other.value});
-  }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-typedef FTranslate = String Function(String input, Map<dynamic, dynamic> args);
+import 'package:path/path.dart' as p;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -53,19 +42,13 @@ class Rec {
     return Rec(
       code?.isNotEmpty == true
           ? this.code?.isNotEmpty == true
-              ? "${this.code}/$code"
+              ? p.join(this.code!, code)
               : null
           : this.code,
       group ?? this.group,
       this.options + options,
     );
   }
-
-  //
-  //
-  //
-
-  String _key() => (this.code?.isNotEmpty == true ? this.code ?? "" : "unknown");
 
   //
   //
@@ -177,3 +160,17 @@ class Rec {
   @override
   String toString() => this.code ?? "???";
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class RecOptions {
+  final Map<String, String> value;
+  const RecOptions(this.value);
+  RecOptions operator +(RecOptions other) {
+    return RecOptions({...this.value, ...other.value});
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+typedef FTranslate = String Function(String input, Map<dynamic, dynamic> args);

@@ -33,15 +33,15 @@ class _Timestamp implements Comparable<_Timestamp> {
 
   /// Create a [_Timestamp] fromMillisecondsSinceEpoch
   factory _Timestamp.fromMillisecondsSinceEpoch(int milliseconds) {
-    int seconds = (milliseconds / _kThousand).floor();
-    final int nanoseconds = (milliseconds - seconds * _kThousand) * _kMillion;
+    var seconds = (milliseconds / _kThousand).floor();
+    final nanoseconds = (milliseconds - seconds * _kThousand) * _kMillion;
     return _Timestamp(seconds, nanoseconds);
   }
 
   /// Create a [_Timestamp] fromMicrosecondsSinceEpoch
   factory _Timestamp.fromMicrosecondsSinceEpoch(int microseconds) {
-    final int seconds = microseconds ~/ _kMillion;
-    final int nanoseconds = (microseconds - seconds * _kMillion) * _kThousand;
+    final seconds = microseconds ~/ _kMillion;
+    final nanoseconds = (microseconds - seconds * _kMillion) * _kThousand;
     return _Timestamp(seconds, nanoseconds);
   }
 
@@ -50,6 +50,7 @@ class _Timestamp implements Comparable<_Timestamp> {
     return _Timestamp.fromMicrosecondsSinceEpoch(date.microsecondsSinceEpoch);
   }
 
+  // ignore: unused_element
   /// Create a [_Timestamp] from [DateTime].now()
   factory _Timestamp.now() {
     return _Timestamp.fromMicrosecondsSinceEpoch(

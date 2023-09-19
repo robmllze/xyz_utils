@@ -62,10 +62,13 @@ class Here {
     // Start iterating from the 2nd line of the stack trace to skip the current function.
     for (var i = 1; i < stackTraceLines.length; i++) {
       final e = stackTraceLines[i];
+      print("e: $e");
       // Use a regular expression to extract details from the stack trace line.
       final match = RegExp(r"#\d+\s+([^\s]+) \(([^\s]+):(\d+):(\d+)\)").firstMatch(e);
       if (match != null) {
+        print("match: $match");
         final fileName = match.group(2);
+        print("fileName: $fileName");
 
         // Filter out non-project stack trace lines (e.g., those from Dart SDK)
         if (fileName != null &&
@@ -154,4 +157,32 @@ class Here {
   String toString() {
     return "File: $filePath, Class: $className, Method: $methodName, Line: $lineNumber";
   }
+}
+
+List<String?> extractStackTraceInfoFlutter() {
+  final List<String?> stackTraceInfo = [];
+  final stackTrace = StackTrace.current.toString().split("\n");
+
+  for (var i = 0; i < stackTrace.length; i++) {
+    final line = stackTrace[i];
+    if (line.contains("main\$")) {
+      final match = RegExp(r'packages/([^/]+)/([^\s]+) (\d+:\d+)').firstMatch(line);
+
+      if (match != null) {
+        final packageName = match.group(1);
+        final fileNameLine = match.group(2);
+        final methodName = fileNameLine?.split(' ')[0];
+        final lineNumber = fileNameLine?.split(' ')[1];
+
+        stackTraceInfo.add(null);
+        stackTraceInfo.add(methodName);
+        stackTraceInfo.add(lineNumber);
+        stackTraceInfo.add(packageName);
+        return stackTraceInfo;
+      }
+    }
+  }
+
+  stackTraceInfo.addAll([null, null, null, null]);
+  return stackTraceInfo;
 }
