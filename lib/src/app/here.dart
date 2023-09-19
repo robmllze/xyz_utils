@@ -4,7 +4,20 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-import 'rec.dart';
+import 'dart:html' as html;
+
+import '/xyz_utils.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+bool get isWeb {
+  try {
+    final _ = html.window.location.href;
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -14,9 +27,9 @@ class Here {
   //
 
   final String? filePath;
-  final String? className;
-  final String? methodName;
-  final String? lineNumber;
+  final String? scope;
+  final int? lineNumber;
+  final int? columnNumber;
   final Symbol? group;
 
   //
@@ -25,9 +38,9 @@ class Here {
 
   const Here._(
     this.filePath,
-    this.className,
-    this.methodName,
+    this.scope,
     this.lineNumber,
+    this.columnNumber,
     this.group,
   );
 
@@ -46,73 +59,19 @@ class Here {
     return null;
   }
 
-  Symbol? get _defaultGroup =>
-      this.group ?? (this.className != null ? Symbol("#${this.className}") : null);
+  Symbol? get _defaultGroup => this.group ?? (this.scope != null ? Symbol("#${this.scope}") : null);
 
   //
   //
   //
 
   factory Here([Symbol? group]) {
-    // Capture the current stack trace.
-    final stackTrace = StackTrace.current;
-    // Split the stack trace string by line for easier processing.
-    final stackTraceLines = stackTrace.toString().split("\n");
-
-    // Start iterating from the 2nd line of the stack trace to skip the current function.
-    for (var i = 1; i < stackTraceLines.length; i++) {
-      final e = stackTraceLines[i];
-      print("e: $e");
-      // Use a regular expression to extract details from the stack trace line.
-      final match = RegExp(r"#\d+\s+([^\s]+) \(([^\s]+):(\d+):(\d+)\)").firstMatch(e);
-      if (match != null) {
-        print("match: $match");
-        final fileName = match.group(2);
-        print("fileName: $fileName");
-
-        // Filter out non-project stack trace lines (e.g., those from Dart SDK)
-        if (fileName != null &&
-            !fileName.startsWith("dart:") &&
-            !fileName.startsWith("package:flutter")) {
-          final fullMethodName = match.group(1);
-          // Split the full method name into class and method parts.
-          final parts = fullMethodName?.split('.');
-          String? className;
-          String? methodName;
-
-          if (parts != null) {
-            if (parts.length == 1) {
-              // This means it's a standalone function.
-              methodName = parts[0];
-            } else if (parts.length > 1) {
-              // This means it's a class method.
-              className = parts[0];
-              methodName = parts[1];
-            }
-          }
-
-          // Check if the captured method or function is not an anonymous closure.
-          if (methodName != null && methodName != "<anonymous closure>") {
-            // Extract the line number.
-            final lineNumber = match.group(3);
-            // Return the captured details as an instance of CallDetails.
-            return Here._(
-              fileName,
-              className,
-              methodName,
-              lineNumber,
-              group,
-            );
-          }
-        }
-      }
-    }
-    // If no suitable caller details are found, return an instance of CallDetails with null values.
+    final parts = isWeb ? hereWeb() : here();
     return Here._(
-      null,
-      null,
-      null,
-      null,
+      parts?[0],
+      parts?[1],
+      parts?[2],
+      parts?[3],
       group,
     );
   }
@@ -126,11 +85,9 @@ class Here {
       this.fileName,
       this._defaultGroup ?? #debug,
     )(
-      this.className,
+      this.scope,
     )(
-      this.methodName,
-    )(
-      this.lineNumber,
+      this.lineNumber?.toString(),
     );
     return rec;
   }
@@ -155,34 +112,100 @@ class Here {
 
   @override
   String toString() {
-    return "File: $filePath, Class: $className, Method: $methodName, Line: $lineNumber";
+    return "File: $filePath, Scope: $scope, Line: $lineNumber, Column: $columnNumber";
   }
 }
 
-List<String?> extractStackTraceInfoFlutter() {
-  final List<String?> stackTraceInfo = [];
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+List<dynamic>? here() {
+  final results = <dynamic>[null, null, null, null];
   final stackTrace = StackTrace.current.toString().split("\n");
-
-  for (var i = 0; i < stackTrace.length; i++) {
+  for (var i = 1; i < stackTrace.length; i++) {
     final line = stackTrace[i];
-    if (line.contains("main\$")) {
-      final match = RegExp(r'packages/([^/]+)/([^\s]+) (\d+:\d+)').firstMatch(line);
-
-      if (match != null) {
-        final packageName = match.group(1);
-        final fileNameLine = match.group(2);
-        final methodName = fileNameLine?.split(' ')[0];
-        final lineNumber = fileNameLine?.split(' ')[1];
-
-        stackTraceInfo.add(null);
-        stackTraceInfo.add(methodName);
-        stackTraceInfo.add(lineNumber);
-        stackTraceInfo.add(packageName);
-        return stackTraceInfo;
+    final [a, b] = line.split(" (");
+    final scope = a.split(RegExp(r"#\d+"))[1].trim();
+    if (scope.contains("<anonymous closure>")) continue;
+    final locationParts = b.substring(0, b.length - 1).split(":");
+    final filePath = locationParts.tryFirstWhere((e) => e.endsWith(".dart"));
+    final fileName = filePath != null ? getBaseName(filePath) : null;
+    int? lineNumber;
+    int? columnNumber;
+    for (final c in locationParts) {
+      if (lineNumber == null) {
+        if (c.contains(RegExp(r"\d+"))) {
+          lineNumber = int.tryParse(c);
+        }
+      } else if (columnNumber == null) {
+        if (c.contains(RegExp(r"\d+"))) {
+          columnNumber = int.tryParse(c);
+        }
       }
     }
+    if (filePath != null && lineNumber != null && columnNumber != null) {
+      results[0] = fileName;
+      results[1] = scope;
+      results[2] = lineNumber;
+      results[3] = columnNumber;
+      return results;
+    }
+  }
+  return results;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+List<dynamic>? hereWeb() {
+  final stackTrace = StackTrace.current.toString().split("\n");
+
+  for (var i = 2; i < stackTrace.length; i++) {
+    final line = stackTrace[i];
+    final parts = line.split(" ").where((e) => e.isNotEmpty).toList();
+
+    final skipParts = <int>[];
+
+    final filePath = () {
+      for (var p = 0; p < parts.length; p++) {
+        final part = parts[p];
+        if (part.startsWith("packages")) {
+          final a = part.replaceAll(RegExp("(packages)[\\/]"), "");
+          skipParts.add(p);
+          return a;
+        }
+      }
+    }();
+
+    if (filePath == null) continue;
+
+    int? lineNumber;
+    int? columnNumber;
+    for (var p = 0; p < parts.length; p++) {
+      final pp = parts[p].split(":");
+      if (pp.length == 2) {
+        lineNumber = int.tryParse(pp[0]);
+        columnNumber = int.tryParse(pp[1]);
+        if (lineNumber != null && columnNumber != null) {
+          skipParts.add(p);
+          break;
+        } else {
+          lineNumber = null;
+          columnNumber = null;
+        }
+      }
+    }
+
+    String? scope;
+    for (var p = 0; p < parts.length; p++) {
+      if (skipParts.contains(p)) continue;
+      scope = parts[p];
+    }
+
+    if (scope == "new") scope = "<new>";
+    final isAnonymous = parts.contains("<fn>");
+    if (isAnonymous) continue;
+
+    return [filePath, scope, null, null].nonNulls.toList();
   }
 
-  stackTraceInfo.addAll([null, null, null, null]);
-  return stackTraceInfo;
+  return [null, null, null, null];
 }
