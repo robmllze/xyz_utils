@@ -26,7 +26,7 @@ class Here {
   //
   //
 
-  final String? filePath;
+  final String? file;
   final String? scope;
   final int? lineNumber;
   final int? columnNumber;
@@ -37,7 +37,7 @@ class Here {
   //
 
   const Here._(
-    this.filePath,
+    this.file,
     this.scope,
     this.lineNumber,
     this.columnNumber,
@@ -49,24 +49,24 @@ class Here {
   //
 
   String? get fileName {
-    if (this.filePath != null) {
-      final uri = Uri.tryParse(this.filePath!);
+    if (this.file != null) {
+      final uri = Uri.tryParse(this.file!);
       if (uri != null && uri.pathSegments.isNotEmpty) {
         final last = uri.pathSegments.last;
-        return last;
+        return "$last.dart";
       }
     }
     return null;
   }
 
-  Symbol? get _defaultGroup => this.group ?? (this.scope != null ? Symbol("#${this.scope}") : null);
+  //Symbol? get _defaultGroup => this.group ?? (this.scope != null ? Symbol("#${this.scope}") : null);
 
   //
   //
   //
 
   factory Here([Symbol? group]) {
-    final parts = isWeb ? hereWeb() : here();
+    final parts = isWeb ? hereWeb(2) : here(2);
     return Here._(
       parts?[0],
       parts?[1],
@@ -82,12 +82,9 @@ class Here {
 
   Rec get _rec {
     final rec = Rec(
-      this.fileName,
-      this._defaultGroup ?? #debug,
+      this.file != null ? getBaseName(this.file!) : null,
     )(
       this.scope,
-    )(
-      this.lineNumber?.toString(),
     );
     return rec;
   }
@@ -112,23 +109,27 @@ class Here {
 
   @override
   String toString() {
-    return "File: $filePath, Scope: $scope, Line: $lineNumber, Column: $columnNumber";
+    return "File: $file, Scope: $scope, Line: $lineNumber, Column: $columnNumber";
   }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-List<dynamic>? here() {
+List<dynamic>? here([int start = 1]) {
   final results = <dynamic>[null, null, null, null];
   final stackTrace = StackTrace.current.toString().split("\n");
-  for (var i = 1; i < stackTrace.length; i++) {
+  for (var i = start; i < stackTrace.length; i++) {
     final line = stackTrace[i];
     final [a, b] = line.split(" (");
     final scope = a.split(RegExp(r"#\d+"))[1].trim();
     if (scope.contains("<anonymous closure>")) continue;
     final locationParts = b.substring(0, b.length - 1).split(":");
-    final filePath = locationParts.tryFirstWhere((e) => e.endsWith(".dart"));
-    final fileName = filePath != null ? getBaseName(filePath) : null;
+    final filePath = locationParts
+        .tryFirstWhere((e) => e.contains(".dart"))
+        ?.replaceAll(".dart", "")
+        .replaceAll(".js", "");
+    ;
+    final file = filePath != null ? getBaseName(filePath) : null;
     int? lineNumber;
     int? columnNumber;
     for (final c in locationParts) {
@@ -143,7 +144,7 @@ List<dynamic>? here() {
       }
     }
     if (filePath != null && lineNumber != null && columnNumber != null) {
-      results[0] = fileName;
+      results[0] = file;
       results[1] = scope;
       results[2] = lineNumber;
       results[3] = columnNumber;
@@ -155,10 +156,10 @@ List<dynamic>? here() {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-List<dynamic>? hereWeb() {
+List<dynamic>? hereWeb([int start = 1]) {
   final stackTrace = StackTrace.current.toString().split("\n");
 
-  for (var i = 2; i < stackTrace.length; i++) {
+  for (var i = start + 1; i < stackTrace.length; i++) {
     final line = stackTrace[i];
     final parts = line.split(" ").where((e) => e.isNotEmpty).toList();
 
@@ -167,8 +168,11 @@ List<dynamic>? hereWeb() {
     final filePath = () {
       for (var p = 0; p < parts.length; p++) {
         final part = parts[p];
-        if (part.startsWith("packages")) {
-          final a = part.replaceAll(RegExp("(packages)[\\/]"), "");
+        if (part.startsWith("packages") && part.contains(".dart")) {
+          final a = part
+              .replaceAll(RegExp("(packages)[\\/]"), "")
+              .replaceAll(".dart", "")
+              .replaceAll(".js", "");
           skipParts.add(p);
           return a;
         }
@@ -204,7 +208,7 @@ List<dynamic>? hereWeb() {
     final isAnonymous = parts.contains("<fn>");
     if (isAnonymous) continue;
 
-    return [filePath, scope, null, null].nonNulls.toList();
+    return [filePath, scope, null, null];
   }
 
   return [null, null, null, null];
