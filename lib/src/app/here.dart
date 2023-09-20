@@ -4,20 +4,7 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-// import 'dart:html' as html;
-
 import '/xyz_utils.dart';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-// bool get isWeb {
-//   try {
-//     final _ = html.window.location.href;
-//     return true;
-//   } catch (_) {
-//     return false;
-//   }
-// }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -66,7 +53,7 @@ class Here {
   //
 
   factory Here([Symbol? group]) {
-    final parts = true ? hereWeb(2) : here(2);
+    final parts = AnyPlatform.instance.isWeb ? hereWeb(2) : here(2);
     return Here._(
       parts?[0],
       parts?[1],

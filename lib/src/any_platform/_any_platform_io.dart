@@ -1,22 +1,19 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // XYZ Utils
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
-import 'dart:io';
-
-import '../paths/paths.dart';
-import '../app/here.dart';
+import '_any_platform_none.dart' as any_platform_none;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Formats the dart file at [filePath].
-Future<void> fmtDartFile(String filePath) async {
-  try {
-    final fixedPath = toLocalPathFormat(filePath);
-    await Process.run("dart", ["format", fixedPath]);
-  } catch (e) {
-    Here().debugLogError(e);
-  }
+class AnyPlatform extends any_platform_none.AnyPlatform {
+  const AnyPlatform() : super();
+  static const instance = AnyPlatform();
+
+  @override
+  bool get isWeb => false;
 }

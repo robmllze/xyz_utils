@@ -4,6 +4,8 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
+// ignore_for_file: camel_case_extensions
+
 import '../data/data.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -125,5 +127,20 @@ extension JoinWithLastSeparator on Iterable {
     final lastTwo = list.sublist(list.length - 2).join(lastSeparator);
     final allButLastTwo = list.sublist(0, list.length - 2).join(separator);
     return "$allButLastTwo$separator$lastTwo";
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension String_replaceLast on String {
+  String replaceLast(Pattern from, String to, [int startIndex = 0]) {
+    final match = from.allMatches(this, startIndex).lastOrNull;
+    if (match == null) return this;
+    final lastIndex = match.start;
+    final beforeLast = this.substring(0, lastIndex);
+    final group0 = match.group(0);
+    if (group0 == null) return this;
+    final afterLast = this.substring(lastIndex + group0.length);
+    return beforeLast + to + afterLast;
   }
 }
