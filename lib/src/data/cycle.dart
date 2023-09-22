@@ -4,7 +4,7 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-T cyclePlaces<T>(Iterable<T> input, int places) {
+T cyclePlaces<T>(Iterable<T> input, [int places = 1]) {
   if (input.isEmpty) {
     throw ArgumentError("Input list should not be empty.");
   }
@@ -15,7 +15,7 @@ T cyclePlaces<T>(Iterable<T> input, int places) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension Cycle<T> on Iterable<T> {
-  T cycle(int places) {
+  T cycle([int places = 1]) {
     return cyclePlaces(this, places);
   }
 }
