@@ -19,6 +19,7 @@ export 'src/app/services.dart';
 export 'src/app/valid_object.dart';
 export 'src/app/version.dart';
 export 'src/data/base_converter.dart';
+export 'src/data/cycle.dart';
 export 'src/data/data.dart';
 export 'src/data/deep_iterable.dart';
 export 'src/data/deep_list.dart';
