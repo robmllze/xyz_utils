@@ -119,7 +119,7 @@ class LooseTypeMappers extends TypeMappers {
         r"^(Model\w+)[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
           final typeName = e.matchGroups?.elementAt(1);
-          return "() { final a = letMap<String, dynamic>(${e.name}); return a != null ? $typeName.fromJMap(a): null; }(),";
+          return "() { final a = letMap<String, dynamic>(${e.name}); return a != null ? $typeName.fromJMap(a): null; }()";
         },
       });
 
