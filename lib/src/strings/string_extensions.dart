@@ -16,12 +16,30 @@ extension XyzUtilsStringExtensions on String {
   //
 
   String toSnakeCase() {
-    final expression = RegExp(r"(?<=\B|[a-z])[A-Z0-9]");
-    final result = this.replaceAllMapped(expression, (e) {
-      return "_${e.group(0)}";
-    }).toLowerCase();
-    return result;
+    if (this.isEmpty) return this;
+    final result = StringBuffer(this[0]);
+    for (var i = 1; i < this.length; i++) {
+      if ((this[i - 1].isLowerCase && this[i].isUpperCase) ||
+          (this[i - 1].isDigit && this[i].isLetter) ||
+          (this[i - 1].isLetter && this[i].isDigit) ||
+          (this[i - 1].isUpperCase &&
+              this[i].isUpperCase &&
+              (i + 1 < this.length && this[i + 1].isLowerCase))) {
+        result.write("_");
+      }
+      result.write(this[i]);
+    }
+    return result.toString().toLowerCase();
   }
+
+  //
+  //
+  //
+
+  bool get isDigit => "0".compareTo(this) <= 0 && "9".compareTo(this) >= 0;
+  bool get isUpperCase => this == this.toUpperCase() && this != this.toLowerCase();
+  bool get isLowerCase => this == this.toLowerCase() && this != this.toUpperCase();
+  bool get isLetter => this.toLowerCase() != this.toUpperCase();
 
   //
   //
