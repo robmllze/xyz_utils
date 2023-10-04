@@ -37,6 +37,32 @@ class HttpService {
   //
   //
 
+  Future<(http.Response, dynamic)> getJson(
+    Uri url, {
+    Duration timeout = const Duration(seconds: 30),
+    Map<String, String>? headers,
+  }) async {
+    final response = await http.get(url, headers: headers).handleExceptions(timeout: timeout);
+    return (response, response.bodyJson);
+  }
+
+  //
+  //
+  //
+
+  Future<(http.Response, Uint8List)> getBytes(
+    Uri url, {
+    Duration timeout = const Duration(seconds: 30),
+    Map<String, String>? headers,
+  }) async {
+    final response = await http.get(url, headers: headers).handleExceptions(timeout: timeout);
+    return (response, response.bodyBytes);
+  }
+
+  //
+  //
+  //
+
   Future<http.Response> post(
     (Uri, Map<String, String>) composedRequest, {
     Duration timeout = const Duration(seconds: 30),
@@ -51,26 +77,7 @@ class HttpService {
   //
   //
 
-ç
-
-  //
-  //
-  //
-
-  Future<(http.Response, dynamic)> getJson(
-    Uri url, {
-    Duration timeout = const Duration(seconds: 30),
-    Map<String, String>? headers,
-  }) async {
-    final response = await http.get(url, headers: headers).handleExceptions(timeout: timeout);
-    return (response, response.bodyJson);
-  }
-
-  //
-  //
-  //
-
-  Future<(http.Response, Uint8List?)> postBytes(
+  Future<(http.Response, Uint8List)> postBytes(
     (Uri, Map<String, String>) composedRequest, {
     Duration timeout = const Duration(seconds: 30),
     Map<String, String>? headers,
