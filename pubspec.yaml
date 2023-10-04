@@ -7,7 +7,7 @@
 name: xyz_utils
 description: A collection of utils for easier development
 publish_to: none
-version: 0.16.0
+version: 0.17.0
 environment:
   sdk: '>= 3.0.0 < 4.0.0'
 dependencies:
@@ -16,6 +16,7 @@ dependencies:
   intl: ^0.17.0
   meta: ^1.9.0
   path: ^1.8.3
+  http: ^1.1.0
 dev_dependencies:
   lints: ^2.0.1
   archive: ^3.3.7
