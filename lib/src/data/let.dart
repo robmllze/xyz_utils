@@ -330,7 +330,7 @@ class _Empty {
 
 T? letAs<T>(dynamic input) => input is T ? input : null;
 
-Map<String, dynamic>? letAsKeyMap(dynamic input) {
+Map<String, dynamic>? letJMap(dynamic input) {
   return letAs<Map>(input)?.map((final k, final v) {
     return MapEntry(k?.toString(), v);
   }).nonNulls;
