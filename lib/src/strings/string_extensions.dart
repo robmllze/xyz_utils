@@ -127,8 +127,8 @@ extension ToTrimmedStringOrNull on Object {
   }
 }
 
-String? trimmedStringOrNull(dynamic input) {
-  return (input as Object?)?.toTrimmedStringOrNull();
+String? trimmedStringOrNull(Object? input) {
+  return input?.toTrimmedStringOrNull();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
