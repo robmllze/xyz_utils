@@ -42,6 +42,7 @@ export 'src/strings/ansi_styled_string.dart';
 export 'src/strings/string_extensions.dart';
 export 'src/time/date_time.dart';
 export 'src/time/duration_formatted_english.dart';
+export 'src/time/parse_duration.dart';
 export 'src/type_codes/loose_type_mappers.dart';
 export 'src/type_codes/type_codes.dart';
 

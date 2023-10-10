@@ -121,9 +121,9 @@ extension XyzUtilsStringExtensions on String {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension ToTrimmedStringOrNull on dynamic {
+extension ToTrimmedStringOrNull on Object {
   String? toTrimmedStringOrNull() {
-    return this?.toString().trim().nullIfEmpty;
+    return this.toString().trim().nullIfEmpty;
   }
 }
 
