@@ -123,12 +123,12 @@ extension XyzUtilsStringExtensions on String {
 
 extension ToTrimmedStringOrNull on Object {
   String? toTrimmedStringOrNull() {
-    return this.toString().trim().nullIfEmpty;
+    return trimmedStringOrNull(this);
   }
 }
 
 String? trimmedStringOrNull(Object? input) {
-  return input?.toTrimmedStringOrNull();
+  return input?.toString().trim().nullIfEmpty;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
