@@ -121,13 +121,13 @@ extension XyzUtilsStringExtensions on String {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension ToTrimmedStringOrNull on Object {
-  String? toTrimmedStringOrNull() {
-    return trimmedStringOrNull(this);
+extension ToTrimmedOrNull on Object {
+  String? toTrimmedOrNull() {
+    return trimmedOrNull(this);
   }
 }
 
-String? trimmedStringOrNull(Object? input) {
+String? trimmedOrNull(Object? input) {
   return input?.toString().trim().nullIfEmpty;
 }
 
