@@ -73,7 +73,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^String[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "${e.name}?.trim().nullIfEmpty";
+          return "${e.name}?.toString().trim().nullIfEmpty";
         },
         r"^bool[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
@@ -105,7 +105,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^Duration[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "${e.name}?.trim().nullIfEmpty?.tryParseDuration()";
+          return "${e.name}?.toString().trim().nullIfEmpty?.tryParseDuration()";
         },
         r"^Uri[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
@@ -131,7 +131,7 @@ class LooseTypeMappers extends TypeMappers {
   TTypeMappers get objectToMappers => newTypeMappers({
         r"^String[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "${e.name}?.trim().nullIfEmpty";
+          return "${e.name}?.toString().trim().nullIfEmpty";
         },
         r"^dynamic|bool|int|double|num|Timestamp|_Timestamp[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
