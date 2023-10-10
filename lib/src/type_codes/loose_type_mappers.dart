@@ -109,7 +109,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^Uri[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "(final a = ${e.name}; a is String ? a.trim().nullIfEmpty?.toUri(): null; ){}();";
+          return "(){ final a = ${e.name}; a is String ? a.trim().nullIfEmpty?.toUri(): null; }()";
         },
         r"^(\w+Type)[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
