@@ -127,6 +127,10 @@ extension ToTrimmedStringOrNull on Object {
   }
 }
 
+String? timmedStringOrNull(dynamic input) {
+  return (input as Object?)?.toTrimmedStringOrNull();
+}
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension JoinWithLastSeparator on Iterable {
