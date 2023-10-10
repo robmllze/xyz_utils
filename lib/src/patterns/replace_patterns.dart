@@ -29,8 +29,8 @@ dynamic replaceAllPatterns(
 extension ReplacePatterns on String {
   String replacePatterns(
     Map<String, dynamic> data, [
-    String opening = "(=",
-    String closing = ")",
+    String opening = "{",
+    String closing = "}",
   ]) {
     return replaceAllPatterns(this, data, opening, closing).toString();
   }
