@@ -6,42 +6,30 @@
 
 String inlineReplaceAll(
   String input,
-  Map<String, dynamic> replacements,
-) {
+  Map<String, dynamic> replacements, {
+  String opening = "",
+  String closing = "",
+}) {
   final result = StringBuffer();
-  var currentPosition = 0;
-
-  while (currentPosition < input.length) {
-    var nextReplacementPosition = input.length;
-    var nextReplacementKey = "";
-
-    for (final key in replacements.keys) {
-      final keyPosition = input.indexOf(key, currentPosition);
-      if (keyPosition != -1 && keyPosition < nextReplacementPosition) {
-        nextReplacementPosition = keyPosition;
-        nextReplacementKey = key;
+  var index = 0;
+  while (index < input.length) {
+    var replaced = false;
+    if (opening.isEmpty || input.startsWith(opening, index)) {
+      var offset = opening.isEmpty ? 0 : opening.length;
+      for (var key in replacements.keys) {
+        if (input.startsWith(key, index + offset) &&
+            (closing.isEmpty || input.startsWith(closing, index + offset + key.length))) {
+          result.write(replacements[key]);
+          index += offset + key.length + (closing.isEmpty ? 0 : closing.length);
+          replaced = true;
+          break;
+        }
       }
     }
-
-    if (nextReplacementPosition > currentPosition) {
-      // Append the part of the input string before the next replacement.
-      result.write(input.substring(currentPosition, nextReplacementPosition));
-      currentPosition = nextReplacementPosition;
+    if (!replaced) {
+      result.write(input[index]);
+      index++;
     }
-
-    if (nextReplacementKey.isNotEmpty) {
-      // Replace the key with its corresponding value.
-      result.write(replacements[nextReplacementKey]);
-      currentPosition += nextReplacementKey.length;
-    } else {
-      // No more replacements found, break the loop.
-      break;
-    }
-  }
-
-  // Append the remaining portion of the input string.
-  if (currentPosition < input.length) {
-    result.write(input.substring(currentPosition));
   }
 
   return result.toString();
@@ -50,7 +38,16 @@ String inlineReplaceAll(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension InlineReplace on String {
-  String inlineReplace(Map<String, dynamic> replacements) {
-    return inlineReplaceAll(this, replacements);
+  String inlineReplace(
+    Map<String, dynamic> replacements, {
+    String opening = "",
+    String closing = "",
+  }) {
+    return inlineReplaceAll(
+      this,
+      replacements,
+      opening: opening,
+      closing: closing,
+    );
   }
 }
