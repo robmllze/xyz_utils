@@ -29,6 +29,12 @@ abstract class DisposableService {
   //
   //
 
+  Future<void> init() async {}
+
+  //
+  //
+  //
+
   Future<void> dispose();
 }
 
@@ -51,7 +57,7 @@ abstract class AsyncInstanceCreator<T extends DisposableService> {
 
   @mustCallSuper
   Future<void> createInstance(T? instance) async {
-    this._instance = instance;
+    await (this._instance = instance)?.init();
   }
 
   //
