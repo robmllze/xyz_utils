@@ -84,7 +84,7 @@ abstract class CollectiveService<T extends DisposableService> {
   //
   //
 
-  final collection = <String, T>{};
+  final all = <String, T>{};
 
   //
   //
@@ -96,8 +96,8 @@ abstract class CollectiveService<T extends DisposableService> {
   //
   //
 
-  Set<String> get keys => this.collection.keys.toSet();
-  Iterable<T> get values => this.collection.values;
+  Set<String> get keys => this.all.keys.toSet();
+  Iterable<T> get values => this.all.values;
 
   //
   //
@@ -108,7 +108,7 @@ abstract class CollectiveService<T extends DisposableService> {
     final removedKeys = getSetDifference(newKeys, oldKeys);
     await Future.forEach(addedKeys, (final key) async {
       final temp = await this.addService(key);
-      if (temp != null) this.collection[key] = temp;
+      if (temp != null) this.all[key] = temp;
     });
     await this.removeServices(removedKeys);
   }
@@ -124,13 +124,13 @@ abstract class CollectiveService<T extends DisposableService> {
   //
 
   Future<void> removeServices(Iterable<String> keys) async {
-    await Future.forEach(keys, (String key) async => await this.collection[key]?.dispose());
-    this.collection.removeWhere((final key, _) => keys.contains(key));
+    await Future.forEach(keys, (String key) async => await this.all[key]?.dispose());
+    this.all.removeWhere((final key, _) => keys.contains(key));
   }
 
   //
   //
   //
 
-  Future<void> dispose() => this.removeServices(this.collection.keys);
+  Future<void> dispose() => this.removeServices(this.all.keys);
 }
