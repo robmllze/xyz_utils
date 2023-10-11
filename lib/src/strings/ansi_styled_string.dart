@@ -35,8 +35,8 @@ class AnsiStyle {
   //
   //
 
-  String formatted(String value) {
-    var result = value;
+  String formatted(Object? value) {
+    var result = value.toString();
     for (final code in this._codes) {
       result = result.withAnsiStyleCode(code);
     }
@@ -155,82 +155,82 @@ extension AnsiStyledString on String {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void printBlack(String message) {
+void printBlack(Object? message) {
   final formatted = AnsiStyle.fgBlack.formatted(message);
   print(formatted);
 }
 
-void printRed(String message) {
+void printRed(Object? message) {
   final formatted = AnsiStyle.fgRed.formatted(message);
   print(formatted);
 }
 
-void printGreen(String message) {
+void printGreen(Object? message) {
   final formatted = AnsiStyle.fgGreen.formatted(message);
   print(formatted);
 }
 
-void printYellow(String message) {
+void printYellow(Object? message) {
   final formatted = AnsiStyle.fgYellow.formatted(message);
   print(formatted);
 }
 
-void printBlue(String message) {
+void printBlue(Object? message) {
   final formatted = AnsiStyle.fgBlue.formatted(message);
   print(formatted);
 }
 
-void printPurple(String message) {
+void printPurple(Object? message) {
   final formatted = AnsiStyle.fgPurple.formatted(message);
   print(formatted);
 }
 
-void printCyan(String message) {
+void printCyan(Object? message) {
   final formatted = AnsiStyle.fgCyan.formatted(message);
   print(formatted);
 }
 
-void printWhite(String message) {
+void printWhite(Object? message) {
   final formatted = AnsiStyle.fgWhite.formatted(message);
   print(formatted);
 }
 
-void printLightBlack(String message) {
+void printLightBlack(Object? message) {
   final formatted = AnsiStyle.fgLightBlack.formatted(message);
   print(formatted);
 }
 
-void printLightRed(String message) {
+void printLightRed(Object? message) {
   final formatted = AnsiStyle.fgLightRed.formatted(message);
   print(formatted);
 }
 
-void printLightGreen(String message) {
+void printLightGreen(Object? message) {
   final formatted = AnsiStyle.fgLightGreen.formatted(message);
   print(formatted);
 }
 
-void printLightYellow(String message) {
+void printLightYellow(Object? message) {
   final formatted = AnsiStyle.fgLightYellow.formatted(message);
   print(formatted);
 }
 
-void printLightBlue(String message) {
+void printLightBlue(Object? message) {
   final formatted = AnsiStyle.fgLightBlue.formatted(message);
   print(formatted);
 }
 
-void printLightPurple(String message) {
+void printLightPurple(Object? message) {
   final formatted = AnsiStyle.fgLightPurple.formatted(message);
   print(formatted);
 }
 
-void printLightCyan(String message) {
+void printLightCyan(Object? message) {
   final formatted = AnsiStyle.fgLightCyan.formatted(message);
   print(formatted);
 }
 
-void printLightWhite(String message) {
+void printLightWhite(Object? message) {
   final formatted = AnsiStyle.fgLightWhite.formatted(message);
   print(formatted);
 }
