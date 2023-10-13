@@ -8,6 +8,7 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 
 import '../data/data.dart';
+import 'here.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -17,7 +18,7 @@ abstract class DisposableService {
   //
 
   /// Creator for async instances.
-  final AsyncInstanceCreator creator;
+  final AsyncServiceCreator creator;
 
   //
   //
@@ -40,14 +41,14 @@ abstract class DisposableService {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class AsyncInstanceCreator<T extends DisposableService> {
+abstract class AsyncServiceCreator<T extends DisposableService> {
   //
   //
   //
 
   String id;
 
-  AsyncInstanceCreator(this.id);
+  AsyncServiceCreator(this.id);
 
   T? _instance;
 
@@ -58,6 +59,7 @@ abstract class AsyncInstanceCreator<T extends DisposableService> {
   @mustCallSuper
   Future<void> createInstance(T? instance) async {
     await (this._instance = instance)?.init();
+    Here().debugLog("Created service of type $T for ${this.id}");
   }
 
   //
@@ -78,6 +80,7 @@ abstract class AsyncInstanceCreator<T extends DisposableService> {
   Future<void> dispose() async {
     await this._instance?.dispose();
     this._instance = null;
+    Here().debugLog("Disposed service of ttoe $T for ${this.id}");
   }
 }
 
