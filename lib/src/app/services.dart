@@ -94,13 +94,19 @@ abstract class CollectiveService<T extends DisposableService> {
   //
   //
 
+  final void Function(Object?)? onError;
+
+  //
+  //
+  //
+
+  CollectiveService(this.onError);
+
+  //
+  //
+  //
+
   final allServices = <String, T>{};
-
-  //
-  //
-  //
-
-  CollectiveService();
 
   //
   //
