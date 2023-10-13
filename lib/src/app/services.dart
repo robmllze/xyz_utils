@@ -80,7 +80,7 @@ abstract class AsyncServiceCreator<T extends DisposableService> {
   Future<void> dispose() async {
     await this._instance?.dispose();
     this._instance = null;
-    Here().debugLog("Disposed service of ttoe $T for ${this.id}");
+    Here().debugLog("Disposed service of type $T for ${this.id}");
   }
 }
 
