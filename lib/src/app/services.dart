@@ -24,7 +24,7 @@ abstract class DisposableService {
   //
   //
 
-  const DisposableService(this.creator, this.onError);
+  const DisposableService(this.creator, {this.onError});
 
   //
   //
@@ -49,7 +49,7 @@ abstract class AsyncServiceCreator<T extends DisposableService> {
   String id;
   final void Function(Object?)? onError;
 
-  AsyncServiceCreator(this.id, this.onError);
+  AsyncServiceCreator(this.id, {this.onError});
 
   T? _instance;
 
@@ -100,7 +100,7 @@ abstract class CollectiveService<T extends DisposableService> {
   //
   //
 
-  CollectiveService(this.onError);
+  CollectiveService({this.onError});
 
   //
   //
