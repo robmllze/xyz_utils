@@ -100,7 +100,7 @@ abstract class CollectiveService<T extends DisposableService> {
   //
   //
 
-  CollectiveService({this.onError});
+  CollectiveService({required this.onError});
 
   //
   //
