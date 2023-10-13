@@ -17,14 +17,14 @@ abstract class DisposableService {
   //
   //
 
-  /// Creator for async instances.
   final AsyncServiceCreator creator;
+  final void Function(Object?)? onError;
 
   //
   //
   //
 
-  const DisposableService(this.creator);
+  const DisposableService(this.creator, this.onError);
 
   //
   //
