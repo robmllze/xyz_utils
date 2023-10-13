@@ -47,8 +47,9 @@ abstract class AsyncServiceCreator<T extends DisposableService> {
   //
 
   String id;
+  final void Function(Object?)? onError;
 
-  AsyncServiceCreator(this.id);
+  AsyncServiceCreator(this.id, this.onError);
 
   T? _instance;
 
