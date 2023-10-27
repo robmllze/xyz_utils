@@ -59,7 +59,19 @@ class FunctionQueue {
   //
   //
 
-  Future<void> wait() => this.add(() async {});
+  bool get isEmpty => this._queue.isEmpty;
+
+  bool get isNotEmpty => this._queue.isNotEmpty;
+
+  //
+  //
+  //
+
+  Future<void> wait() async {
+    if (this.isNotEmpty) {
+      await this.add(() async {});
+    }
+  }
 
   //
   //

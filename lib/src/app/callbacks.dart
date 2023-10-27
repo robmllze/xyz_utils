@@ -41,6 +41,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   ///
   /// Returns a function that removes the callback.
   void Function() add(TCallback<T1> callback, {dynamic callbackKey}) {
+    assert(this._queue.isEmpty, "Cannot add callbacks while callbacks are executing.");
     final k = callbackKey ?? callback;
     this._callbacks[k] = callback;
     return () => this._callbacks.remove(k);
@@ -51,20 +52,29 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// - [callbackKey] Specify which callback to check.
   ///
   /// Returns `true` if the callback exists, otherwise `false`.
-  bool exists(dynamic callbackKey) => this._callbacks.containsKey(callbackKey);
+  bool exists(dynamic callbackKey) {
+    assert(this._queue.isEmpty, "Cannot check callbacks while callbacks are executing.");
+    return this._callbacks.containsKey(callbackKey);
+  }
 
   /// Removes the appropriate callback.
   ///
   /// - [callbackKey] Specify which callback to remove.
   ///
   /// Returns `true` if the callback was found and removed, otherwise `false`.
-  bool remove(dynamic callbackKey) => this._callbacks.remove(callbackKey) != null;
+  bool remove(dynamic callbackKey) {
+    assert(this._queue.isEmpty, "Cannot remove callbacks while callbacks are executing.");
+    return this._callbacks.remove(callbackKey) != null;
+  }
 
   /// Clears all callbacks.
-  void clear() => this._callbacks.clear();
+  void clear() {
+    assert(this._queue.isEmpty, "Cannot clear callbacks while callbacks are executing.");
+    this._callbacks.clear();
+  }
 
   /// Returns a Future which waits for all currently callbacks to complete.
-  Future<void> wait() async => await this._queue.add(() async {});
+  Future<void> wait() => this._queue.wait();
 
   /// Invokes the appropriate callback.
   ///
@@ -73,9 +83,11 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   ///
   /// Returns `true` if the callback was found and invoked, otherwise `false`.
   Future<bool> call(dynamic callbackKey, T1 param) async {
-    final callback = this._callbacks[callbackKey];
-    await callback?.call(callbackKey, param);
-    return callback != null;
+    return this._queue.add(() async {
+      final callback = this._callbacks[callbackKey];
+      await callback?.call(callbackKey, param);
+      return callback != null;
+    });
   }
 
   /// Invokes the appripriate callbacks in the collection.
@@ -93,7 +105,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
     Set<dynamic> exclude = const {},
     dynamic Function(Object e)? onError,
   }) async {
-    return _queue.add<Map<dynamic, dynamic>>(() async {
+    return this._queue.add(() async {
       final results = <dynamic, dynamic>{};
       var entries = this._callbacks.entries;
       if (include != null) {
