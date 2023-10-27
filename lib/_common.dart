@@ -8,6 +8,7 @@ export 'src/http_service.dart';
 
 export 'src/any_platform/any_platform.dart';
 export 'src/app/callbacks.dart';
+export 'src/app/collective_service.dart';
 export 'src/app/debouncer.dart';
 export 'src/app/debug_log.dart';
 export 'src/app/disposable_value.dart';
@@ -17,7 +18,7 @@ export 'src/app/here.dart';
 export 'src/app/post_destructor.dart';
 export 'src/app/rec.dart';
 export 'src/app/screen_calculator.dart';
-export 'src/app/services.dart';
+export 'src/app/single_service.dart';
 export 'src/app/valid_object.dart';
 export 'src/app/version.dart';
 export 'src/data/base_converter.dart';

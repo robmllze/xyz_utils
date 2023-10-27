@@ -142,12 +142,12 @@ DateTime? getFirstDate(Iterable<DateTime>? dates) {
 
 extension DateTimeUtilsExtension on DateTime {
   /// e.g. August 8, 2023
-  String full(String localeCode) {
+  String full([String? localeCode]) {
     return DateFormat("MMMM d, y", localeCode).format(this);
   }
 
   /// e.g. Aug-8 23
-  String fullShort(String localeCode) {
+  String fullShort([String? localeCode]) {
     return DateFormat("MMM/d/yyyy", localeCode).format(this);
   }
 }

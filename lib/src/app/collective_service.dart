@@ -5,91 +5,13 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'dart:async';
-import 'package:meta/meta.dart';
 
 import '../data/data.dart';
-import 'here.dart';
+import 'single_service.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class DisposableService {
-  //
-  //
-  //
-
-  final AsyncServiceCreator creator;
-  final void Function(Object?)? onError;
-
-  //
-  //
-  //
-
-  const DisposableService(this.creator, {required this.onError});
-
-  //
-  //
-  //
-
-  Future<void> init() async {}
-
-  //
-  //
-  //
-
-  Future<void> dispose();
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-abstract class AsyncServiceCreator<T extends DisposableService> {
-  //
-  //
-  //
-
-  String id;
-  final void Function(Object?)? onError;
-
-  AsyncServiceCreator(this.id, {required this.onError});
-
-  T? _instance;
-
-  //
-  //
-  //
-
-  @mustCallSuper
-  Future<void> createInstance(T? instance) async {
-    await (this._instance = instance)?.init();
-    Here().debugLog("Created service of type $T for ${this.id}");
-  }
-
-  //
-  //
-  //
-
-  Future<T> getInstance() async {
-    if (this._instance == null) {
-      await createInstance(null);
-    }
-    return this._instance!;
-  }
-
-  //
-  //
-  //
-
-  Future<void> dispose() async {
-    await this._instance?.dispose();
-    this._instance = null;
-    Here().debugLog("Disposed service of type $T for ${this.id}");
-  }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-/// Manages a collection of [DisposableService] instances, each associated with
-/// a key.
-abstract class CollectiveService<T extends DisposableService> {
+abstract class CollectiveService<T extends SingleService> {
   //
   //
   //
