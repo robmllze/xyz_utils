@@ -81,9 +81,9 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Invokes the appripriate callbacks in the collection.
   ///
   /// - [param] Specify a parameter to pass to the callbacks.
-  /// - [include] Specify which callbacks to invoke. Set to null to include allcallbacks.
+  /// - [include] Specify which callbacks to invoke. Set to null to include all callbacks.
   /// - [exclude] Specify which callbacks to exclude from invocation.
-  /// - [onError] Specify a callback to invokes when an handle errors.
+  /// - [onError] Specify a callback to execute if an error occurs.
   ///
   /// Returns a map where each key corresponds to a callback's key and its
   /// associated result.
