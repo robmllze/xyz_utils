@@ -1,143 +1,3 @@
-// // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-// //
-// // XYZ Utils
-// //
-// // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-
-// import 'dart:async';
-
-// // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-// /// Provides a flexible and easy-to-use way to manage and execute a collection
-// /// of callbacks. Callbacks may be preferred over the usual Flutter callbacks
-// /// because they offer the following additional features:
-// ///
-// /// - The ability to add, remove, and check the existence of callbacks using a
-// /// callback key.
-// /// - The ability to execute all callbacks in sequence or simultaneously.
-// /// - The ability to track the completion of the execution of all callbacks,
-// /// which is useful when subsequent actions depend on the completion of all
-// /// callbacks.
-// class Callbacks<T1, T2 extends TCallback<T1>> {
-//   //
-//   //
-//   //
-
-//   final _callbacks = <dynamic, TCallback<T1>>{};
-//   Completer? _completer;
-
-//   //
-//   //
-//   //
-
-//   /// Adds a new [callback] to the collection and assigns an optional
-//   /// [callbackKey] to call or remove it later.
-//   void Function() add(TCallback<T1> callback, {dynamic callbackKey}) {
-//     final k = callbackKey ?? callback;
-//     this._callbacks[k] = callback;
-//     return () => this._callbacks.remove(k);
-//   }
-
-//   /// Checks whether a callback with the given callbackKey exists in the collection.
-//   bool exists(dynamic callbackKey) => this._callbacks.containsKey(callbackKey);
-
-//   /// Removes the callback with the given [callbackKey] from the collection.
-//   bool remove(dynamic callbackKey) => this._callbacks.remove(callbackKey) != null;
-
-//   /// Clears all callbacks from the collection.
-//   void clear() => this._callbacks.clear();
-
-//   /// Returns a Future which waits for all currently executing callbacks to
-//   /// complete.
-//   Future<void> wait() async => await this._completer?.future;
-
-//   /// Invokes the callback with the given [callbackKey] passing in the given
-//   /// [param].
-//   Future<bool> call(dynamic callbackKey, T1 param) async {
-//     final callback = this._callbacks[callbackKey];
-//     await callback?.call(callbackKey, param);
-//     return callback != null;
-//   }
-
-//   /// Invokes all callbacks in the collection with the given [param] and returns
-//   /// a map of the results of each callback. The optional function [onError] can
-//   /// be passed to handle errors.
-//   Future<Map<dynamic, dynamic>?> callAll(
-//     T1 param, [
-//     dynamic Function(Object e)? onError,
-//   ]) async {
-//     if (this._completer != null && !this._completer!.isCompleted) {
-//       await this._completer!.future;
-//     }
-//     this._completer = Completer();
-//     try {
-//       final results = <dynamic, dynamic>{};
-//       for (final l in this._callbacks.entries) {
-//         final callbackKey = l.key;
-//         final callback = l.value;
-//         try {
-//           results[callbackKey] = await callback(callbackKey, param);
-//         } catch (e) {
-//           if (onError != null) {
-//             results[callbackKey] = onError(e);
-//           } else {
-//             rethrow;
-//           }
-//         }
-//       }
-//       return results;
-//     } catch (_) {
-//       rethrow;
-//     } finally {
-//       this._completer!.complete();
-//     }
-//   }
-
-//   /// Invokes all callbacks in the collection simultaneously with the given
-//   /// [param] and returns a map of the results of each callback. The optional
-//   /// function [onError] can be passed to handle errors.
-//   Future<Map<dynamic, dynamic>?> callAllSimultaneously(
-//     T1 param, {
-//     dynamic Function(Object e)? onError,
-//   }) async {
-//     if (this._completer != null && !this._completer!.isCompleted) {
-//       await this._completer!.future;
-//     }
-//     this._completer = Completer();
-//     try {
-//       final results = <dynamic, dynamic>{};
-//       final callbacks = this._callbacks.entries.map(
-//         (final l) async {
-//           final callbackKey = l.key;
-//           final callback = l.value;
-//           try {
-//             results[callbackKey] = await callback(callbackKey, param);
-//           } catch (e) {
-//             if (onError != null) {
-//               results[callbackKey] = onError(e);
-//             } else {
-//               rethrow;
-//             }
-//           }
-//         },
-//       );
-//       if (callbacks.isNotEmpty) {
-//         await Future.wait(callbacks);
-//         return results;
-//       }
-//       return null;
-//     } catch (_) {
-//       rethrow;
-//     } finally {
-//       this._completer!.complete();
-//     }
-//   }
-// }
-
-// // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-// typedef TCallback<T> = Future<dynamic> Function(dynamic callbackKey, T param);
-
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
 // XYZ Utils
@@ -150,9 +10,9 @@ import '../../xyz_utils.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Provides a flexible and easy-to-use way to manage and execute a collection
-/// of callbacks. Callbacks may be preferred over the usual Flutter callbacks
-/// because they offer the following additional features:
+/// Provides a flexible and easy way to manage and execute a set of callbacks.
+/// 
+/// This class provides the following features:
 ///
 /// - The ability to add, remove, and check the existence of callbacks using a
 /// callback key.
@@ -172,45 +32,77 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   //
   //
 
-  /// Adds a new [callback] to the collection and assigns an optional
-  /// [callbackKey] to call or remove it later.
+  /// Adds a new callback.
+  ///
+  /// - [callback] Specify the callback to add.
+  /// - [callbackKey] Specify a key for the callback that can be used to
+  /// identify the callback. If not specified, the callback itself will be used
+  /// as the key.
+  ///
+  /// Returns a function that removes the callback.
   void Function() add(TCallback<T1> callback, {dynamic callbackKey}) {
     final k = callbackKey ?? callback;
     this._callbacks[k] = callback;
     return () => this._callbacks.remove(k);
   }
 
-  /// Checks whether a callback with the given callbackKey exists in the collection.
+  /// Checks if the appropriate callback exists.
+  ///
+  /// - [callbackKey] Specify which callback to check.
+  ///
+  /// Returns `true` if the callback exists, otherwise `false`.
   bool exists(dynamic callbackKey) => this._callbacks.containsKey(callbackKey);
 
-  /// Removes the callback with the given [callbackKey] from the collection.
+  /// Removes the appropriate callback.
+  ///
+  /// - [callbackKey] Specify which callback to remove.
+  ///
+  /// Returns `true` if the callback was found and removed, otherwise `false`.
   bool remove(dynamic callbackKey) => this._callbacks.remove(callbackKey) != null;
 
-  /// Clears all callbacks from the collection.
+  /// Clears all callbacks.
   void clear() => this._callbacks.clear();
 
-  /// Returns a Future which waits for all currently executing callbacks to
-  /// complete.
+  /// Returns a Future which waits for all currently callbacks to complete.
   Future<void> wait() async => await this._queue.add(() async {});
 
-  /// Invokes the callback with the given [callbackKey] passing in the given
-  /// [param].
+  /// Invokes the appropriate callback.
+  ///
+  /// - [callbackKey] Specify which callback to invoke.
+  /// - [param] Specify a parameter to pass to the callback.
+  ///
+  /// Returns `true` if the callback was found and invoked, otherwise `false`.
   Future<bool> call(dynamic callbackKey, T1 param) async {
     final callback = this._callbacks[callbackKey];
     await callback?.call(callbackKey, param);
     return callback != null;
   }
 
-  /// Invokes all callbacks in the collection with the given [param] and returns
-  /// a map of the results of each callback. The optional function [onError] can
-  /// be passed to handle errors.
+  /// Invokes the appripriate callbacks in the collection.
+  ///
+  /// - [param] Specify a parameter to pass to the callbacks.
+  /// - [include] Specify which callbacks to invoke. Leave empty to invoke all callbacks.
+  /// - [exclude] Specify which callbacks to exclude from invocation.
+  /// - [onError] Specify a callback to invokes when an handle errors.
+  ///
+  /// Returns a map where each key corresponds to a callback's key and its
+  /// associated result.
   Future<Map<dynamic, dynamic>> callAll(
-    T1 param, [
+    T1 param, {
+    Set<dynamic> include = const {},
+    Set<dynamic> exclude = const {},
     dynamic Function(Object e)? onError,
-  ]) async {
+  }) async {
     return _queue.add<Map<dynamic, dynamic>>(() async {
       final results = <dynamic, dynamic>{};
-      for (final entry in this._callbacks.entries) {
+      var entries = this._callbacks.entries;
+      if (include.isNotEmpty) {
+        entries = entries.where((e) => include.contains(e.key));
+      }
+      if (exclude.isNotEmpty) {
+        entries = entries.where((e) => !exclude.contains(e.key));
+      }
+      for (final entry in entries) {
         final key = entry.key;
         final function = entry.value;
         try {
