@@ -11,7 +11,7 @@ import '../../xyz_utils.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Provides a flexible and easy way to manage and execute a set of callbacks.
-/// 
+///
 /// This class provides the following features:
 ///
 /// - The ability to add, remove, and check the existence of callbacks using a
@@ -81,7 +81,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Invokes the appripriate callbacks in the collection.
   ///
   /// - [param] Specify a parameter to pass to the callbacks.
-  /// - [include] Specify which callbacks to invoke. Leave empty to invoke all callbacks.
+  /// - [include] Specify which callbacks to invoke. Set to null to include allcallbacks.
   /// - [exclude] Specify which callbacks to exclude from invocation.
   /// - [onError] Specify a callback to invokes when an handle errors.
   ///
@@ -89,14 +89,14 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// associated result.
   Future<Map<dynamic, dynamic>> callAll(
     T1 param, {
-    Set<dynamic> include = const {},
+    Set<dynamic>? include,
     Set<dynamic> exclude = const {},
     dynamic Function(Object e)? onError,
   }) async {
     return _queue.add<Map<dynamic, dynamic>>(() async {
       final results = <dynamic, dynamic>{};
       var entries = this._callbacks.entries;
-      if (include.isNotEmpty) {
+      if (include != null) {
         entries = entries.where((e) => include.contains(e.key));
       }
       if (exclude.isNotEmpty) {
