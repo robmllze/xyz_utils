@@ -23,7 +23,10 @@ abstract class SingleService {
   //
   //
 
-  const SingleService(this.creator, {required this.onError});
+  const SingleService({
+    required this.creator,
+    required this.onError,
+  });
 
   //
   //
@@ -45,12 +48,24 @@ abstract class SingleServiceCreator<T extends SingleService> {
   //
   //
 
-  String id;
-  final void Function(Object?)? onError;
-
-  SingleServiceCreator(this.id, {required this.onError});
-
+  final String? id;
+  late final void Function(Object?)? onError;
   T? _instance;
+
+  //
+  //
+  //
+
+  SingleServiceCreator({
+    this.id,
+    required void Function(Object?)? onError,
+  }) {
+    this.onError = onError ??
+        (e) {
+          // Handle error silently.
+          Here().debugLogError(e);
+        };
+  }
 
   //
   //
@@ -59,7 +74,7 @@ abstract class SingleServiceCreator<T extends SingleService> {
   @mustCallSuper
   Future<void> createService(T? instance) async {
     await (this._instance = instance)?.init();
-    Here().debugLog("Created service of type $T for ${this.id}");
+    Here().debugLog("Created service of type $T${this.id != null ? " for ${this.id}" : ""}");
   }
 
   //
@@ -80,6 +95,6 @@ abstract class SingleServiceCreator<T extends SingleService> {
   Future<void> dispose() async {
     await this._instance?.dispose();
     this._instance = null;
-    Here().debugLog("Disposed service of type $T for ${this.id}");
+    Here().debugLog("Disposed service of type $T${this.id != null ? " for ${this.id}" : ""}");
   }
 }
