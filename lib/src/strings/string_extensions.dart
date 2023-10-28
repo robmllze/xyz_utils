@@ -78,6 +78,14 @@ extension XyzUtilsStringExtensions on String {
   //
   //
 
+  String capitalizeWords() {
+    return this.trim().split(RegExp(r"[- ]+")).map((final e) => e.trim().capitalize()).join(" ");
+  }
+
+  //
+  //
+  //
+
   String lineToLength(int length) {
     return (this.length > length ? "${this.substring(0, length).trim()}..." : this);
   }
