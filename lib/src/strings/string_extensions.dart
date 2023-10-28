@@ -70,30 +70,8 @@ extension XyzUtilsStringExtensions on String {
 
   String capitalize() {
     if (this.isEmpty) return this;
-
-    for (var n = 0; n < this.length; n++) {
-      final char = this[n];
-      if (char.toUpperCase() != char) {
-        return this.substring(0, n) + char.toUpperCase() + this.substring(n + 1);
-      }
-    }
-    return this;
-  }
-
-  //
-  //
-  //
-
-  String decapitalize() {
-    if (this.isEmpty) return this;
-
-    for (var n = 0; n < this.length; n++) {
-      final char = this[n];
-      if (char.toLowerCase() != char) {
-        return this.substring(0, n) + char.toLowerCase() + this.substring(n + 1);
-      }
-    }
-    return this;
+    final a = this[0].toUpperCase();
+    return a.length > 1 ? a + this.substring(1).toLowerCase() : a;
   }
 
   //
