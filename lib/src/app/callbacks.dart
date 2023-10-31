@@ -42,7 +42,8 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Returns a function that removes the callback.
   void Function() add(TCallback<T1> callback, {dynamic callbackKey}) {
     if (this._queue.isNotEmpty) {
-      throw Exception("Cannot add callbacks while callbacks are executing. Call wait() first.");
+      Here()
+          .debugLogAlert("Do not add callbacks while callbacks are executing. Call wait() first.");
     }
     final k = callbackKey ?? callback;
     this._callbacks[k] = callback;
@@ -56,7 +57,8 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Returns `true` if the callback exists, otherwise `false`.
   bool exists(dynamic callbackKey) {
     if (this._queue.isNotEmpty) {
-      throw Exception("Cannot check callbacks while callbacks are executing. Call wait() first.");
+      Here().debugLogAlert(
+          "Do not check callbacks while callbacks are executing. Call wait() first.");
     }
     return this._callbacks.containsKey(callbackKey);
   }
@@ -68,7 +70,8 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Returns `true` if the callback was found and removed, otherwise `false`.
   bool remove(dynamic callbackKey) {
     if (this._queue.isNotEmpty) {
-      throw Exception("Cannot remove callbacks while callbacks are executing. Call wait() first.");
+      Here().debugLogAlert(
+          "Do not remove callbacks while callbacks are executing. Call wait() first.");
     }
     return this._callbacks.remove(callbackKey) != null;
   }
@@ -76,7 +79,8 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Clears all callbacks.
   void clear() {
     if (this._queue.isNotEmpty) {
-      throw Exception("Cannot clear callbacks while callbacks are executing. Call wait() first.");
+      Here().debugLogAlert(
+          "Do not clear callbacks while callbacks are executing. Call wait() first.");
     }
     this._callbacks.clear();
   }
