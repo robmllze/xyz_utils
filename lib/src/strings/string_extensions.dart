@@ -70,8 +70,8 @@ extension XyzUtilsStringExtensions on String {
 
   String capitalize() {
     if (this.isEmpty) return this;
-    final a = this[0].toUpperCase();
-    return a.length > 1 ? a + this.substring(1).toLowerCase() : a;
+    if (this.length == 1) return this.toUpperCase();
+    return this[0].toUpperCase() + this.substring(1).toLowerCase();
   }
 
   //
