@@ -47,7 +47,6 @@ Future<void> generateFromTemplates({
     for (final templateFilePath in templateFilePaths) {
       templates[templateFilePath] = await readDartTemplate(templateFilePath);
     }
-    printRed(path);
     final results = await findDartFiles(
       path,
       pathPatterns: pathPatterns,
