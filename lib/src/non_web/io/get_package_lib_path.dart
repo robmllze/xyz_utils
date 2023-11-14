@@ -19,12 +19,15 @@ Future<String?> getPackageLibPath(String packageName) async {
   final pathUri = await Isolate.resolvePackageUri(packageUri);
   if (pathUri == null) return null;
   var path = pathUri.path;
+
   // On Windows, adjust the path format.
   if (Platform.isWindows) {
-    if (path.startsWith('/')) {
+    // Regular expression to match patterns like /CC:
+    final driveLetterPattern = RegExp(r"^[/\\][A-Za-z]+:");
+    if (driveLetterPattern.hasMatch(path)) {
       path = path.substring(1);
     }
-    path = path.replaceAll('/', '\\');
+    path = path.replaceAll("/", "\\");
   }
   return path;
 }
