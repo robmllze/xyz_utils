@@ -6,19 +6,15 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:io';
-
-import '../paths/paths.dart';
-import '../app/here.dart';
+import 'dart:async';
+import 'dart:isolate';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Applies fixes to the dart file at [filePath].
-Future<void> fixDartFile(String filePath) async {
-  try {
-    final fixedPath = toLocalPathFormat(filePath);
-    await Process.run("dart", ["fix", "--apply", fixedPath]);
-  } catch (e) {
-    Here().debugLogError(e);
-  }
+/// Returns the path of the package's `lib` directory or `null` if the package
+/// is not found.
+Future<String?> getPackageLibPath(String packageName) async {
+  final packageUri = Uri.parse("package:$packageName/");
+  final pathUri = await Isolate.resolvePackageUri(packageUri);
+  return pathUri?.path;
 }
