@@ -13,5 +13,6 @@ export 'generate.dart';
 export 'io/file_system.dart';
 export 'io/list_file_paths.dart';
 export 'io/list_folder_paths.dart';
+export 'io/get_package_lib_path.dart';
 
 export 'debug/download_and_extract_zip.dart';
