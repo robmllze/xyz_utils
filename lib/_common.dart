@@ -17,7 +17,7 @@ export 'src/app/disposable_value.dart';
 export 'src/app/errors.dart';
 export 'src/app/function_queue.dart';
 export 'src/app/here.dart';
-export 'src/app/post_destructor.dart';
+export 'src/app/post_destruction_checker.dart';
 export 'src/app/rec.dart';
 export 'src/app/screen_calculator.dart';
 export 'src/app/single_service.dart';
