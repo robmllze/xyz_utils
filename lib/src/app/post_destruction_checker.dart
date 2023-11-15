@@ -30,11 +30,11 @@ class ObjectPostDestructionChecker {
   /// This constructor attaches a post-destruction callback to the specified [object].
   ///
   /// - [object] The object to which the post-destruction callback will be attached.
-  /// - [onPostDestruct] The callback function to be executed after the [object] is destructed.
-  ObjectPostDestructionChecker(Object object, void Function() onPostDestruct) {
+  /// - [onPostDestruction] The callback function to be executed after the [object] is destructed.
+  ObjectPostDestructionChecker(Object object, void Function() onPostDestruction) {
     _finalizer.attach(
       object,
-      onPostDestruct,
+      onPostDestruction,
       detach: object,
     );
   }
@@ -49,7 +49,7 @@ class ObjectPostDestructionChecker {
 /// ```dart
 /// class YourClass extends PostDestructionChecker {
 ///   @override
-///   void onPostDestruct() {
+///   void onPostDestruction() {
 ///     print("Your class has been destructed/no longer exists");
 ///   }
 /// }
@@ -60,12 +60,12 @@ abstract class PostDestructionChecker {
   PostDestructionChecker() {
     _finalizer.attach(
       this,
-      this.onPostDestruct,
+      this.onPostDestruction,
       detach: this,
     );
   }
 
   /// Implement this method to define the action to be taken when the object is
   /// destructed.
-  void onPostDestruct();
+  void onPostDestruction();
 }
