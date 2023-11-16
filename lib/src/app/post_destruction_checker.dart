@@ -65,7 +65,7 @@ abstract class PostDestructionChecker {
     );
   }
 
-  /// Implement this method to define the action to be taken when the object is
+  /// Implement this method to define the action to be taken after the object is
   /// destructed.
   void onPostDestruction();
 }
