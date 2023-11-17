@@ -73,7 +73,7 @@ extension XyzUtilsStringExtensions on String {
   String capitalize() {
     if (this.isEmpty) return this;
     if (this.length == 1) return this.toUpperCase();
-    return this[0].toUpperCase() + this.substring(1).toLowerCase();
+    return this[0].toUpperCase() + this.substring(1);
   }
 
   //
@@ -81,7 +81,11 @@ extension XyzUtilsStringExtensions on String {
   //
 
   String capitalizeWords() {
-    return this.trim().split(RegExp(r"[- ]+")).map((final e) => e.trim().capitalize()).join(" ");
+    return this
+        .trim()
+        .split(RegExp(r"[- ]+"))
+        .map((final e) => e.trim().toLowerCase().capitalize())
+        .join(" ");
   }
 
   //
