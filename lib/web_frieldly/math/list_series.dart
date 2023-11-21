@@ -11,7 +11,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'list_various.dart';
-import 'utils.dart' show combineHashCodes;
+import 'vec.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -173,7 +173,8 @@ extension List_Series on List<num> {
     if (this.isEmpty) return 0;
     if (this.length == 1) return this[0].hashCode;
     int _combined = this[0].hashCode;
-    for (int n = 1; n < this.length; n++) _combined = combineHashCodes(_combined, this[n].hashCode);
+    for (int n = 1; n < this.length; n++)
+      _combined = combineHashCodes([_combined, this[n].hashCode]);
 
     return _combined;
   }

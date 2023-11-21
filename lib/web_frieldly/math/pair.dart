@@ -9,6 +9,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'utils.dart';
+import 'vec.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -51,7 +52,7 @@ class Pair<T> {
   bool operator ==(final Object b) => this.hashCode == b.hashCode;
 
   @override
-  int get hashCode => combineHashCodes(this.t0.hashCode, this.t1.hashCode);
+  int get hashCode => combineHashCodes([this.t0.hashCode, this.t1.hashCode]);
 
   /// Returns new Pair but with components reversed.
   Pair<T> get reversed => Pair<T>(this.t1, this.t0);

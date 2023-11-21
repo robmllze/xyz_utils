@@ -11,7 +11,12 @@ import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 
-import '/xyz_utils_non_web.dart';
+import '../web_frieldly/paths/combine_paths.dart';
+import '../web_frieldly/paths/paths.dart';
+import '../web_frieldly/strings/string_extensions.dart';
+import 'analyze_annotated_classes.dart';
+import 'io/file_system.dart';
+import 'io/list_file_paths.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

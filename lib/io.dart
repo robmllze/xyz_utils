@@ -10,5 +10,5 @@ library xyz_utils;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export '_common.dart';
-export 'src/non_web/non_web.dart';
+export 'web_friendly_only.dart';
+export 'non_web_only.dart';

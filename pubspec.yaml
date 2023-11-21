@@ -20,4 +20,7 @@ dependencies:
 dev_dependencies:
   lints: ^2.0.1
   archive: ^3.3.7
+  xyz_gen:
+    git:
+      url: https://github.com/robmllze/xyz_gen.git
   

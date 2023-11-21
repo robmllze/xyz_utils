@@ -1,13 +1,14 @@
 //.title
-//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Generate All Exports
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-//.title~
 //.title~
 
-export '_any_platform_none.dart'
-    if (dart.library.io) '_any_platform_io.dart'
-    if (dart.library.html) '_any_platform_html.dart';
+import 'package:xyz_gen/default_apps/generate_all_exports_app.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+// dart generators/generate_all_exports.dart -r lib/src -s streams
+void main(List<String> arguments) => generateAllExportsApp(arguments);

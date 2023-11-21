@@ -9,7 +9,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
-import '../../paths/paths.dart';
+import '../../web_frieldly/paths/paths.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
