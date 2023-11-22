@@ -8,7 +8,7 @@
 
 // ignore_for_file: camel_case_extensions
 
-import '../data/data.dart';
+import '/web_friendly/all_web_friendly_g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

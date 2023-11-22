@@ -8,8 +8,7 @@
 
 import 'dart:async';
 
-import '../data/data.dart';
-import 'single_service.dart';
+import '/web_friendly/all_web_friendly_g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

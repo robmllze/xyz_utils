@@ -9,7 +9,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 
-import 'here.dart';
+import '/web_friendly/all_web_friendly_g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

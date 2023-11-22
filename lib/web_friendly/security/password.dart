@@ -8,6 +8,8 @@
 
 import 'dart:math' show Random;
 
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
 /// Generates a deterministic password based on the provided input values.
 ///
 /// The length of the generated password may be anywhere between half of the

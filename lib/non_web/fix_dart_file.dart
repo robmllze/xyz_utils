@@ -8,8 +8,7 @@
 
 import 'dart:io';
 
-import '../web_frieldly/app/here.dart';
-import '../web_frieldly/paths/paths.dart';
+import '/io.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

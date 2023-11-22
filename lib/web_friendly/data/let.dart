@@ -9,8 +9,7 @@
 import 'dart:convert';
 import 'dart:core';
 
-import 'data.dart';
-import '../time/parse_duration.dart';
+import '/web_friendly/all_web_friendly_g.dart';
 
 part '_timestamp.dart';
 

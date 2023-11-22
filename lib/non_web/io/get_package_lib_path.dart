@@ -18,7 +18,7 @@ Future<String?> getPackageLibPath(String packageName) async {
   final packageUri = Uri.parse("package:$packageName/");
   final pathUri = await Isolate.resolvePackageUri(packageUri);
   if (pathUri == null) return null;
-  var path = pathUri.path;
+  var path = Uri.decodeFull(pathUri.path);
 
   // On Windows, adjust the path format.
   if (Platform.isWindows) {

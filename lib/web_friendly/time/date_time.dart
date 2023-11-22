@@ -8,8 +8,7 @@
 
 import 'package:intl/intl.dart';
 
-import 'duration_formatted_english.dart';
-import '../data/data.dart';
+import '/web_friendly/all_web_friendly_g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
