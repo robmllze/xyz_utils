@@ -10,18 +10,27 @@ name: xyz_utils
 description: A collection of utils for rapid development
 publish_to: none
 version: 0.23.0
+
+## -----------------------------------------------------------------------------
+
 environment:
   sdk: '>= 3.0.0 < 4.0.0'
+
+## -----------------------------------------------------------------------------
+
 dependencies:
-  analyzer: ^6.2.0
-  collection: ^1.17.1
-  intl: ^0.18.0
-  meta: ^1.9.0
-  path: ^1.8.3
-  http: ^1.1.0
+  analyzer:
+  collection:
+  meta:
+  path:
+  http:
+  archive:
+  intl:
+
+## -----------------------------------------------------------------------------
+
 dev_dependencies:
-  lints: ^2.0.1
-  archive: ^3.3.7
+  lints:
   xyz_gen:
     #path: ../xyz_gen
     git:
