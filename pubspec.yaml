@@ -7,9 +7,8 @@
 #.title~
 
 name: xyz_utils
-description: A collection of utils for rapid development
 publish_to: none
-version: 0.23.0
+version: 0.24.0
 
 ## -----------------------------------------------------------------------------
 
@@ -24,10 +23,11 @@ dependencies:
   analyzer:
   collection:
   meta:
-  path:
   http:
   archive:
   intl:
+  encrypt:
+  shared_preferences:
 
 ## -----------------------------------------------------------------------------
 
