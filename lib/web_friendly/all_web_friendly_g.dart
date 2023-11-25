@@ -65,6 +65,7 @@ export 'patterns/replace_data.dart';
 export 'patterns/replace_patterns.dart';
 export 'security/fnv_hash.dart';
 export 'security/password.dart';
+export 'security/protected_shared_preferences.dart';
 export 'stream_to_future.dart';
 export 'strings/ansi_styled_string.dart';
 export 'strings/string_extensions.dart';
