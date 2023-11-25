@@ -21,13 +21,13 @@ environment:
 dependencies:
 
   analyzer:
-  collection:
-  meta:
-  http:
   archive:
-  intl:
+  collection:
   encrypt:
-  shared_preferences:
+  equatable:
+  http:
+  intl:
+  meta:
 
 ## -----------------------------------------------------------------------------
 
