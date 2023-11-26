@@ -101,7 +101,7 @@ String toLocalPathFormat(String path) {
 
 /// Checks if the provided file is a private Dart file (starts with an
 /// underscore).
-bool isPrivateFile(String filePath) {
+bool isPrivateFileName(String filePath) {
   final fileName = getBaseName(filePath);
   return fileName.startsWith("_");
 }
