@@ -133,7 +133,7 @@ Future<List<(String, String, String)>> findDartFiles(
   if (filePaths != null) {
     filePaths.sort();
     for (final filePath in filePaths) {
-      if (isSourceDartFilePath(filePath, pathPatterns)) {
+      if (isDartFilePath(filePath, pathPatterns)) {
         final dirPath = getDirPath(filePath);
         final folderName = getBaseName(dirPath);
         final add = (await onFileFound?.call(dirPath, folderName, filePath)) ?? true;
