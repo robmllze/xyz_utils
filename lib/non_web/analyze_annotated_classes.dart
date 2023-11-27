@@ -23,7 +23,6 @@ AnalysisContextCollection createCollection(
   Set<String> paths,
   String? fallbackDartSdkPath,
 ) {
-  print("Creating collection...");
   final dartSdkPath = Platform.environment["DART_SDK"] ?? fallbackDartSdkPath;
   final includePaths = paths.map((e) => p.normalize(p.absolute(e))).toList();
   final collection = AnalysisContextCollection(
@@ -31,7 +30,6 @@ AnalysisContextCollection createCollection(
     resourceProvider: PhysicalResourceProvider.INSTANCE,
     sdkPath: dartSdkPath,
   );
-  print("[COLLECTION CREATED]");
   return collection;
 }
 

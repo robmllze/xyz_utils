@@ -30,8 +30,10 @@ Future<void> generateFromTemplates({
   bool deleteGeneratedFiles = false,
   void Function(String filePath)? onDelete,
 }) async {
+  final completer = Completer<void>();
+  runConsoleLoadingAnimation(() => completer.future);
   final combinedPaths = combinePaths([rootPaths, subPaths]);
-  final collection = await createCollection(
+  final collection = createCollection(
     combinedPaths,
     fallbackDartSdkPath,
   );
@@ -64,6 +66,7 @@ Future<void> generateFromTemplates({
       await generateForFile(collection, filePath, templates);
     }
   }
+  completer.complete();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
