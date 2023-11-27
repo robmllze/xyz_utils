@@ -75,8 +75,10 @@ Future<void> analyzeAnnotatedClasses({
   )? onMemberAnnotationField,
 }) async {
   final completer = Completer<void>();
-  printYellow("Analyzing annotations at $filePath....");
-  runConsoleLoadingAnimation(() => completer.future);
+  runConsoleLoadingAnimation(
+    () => completer.future,
+    interval: const Duration(milliseconds: 50),
+  );
   final absoluteFilePath = p.absolute(filePath);
   final normalizedFilePath = p.normalize(absoluteFilePath);
   final fileUri = Uri.file(absoluteFilePath).toString();
