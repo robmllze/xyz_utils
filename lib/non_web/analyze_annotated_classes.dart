@@ -17,6 +17,9 @@ import 'package:analyzer/file_system/physical_file_system.dart';
 
 import 'package:path/path.dart' as p;
 
+import '../html.dart';
+import 'io/run_console_loading_animation.dart';
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Future<AnalysisContextCollection> createCollection(
@@ -71,6 +74,9 @@ Future<void> analyzeAnnotatedClasses({
     DartObject fieldValue,
   )? onMemberAnnotationField,
 }) async {
+  final completer = Completer<void>();
+  printYellow("Analyzing annotations at $filePath....");
+  runConsoleLoadingAnimation(() => completer.future);
   final absoluteFilePath = p.absolute(filePath);
   final normalizedFilePath = p.normalize(absoluteFilePath);
   final fileUri = Uri.file(absoluteFilePath).toString();
@@ -78,7 +84,6 @@ Future<void> analyzeAnnotatedClasses({
   final library = await context.currentSession.getLibraryByUri(fileUri);
   if (library is LibraryElementResult) {
     final classElements = library.element.topLevelElements.whereType<ClassElement>();
-
     for (final classElement in classElements) {
       final className = classElement.displayName;
       if (classNamePattern == null || classNamePattern.hasMatch(className)) {
@@ -105,6 +110,7 @@ Future<void> analyzeAnnotatedClasses({
       }
     }
   }
+  completer.complete();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
