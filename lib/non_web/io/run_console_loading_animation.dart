@@ -1,14 +1,34 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Generate All Exports
+// XYZ Utils
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_gen/default_apps/generate_all_exports_app.dart';
+import 'dart:io';
+
+import 'dart:async';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// dart generators/generate_all_exports.dart -r lib -s web_friendly:non_web
-void main(List<String> arguments) => generateAllExportsApp(arguments);
+Future<double> runConsoleLoadingAnimation(
+  Future<void> Function() onComplete, {
+  String loadingText = "><",
+  String doneText = "[DONE]\n",
+  Duration interval = const Duration(milliseconds: 100),
+}) async {
+  var dotCount = 0;
+  final animationCompleter = Completer<void>();
+  final timer = Timer.periodic(interval, (final timer) {
+    stdout.write(loadingText[(dotCount++) % loadingText.length]);
+    if (animationCompleter.isCompleted) {
+      timer.cancel();
+    }
+  });
+  await onComplete();
+  animationCompleter.complete();
+  timer.cancel();
+  stdout.write(doneText);
+  return dotCount * 500.0 / 1000.0;
+}

@@ -16,4 +16,5 @@ export 'io/file_system.dart';
 export 'io/get_package_lib_path.dart';
 export 'io/list_file_paths.dart';
 export 'io/list_folder_paths.dart';
+export 'io/run_console_loading_animation.dart';
 export 'io/run_functions_in_isolates.dart';
