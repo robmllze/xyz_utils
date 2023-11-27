@@ -17,15 +17,13 @@ import 'package:analyzer/file_system/physical_file_system.dart';
 
 import 'package:path/path.dart' as p;
 
-import '../html.dart';
-import 'io/run_console_loading_animation.dart';
-
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<AnalysisContextCollection> createCollection(
+AnalysisContextCollection createCollection(
   Set<String> paths,
   String? fallbackDartSdkPath,
-) async {
+) {
+  print("CREATING....");
   final dartSdkPath = Platform.environment["DART_SDK"] ?? fallbackDartSdkPath;
   final includePaths = paths.map((e) => p.normalize(p.absolute(e))).toList();
   final collection = AnalysisContextCollection(
@@ -33,6 +31,7 @@ Future<AnalysisContextCollection> createCollection(
     resourceProvider: PhysicalResourceProvider.INSTANCE,
     sdkPath: dartSdkPath,
   );
+  print("assadsaddsa");
   return collection;
 }
 
@@ -74,11 +73,6 @@ Future<void> analyzeAnnotatedClasses({
     DartObject fieldValue,
   )? onMemberAnnotationField,
 }) async {
-  final completer = Completer<void>();
-  runConsoleLoadingAnimation(
-    () => completer.future,
-    interval: const Duration(milliseconds: 50),
-  );
   final absoluteFilePath = p.absolute(filePath);
   final normalizedFilePath = p.normalize(absoluteFilePath);
   final fileUri = Uri.file(absoluteFilePath).toString();
@@ -112,7 +106,6 @@ Future<void> analyzeAnnotatedClasses({
       }
     }
   }
-  completer.complete();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
