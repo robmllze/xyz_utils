@@ -30,8 +30,7 @@ Future<void> generateFromTemplates({
   bool deleteGeneratedFiles = false,
   void Function(String filePath)? onDelete,
 }) async {
-  final completer = Completer<void>();
-  runConsoleLoadingAnimation(() => completer.future);
+  printYellow("Starting generator. Please wait...");
   final combinedPaths = combinePaths([rootPaths, subPaths]);
   final collection = createCollection(
     combinedPaths,
@@ -66,7 +65,7 @@ Future<void> generateFromTemplates({
       await generateForFile(collection, filePath, templates);
     }
   }
-  completer.complete();
+  printYellow("[DONE]");
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
