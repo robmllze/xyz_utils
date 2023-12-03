@@ -97,10 +97,6 @@ class LooseTypeMappers extends TypeMappers {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "() { final a = ${e.name}; return a is Timestamp ? a: null; }()";
         },
-        r"^FirestoreTimestamp[\?]?$": (e) {
-          if (e is! ObjectMapperEvent) throw TypeError();
-          return "letFirestoreTimestamp(${e.name})";
-        },
         r"^DateTime[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "() { final a = ${e.name}; return a != null ? DateTime.tryParse(a)?.toUtc(): null; }()";
@@ -135,7 +131,7 @@ class LooseTypeMappers extends TypeMappers {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "${e.name}?.toString().trim().nullIfEmpty";
         },
-        r"^dynamic|bool|int|double|num|Timestamp|FirestoreTimestamp[\?]?$": (e) {
+        r"^dynamic|bool|int|double|num|Timestamp[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "${e.name}";
         },
