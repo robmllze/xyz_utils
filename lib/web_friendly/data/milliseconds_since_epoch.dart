@@ -6,9 +6,35 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-library xyz_utils;
+class MillisecondsSinceEpoch {
+  //
+  //
+  //
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  final int value;
 
-export 'web_friendly/all_web_friendly.g.dart';
-export 'non_web/all_non_web_g.dart';
+  //
+  //
+  //
+
+  const MillisecondsSinceEpoch(this.value);
+
+  //
+  //
+  //
+
+  MillisecondsSinceEpoch.fromDateTime(DateTime dateTime) : value = dateTime.millisecondsSinceEpoch;
+
+  //
+  //
+  //
+
+  DateTime get dateTime => DateTime.fromMillisecondsSinceEpoch(value);
+
+  //
+  //
+  //
+
+  @override
+  String toString() => this.dateTime.toString();
+}

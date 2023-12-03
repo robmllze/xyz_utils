@@ -9,9 +9,7 @@
 import 'dart:convert';
 import 'dart:core';
 
-import '/web_friendly/all_web_friendly_g.dart';
-
-part '_timestamp.dart';
+import '/web_friendly/all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -31,8 +29,8 @@ T? let<T>(dynamic input) {
       return letBool(input) as T;
     } else if (typeEquality<T, DateTime>() || typeEquality<T, DateTime?>()) {
       return letDateTime(input) as T;
-    } else if (typeEquality<T, _Timestamp>() || typeEquality<T, _Timestamp?>()) {
-      return letTimestamp(input) as T;
+    } else if (typeEquality<T, FirestoreTimestamp>() || typeEquality<T, FirestoreTimestamp?>()) {
+      return letFirestoreTimestamp(input) as T;
     } else if (typeEquality<T, Duration>() || typeEquality<T, Duration?>()) {
       return letDuration(input) as T;
     } else if (typeEquality<T, Uri>() || typeEquality<T, Uri?>()) {
@@ -104,7 +102,7 @@ DateTime? letDateTime(dynamic input) {
   if (input is Duration) {
     return DateTime.fromMillisecondsSinceEpoch(input.inMilliseconds);
   }
-  if (input is _Timestamp) {
+  if (input is FirestoreTimestamp) {
     return DateTime.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
   if (input is int) {
@@ -116,30 +114,30 @@ DateTime? letDateTime(dynamic input) {
   return null;
 }
 
-/// Converts the [input] to a [_Timestamp] type if possible, or returns null if
+/// Converts the [input] to a [FirestoreTimestamp] type if possible, or returns null if
 /// the conversion cannot be performed.
-_Timestamp? letTimestamp(dynamic input) {
+FirestoreTimestamp? letFirestoreTimestamp(dynamic input) {
   if (input is DateTime) {
-    return _Timestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
+    return FirestoreTimestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   }
   if (input is int) {
-    return _Timestamp.fromMillisecondsSinceEpoch(input);
+    return FirestoreTimestamp.fromMillisecondsSinceEpoch(input);
   }
   if (input is Duration) {
-    return _Timestamp.fromMillisecondsSinceEpoch(input.inMilliseconds);
+    return FirestoreTimestamp.fromMillisecondsSinceEpoch(input.inMilliseconds);
   }
   if (input is String) {
     final date = DateTime.tryParse(input.trim());
     if (date != null) {
-      return _Timestamp.fromDate(date);
+      return FirestoreTimestamp.fromDate(date);
     }
   }
   if (input is num) {
-    return _Timestamp.fromMillisecondsSinceEpoch(input.round());
+    return FirestoreTimestamp.fromMillisecondsSinceEpoch(input.round());
   }
   try {
     // Assume input is a Timestamp (from Firestore package).
-    return _Timestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
+    return FirestoreTimestamp.fromMillisecondsSinceEpoch(input.millisecondsSinceEpoch);
   } catch (_) {}
   return null;
 }

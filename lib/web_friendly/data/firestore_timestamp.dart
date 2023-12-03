@@ -1,4 +1,10 @@
-part of 'let.dart';
+//.title
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// XYZ Utils
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
 // Copyright 2018, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
@@ -25,35 +31,35 @@ void _check(bool expr, String name, int value) {
 ///
 /// For more information, see [the reference timestamp definition](https://github.com/google/protobuf/blob/master/src/google/protobuf/timestamp.proto)
 
-class _Timestamp implements Comparable<_Timestamp> {
-  /// Creates a [_Timestamp]
-  _Timestamp(this._seconds, this._nanoseconds) {
+class FirestoreTimestamp implements Comparable<FirestoreTimestamp> {
+  /// Creates a [FirestoreTimestamp]
+  FirestoreTimestamp(this._seconds, this._nanoseconds) {
     _validateRange(_seconds, _nanoseconds);
   }
 
-  /// Create a [_Timestamp] fromMillisecondsSinceEpoch
-  factory _Timestamp.fromMillisecondsSinceEpoch(int milliseconds) {
+  /// Create a [FirestoreTimestamp] fromMillisecondsSinceEpoch
+  factory FirestoreTimestamp.fromMillisecondsSinceEpoch(int milliseconds) {
     var seconds = (milliseconds / _kThousand).floor();
     final nanoseconds = (milliseconds - seconds * _kThousand) * _kMillion;
-    return _Timestamp(seconds, nanoseconds);
+    return FirestoreTimestamp(seconds, nanoseconds);
   }
 
-  /// Create a [_Timestamp] fromMicrosecondsSinceEpoch
-  factory _Timestamp.fromMicrosecondsSinceEpoch(int microseconds) {
+  /// Create a [FirestoreTimestamp] fromMicrosecondsSinceEpoch
+  factory FirestoreTimestamp.fromMicrosecondsSinceEpoch(int microseconds) {
     final seconds = microseconds ~/ _kMillion;
     final nanoseconds = (microseconds - seconds * _kMillion) * _kThousand;
-    return _Timestamp(seconds, nanoseconds);
+    return FirestoreTimestamp(seconds, nanoseconds);
   }
 
-  /// Create a [_Timestamp] from [DateTime] instance
-  factory _Timestamp.fromDate(DateTime date) {
-    return _Timestamp.fromMicrosecondsSinceEpoch(date.microsecondsSinceEpoch);
+  /// Create a [FirestoreTimestamp] from [DateTime] instance
+  factory FirestoreTimestamp.fromDate(DateTime date) {
+    return FirestoreTimestamp.fromMicrosecondsSinceEpoch(date.microsecondsSinceEpoch);
   }
 
   // ignore: unused_element
-  /// Create a [_Timestamp] from [DateTime].now()
-  factory _Timestamp.now() {
-    return _Timestamp.fromMicrosecondsSinceEpoch(
+  /// Create a [FirestoreTimestamp] from [DateTime].now()
+  factory FirestoreTimestamp.now() {
+    return FirestoreTimestamp.fromMicrosecondsSinceEpoch(
       DateTime.now().microsecondsSinceEpoch,
     );
   }
@@ -76,7 +82,7 @@ class _Timestamp implements Comparable<_Timestamp> {
   // ignore: public_member_api_docs
   int get microsecondsSinceEpoch => seconds * _kMillion + nanoseconds ~/ _kThousand;
 
-  /// Converts [_Timestamp] to [DateTime]
+  /// Converts [FirestoreTimestamp] to [DateTime]
   DateTime toDate() {
     return DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch);
   }
@@ -86,10 +92,10 @@ class _Timestamp implements Comparable<_Timestamp> {
 
   @override
   bool operator ==(Object other) =>
-      other is _Timestamp && other.seconds == seconds && other.nanoseconds == nanoseconds;
+      other is FirestoreTimestamp && other.seconds == seconds && other.nanoseconds == nanoseconds;
 
   @override
-  int compareTo(_Timestamp other) {
+  int compareTo(FirestoreTimestamp other) {
     if (seconds == other.seconds) {
       return nanoseconds.compareTo(other.nanoseconds);
     }

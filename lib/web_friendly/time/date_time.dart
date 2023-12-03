@@ -8,7 +8,7 @@
 
 import 'package:intl/intl.dart';
 
-import '/web_friendly/all_web_friendly_g.dart';
+import '/web_friendly/all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

@@ -95,15 +95,15 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^Timestamp[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "(${e.name} is Timestamp ? ${e.name}: null)";
+          return "() { final a = ${e.name}; return a is Timestamp ? a: null; }()";
         },
-        r"^_Timestamp[\?]?$": (e) {
+        r"^FirestoreTimestamp[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "letTimestamp(${e.name})";
         },
         r"^DateTime[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "letTimestamp(${e.name})?.toDate()?.toLocal()";
+          return "() { final a = ${e.name}; return a != null ? DateTime.tryParse(a)?.toUtc(): null; }()";
         },
         r"^Duration[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
@@ -135,13 +135,13 @@ class LooseTypeMappers extends TypeMappers {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "${e.name}?.toString().trim().nullIfEmpty";
         },
-        r"^dynamic|bool|int|double|num|Timestamp|_Timestamp[\?]?$": (e) {
+        r"^dynamic|bool|int|double|num|Timestamp|FirestoreTimestamp[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
           return "${e.name}";
         },
         r"^DateTime[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "(${e.name} != null ? Timestamp.fromDate(${e.name}!.toLocal()): null)";
+          return "${e.name}?.toUtc()?.toIso8601String()";
         },
         r"^Duration|Uri[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
