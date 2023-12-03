@@ -99,7 +99,7 @@ class LooseTypeMappers extends TypeMappers {
         },
         r"^FirestoreTimestamp[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
-          return "letTimestamp(${e.name})";
+          return "letFirestoreTimestamp(${e.name})";
         },
         r"^DateTime[\?]?$": (e) {
           if (e is! ObjectMapperEvent) throw TypeError();
