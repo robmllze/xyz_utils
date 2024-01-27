@@ -1,8 +1,8 @@
 # XYZ Utils
 
-[![pub package](https://img.shields.io/pub/v/xyz_gen.svg)](https://pub.dev/packages/xyz_gen)
+[![pub package](https://img.shields.io/pub/v/xyz_utils.svg)](https://pub.dev/packages/xyz_utils)
 
-`xyz_utils` is a Dart package that provides a set of utilities for Dart and Flutter projects.
+`xyz_utils` is a Dart package that provides a set of utilities for Dart and Flutter projects. It is used by the `xyz_gen` package.
 
 ## Getting Started
 
