@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Initial planning and design of the project.
+- Initial planning and design.
 
-## [0.29.2]
+## [0.29.0]
 
-- Initial release of the project.
+- Initial release.
+
+## [0.29.3]
+
+- Current release.
 
