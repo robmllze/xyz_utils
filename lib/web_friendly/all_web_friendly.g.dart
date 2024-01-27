@@ -26,4 +26,3 @@ export 'http_service.dart';
 export 'stream_to_future.dart';
 export 'time/date_time.dart';
 export 'time/duration_formatted_english.dart';
-export 'time/parse_duration.dart';
