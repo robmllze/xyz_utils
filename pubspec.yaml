@@ -9,7 +9,7 @@
 name: xyz_utils
 description: A set of utilities for Dart and Flutter projects to help with file IO, logging, versioning, formatting, and other common tasks.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.29.1
+version: 0.29.2
 
 ## -----------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ dependencies:
   http: ^1.2.0
   intl: ^0.19.0
   meta: ^1.11.0
-  path: ^1.9.0
+  path: ^1.8.3
 
 ## -----------------------------------------------------------------------------
 
