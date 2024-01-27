@@ -81,7 +81,8 @@ T? letOrNull<T>(dynamic input) {
       return letBoolOrNull(input) as T;
     } else if (typeEquality<T, DateTime>() || typeEquality<T, DateTime?>()) {
       return letDateTimeOrNull(input) as T;
-    } else if (typeEquality<T, FirestoreTimestamp>() || typeEquality<T, FirestoreTimestamp?>()) {
+    } else if (typeEquality<T, FirestoreTimestamp>() ||
+        typeEquality<T, FirestoreTimestamp?>()) {
       return letFirestoreTimestampOrNull(input) as T;
     } else if (typeEquality<T, Duration>() || typeEquality<T, Duration?>()) {
       return letDurationOrNull(input) as T;
@@ -250,7 +251,8 @@ Map<K, V>? letMapOrNull<K, V>(
       final temp = decoded.entries
           .map((final entry) {
             final convertedKey = letOrNull<K>(entry.key);
-            final convertedValue = letOrNull<V>(entry.value) ?? letOrNull<V?>(nullFallback);
+            final convertedValue =
+                letOrNull<V>(entry.value) ?? letOrNull<V?>(nullFallback);
             if (filterNulls) {
               if (!isNullable<K>() && convertedKey == null) {
                 return const _Empty();

@@ -31,7 +31,8 @@ class ObjectPostDestructionChecker {
   ///
   /// - [object] The object to which the post-destruction callback will be attached.
   /// - [onPostDestruction] The callback function to be executed after the [object] is destructed.
-  ObjectPostDestructionChecker(Object object, void Function() onPostDestruction) {
+  ObjectPostDestructionChecker(
+      Object object, void Function() onPostDestruction) {
     _finalizer.attach(
       object,
       onPostDestruction,

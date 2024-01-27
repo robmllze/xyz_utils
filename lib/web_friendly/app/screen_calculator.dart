@@ -28,8 +28,10 @@ class ScreenCalculator {
   late bool _isVertical;
   bool get isVertical => this._isVertical;
   late bool _isNeitherHorizontalNorVertical;
-  bool get isNeitherHorizontalNorVertical => this._isNeitherHorizontalNorVertical;
-  bool get isAspectRatioMobile => this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
+  bool get isNeitherHorizontalNorVertical =>
+      this._isNeitherHorizontalNorVertical;
+  bool get isAspectRatioMobile =>
+      this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
 
   //
   //

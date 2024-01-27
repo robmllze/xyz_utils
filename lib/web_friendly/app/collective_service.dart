@@ -64,7 +64,8 @@ abstract class CollectiveService<T extends SingleService> {
   //
 
   Future<void> removeServices(Iterable<String> keys) async {
-    await Future.forEach(keys, (String key) async => await this.allServices[key]?.dispose());
+    await Future.forEach(
+        keys, (String key) async => await this.allServices[key]?.dispose());
     this.allServices.removeWhere((final key, _) => keys.contains(key));
   }
 

@@ -44,8 +44,8 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   /// Returns a function that removes the callback.
   void Function() add(TCallback<T1> callback, {dynamic callbackKey}) {
     if (this._queue.isNotEmpty) {
-      Here()
-          .debugLogAlert("Do not add callbacks while callbacks are executing. Call wait() first.");
+      Here().debugLogAlert(
+          "Do not add callbacks while callbacks are executing. Call wait() first.");
     }
     final k = callbackKey ?? callback;
     this._callbacks[k] = callback;
