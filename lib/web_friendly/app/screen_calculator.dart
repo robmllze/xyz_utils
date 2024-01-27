@@ -6,9 +6,11 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-// ignore_for_file: library_private_types_in_public_api
-
 class ScreenCalculator {
+  //
+  //
+  //
+
   late double _longest;
   double get longest => this._longest;
   late double _shortest;
@@ -28,6 +30,10 @@ class ScreenCalculator {
   late bool _isNeitherHorizontalNorVertical;
   bool get isNeitherHorizontalNorVertical => this._isNeitherHorizontalNorVertical;
   bool get isAspectRatioMobile => this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
+
+  //
+  //
+  //
 
   ScreenCalculator(double maxWidth, double maxHeight) {
     this._longest = maxWidth >= maxHeight ? maxWidth : maxHeight;

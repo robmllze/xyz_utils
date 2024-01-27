@@ -1,0 +1,170 @@
+//.title
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// XYZ Gen
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
+
+import 'dart:math' show Random;
+import 'dart:typed_data' show Uint8List;
+
+import 'package:encrypt/encrypt.dart'; // encrypt: ^5.0.3
+import 'package:pointycastle/export.dart'; // pointycastle: ^3.7.4
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// Encrypts a string using RSA encryption with a provided public key.
+///
+/// - [source] The string to be encrypted.
+/// - [publicKey]  The public key in string format used for encryption. This key
+/// should be in a format that `decodeRSAPublicKey` can process, typically PEM.
+///
+/// Returns the encrypted string in base64 format.
+String rsaEncrypt(
+  String source, {
+  required String publicKey,
+}) {
+  try {
+    final encrypter = Encrypter(RSA(publicKey: decodeRSAPublicKey(publicKey)));
+    final encrypted = encrypter.encrypt(source);
+    return encrypted.base64;
+  } catch (e) {
+    assert(false, e);
+    rethrow;
+  }
+}
+
+/// Decrypts a string using RSA decryption with a provided private key.
+///
+/// - [source] The string to be decrypted. It should be a base64 encoded string
+/// that was encrypted using a corresponding RSA public key.
+/// - [privateKey] The private key in string format used for decryption. This
+/// key should be in a format that `decodeRSAPrivateKey` can process, typically
+/// PEM.
+///
+/// Returns the decrypted string.
+String rsaDecrypt(
+  String source, {
+  required String privateKey,
+}) {
+  try {
+    final encrypter = Encrypter(RSA(privateKey: decodeRSAPrivateKey(privateKey)));
+    final decrypted = encrypter.decrypt64(source);
+    return decrypted;
+  } catch (e) {
+    assert(false, e);
+    rethrow;
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// Decodes a string representation of an RSA public key into an [RSAPublicKey] object.
+///
+/// [source] is the string representation of the RSA public key, usually in PEM format.
+///
+/// Returns an [RSAPublicKey] object.
+RSAPublicKey decodeRSAPublicKey(String source) {
+  final parser = RSAKeyParser();
+  final publicKey = parser.parse(source) as RSAPublicKey;
+  return publicKey;
+}
+
+/// Decodes a string representation of an RSA private key into an [RSAPrivateKey] object.
+///
+/// [source] is the string representation of the RSA private key, usually in PEM format.
+///
+/// Returns an [RSAPrivateKey] object.
+RSAPrivateKey decodeRSAPrivateKey(String source) {
+  final parser = RSAKeyParser();
+  final privateKey = parser.parse(source) as RSAPrivateKey;
+  return privateKey;
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// Generates an RSA key pair with a specified bit length.
+///
+/// [bitLength] is an optional parameter that sets the size of the key.
+/// Common values:
+/// - 4096 bits: High security, used where security is a top priority.
+/// - 3072 bits: Enhanced security level for higher security needs.
+/// - 2048 bits: Standard security level, suitable for most uses.
+/// - 1024 bits: Faster but less secure, only recommended for low-security applications.
+/// - 768 bits: Significantly less secure, not recommended for most applications.
+/// - 512 bits and below: Generally considered insecure, easily breakable.
+///
+/// Returns an [AsymmetricKeyPair] containing [RSAPublicKey] and [RSAPrivateKey].
+AsymmetricKeyPair<PublicKey, PrivateKey> generateRSAKeyPair({
+  int bitLength = RSA_KEY_SIZE_2048,
+}) {
+  final rnd = FortunaRandom();
+  final random = Random.secure();
+  final seeds = Uint8List(32);
+  for (int i = 0; i < 32; i++) {
+    seeds[i] = random.nextInt(256);
+  }
+  rnd.seed(KeyParameter(seeds));
+  final keyGen = RSAKeyGenerator()
+    ..init(
+      ParametersWithRandom(
+        RSAKeyGeneratorParameters(
+          BigInt.parse("65537"),
+          bitLength,
+          64,
+        ),
+        rnd,
+      ),
+    );
+
+  return keyGen.generateKeyPair();
+}
+
+/// Encodes an [RSAPublicKey] object into a string representation.
+const int RSA_KEY_SIZE_4096 = 4096;
+
+/// Enhanced security level for higher security needs.
+const int RSA_KEY_SIZE_3072 = 3072;
+
+/// Standard security level, suitable for most uses.
+const int RSA_KEY_SIZE_2048 = 2048;
+
+/// Faster but less secure, only recommended for low-security applications.
+const int RSA_KEY_SIZE_1024 = 1024;
+
+/// Significantly less secure, not recommended for most applications.
+const int RSA_KEY_SIZE_768 = 768;
+
+/// Generally considered insecure, easily breakable.
+const int RSA_KEY_SIZE_512 = 512;
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// Encodes an [RSAPublicKey] object into a string representation.
+///
+/// [publicKey] is the RSA public key to encode.
+///
+/// Returns a string representation of the public key.
+String encodePublicKey(RSAPublicKey publicKey) {
+  return "${publicKey.modulus}\n${publicKey.exponent}";
+}
+
+/// Encodes an [RSAPrivateKey] object into a string representation.
+///
+/// [privateKey] is the RSA private key to encode.
+///
+/// Returns a string representation of the private key.
+String encodePrivateKey(RSAPrivateKey privateKey) {
+  return "${privateKey.modulus}\n${privateKey.privateExponent}";
+}
+
+/// Extension on [RSAPublicKey] to encode the public key into a string.
+extension EncodePublicKey on RSAPublicKey {
+  String encode() => encodePublicKey(this);
+}
+
+/// Extension on [RSAPrivateKey] to encode the private key into a string.
+extension EncodePrivateKey on RSAPrivateKey {
+  String encode() => encodePrivateKey(this);
+}
