@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial planning and design of the project.
 
-## [0.29.0]
+## [0.29.1]
 
 - Initial release of the project.
 
