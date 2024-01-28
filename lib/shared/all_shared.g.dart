@@ -9,9 +9,11 @@
 
 library;
 
+export 'non_web/all_non_web.g.dart';
 export 'non_web/all_xyz_utils_non_web.g.dart';
 export 'non_web/src/file_system.dart';
 export 'non_web/src/get_package_lib_path.dart';
+export 'web_friendly/all_web_friendly.g.dart';
 export 'web_friendly/all_xyz_utils_web_friendly.g.dart';
 export 'web_friendly/src/ansi_styled_string.dart';
 export 'web_friendly/src/collection_utils/generic_type_extension.dart';
