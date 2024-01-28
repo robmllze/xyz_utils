@@ -15,14 +15,14 @@ class ScreenCalculator {
   double get longest => this._longest;
   late double _shortest;
   double get shortest => this._shortest;
-  late _Size _size;
-  _Size get size => this._size;
+  late ScreenSize _size;
+  ScreenSize get size => this._size;
   double get width => this._size.width;
   double get height => this._size.height;
-  late _Size _sizeVerticalBias;
-  _Size get sizeVerticalBias => this._sizeVerticalBias;
-  late _Size _sizeHorizontalBias;
-  _Size get sizeHorizontalBias => this._sizeHorizontalBias;
+  late ScreenSize _sizeVerticalBias;
+  ScreenSize get sizeVerticalBias => this._sizeVerticalBias;
+  late ScreenSize _sizeHorizontalBias;
+  ScreenSize get sizeHorizontalBias => this._sizeHorizontalBias;
   late bool _isHorizontal;
   bool get isHorizontal => this._isHorizontal;
   late bool _isVertical;
@@ -40,12 +40,12 @@ class ScreenCalculator {
   ScreenCalculator(double maxWidth, double maxHeight) {
     this._longest = maxWidth >= maxHeight ? maxWidth : maxHeight;
     this._shortest = maxWidth <= maxHeight ? maxWidth : maxHeight;
-    this._size = _Size(maxWidth, maxHeight);
-    this._sizeVerticalBias = _Size(
+    this._size = ScreenSize(maxWidth, maxHeight);
+    this._sizeVerticalBias = ScreenSize(
       this._longest,
       this._shortest,
     );
-    this._sizeHorizontalBias = _Size(
+    this._sizeHorizontalBias = ScreenSize(
       this._shortest,
       this._longest,
     );
@@ -57,9 +57,9 @@ class ScreenCalculator {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _Size {
+class ScreenSize {
   final double width, height;
-  const _Size(this.width, this.height);
+  const ScreenSize(this.width, this.height);
   double get aspectRatio {
     if (height != 0.0) return width / height;
     if (width > 0.0) return double.infinity;
@@ -99,14 +99,14 @@ double get minMobileAspectRatio => {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension IsVertical on _Size {
+extension IsVertical on ScreenSize {
   bool get isVertical => this.aspectRatio <= 1.0;
 }
 
-extension IsHorizontal on _Size {
+extension IsHorizontal on ScreenSize {
   bool get isHorizontal => this.aspectRatio >= 1.0;
 }
 
-extension IsNeitherHorizontalNorVertical on _Size {
+extension IsNeitherHorizontalNorVertical on ScreenSize {
   bool get isNeitherHorizontalNorVerticalisVertical => this.aspectRatio == 1.0;
 }

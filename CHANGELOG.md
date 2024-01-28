@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-## [0.30.0]
+## [0.30.1]
 
 - Current release.
 
