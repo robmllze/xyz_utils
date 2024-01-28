@@ -17,7 +17,7 @@ dependencies:
 
 ## Contributing
 
-Contributions to XYZ Gen are welcome.
+Contributions are welcome.
 
 ## License
 
