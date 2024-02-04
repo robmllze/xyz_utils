@@ -22,10 +22,11 @@ String getDirPath(String path) {
   return p.dirname(localSystemPath);
 }
 
-/// Checks if the provided path contains any of the specified components.
+/// Checks if the provided path contains any of the specified components. This
+/// operation is case-insensitive.
 bool pathContainsComponent(String path, Set<String> components) {
   final localSystemPath = toLocalSystemPathFormat(path);
-  final a = p.split(localSystemPath);
+  final a = p.split(localSystemPath).map((e) => e.toLowerCase());
   for (final component in components) {
     if (a.contains(component.toLowerCase())) {
       return true;
@@ -137,5 +138,5 @@ Set<String> combinePathSets(List<Set<String>> pathSets) {
       ...input.skip(2),
     ]);
   }
-  return output.map((e) => e.toLowerCase()).toSet();
+  return output.map((e) => toLocalSystemPathFormat(e)).toSet();
 }
