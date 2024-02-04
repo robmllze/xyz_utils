@@ -11,15 +11,21 @@ import 'package:path/path.dart' as p;
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Returns the base name of a given file path.
-String getBaseName(String path) => p.basename(toLocalPathFormat(path));
+String getBaseName(String path) {
+  final localSystemPath = toLocalSystemPathFormat(path);
+  return p.basename(localSystemPath);
+}
 
 /// Returns the directory path of a given file path.
-String getDirPath(String path) => p.dirname(toLocalPathFormat(path));
+String getDirPath(String path) {
+  final localSystemPath = toLocalSystemPathFormat(path);
+  return p.dirname(localSystemPath);
+}
 
 /// Checks if the provided path contains any of the specified components.
 bool pathContainsComponent(String path, Set<String> components) {
-  final fixedPath = toLocalPathFormat(path);
-  final a = p.split(fixedPath);
+  final localSystemPath = toLocalSystemPathFormat(path);
+  final a = p.split(localSystemPath);
   for (final component in components) {
     if (a.contains(component.toLowerCase())) {
       return true;
@@ -31,9 +37,9 @@ bool pathContainsComponent(String path, Set<String> components) {
 /// Checks if the provided path matches any of the specified path patterns.
 bool matchesAnyPathPattern(String path, Set<String> pathPatterns) {
   if (pathPatterns.isNotEmpty) {
-    final fixedPath = toLocalPathFormat(path);
+    final localSystemPath = toLocalSystemPathFormat(path);
     for (final pattern in pathPatterns) {
-      if (RegExp(pattern).hasMatch(fixedPath)) return true;
+      if (RegExp(pattern).hasMatch(localSystemPath)) return true;
     }
     return false;
   }
@@ -42,12 +48,23 @@ bool matchesAnyPathPattern(String path, Set<String> pathPatterns) {
 
 /// Converts the given path to a consistent, local path format.
 String getFileNameWithoutExtension(String filePath) {
-  return p.basenameWithoutExtension(toLocalPathFormat(filePath));
+  final localSystemPath = toLocalSystemPathFormat(filePath);
+  return p.basenameWithoutExtension(localSystemPath);
 }
 
-/// Converts the given path to a consistent, local path format.
-String toLocalPathFormat(String path) {
-  return path.split(RegExp(r"[\\/]")).join(p.separator).toLowerCase();
+/// Replaces all forward slashes with the local path separator.
+String toLocalSystemPathFormat(String path) {
+  return path.split(RegExp(r"[\\/]")).join(p.separator);
+}
+
+/// Replaces all backslashes with forward slashes.
+String toUnixSystemPathFormat(String path) {
+  return path.split(RegExp(r"[\\/]")).join("/");
+}
+
+/// Replaces all forward slashes with backslashes.
+String toWindowsSystemPathFormat(String path) {
+  return path.split(RegExp(r"[\\/]")).join("\\");
 }
 
 /// Checks if the provided file is a private Dart file (starts with an

@@ -16,7 +16,8 @@ import '../../web_friendly/src/paths.dart';
 /// Reads the contents of the file located at [filePath] as a String.
 Future<String?> readFile(String filePath) async {
   try {
-    final file = File(toLocalPathFormat(filePath));
+    final localSystemPath = toLocalSystemPathFormat(filePath);
+    final file = File(localSystemPath);
     final data = await file.readAsString();
     return data;
   } catch (_) {
@@ -27,7 +28,8 @@ Future<String?> readFile(String filePath) async {
 /// Reads the contents of the file located at [filePath] as a list of lines.
 Future<List<String>?> readFileAsLines(String filePath) async {
   try {
-    final file = File(toLocalPathFormat(filePath));
+    final localSystemPath = toLocalSystemPathFormat(filePath);
+    final file = File(localSystemPath);
     final lines = await file.readAsLines();
     return lines;
   } catch (_) {
@@ -42,7 +44,8 @@ Future<void> writeFile(
   String content, {
   bool append = false,
 }) async {
-  final file = File(toLocalPathFormat(filePath));
+  final localSystemPath = toLocalSystemPathFormat(filePath);
+  final file = File(localSystemPath);
   await file.parent.create(recursive: true);
   await file.writeAsString(
     content,
@@ -52,19 +55,23 @@ Future<void> writeFile(
 
 /// Clears the contents of the file located at [filePath].
 Future<void> clearFile(String filePath) async {
-  final file = File(toLocalPathFormat(filePath));
+  final localSystemPath = toLocalSystemPathFormat(filePath);
+  final file = File(localSystemPath);
   await file.writeAsString("");
 }
 
 /// Deletes the file located at [filePath].
 Future<void> deleteFile(String filePath) async {
-  final file = File(toLocalPathFormat(filePath));
+  final localSystemPath = toLocalSystemPathFormat(filePath);
+  final file = File(localSystemPath);
   await file.delete();
 }
 
 /// Returns `true` if the file located at [filePath] exists.
 Future<bool> fileExists(String filePath) {
-  return File(toLocalPathFormat(filePath)).exists();
+  final localSystemPath = toLocalSystemPathFormat(filePath);
+  final file = File(localSystemPath);
+  return file.exists();
 }
 
 /// Finds a file with the given [fileName] in the directory located at
@@ -88,7 +95,8 @@ Future<List<String>?> listFilePaths(
   String dirPath, {
   bool recursive = true,
 }) async {
-  final dir = Directory(toLocalPathFormat(dirPath));
+  final localSystemPath = toLocalSystemPathFormat(dirPath);
+  final dir = Directory(localSystemPath);
   final filePaths = <String>[];
   if (await dir.exists()) {
     final entities = dir.listSync(recursive: recursive);
