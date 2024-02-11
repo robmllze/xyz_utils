@@ -77,7 +77,7 @@ abstract class SingleServiceCreator<T extends SingleService> {
   Future<void> createService(T? instance) async {
     await (this._instance = instance)?.init();
     Here().debugLog(
-        "Created service of type $T${this.id != null ? " for ${this.id}" : ""}");
+        "Created service of type $T${this.id != null ? " for ${this.id}" : ""}",);
   }
 
   //
@@ -99,6 +99,6 @@ abstract class SingleServiceCreator<T extends SingleService> {
     await this._instance?.dispose();
     this._instance = null;
     Here().debugLog(
-        "Disposed service of type $T${this.id != null ? " for ${this.id}" : ""}");
+        "Disposed service of type $T${this.id != null ? " for ${this.id}" : ""}",);
   }
 }

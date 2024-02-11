@@ -10,11 +10,17 @@ extension StringExtensions on String {
   /// Converts the string to UPPER_SNAKE_CASE;
   String toUpperSnakeCase() => this.toSnakeCase().toUpperCase();
 
+  /// Converts the string to lower_snake_case (alias for [toSnakeCase]).
+  String toLowerSnakeCase() => this.toSnakeCase();
+
   /// Converts the string to snake_case.
   String toSnakeCase() => this.extractLowercaseComponents().join("_");
 
   /// Converts the string to lower-kebab-case.
   String toUpperKebabCase() => this.toKebabCase().toUpperCase();
+
+  /// Converts the string to lower-kebab-case (alias for [toKebabCase]).
+  String toLowerKebabCase() => this.toKebabCase();
 
   /// Converts the string to kebab-case.
   String toKebabCase() => this.extractLowercaseComponents().join("-");

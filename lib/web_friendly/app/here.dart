@@ -111,7 +111,6 @@ List<dynamic>? here([int start = 1]) {
         .tryFirstWhere((e) => e.contains(".dart"))
         ?.replaceAll(".dart", "")
         .replaceAll(".js", "");
-    ;
     final file = filePath != null ? getBaseName(filePath) : null;
     int? lineNumber;
     int? columnNumber;
