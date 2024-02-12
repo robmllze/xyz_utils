@@ -22,6 +22,7 @@ export 'src/collection_utils/non_nulls.dart';
 export 'src/collection_utils/null_filtered.dart';
 export 'src/collection_utils/try_first_where.dart';
 export 'src/collection_utils/var_args.dart';
+export 'src/extensions/enum_extensions.dart';
 export 'src/extensions/join_with_last_separator_extension.dart';
 export 'src/extensions/null_if_empty_extensions.dart';
 export 'src/extensions/string_extensions.dart';
