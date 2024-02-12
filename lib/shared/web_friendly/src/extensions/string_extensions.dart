@@ -29,12 +29,6 @@ extension StringExtensions on String {
   /// Converts the string to kebab-case.
   String toKebabCase() => this.extractLowercaseComponents().join("-");
 
-  /// Converts the string to camelCase.
-  String toCamelCase() => this.toPascalCase().withFirstLetterAsLowerCase();
-
-  /// Converts the string to PascalCase.
-  String toPascalCase() => this.extractLowercaseComponents().map((e) => e.capitalize()).join();
-
   /// Converts the string to dot.case.
   String toDotCase() => this.extractLowercaseComponents().join(".");
 
@@ -44,11 +38,17 @@ extension StringExtensions on String {
   /// Converts the string to UPPER.DOT.CASE.
   String toUpperDotCase() => this.toDotCase().toUpperCase();
 
+  /// Converts the string to uri/path/case.
+  String toUriPathCase() => this.extractLowercaseComponents().join("/");
+
   /// Converts the string to path/case or path\case based on the platform.
   String toPathCase() => this.extractLowercaseComponents().join(p.separator);
 
-  /// Converts the string to uri/path/case.
-  String toUriPathCase() => this.extractLowercaseComponents().join("/");
+  /// Converts the string to camelCase.
+  String toCamelCase() => this.toPascalCase().withFirstLetterAsLowerCase();
+
+  /// Converts the string to PascalCase.
+  String toPascalCase() => this.extractLowercaseComponents().map((e) => e.capitalize()).join();
 
   /// Extracts and returns a list of lowercase components from the string.
   ///
