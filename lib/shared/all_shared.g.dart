@@ -38,5 +38,6 @@ export 'web_friendly/src/let.dart';
 export 'web_friendly/src/parse_duration.dart';
 export 'web_friendly/src/paths.dart';
 export 'web_friendly/src/replace_data.dart';
+export 'web_friendly/src/string_case_types.dart';
 export 'web_friendly/src/valid_object.dart';
 export 'web_friendly/src/version.dart';

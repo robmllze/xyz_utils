@@ -6,10 +6,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:path/path.dart' as p;
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 extension StringExtensions on String {
   /// Converts the string to UPPER_SNAKE_CASE;
   String toUpperSnakeCase() => this.toSnakeCase().toUpperCase();
@@ -38,11 +34,8 @@ extension StringExtensions on String {
   /// Converts the string to UPPER.DOT.CASE.
   String toUpperDotCase() => this.toDotCase().toUpperCase();
 
-  /// Converts the string to uri/path/case.
-  String toUriPathCase() => this.extractLowercaseComponents().join("/");
-
-  /// Converts the string to path/case or path\case based on the platform.
-  String toPathCase() => this.extractLowercaseComponents().join(p.separator);
+  /// Converts the string to path/case.
+  String toPathCase([String separator = "/"]) => this.extractLowercaseComponents().join(separator);
 
   /// Converts the string to camelCase.
   String toCamelCase() => this.toPascalCase().withFirstLetterAsLowerCase();
