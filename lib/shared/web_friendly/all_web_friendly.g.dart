@@ -34,5 +34,6 @@ export 'src/parse_duration.dart';
 export 'src/paths.dart';
 export 'src/replace_data.dart';
 export 'src/string_case_types.dart';
+export 'src/type_message_mixin.dart';
 export 'src/valid_object.dart';
 export 'src/version.dart';
