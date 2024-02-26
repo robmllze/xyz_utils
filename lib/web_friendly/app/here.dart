@@ -108,7 +108,7 @@ List<dynamic>? here([int start = 1]) {
     if (scope.contains("<anonymous closure>")) continue;
     final locationParts = b.substring(0, b.length - 1).split(":");
     final filePath = locationParts
-        .tryFirstWhere((e) => e.contains(".dart"))
+        .firstWhereOrNull((e) => e.contains(".dart"))
         ?.replaceAll(".dart", "")
         .replaceAll(".js", "");
     final file = filePath != null ? getBaseName(filePath) : null;

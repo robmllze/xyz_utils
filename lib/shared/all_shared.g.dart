@@ -25,7 +25,7 @@ export 'web_friendly/src/collection_utils/merge.dart';
 export 'web_friendly/src/collection_utils/misc.dart';
 export 'web_friendly/src/collection_utils/non_nulls.dart';
 export 'web_friendly/src/collection_utils/null_filtered.dart';
-export 'web_friendly/src/collection_utils/try_first_where.dart';
+export 'web_friendly/src/collection_utils/first_where_or_null.dart';
 export 'web_friendly/src/collection_utils/var_args.dart';
 export 'web_friendly/src/extensions/enum_extensions.dart';
 export 'web_friendly/src/extensions/join_with_last_separator_extension.dart';

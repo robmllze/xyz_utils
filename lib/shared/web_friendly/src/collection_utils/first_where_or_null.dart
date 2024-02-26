@@ -6,8 +6,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension TryFirstWhereIterable<T> on Iterable<T> {
-  T? tryFirstWhere(bool Function(T) test) {
+extension FirstWhereOrNullIterable<T> on Iterable<T> {
+  T? firstWhereOrNull(bool Function(T) test) {
     try {
       return this.firstWhere(test);
     } catch (_) {
@@ -16,8 +16,8 @@ extension TryFirstWhereIterable<T> on Iterable<T> {
   }
 }
 
-extension TryFirstWhereList<T> on List<T> {
-  T? tryFirstWhere(bool Function(T) test) {
+extension FirstWhereOrNullList<T> on List<T> {
+  T? firstWhereOrNull(bool Function(T) test) {
     try {
       return this.firstWhere(test);
     } catch (_) {
@@ -26,8 +26,8 @@ extension TryFirstWhereList<T> on List<T> {
   }
 }
 
-extension TryFirstWhereSet<T> on Set<T> {
-  T? tryFirstWhere(bool Function(T) test) {
+extension FirstWhereOrNullSet<T> on Set<T> {
+  T? firstWhereOrNull(bool Function(T) test) {
     try {
       return this.firstWhere(test);
     } catch (_) {
@@ -36,8 +36,8 @@ extension TryFirstWhereSet<T> on Set<T> {
   }
 }
 
-extension TryFirstWhereMap<K, V> on Map<K, V> {
-  MapEntry<K, V>? tryFirstWhere(bool Function(MapEntry<K, V>) test) {
+extension FirstWhereOrNullMap<K, V> on Map<K, V> {
+  MapEntry<K, V>? firstWhereOrNull(bool Function(MapEntry<K, V>) test) {
     try {
       return this.entries.firstWhere(test);
     } catch (_) {
