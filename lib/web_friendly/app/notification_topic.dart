@@ -36,7 +36,10 @@ class NotificationTopic extends Equatable {
     final subjectUid = a?.elementAtOrNull(1);
     final blocked = b?.elementAtOrNull(1) == "BLOCKED";
     return NotificationTopic(
-        name: name, subjectUid: subjectUid, blocked: blocked,);
+      name: name,
+      subjectUid: subjectUid,
+      blocked: blocked,
+    );
   }
 
   //

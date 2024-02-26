@@ -93,7 +93,9 @@ class _VarArgsFunction<T> {
         (k, v) {
           final keyAsString = k.toString();
           return MapEntry(
-              keyAsString.substring(_OFFSET, keyAsString.length - 2), v,);
+            keyAsString.substring(_OFFSET, keyAsString.length - 2),
+            v,
+          );
         },
       ),
     );

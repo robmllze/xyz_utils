@@ -7,9 +7,9 @@
 #.title~
 
 name: xyz_utils
-description: A set of utilities for Dart and Flutter projects to help with file IO, logging, versioning, formatting, and other common tasks.
+description: This package is designed to speed up development by providing a set of utilities that are commonly used in Dart apps.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.34.1
+version: 0.35.0
 
 ## -----------------------------------------------------------------------------
 

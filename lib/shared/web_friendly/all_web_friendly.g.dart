@@ -11,6 +11,7 @@ library;
 
 export 'all_xyz_utils_web_friendly.g.dart';
 export 'src/ansi_styled_string.dart';
+export 'src/collection_utils/first_where_or_null.dart';
 export 'src/collection_utils/generic_type_extension.dart';
 export 'src/collection_utils/jmap.dart';
 export 'src/collection_utils/map_filter_extension.dart';
@@ -20,7 +21,6 @@ export 'src/collection_utils/merge.dart';
 export 'src/collection_utils/misc.dart';
 export 'src/collection_utils/non_nulls.dart';
 export 'src/collection_utils/null_filtered.dart';
-export 'src/collection_utils/first_where_or_null.dart';
 export 'src/collection_utils/var_args.dart';
 export 'src/extensions/enum_extensions.dart';
 export 'src/extensions/join_with_last_separator_extension.dart';

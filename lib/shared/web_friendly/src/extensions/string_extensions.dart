@@ -35,13 +35,15 @@ extension StringExtensions on String {
   String toUpperDotCase() => this.toDotCase().toUpperCase();
 
   /// Converts the string to path/case.
-  String toPathCase([String separator = "/"]) => this.extractLowercaseComponents().join(separator);
+  String toPathCase([String separator = "/"]) =>
+      this.extractLowercaseComponents().join(separator);
 
   /// Converts the string to camelCase.
   String toCamelCase() => this.toPascalCase().withFirstLetterAsLowerCase();
 
   /// Converts the string to PascalCase.
-  String toPascalCase() => this.extractLowercaseComponents().map((e) => e.capitalize()).join();
+  String toPascalCase() =>
+      this.extractLowercaseComponents().map((e) => e.capitalize()).join();
 
   /// Extracts and returns a list of lowercase components from the string.
   ///
@@ -97,10 +99,12 @@ extension StringExtensions on String {
   bool get isLetter => RegExp(r"^[a-zA-Z]$").hasMatch(this);
 
   /// Returns `true` if the string is all uppercase.
-  bool get isUpperCase => this == this.toUpperCase() && this != this.toLowerCase();
+  bool get isUpperCase =>
+      this == this.toUpperCase() && this != this.toLowerCase();
 
   /// Returns `true` if the string is all lowercase.
-  bool get isLowerCase => this == this.toLowerCase() && this != this.toUpperCase();
+  bool get isLowerCase =>
+      this == this.toLowerCase() && this != this.toUpperCase();
 
   /// Capitalizes the first letter of the string.
   ///
@@ -134,7 +138,9 @@ extension StringExtensions on String {
 
   /// Truncates the string to the given [length] and adds "..." at the end.
   String truncToLength(int length) {
-    return (this.length > length ? "${this.substring(0, length).trim()}..." : this);
+    return (this.length > length
+        ? "${this.substring(0, length).trim()}..."
+        : this);
   }
 
   /// Replaces all whitespace characters with a single space.

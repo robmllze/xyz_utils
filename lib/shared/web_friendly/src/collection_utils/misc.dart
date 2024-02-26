@@ -47,8 +47,9 @@ extension TryReduce<T> on Iterable<T> {
 }
 
 extension TryMerge<T> on Iterable<Iterable<T>?> {
-  Iterable<T>? tryMerge(
-      [Iterable<T> Function(Iterable<T>?, Iterable<T>?)? merge,]) {
+  Iterable<T>? tryMerge([
+    Iterable<T> Function(Iterable<T>?, Iterable<T>?)? merge,
+  ]) {
     try {
       return this.reduce(merge ?? (a, b) => <T>[...a ?? [], ...b ?? []]);
     } catch (_) {
