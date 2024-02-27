@@ -1,5 +1,11 @@
 # Developer Notes
 
+## Fetching Generators
+
+```bash
+git clone https://github.com/robmllze/___generators.git
+```
+
 ## Publishing
 
 1. Make your changes.
