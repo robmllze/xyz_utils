@@ -2,8 +2,16 @@
 
 ## Fetching Generators
 
+#### On macOS and Linux:
+
 ```bash
-git clone https://github.com/robmllze/___generators.git
+rm -rf ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rm -rf ___generators/.git/
+```
+
+#### On Windows:
+
+```cmd
+rmdir /s /q ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rmdir /s /q ___generators/.git/
 ```
 
 ## Publishing
