@@ -12,4 +12,4 @@
 
 library;
 
-export 'lib.dart';
+export '/web_friendly.dart';
