@@ -13,7 +13,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
-import '/src/shared/web_friendly/src/paths.dart';
+import '/src/shared/web_friendly/paths.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
