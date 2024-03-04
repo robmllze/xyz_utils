@@ -10,11 +10,18 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_utils/xyz_utils.dart';
+extension ToTrimmedOrNullExtension on Object {
+  /// Converts the input to a string and trims it or returns `null` if the
+  /// result is empty.
+  String? toTrimmedOrNull() {
+    return trimmedOrNull(this);
+  }
+}
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-void main() async {
-  // Print the current file name.
-  print(Here().fileName);
+/// Converts the input to a string if it's not null and trims it or returns
+/// `null` if the result is empty.
+String? trimmedOrNull(Object? input) {
+  final a = input?.toString().trim();
+  final b = a?.isEmpty == true ? null : a;
+  return b;
 }

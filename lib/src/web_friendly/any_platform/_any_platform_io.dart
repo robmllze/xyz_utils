@@ -10,11 +10,14 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_utils/xyz_utils.dart';
+import '_any_platform_none.dart' as any_platform_none;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void main() async {
-  // Print the current file name.
-  print(Here().fileName);
+class AnyPlatform extends any_platform_none.AnyPlatform {
+  const AnyPlatform() : super();
+  static const instance = AnyPlatform();
+
+  @override
+  bool get isWeb => false;
 }

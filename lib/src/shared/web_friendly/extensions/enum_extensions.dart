@@ -10,11 +10,14 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_utils/xyz_utils.dart';
+import 'package:collection/collection.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void main() async {
-  // Print the current file name.
-  print(Here().fileName);
+extension EnumFromString<T extends Enum> on Iterable<T> {
+  T? valueOf(String? value) {
+    return this.firstWhereOrNull(
+      (type) => type.name.toLowerCase() == value?.toLowerCase(),
+    );
+  }
 }

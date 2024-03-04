@@ -1,15 +1,19 @@
-#.title
+##.title
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##
-## XYZ Utils
+## X|Y|Z & Dev
 ##
+## Copyright Ⓒ Robert Mollentze, xyzand.dev
+## 
+## Licensing details can be found in the LICENSE file in the root directory.
+## 
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-#.title~
+##.title~
 
 name: xyz_utils
 description: This package is designed to speed up development by providing a set of utilities that are commonly used in Dart apps.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.36.0
+version: 0.37.0
 
 ## -----------------------------------------------------------------------------
 

@@ -10,11 +10,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_utils/xyz_utils.dart';
+class AnyPlatform {
+  const AnyPlatform();
+  static const instance = AnyPlatform();
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-void main() async {
-  // Print the current file name.
-  print(Here().fileName);
+  bool get isWeb => throw UnimplementedError();
 }

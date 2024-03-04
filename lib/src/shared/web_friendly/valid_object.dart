@@ -10,11 +10,20 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_utils/xyz_utils.dart';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-void main() async {
-  // Print the current file name.
-  print(Here().fileName);
+abstract class ValidObject {
+  const ValidObject();
+  bool get valid;
+  static bool areValid(List<dynamic> inputs) {
+    for (final input in inputs) {
+      if (input == null) {
+        return false;
+      }
+      try {
+        if (input.isEmpty) {
+          return false;
+        }
+      } catch (_) {}
+    }
+    return true;
+  }
 }
