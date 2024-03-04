@@ -86,10 +86,8 @@ bool isPrivateFileName(String filePath) {
   String endType,
 ) {
   final fileName = getBaseName(filePath);
-  final a =
-      begType.isEmpty ? true : fileName.startsWith("${begType.toLowerCase()}_");
-  final b =
-      endType.isEmpty ? true : fileName.endsWith(".$endType".toLowerCase());
+  final a = begType.isEmpty ? true : fileName.startsWith("${begType.toLowerCase()}_");
+  final b = endType.isEmpty ? true : fileName.endsWith(".$endType".toLowerCase());
   final c = a && b;
   return (c, fileName);
 }
@@ -124,11 +122,9 @@ Set<String> combinePathSets(List<Set<String>> pathSets) {
   } else if (input.length == 1) {
     output = input[0];
   } else {
-    final first = input[0];
-    final second = input[1];
     final joined = <String>{};
-    for (final a in first) {
-      for (final b in second) {
+    for (final a in input[0]) {
+      for (final b in input[1]) {
         if (b.isEmpty) {
           joined.add(a);
         } else if (a.isEmpty) {
@@ -143,5 +139,6 @@ Set<String> combinePathSets(List<Set<String>> pathSets) {
       ...input.skip(2),
     ]);
   }
-  return output.map((e) => toLocalSystemPathFormat(e)).toSet();
+  output = output.map((e) => p.normalize(toLocalSystemPathFormat(e))).toSet();
+  return output;
 }
