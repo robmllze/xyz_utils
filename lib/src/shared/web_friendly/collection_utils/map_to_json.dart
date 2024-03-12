@@ -10,24 +10,15 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-typedef JMap = Map<String, dynamic>;
-
-String? _defaultKeyConverter(dynamic key) {
-  if (key is DateTime) {
-    return key.microsecondsSinceEpoch.toString();
-  }
-  return null;
-}
-
-JMap mapToJMap<T1, T2>(
+Json mapToJson<T1, T2>(
   Map<T1, T2> input, {
   Set<Type> typesAllowed = const {},
   String? Function(dynamic)? keyConverter,
 }) {
-  return _mapToJMap(input, typesAllowed, keyConverter);
+  return _mapToJson(input, typesAllowed, keyConverter);
 }
 
-dynamic _mapToJMap(
+dynamic _mapToJson(
   dynamic input,
   Set<Type> typesAllowed,
   String? Function(dynamic)? keyConverter,
@@ -36,7 +27,7 @@ dynamic _mapToJMap(
     return input.map(
       (final k, final v) => MapEntry(
         keyConverter?.call(k) ?? _defaultKeyConverter(k) ?? k.toString(),
-        _mapToJMap(
+        _mapToJson(
           v,
           typesAllowed,
           keyConverter,
@@ -46,7 +37,7 @@ dynamic _mapToJMap(
   } else if (input is Iterable) {
     return input
         .map(
-          (final l) => _mapToJMap(
+          (final l) => _mapToJson(
             l,
             typesAllowed,
             keyConverter,
@@ -69,4 +60,13 @@ dynamic _mapToJMap(
     "[mapToJson] Unsupported type \"${input.runtimeType}\"",
   );
   return input.toString();
+}
+
+typedef Json = Map<String, dynamic>;
+
+String? _defaultKeyConverter(dynamic key) {
+  if (key is DateTime) {
+    return key.microsecondsSinceEpoch.toString();
+  }
+  return null;
 }

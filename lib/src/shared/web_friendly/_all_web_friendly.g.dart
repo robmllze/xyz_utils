@@ -10,12 +10,12 @@
 export 'ansi_styled_string.dart';
 export 'collection_utils/first_where_or_null.dart';
 export 'collection_utils/generic_type_extension.dart';
-export 'collection_utils/jmap.dart';
+export 'collection_utils/map_to_json.dart';
 export 'collection_utils/map_filter_extension.dart';
 export 'collection_utils/mapi.dart';
 export 'collection_utils/maybe_add_to.dart';
 export 'collection_utils/merge.dart';
-export 'collection_utils/misc.dart';
+export 'collection_utils/more_collection_utils.dart';
 export 'collection_utils/non_nulls.dart';
 export 'collection_utils/null_filtered.dart';
 export 'collection_utils/var_args.dart';
