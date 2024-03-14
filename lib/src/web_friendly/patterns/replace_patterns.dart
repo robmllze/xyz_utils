@@ -15,7 +15,7 @@ dynamic replaceAllPatterns(
   Map<dynamic, dynamic> data, {
   String opening = "<<<",
   String closing = ">>>",
-  String delimeter = "||",
+  String delimiter = "||",
   String? Function(
     String key,
     dynamic value,
@@ -32,7 +32,7 @@ dynamic replaceAllPatterns(
   for (final match in matches) {
     final fullMatch = match.group(0)!;
     final keyWithDefault = match.group(1)!;
-    final parts = keyWithDefault.split(delimeter);
+    final parts = keyWithDefault.split(delimiter);
     final key = parts[0];
     final defaultValue = parts.length > 1 ? parts[1] : null;
 
@@ -62,7 +62,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
     Map<String, dynamic> data, {
     String opening = "<<<",
     String closing = ">>>",
-    String delimeter = "||",
+    String delimiter = "||",
     String? Function(
       String key,
       dynamic value,
@@ -74,7 +74,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
       data,
       opening: opening,
       closing: closing,
-      delimeter: delimeter,
+      delimiter: delimiter,
       onReplace: onReplace,
     ).toString();
   }
