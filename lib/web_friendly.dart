@@ -13,4 +13,4 @@
 library;
 
 export 'src/web_friendly/_all_web_friendly.g.dart';
-export 'src/shared/web_friendly/_all_web_friendly.g.dart';
+export 'shared_src/web_friendly/_all_web_friendly.g.dart';
