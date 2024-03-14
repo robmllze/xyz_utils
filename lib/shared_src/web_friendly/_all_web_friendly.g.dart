@@ -23,6 +23,7 @@ export 'collection_utils/var_args.dart';
 export 'extensions/enum_extensions.dart';
 export 'extensions/join_with_last_separator_extension.dart';
 export 'extensions/null_if_empty_extensions.dart';
+export 'extensions/split_by_last_occurence_of.dart';
 export 'extensions/string_extensions.dart';
 export 'extensions/to_timmed_or_null_extension.dart';
 export 'extract_scopes.dart';
