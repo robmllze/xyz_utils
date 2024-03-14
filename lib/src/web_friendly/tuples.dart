@@ -130,7 +130,8 @@ class Tuple5<T1, T2, T3, T4, T5> {
 
 /// Returns a tuple with five elements.
 Tuple5<T1, T2, T3, T4, T5> getAs5<T1, T2, T3, T4, T5>(
-    Iterable<dynamic> source,) {
+  Iterable<dynamic> source,
+) {
   if (source.length < 5) {
     throw ArgumentError("Source does not have enough elements");
   }
