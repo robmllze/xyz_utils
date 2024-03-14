@@ -12,32 +12,74 @@
 
 dynamic replaceAllPatterns(
   String input,
-  Map<dynamic, dynamic> data,
-  String opening,
-  String closing,
-) {
+  Map<dynamic, dynamic> data, {
+  String opening = "<<<",
+  String closing = ">>>",
+  String delimeter = "||",
+  String? Function(
+    String key,
+    dynamic value,
+    String? defaultValue,
+  )? onReplace,
+}) {
   final o1 = RegExp.escape(opening);
   final c1 = RegExp.escape(closing);
   var output = input;
-  for (final entry in data.entries) {
-    final k = entry.key;
-    final v = entry.value;
-    final source = "$o1$k$c1";
-    if (input == source) return v;
-    final expression = RegExp(source, caseSensitive: false);
-    output = output.replaceAll(expression, v.toString());
+
+  final regex = RegExp("$o1(.*?)$c1");
+  final matches = regex.allMatches(input);
+
+  for (final match in matches) {
+    final fullMatch = match.group(0)!;
+    final keyWithDefault = match.group(1)!;
+    final parts = keyWithDefault.split(delimeter);
+    final key = parts[0];
+    final defaultValue = parts.length > 1 ? parts[1] : null;
+
+    String? replacementValue;
+    if (data.containsKey(key)) {
+      replacementValue = data[key].toString();
+    } else if (defaultValue != null) {
+      replacementValue = defaultValue;
+    }
+
+    if (replacementValue != null) {
+      final temp = onReplace?.call(key, replacementValue, defaultValue);
+      if (temp != null) {
+        replacementValue = temp;
+      }
+      output = output.replaceFirst(fullMatch, replacementValue);
+    }
   }
+
   return output;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension ReplacePatterns on String {
-  String replacePatterns(
-    Map<String, dynamic> data, [
-    String opening = "{",
-    String closing = "}",
-  ]) {
-    return replaceAllPatterns(this, data, opening, closing).toString();
+extension ReplaceAllPatternsOnStringExtension on String {
+  String replaceAllPatterns(
+    Map<String, dynamic> data, {
+    String opening = "<<<",
+    String closing = ">>>",
+    String delimeter = "||",
+    String? Function(
+      String key,
+      dynamic value,
+      String? defaultValue,
+    )? onReplace,
+  }) {
+    return _replaceAllPatterns(
+      this,
+      data,
+      opening: opening,
+      closing: closing,
+      delimeter: delimeter,
+      onReplace: onReplace,
+    ).toString();
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+const _replaceAllPatterns = replaceAllPatterns;

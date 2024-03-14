@@ -21,6 +21,7 @@ export 'app/rec.dart';
 export 'app/screen_calculator.dart';
 export 'app/single_service.dart';
 export 'http_service.dart';
+export 'patterns/recursive_replace.dart';
 export 'patterns/replace_patterns.dart';
 export 'second_to_ninth_element.dart';
 export 'stream_to_future.dart';

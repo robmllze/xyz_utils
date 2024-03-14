@@ -21,6 +21,7 @@ export 'web_friendly/app/rec.dart';
 export 'web_friendly/app/screen_calculator.dart';
 export 'web_friendly/app/single_service.dart';
 export 'web_friendly/http_service.dart';
+export 'web_friendly/patterns/recursive_replace.dart';
 export 'web_friendly/patterns/replace_patterns.dart';
 export 'web_friendly/second_to_ninth_element.dart';
 export 'web_friendly/stream_to_future.dart';
