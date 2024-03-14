@@ -11,6 +11,7 @@ export 'non_web/file_system.dart';
 export 'non_web/get_package_lib_path.dart';
 export 'web_friendly/ansi_styled_string.dart';
 export 'web_friendly/collection_utils/expand_flattened_json.dart';
+export 'web_friendly/collection_utils/expand_json.dart';
 export 'web_friendly/collection_utils/first_where_or_null.dart';
 export 'web_friendly/collection_utils/flatten_json.dart';
 export 'web_friendly/collection_utils/generic_type_extension.dart';

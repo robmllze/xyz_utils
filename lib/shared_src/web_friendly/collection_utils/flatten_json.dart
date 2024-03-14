@@ -59,27 +59,27 @@
 /// //   "emails.1": "phillip.sherman@gmail.com"
 /// // }
 /// ```
-Map<String, dynamic> flattenJson(Map input, {String separator = "."}) {
-  Map<String, dynamic> $flattenJson(dynamic input, [String prefix = ""]) {
-    final result = <String, dynamic>{};
-    void flatten(dynamic value, String path) {
+Map flattenJson(Map input, {String separator = "."}) {
+  Map $flattenJson(dynamic input, [String prefix = ""]) {
+    final result = {};
+    void flatten(String path, dynamic value) {
       if (value is Map) {
         for (final entry in value.entries) {
           final k = entry.key;
           final v = entry.value;
           final newPath = path.isEmpty ? k.toString() : "$path$separator$k";
-          flatten(v, newPath);
+          flatten(newPath, v);
         }
       } else if (value is List) {
         for (var i = 0; i < value.length; i++) {
-          flatten(value[i], "$path$separator$i");
+          flatten("$path$separator$i", value[i]);
         }
       } else {
         result[path] = value;
       }
     }
 
-    flatten(input, prefix);
+    flatten(prefix, input);
     return result;
   }
 
