@@ -27,7 +27,7 @@ dynamic _mapToJson(
 ) {
   if (input is Map) {
     return input.map(
-      (final k, final v) => MapEntry(
+      (k, v) => MapEntry(
         keyConverter?.call(k) ?? _defaultKeyConverter(k) ?? k.toString(),
         _mapToJson(
           v,

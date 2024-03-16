@@ -282,7 +282,7 @@ Map<K, V>? letMapOrNull<K, V>(
     }
     if (decoded is Map) {
       final temp = decoded.entries
-          .map((final entry) {
+          .map((entry) {
             final convertedKey = letOrNull<K>(entry.key);
             final convertedValue =
                 letOrNull<V>(entry.value) ?? letOrNull<V?>(nullFallback);
@@ -296,8 +296,8 @@ Map<K, V>? letMapOrNull<K, V>(
             }
             return MapEntry(convertedKey as K, convertedValue as V);
           })
-          .where((final e) => e != const _Empty())
-          .map((final e) => e as MapEntry<K, V>);
+          .where((e) => e != const _Empty())
+          .map((e) => e as MapEntry<K, V>);
       return Map.fromEntries(temp.nonNulls);
     }
   } catch (_) {}
@@ -325,8 +325,8 @@ Iterable<T>? letIterableOrNull<T>(
   }
   if (decoded is Iterable) {
     try {
-      final a = decoded.map((final element) {
-        final result = letOrNull<T>(element) ?? letOrNull<T>(nullFallback);
+      final a = decoded.map((e) {
+        final result = letOrNull<T>(e) ?? letOrNull<T>(nullFallback);
         if (filterNulls) {
           if (!nullable && result == null) {
             return const _Empty();
@@ -334,10 +334,10 @@ Iterable<T>? letIterableOrNull<T>(
         }
         return result;
       });
-      final b = a.where((final e) => e != const _Empty());
-      var c = b.map((final e) => e as T);
+      final b = a.where((e) => e != const _Empty());
+      var c = b.map((e) => e as T);
       if (filterNulls) {
-        c = c.where((final e) => e != null);
+        c = c.where((e) => e != null);
       }
       return c;
     } catch (_) {}

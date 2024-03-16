@@ -56,7 +56,8 @@ extension UtilsOnDateTimeExtension on DateTime {
   /// ''|single quote|(Literal)|'o''clock'
   ///
   /// For more info, see: https://api.flutter.dev/flutter/intl/DateFormat-class.html
-  String format(String pattern, String locale) => DateFormat(pattern, locale).format(this);
+  String format(String pattern, String locale) =>
+      DateFormat(pattern, locale).format(this);
 
   /// e.g. August 8, 2023
   String full([String? localeCode]) {
@@ -124,10 +125,14 @@ bool isSameDay(DateTime date1, DateTime date2) {
 bool isSameWeek(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
-  final week1 =
-      DateTime.utc(a.year, a.month, a.day).difference(DateTime.utc(a.year, a.month)).inDays ~/ 7;
-  final week2 =
-      DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(b.year, b.month)).inDays ~/ 7;
+  final week1 = DateTime.utc(a.year, a.month, a.day)
+          .difference(DateTime.utc(a.year, a.month))
+          .inDays ~/
+      7;
+  final week2 = DateTime.utc(b.year, b.month, b.day)
+          .difference(DateTime.utc(b.year, b.month))
+          .inDays ~/
+      7;
   return week1 == week2;
 }
 
@@ -141,7 +146,7 @@ bool isSameMonth(DateTime date1, DateTime date2) {
 /// Checks if two dates are on the same year.
 List<DateTime> sortDates(List<DateTime> dates) {
   final copy = List<DateTime>.from(dates);
-  return copy..sort((final a, final b) => a.compareTo(b));
+  return copy..sort((a, b) => a.compareTo(b));
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -149,7 +154,7 @@ List<DateTime> sortDates(List<DateTime> dates) {
 /// Returns the last date in the list of dates.
 DateTime? getLastDate(Iterable<DateTime>? dates) {
   return dates?.tryReduce(
-    (final a, final b) {
+    (a, b) {
       return a.microsecondsSinceEpoch > b.microsecondsSinceEpoch ? a : b;
     },
   );
@@ -158,7 +163,7 @@ DateTime? getLastDate(Iterable<DateTime>? dates) {
 /// Returns the first date in the list of dates.
 DateTime? getFirstDate(Iterable<DateTime>? dates) {
   return dates?.tryReduce(
-    (final a, final b) {
+    (a, b) {
       return a.microsecondsSinceEpoch < b.microsecondsSinceEpoch ? a : b;
     },
   );
