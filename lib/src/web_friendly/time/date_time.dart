@@ -56,8 +56,7 @@ extension UtilsOnDateTimeExtension on DateTime {
   /// ''|single quote|(Literal)|'o''clock'
   ///
   /// For more info, see: https://api.flutter.dev/flutter/intl/DateFormat-class.html
-  String format(String pattern, String locale) =>
-      DateFormat(pattern, locale).format(this);
+  String format(String pattern, String locale) => DateFormat(pattern, locale).format(this);
 
   /// e.g. August 8, 2023
   String full([String? localeCode]) {
@@ -125,14 +124,10 @@ bool isSameDay(DateTime date1, DateTime date2) {
 bool isSameWeek(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
-  final week1 = DateTime.utc(a.year, a.month, a.day)
-          .difference(DateTime.utc(a.year, a.month))
-          .inDays ~/
-      7;
-  final week2 = DateTime.utc(b.year, b.month, b.day)
-          .difference(DateTime.utc(b.year, b.month))
-          .inDays ~/
-      7;
+  final week1 =
+      DateTime.utc(a.year, a.month, a.day).difference(DateTime.utc(a.year, a.month)).inDays ~/ 7;
+  final week2 =
+      DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(b.year, b.month)).inDays ~/ 7;
   return week1 == week2;
 }
 
