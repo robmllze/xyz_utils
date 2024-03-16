@@ -2,7 +2,9 @@
 
 [![pub package](https://img.shields.io/pub/v/xyz_utils.svg)](https://pub.dev/packages/xyz_utils)
 
-This package is designed to speed up development by providing a set of utilities that are commonly used in Dart apps.
+This package helps speed up development by providing a set of utilities that are commonly used in Dart apps.
+
+There are no examples provided because there are too many utilities to cover in a single example. However, the package is well documented and easy to use. Please refer to the [API reference](https://pub.dev/documentation/xyz_utils/0.44.0/web_friendly/web_friendly-library.html) for more information.
 
 ## Documentation
 
