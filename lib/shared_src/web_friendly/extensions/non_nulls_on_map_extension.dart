@@ -11,6 +11,7 @@
 //.title~
 
 extension NonNullsOnMapExtension<K, V> on Map<K?, V?> {
+  /// Returns a new map with all non-null keys and values.
   Map<K, V> get nonNulls {
     return Map<K, V>.fromEntries(
       this
@@ -22,6 +23,7 @@ extension NonNullsOnMapExtension<K, V> on Map<K?, V?> {
 }
 
 extension NonNullKeysOnMapExtension<K, V> on Map<K?, V> {
+  /// Returns a new map with all non-null keys and values.
   Map<K, V> get nonNullKeys {
     return Map<K, V>.fromEntries(
       this
@@ -33,6 +35,7 @@ extension NonNullKeysOnMapExtension<K, V> on Map<K?, V> {
 }
 
 extension NonNullValuesOnMapExtension<K, V> on Map<K, V?> {
+  /// Returns a new map with all non-null keys and values.
   Map<K, V> get nonNullValues {
     return Map<K, V>.fromEntries(
       this

@@ -17,36 +17,46 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// An abstract class that provides a way to manage a [SingleService]
+/// collection.
 abstract class CollectiveService<T extends SingleService> {
   //
   //
   //
 
+  /// A callback that is called when an error occurs.
   final void Function(Object?)? onError;
 
   //
   //
   //
 
-  CollectiveService({required this.onError});
+  CollectiveService({
+    required this.onError,
+  });
 
   //
   //
   //
 
+  /// Holds all the services in the collection.
   final allServices = <String, T>{};
 
   //
   //
   //
 
+  /// Returns all the service keys in the collection.
   Set<String> get keys => this.allServices.keys.toSet();
+
+  /// Returns all the services in the collection.
   Iterable<T> get values => this.allServices.values;
 
   //
   //
   //
 
+  /// Updates the collection with the services and removes services.
   Future<void> update(Set<String> oldKeys, Set<String> newKeys) async {
     final addedKeys = getSetDifference(oldKeys, newKeys);
     final removedKeys = getSetDifference(newKeys, oldKeys);
@@ -61,12 +71,14 @@ abstract class CollectiveService<T extends SingleService> {
   //
   //
 
+  /// Adds a new service by [key] to the collection and returns the service.
   Future<T?> addService(String key);
 
   //
   //
   //
 
+  /// Removes a service by [key] from the collection.
   Future<void> removeServices(Iterable<String> keys) async {
     await Future.forEach(
       keys,
@@ -79,5 +91,6 @@ abstract class CollectiveService<T extends SingleService> {
   //
   //
 
+  /// Removes all services from the collection.
   Future<void> dispose() => this.removeServices(this.allServices.keys);
 }

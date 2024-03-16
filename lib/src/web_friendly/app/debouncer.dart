@@ -39,20 +39,32 @@ class Debouncer {
   //
 
   Timer? _timer;
+
+  /// The function to call after the [delay] has passed.
   final void Function()? onWaited;
+
+  /// The function to call immediately.
   final void Function()? onCall;
+
+  /// The delay before calling the [onWaited] function.
   final Duration delay;
 
   //
   //
   //
 
-  Debouncer({required this.delay, this.onWaited, this.onCall});
+  Debouncer({
+    required this.delay,
+    this.onWaited,
+    this.onCall,
+  });
 
   //
   //
   //
 
+  /// Calls the [onCall] function and then waits for [delay] before calling the
+  /// [onWaited] function.
   void call({
     void Function()? onWaited,
     void Function()? onCall,
@@ -70,6 +82,7 @@ class Debouncer {
   //
   //
 
+  /// Finalizes the debouncer and calls the [onWaited] function.
   void finalize({void Function()? onWaited}) async {
     if (this._timer != null) {
       if (this._timer!.isActive) {
@@ -85,6 +98,7 @@ class Debouncer {
   //
   //
 
+  /// Cancels the debouncer.
   bool cancel() {
     final timer = this._timer;
     if (timer != null) {

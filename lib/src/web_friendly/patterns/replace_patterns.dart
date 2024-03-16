@@ -10,6 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+/// Replaces placeholders in a string with corresponding values from a provided
+/// map, supporting default values and custom delimiters.
 dynamic replaceAllPatterns(
   String input,
   Map<dynamic, dynamic> data, {
@@ -20,7 +22,7 @@ dynamic replaceAllPatterns(
     String key,
     dynamic value,
     String? defaultValue,
-  )? onReplace,
+  )? callback,
 }) {
   final o1 = RegExp.escape(opening);
   final c1 = RegExp.escape(closing);
@@ -44,7 +46,7 @@ dynamic replaceAllPatterns(
     }
 
     if (replacementValue != null) {
-      final temp = onReplace?.call(key, replacementValue, defaultValue);
+      final temp = callback?.call(key, replacementValue, defaultValue);
       if (temp != null) {
         replacementValue = temp;
       }
@@ -58,6 +60,8 @@ dynamic replaceAllPatterns(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension ReplaceAllPatternsOnStringExtension on String {
+  /// Replaces placeholders in this string with corresponding values from a
+  /// provided map, supporting default values and custom delimiters.
   String replaceAllPatterns(
     Map<String, dynamic> data, {
     String opening = "<<<",
@@ -67,7 +71,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
       String key,
       dynamic value,
       String? defaultValue,
-    )? onReplace,
+    )? callback,
   }) {
     return _replaceAllPatterns(
       this,
@@ -75,7 +79,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
       opening: opening,
       closing: closing,
       delimiter: delimiter,
-      onReplace: onReplace,
+      callback: callback,
     ).toString();
   }
 }

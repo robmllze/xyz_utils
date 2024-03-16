@@ -15,15 +15,26 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// A method to log a message to the console with the file, scope, line and
+/// column number passed in as context.
 class Here {
   //
   //
   //
 
-  final String? file;
+  /// The file path of the file where the Here instance was created.
+  final String? filePath;
+
+  /// The scope where the Here instance was created.
   final String? scope;
+
+  /// The line number where the Here instance was created.
   final int? lineNumber;
+
+  /// The column number where the Here instance was created.
   final int? columnNumber;
+
+  /// The group of the Here instance.
   final Symbol? group;
 
   //
@@ -31,7 +42,7 @@ class Here {
   //
 
   const Here._(
-    this.file,
+    this.filePath,
     this.scope,
     this.lineNumber,
     this.columnNumber,
@@ -42,9 +53,10 @@ class Here {
   //
   //
 
+  /// The file name of the file where the Here instance was created.
   String? get fileName {
-    if (this.file != null) {
-      final uri = Uri.tryParse(this.file!);
+    if (this.filePath != null) {
+      final uri = Uri.tryParse(this.filePath!);
       if (uri != null && uri.pathSegments.isNotEmpty) {
         final last = uri.pathSegments.last;
         return "$last.dart";
@@ -60,7 +72,7 @@ class Here {
   //
 
   factory Here([Symbol? group]) {
-    final parts = AnyPlatform.instance.isWeb ? hereWeb(2) : here(2);
+    final parts = AnyPlatform.instance.isWeb ? _hereWeb(2) : _here(2);
     return Here._(
       parts?[0],
       parts?[1],
@@ -80,15 +92,32 @@ class Here {
   //
   //
 
+  /// ⚪️ Logs a message to the console.
   void debugLog(e) => this._rec.debugLog(e);
-  void debugLogAlert(e) => this._rec.debugLogAlert(e);
+
+  /// 🔴 Logs an error message to the console.
   void debugLogError(e) => this._rec.debugLogError(e);
+
+  /// 🟠 Logs an alert message to the console.
+  void debugLogAlert(e) => this._rec.debugLogAlert(e);
+
+  /// 🟡 Logs an ignore message to the console.
   void debugLogIgnore(e) => this._rec.debugLogIgnore(e);
-  void debugLogInfo(e) => this._rec.debugLogInfo(e);
-  void debugLogMessage(e) => this._rec.debugLogMessage(e);
-  void debugLogStart(e) => this._rec.debugLogStart(e);
-  void debugLogStop(e) => this._rec.debugLogStop(e);
+
+  /// 🟢 Logs a success message to the console.
   void debugLogSuccess(e) => this._rec.debugLogSuccess(e);
+
+  /// 🟣 Logs an info message to the console.
+  void debugLogInfo(e) => this._rec.debugLogInfo(e);
+
+  /// 🟤 Logs a debug message to the console.
+  void debugLogMessage(e) => this._rec.debugLogMessage(e);
+
+  /// 🔵 Logs a start message to the console.
+  void debugLogStart(e) => this._rec.debugLogStart(e);
+
+  /// ⚫ Logs a stop message to the console.
+  void debugLogStop(e) => this._rec.debugLogStop(e);
 
   //
   //
@@ -96,13 +125,18 @@ class Here {
 
   @override
   String toString() {
-    return "File: $file, Scope: $scope, Line: $lineNumber, Column: $columnNumber";
+    return [
+      "File Path: $filePath",
+      "Scope: $scope",
+      "Line: $lineNumber",
+      "Column: $columnNumber",
+    ].join(", ");
   }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-List<dynamic>? here([int start = 1]) {
+List<dynamic>? _here([int start = 1]) {
   final results = <dynamic>[null, null, null, null];
   final stackTrace = StackTrace.current.toString().split("\n");
   for (var i = start; i < stackTrace.length; i++) {
@@ -142,15 +176,12 @@ List<dynamic>? here([int start = 1]) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-List<dynamic>? hereWeb([int start = 1]) {
+List<dynamic>? _hereWeb([int start = 1]) {
   final stackTrace = StackTrace.current.toString().split("\n");
-
   for (var i = start + 1; i < stackTrace.length; i++) {
     final line = stackTrace[i];
     final parts = line.split(" ").where((e) => e.isNotEmpty).toList();
-
     final skipParts = <int>[];
-
     final filePath = () {
       for (var p = 0; p < parts.length; p++) {
         final part = parts[p];
@@ -164,9 +195,7 @@ List<dynamic>? hereWeb([int start = 1]) {
         }
       }
     }();
-
     if (filePath == null) continue;
-
     int? lineNumber;
     int? columnNumber;
     for (var p = 0; p < parts.length; p++) {
@@ -183,19 +212,15 @@ List<dynamic>? hereWeb([int start = 1]) {
         }
       }
     }
-
     String? scope;
     for (var p = 0; p < parts.length; p++) {
       if (skipParts.contains(p)) continue;
       scope = parts[p];
     }
-
     if (scope == "new") scope = "<new>";
     final isAnonymous = parts.contains("<fn>");
     if (isAnonymous) continue;
-
     return [filePath, scope, null, null];
   }
-
   return [null, null, null, null];
 }

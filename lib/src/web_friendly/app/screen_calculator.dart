@@ -10,36 +10,61 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+/// Calculates the size, orientation and aspect ratio of a screen.
 class ScreenCalculator {
   //
   //
   //
 
-  late double _longest;
+  /// The longest side of the screen.
   double get longest => this._longest;
-  late double _shortest;
+  late double _longest;
+
+  /// The shortest side of the screen.
   double get shortest => this._shortest;
-  late ScreenSize _size;
+  late double _shortest;
+
+  /// The size of the screen.
   ScreenSize get size => this._size;
+  late ScreenSize _size;
+
+  /// The width of the screen.
   double get width => this._size.width;
+
+  /// The height of the screen.
   double get height => this._size.height;
-  late ScreenSize _sizeVerticalBias;
+
+  /// The size of the screen with the longest side as the width.
   ScreenSize get sizeVerticalBias => this._sizeVerticalBias;
-  late ScreenSize _sizeHorizontalBias;
+  late ScreenSize _sizeVerticalBias;
+
+  /// The size of the screen with the shortest side as the width.
   ScreenSize get sizeHorizontalBias => this._sizeHorizontalBias;
-  late bool _isHorizontal;
+  late ScreenSize _sizeHorizontalBias;
+
+  /// Whether the screen is horizontal.
   bool get isHorizontal => this._isHorizontal;
-  late bool _isVertical;
+  late bool _isHorizontal;
+
+  /// Whether the screen is vertical.
   bool get isVertical => this._isVertical;
-  late bool _isNeitherHorizontalNorVertical;
+  late bool _isVertical;
+
+  /// Whether the screen is neither horizontal nor vertical, i.e. a square.
   bool get isNeitherHorizontalNorVertical => this._isNeitherHorizontalNorVertical;
+  late bool _isNeitherHorizontalNorVertical;
+
+  /// Whether the aspect ratio of the screen is that of a mobile phone.
   bool get isAspectRatioMobile => this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
 
   //
   //
   //
 
-  ScreenCalculator(double maxWidth, double maxHeight) {
+  ScreenCalculator(
+    double maxWidth,
+    double maxHeight,
+  ) {
     this._longest = maxWidth >= maxHeight ? maxWidth : maxHeight;
     this._shortest = maxWidth <= maxHeight ? maxWidth : maxHeight;
     this._size = ScreenSize(maxWidth, maxHeight);
@@ -59,6 +84,7 @@ class ScreenCalculator {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Represents the size of a screen.
 class ScreenSize {
   final double width, height;
   const ScreenSize(this.width, this.height);
@@ -72,8 +98,10 @@ class ScreenSize {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-// The smallest of the following common aspect ratios for mobile phones (4.0 / 3.0)
+/// The smallest of the following common aspect ratios for mobile phones (4.0 / 3.0)
 const MIN_MOBILE_ASPECT_RATIO = 4.0 / 3.0;
+
+/// The smallest of the following common aspect ratios for mobile phones (4.0 / 3.0)
 double get minMobileAspectRatio => {
       // Samsungs
       16.0 / 10.0,
@@ -97,14 +125,11 @@ double get minMobileAspectRatio => {
       2.10 / 1,
       20.0 / 9.0,
       193 / 90,
-    }.reduce((final a, final b) => a <= b ? a : b);
+    }.reduce((a, b) => a <= b ? a : b);
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension UtilsOnScreenSizeExtension on ScreenSize {
-  bool get isVertical => this.aspectRatio <= 1.0;
-
-  bool get isHorizontal => this.aspectRatio >= 1.0;
-
-  bool get isNeitherHorizontalNorVerticalisVertical => this.aspectRatio == 1.0;
+extension CalculatorOnScreenSizeExtension on ScreenSize {
+  /// The calculator for the screen size.
+  ScreenCalculator get calculator => ScreenCalculator(this.width, this.height);
 }

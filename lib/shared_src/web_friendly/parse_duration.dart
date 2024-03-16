@@ -15,6 +15,7 @@ extension ParseDurationOnStringExtension on String {
   //
   //
 
+  /// Tries to parse the string as a duration in the format `HH:MM:SS.SSS`.
   Duration? tryParseDuration() {
     final a = this.split(":");
     if (a.length != 3) return null;
@@ -42,6 +43,7 @@ extension ParseDurationOnStringExtension on String {
   //
   //
 
+  /// Parses the string as a duration in the format `HH:MM:SS.SSS`.
   Duration parseDuration() {
     final duration = this.tryParseDuration();
     if (duration == null) {

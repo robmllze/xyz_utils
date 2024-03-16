@@ -71,6 +71,8 @@ extension UtilsOnDateTimeExtension on DateTime {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Returns a string representing the day ago from the given date. Requires a
+/// translation function [tr] to translate the string into the given [locale].
 String dayAgo(DateTime date, String Function(String) tr, String locale) {
   final delta = DateTime.now().difference(date);
   const K = "time_ago";
@@ -82,6 +84,8 @@ String dayAgo(DateTime date, String Function(String) tr, String locale) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Returns a string representing the time ago from the given date. Requires a
+/// translation function [tr] to translate the string into the given [locale].
 String timeAgo(DateTime date, String Function(String) tr, String locale) {
   final delta = DateTime.now().difference(date);
   final a = DurationFormattedEnglish(delta.inMicroseconds);
@@ -109,12 +113,14 @@ String timeAgo(DateTime date, String Function(String) tr, String locale) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Checks if two dates are on the same day.
 bool isSameDay(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
   return a.year == b.year && a.month == b.month && a.day == b.day;
 }
 
+/// Checks if two dates are on the same week.
 bool isSameWeek(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
@@ -125,12 +131,14 @@ bool isSameWeek(DateTime date1, DateTime date2) {
   return week1 == week2;
 }
 
+/// Checks if two dates are on the same month.
 bool isSameMonth(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
   return a.year == b.year && a.month == b.month;
 }
 
+/// Checks if two dates are on the same year.
 List<DateTime> sortDates(List<DateTime> dates) {
   final copy = List<DateTime>.from(dates);
   return copy..sort((final a, final b) => a.compareTo(b));
@@ -138,6 +146,7 @@ List<DateTime> sortDates(List<DateTime> dates) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Returns the last date in the list of dates.
 DateTime? getLastDate(Iterable<DateTime>? dates) {
   return dates?.tryReduce(
     (final a, final b) {
@@ -146,6 +155,7 @@ DateTime? getLastDate(Iterable<DateTime>? dates) {
   );
 }
 
+/// Returns the first date in the list of dates.
 DateTime? getFirstDate(Iterable<DateTime>? dates) {
   return dates?.tryReduce(
     (final a, final b) {

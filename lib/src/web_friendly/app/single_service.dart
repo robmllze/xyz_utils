@@ -17,6 +17,7 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// An abstract class that provides a way to manage an application service.
 abstract class SingleService {
   //
   //
@@ -38,24 +39,33 @@ abstract class SingleService {
   //
   //
 
+  /// Override this method with the init logic for the service.
   Future<void> init() async {}
 
   //
   //
   //
 
+  /// Override this method with the dispose logic for the service.
   Future<void> dispose();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// An abstract class that provides a convenient way create a [SingleService]
+/// instance.
 abstract class SingleServiceCreator<T extends SingleService> {
   //
   //
   //
 
+  /// The id of the service.
   final String? id;
+
+  /// A callback that is called when an error occurs.
   late final void Function(Object?)? onError;
+
+  /// The instance of the service.
   T? _instance;
 
   //
@@ -77,6 +87,7 @@ abstract class SingleServiceCreator<T extends SingleService> {
   //
   //
 
+  /// Override this method with the logic to create the service.
   @mustCallSuper
   Future<void> createService(T? instance) async {
     await (this._instance = instance)?.init();
@@ -89,6 +100,8 @@ abstract class SingleServiceCreator<T extends SingleService> {
   //
   //
 
+  /// Returns the service instance or creates it if it doesn't exist.
+  @mustCallSuper
   Future<T> getService() async {
     if (this._instance == null) {
       await createService(null);
@@ -100,6 +113,8 @@ abstract class SingleServiceCreator<T extends SingleService> {
   //
   //
 
+  /// Disposes the service instance.
+  @mustCallSuper
   Future<void> dispose() async {
     await this._instance?.dispose();
     this._instance = null;

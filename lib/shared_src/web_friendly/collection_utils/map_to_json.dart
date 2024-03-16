@@ -10,6 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+/// Converts a map to a Json map by recursively converting its keys and values
+/// to Json compatible types.
 Json mapToJson<T1, T2>(
   Map<T1, T2> input, {
   Set<Type> typesAllowed = const {},
@@ -35,15 +37,7 @@ dynamic _mapToJson(
       ),
     );
   } else if (input is Iterable) {
-    return input
-        .map(
-          (final l) => _mapToJson(
-            l,
-            typesAllowed,
-            keyConverter,
-          ),
-        )
-        .toList();
+    return input.map((e) => _mapToJson(e, typesAllowed, keyConverter)).toList();
   }
   if ({
     bool,
@@ -62,11 +56,12 @@ dynamic _mapToJson(
   return input.toString();
 }
 
-typedef Json = Map<String, dynamic>;
-
 String? _defaultKeyConverter(dynamic key) {
   if (key is DateTime) {
     return key.microsecondsSinceEpoch.toString();
   }
   return null;
 }
+
+/// A type alias for a Json map.
+typedef Json = Map<String, dynamic>;

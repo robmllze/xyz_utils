@@ -15,6 +15,7 @@ import 'flatten_json.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Expands a Json map, e.g. `{"a": {"b": 1}}` to `{a.b: 1, b: 1}`.
 Map expandJson(
   Map input, {
   String separator = ".",

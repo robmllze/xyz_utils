@@ -10,42 +10,77 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+/// A class that formats a [Duration] into a human-readable string.
 class DurationFormattedEnglish {
-  late final int _us, _ms, _s, _m, _h, _d, _w;
+  //
+  //
+  //
+
   DurationFormattedEnglish(int microseconds) {
-    const MS = 1000,
-        S = 1000 * MS,
-        M = 60 * S,
-        H = 60 * M,
-        D = 24 * H,
-        W = 7 * D;
+    const MS = 1000, S = 1000 * MS, M = 60 * S, H = 60 * M, D = 24 * H, W = 7 * D;
     late final int tms, ts, tm, th, td, tw;
-    _w = microseconds ~/ W;
+    w = microseconds ~/ W;
     tw = microseconds - W * w;
-    _d = tw ~/ D;
+    d = tw ~/ D;
     td = tw - D * d;
-    _h = td ~/ H;
+    h = td ~/ H;
     th = td - H * h;
-    _m = th ~/ M;
+    m = th ~/ M;
     tm = th - M * m;
-    _s = tm ~/ S;
+    s = tm ~/ S;
     ts = tm - s * S;
-    _ms = ts ~/ MS;
+    ms = ts ~/ MS;
     tms = ts - ms * MS;
-    _us = tms;
+    us = tms;
   }
-  int get w => _w;
-  int get d => _d;
-  int get h => _h;
-  int get m => _m;
-  int get s => _s;
-  int get ms => _ms;
-  int get us => _us;
-  String get toW => (_w != 0 ? "${_w}w " : "");
-  String get toD => toW + (_d != 0 ? "${_d}d " : "");
-  String get toH => toD + (_h != 0 ? "${_h}h " : "");
-  String get toM => toH + (_m != 0 ? "${_m}m " : "");
-  String get toS => toM + (_s != 0 ? "${_s}s " : "");
-  String get toMs => toS + (_ms != 0 ? "${_ms}ms " : "");
-  String get toUs => toMs + (_us != 0 ? "$_usμs " : "");
+
+  //
+  //
+  //
+
+  /// The remaining microseconds in the duration.
+  late final int us;
+
+  /// The remaining milliseconds in the duration.
+  late final int ms;
+
+  /// The remaining seconds in the duration.
+  late final int s;
+
+  /// The remaining minutes in the duration.
+  late final int m;
+
+  /// The remaining hours in the duration.
+  late final int h;
+
+  /// The remaining days in the duration.
+  late final int d;
+
+  /// The remaining weeks in the duration.
+  late final int w;
+
+  //
+  //
+  //
+
+  /// The formatted duration string with the week as the largest unit.
+  String get toW => (w != 0 ? "${w}w " : "");
+
+  /// The formatted duration string with the day as the largest unit.
+  String get toD => toW + (d != 0 ? "${d}d " : "");
+
+  /// The formatted duration string with the hour as the largest unit.
+  String get toH => toD + (h != 0 ? "${h}h " : "");
+
+  /// The formatted duration string with the minute as the largest unit.
+  String get toM => toH + (m != 0 ? "${m}m " : "");
+
+  /// The formatted duration string with the second as the largest unit.
+  String get toS => toM + (s != 0 ? "${s}s " : "");
+
+  /// The formatted duration string with the millisecond as the largest unit.
+  String get toMs => toS + (ms != 0 ? "${ms}ms " : "");
+
+  /// The formatted duration string with the microsecond as the largest unit.
+  String get toUs => toMs + (us != 0 ? "$usμs " : "");
 }

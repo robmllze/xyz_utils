@@ -14,6 +14,7 @@ import 'dart:async';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Converts a [Stream] to a [Future].
 Future<T> streamToFuture<T>(
   Stream<T> stream, {
   bool cancelOnDone = false,

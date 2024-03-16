@@ -15,11 +15,21 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Performs recursive replacement of string values within a map using
+/// placeholders defined by the map's own key-value pairs. It supports nested
+/// structures (maps and lists) and replaces placeholders in strings with
+/// corresponding values.
 Map recursiveReplace(
   Map input, {
   String opening = "<<<",
   String closing = ">>>",
   String separator = ".",
+  String delimeter = "||",
+  String? Function(
+    String key,
+    dynamic value,
+    String? defaultValue,
+  )? callback,
 }) {
   final data = expandFlattenedJson(
     flattenJson(input, separator: separator),
@@ -55,6 +65,8 @@ Map recursiveReplace(
         data,
         opening: opening,
         closing: closing,
+        delimiter: delimeter,
+        callback: callback,
       );
     } else {
       r = inputValue;

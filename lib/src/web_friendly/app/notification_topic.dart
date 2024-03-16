@@ -14,6 +14,8 @@ import 'package:equatable/equatable.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// A method to help manage blocking and unblocking of notification topics for
+/// Firebase Cloud Messaging or similar services.
 class NotificationTopic extends Equatable {
   //
   //
@@ -50,6 +52,7 @@ class NotificationTopic extends Equatable {
   //
   //
 
+  /// Copies the current instance and replaces the provided values.
   NotificationTopic copyWith({
     String? name,
     String? subjectUid,
@@ -66,18 +69,20 @@ class NotificationTopic extends Equatable {
   //
   //
 
-  NotificationTopic toBlocked([String? subjectUid]) {
+  /// Returns a new instance with the provided [uid] blocked.
+  NotificationTopic toBlocked([String? uid]) {
     return NotificationTopic(
       name: this.name,
-      subjectUid: subjectUid ?? this.subjectUid,
+      subjectUid: uid ?? this.subjectUid,
       blocked: true,
     );
   }
 
-  NotificationTopic toUnblocked() {
+  /// Returns a new instance with the provided [uid] unblocked.
+  NotificationTopic toUnblocked([String? uid]) {
     return NotificationTopic(
       name: this.name,
-      subjectUid: this.subjectUid,
+      subjectUid: uid ?? this.subjectUid,
       blocked: false,
     );
   }
@@ -98,5 +103,11 @@ class NotificationTopic extends Equatable {
   //
 
   @override
-  List<Object?> get props => [this.name, this.subjectUid, this.blocked];
+  List<Object?> get props {
+    return [
+      this.name,
+      this.subjectUid,
+      this.blocked,
+    ];
+  }
 }

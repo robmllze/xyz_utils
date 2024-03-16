@@ -88,7 +88,7 @@ class FunctionQueue {
   Future<void> _execute() async {
     for (final l in this._queue
       ..removeWhere(
-        (final l) => l._status == _QueueableStatus.RAN,
+        (e) => e._status == _QueueableStatus.RAN,
       )) {
       final status = l._status;
       if (status == _QueueableStatus.RUNNING) break;

@@ -10,6 +10,15 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+/// **Example:**
+/// ```dart
+/// final a = iterable(1, 2, 3, 4, /* etc. */);
+/// print(a);
+/// ```
+/// **Output:**
+/// ```bash
+/// (1, 2, 3, 4)
+/// ```
 final dynamic iterable = _VarArgsFunction<Iterable>((args1, args2) {
   return args1.skip(0).followedBy(args2.values);
 });
@@ -58,8 +67,6 @@ final dynamic map = _VarArgsFunction<Map>((args1, args2) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-typedef _VarArgsCallback<T> = T Function(List<dynamic>, Map<String, dynamic>);
-
 class _VarArgsFunction<T> {
   //
   //
@@ -105,3 +112,5 @@ class _VarArgsFunction<T> {
     );
   }
 }
+
+typedef _VarArgsCallback<T> = T Function(List<dynamic>, Map<String, dynamic>);

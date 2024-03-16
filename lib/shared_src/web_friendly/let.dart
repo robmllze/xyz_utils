@@ -17,20 +17,49 @@ import '_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Alias for [letAsOrNull].
 final letAs = letAsOrNull;
+
+/// Alias for [letAsJMapOrNull].
 final letAsJMap = letAsJMapOrNull;
+
+/// Alias for [letOrNull].
 final let = letOrNull;
+
+/// Alias for [letNumOrNull].
 final letNum = letNumOrNull;
+
+/// Alias for [letIntOrNull].
 final letInt = letIntOrNull;
+
+/// Alias for [letDoubleOrNull].
 final letDouble = letDoubleOrNull;
+
+/// Alias for [letBoolOrNull].
 final letBool = letBoolOrNull;
+
+/// Alias for [letUriOrNull].
 final letUri = letUriOrNull;
+
+/// Alias for [letDateTimeOrNull].
 final letDateTime = letDateTimeOrNull;
+
+/// Alias for [letFirestoreTimestampOrNull].
 final letFirestoreTimestamp = letFirestoreTimestampOrNull;
+
+/// Alias for [letDurationOrNull].
 final letDuration = letDurationOrNull;
+
+/// Alias for [letMapOrNull].
 final letMap = letMapOrNull;
+
+/// Alias for [letIterableOrNull].
 final letIterable = letIterableOrNull;
+
+/// Alias for [letListOrNull].
 final letList = letListOrNull;
+
+/// Alias for [letSetOrNull].
 final letSet = letSetOrNull;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

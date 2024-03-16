@@ -15,6 +15,7 @@ import 'type_message_mixin.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Enum for different string case types.
 enum StringCaseType implements TypeMessageMixin {
   //
   //
@@ -49,14 +50,58 @@ enum StringCaseType implements TypeMessageMixin {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-const CAMEL_CASE = "camelCase";
-const LOWER_DOT_CASE = "lower.dot.case";
-const LOWER_KEBAB_CASE = "lower-kebab-case";
-const LOWER_SNAKE_CASE = "lower_snake_case";
-const PASCAL_CASE = "PascalCase";
-const PATH_CASE = "path/case";
-const UPPER_DOT_CASE = "UPPER.DOT.CASE";
-const UPPER_KEBAB_CASE = "UPPER-KEBAB-CASE";
+/// Camel case example.
+const CAMEL_CASE_EXAMPLE = "camelCase";
+
+/// Lower dot case example.
+const LOWER_DOT_CASE_EXAMPLE = "lower.dot.case";
+
+/// Lower kebab case example.
+const LOWER_KEBAB_CASE_EXAMPLE = "lower-kebab-case";
+
+/// Lower snake case example.
+const LOWER_SNAKE_CASE_EXAMPLE = "lower_snake_case";
+
+/// Pascal case example.
+const PASCAL_CASE_EXAMPLE = "PascalCase";
+
+/// Path case example.
+const PATH_CASE_EXAMPLE = "path/case";
+
+/// Upper dot case example.
+const UPPER_DOT_CASE_EXAMPLE = "UPPER.DOT.CASE";
+
+/// Upper kebab case example.
+const UPPER_KEBAB_CASE_EXAMPLE = "UPPER-KEBAB-CASE";
+
+/// Upper snake case example.
+const UPPER_SNAKE_CASE_EXAMPLE = "UPPER_SNAKE_CASE";
+
+/// A key representing camel case.
+const CAMEL_CASE = "CAMEL_CASE";
+
+/// A key representing lower dot case.
+const LOWER_DOT_CASE = "LOWER_DOT_CASE";
+
+/// A key representing lower kebab case.
+const LOWER_KEBAB_CASE = "LOWER_KEBAB_CASE";
+
+/// A key representing lower snake case.
+const LOWER_SNAKE_CASE = "LOWER_SNAKE_CASE";
+
+/// A key representing pascal case.
+const PASCAL_CASE = "PASCAL_CASE";
+
+/// A key representing path case.
+const PATH_CASE = "PATH_CASE";
+
+/// A key representing upper dot case.
+const UPPER_DOT_CASE = "UPPER_DOT_CASE";
+
+/// A key representing upper kebab case.
+const UPPER_KEBAB_CASE = "UPPER_KEBAB_CASE";
+
+/// A key representing upper snake case.
 const UPPER_SNAKE_CASE = "UPPER_SNAKE_CASE";
 
 const _CAMEL_CASE = CAMEL_CASE;
@@ -71,6 +116,7 @@ const _UPPER_SNAKE_CASE = UPPER_SNAKE_CASE;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Converts a string to a specific case type.
 String convertToStringCaseType(
   String value,
   StringCaseType? stringCaseType,
@@ -100,6 +146,7 @@ String convertToStringCaseType(
 }
 
 extension ConvertStringOnStringCaseTypeExtension on StringCaseType {
+  /// Converts a string to a specific case type.
   String convertString(String value) {
     return convertToStringCaseType(value, this);
   }
