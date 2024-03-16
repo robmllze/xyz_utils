@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension MapNonNulls<K, V> on Map<K?, V?> {
+extension NonNullsOnMapExtension<K, V> on Map<K?, V?> {
   Map<K, V> get nonNulls {
     return Map<K, V>.fromEntries(
       this
@@ -21,7 +21,7 @@ extension MapNonNulls<K, V> on Map<K?, V?> {
   }
 }
 
-extension MapNonNullKeys<K, V> on Map<K?, V> {
+extension NonNullKeysOnMapExtension<K, V> on Map<K?, V> {
   Map<K, V> get nonNullKeys {
     return Map<K, V>.fromEntries(
       this
@@ -32,7 +32,7 @@ extension MapNonNullKeys<K, V> on Map<K?, V> {
   }
 }
 
-extension MapNonNullValues<K, V> on Map<K, V?> {
+extension NonNullValuesOnMapExtension<K, V> on Map<K, V?> {
   Map<K, V> get nonNullValues {
     return Map<K, V>.fromEntries(
       this

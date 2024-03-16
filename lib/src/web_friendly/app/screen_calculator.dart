@@ -32,10 +32,8 @@ class ScreenCalculator {
   late bool _isVertical;
   bool get isVertical => this._isVertical;
   late bool _isNeitherHorizontalNorVertical;
-  bool get isNeitherHorizontalNorVertical =>
-      this._isNeitherHorizontalNorVertical;
-  bool get isAspectRatioMobile =>
-      this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
+  bool get isNeitherHorizontalNorVertical => this._isNeitherHorizontalNorVertical;
+  bool get isAspectRatioMobile => this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
 
   //
   //
@@ -103,14 +101,10 @@ double get minMobileAspectRatio => {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension IsVertical on ScreenSize {
+extension UtilsOnScreenSizeExtension on ScreenSize {
   bool get isVertical => this.aspectRatio <= 1.0;
-}
 
-extension IsHorizontal on ScreenSize {
   bool get isHorizontal => this.aspectRatio >= 1.0;
-}
 
-extension IsNeitherHorizontalNorVertical on ScreenSize {
   bool get isNeitherHorizontalNorVerticalisVertical => this.aspectRatio == 1.0;
 }

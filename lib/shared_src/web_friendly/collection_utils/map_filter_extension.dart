@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension MapFilterExtension<K, V> on Map<K, V> {
+extension MapWithDefaultOnMapExtension<K, V> on Map<K, V> {
   /// Returns a new map with the same keys as this map but with the specified
   /// [defaultValue] for all values that are null. If [defaultValue] is null,
   /// it simply returns a copy of the original map.

@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'extensions/string_extensions.dart';
+import 'extensions/utils_on_string_extension.dart';
 import 'type_message_mixin.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -99,7 +99,7 @@ String convertToStringCaseType(
   }
 }
 
-extension ConvertStringToStringCaseType on StringCaseType {
+extension ConvertStringOnStringCaseTypeExtension on StringCaseType {
   String convertString(String value) {
     return convertToStringCaseType(value, this);
   }

@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension SplitByLastOccurrenceOf on String {
+extension SplitByLastOccurrenceOfOnStringExtension on String {
   /// Splits the string by the last occurrence of [separator].
   List<String> splitByLastOccurrenceOf(String separator) {
     final splitIndex = this.lastIndexOf(separator);

@@ -160,11 +160,11 @@ String encodePrivateKey(RSAPrivateKey privateKey) {
 }
 
 /// Extension on [RSAPublicKey] to encode the public key into a string.
-extension EncodePublicKey on RSAPublicKey {
+extension EncodePublicKeyOnRSAPublicKeyExtension on RSAPublicKey {
   String encode() => encodePublicKey(this);
 }
 
 /// Extension on [RSAPrivateKey] to encode the private key into a string.
-extension EncodePrivateKey on RSAPrivateKey {
+extension EncodePrivateKeyOnRSAPrivateKeyExtension on RSAPrivateKey {
   String encode() => encodePrivateKey(this);
 }

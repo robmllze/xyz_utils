@@ -23,7 +23,7 @@ export 'web_friendly/app/single_service.dart';
 export 'web_friendly/http_service.dart';
 export 'web_friendly/patterns/recursive_replace.dart';
 export 'web_friendly/patterns/replace_patterns.dart';
-export 'web_friendly/second_to_ninth_element.dart';
+export 'web_friendly/second_to_ninth_element_on_iterable_extension.dart';
 export 'web_friendly/stream_to_future.dart';
 export 'web_friendly/time/date_time.dart';
 export 'web_friendly/time/duration_formatted_english.dart';

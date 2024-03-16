@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension IterableMapI<A> on Iterable<A> {
+extension MapIOnIterableExtension<A> on Iterable<A> {
   Iterable<B> mapi<B, C>(
     B Function(A e, int index, C? option) mapper, {
     List<C> options = const [],
@@ -23,7 +23,7 @@ extension IterableMapI<A> on Iterable<A> {
   }
 }
 
-extension ListMapI<A> on List<A> {
+extension MapIOnListExtension<A> on List<A> {
   Iterable<B> mapi<B, C>(
     B Function(A e, int index, C? option) mapper, {
     List<C> options = const [],
@@ -36,7 +36,7 @@ extension ListMapI<A> on List<A> {
   }
 }
 
-extension SetMapI<A> on Set<A> {
+extension MapIOnSetExtension<A> on Set<A> {
   Iterable<B> mapi<B, C>(
     B Function(A e, int index, C? option) mapper, {
     List<C> options = const [],
@@ -49,7 +49,7 @@ extension SetMapI<A> on Set<A> {
   }
 }
 
-extension MapMapI<A1, A2> on Map<A1, A2> {
+extension MapIOnMapExtension<A1, A2> on Map<A1, A2> {
   Map<B1, B2> mapi<B1, B2, C>(
     MapEntry<B1, B2> Function(A1 e1, A2 e2, int index, C? option) mapper, {
     List<C> options = const [],

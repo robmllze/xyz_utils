@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension FirstWhereOrNullIterable<T> on Iterable<T> {
+extension FirstWhereOrNullOnIterableExtension<T> on Iterable<T> {
   T? firstWhereOrNull(bool Function(T) test) {
     try {
       return this.firstWhere(test);
@@ -20,7 +20,7 @@ extension FirstWhereOrNullIterable<T> on Iterable<T> {
   }
 }
 
-extension FirstWhereOrNullList<T> on List<T> {
+extension FirstWhereOrNullOnListExtension<T> on List<T> {
   T? firstWhereOrNull(bool Function(T) test) {
     try {
       return this.firstWhere(test);
@@ -30,7 +30,7 @@ extension FirstWhereOrNullList<T> on List<T> {
   }
 }
 
-extension FirstWhereOrNullSet<T> on Set<T> {
+extension FirstWhereOrNullOnSetExtension<T> on Set<T> {
   T? firstWhereOrNull(bool Function(T) test) {
     try {
       return this.firstWhere(test);
@@ -40,7 +40,7 @@ extension FirstWhereOrNullSet<T> on Set<T> {
   }
 }
 
-extension FirstWhereOrNullMap<K, V> on Map<K, V> {
+extension FirstWhereOrNullOnMapExtension<K, V> on Map<K, V> {
   MapEntry<K, V>? firstWhereOrNull(bool Function(MapEntry<K, V>) test) {
     try {
       return this.entries.firstWhere(test);

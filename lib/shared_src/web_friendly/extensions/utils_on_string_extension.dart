@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension StringExtensions on String {
+extension UtilsOnStringExtension on String {
   /// Converts the string to UPPER_SNAKE_CASE;
   String toUpperSnakeCase() => this.toSnakeCase().toUpperCase();
 

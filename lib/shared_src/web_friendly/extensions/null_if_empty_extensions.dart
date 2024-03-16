@@ -10,32 +10,42 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension StringNullIfEmpty on String {
+import 'dart:collection';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension NullIfEmptyOnStringExtension on String {
   String? get nullIfEmpty {
     return this.isEmpty ? null : this;
   }
 }
 
-extension MapNullIfEmpty<T1, T2> on Map<T1, T2> {
+extension NullIfEmptyOnMapExtension<T1, T2> on Map<T1, T2> {
   Map<T1, T2>? get nullIfEmpty {
     return this.isEmpty ? null : this;
   }
 }
 
-extension IterableNullIfEmpty<T> on Iterable<T> {
+extension NullIfEmptyOnIterableExtension<T> on Iterable<T> {
   Iterable<T>? get nullIfEmpty {
     return this.isEmpty ? null : this;
   }
 }
 
-extension ListNullIfEmpty<T> on List<T> {
+extension LNullIfEmptyOnListExtension<T> on List<T> {
   List<T>? get nullIfEmpty {
     return this.isEmpty ? null : this;
   }
 }
 
-extension SetNullIfEmpty<T> on Set<T> {
+extension NullIfEmptyOnSetExtension<T> on Set<T> {
   Set<T>? get nullIfEmpty {
+    return this.isEmpty ? null : this;
+  }
+}
+
+extension NullIfEmptyOnQueueExtension<T> on Queue<T> {
+  Queue<T>? get nullIfEmpty {
     return this.isEmpty ? null : this;
   }
 }

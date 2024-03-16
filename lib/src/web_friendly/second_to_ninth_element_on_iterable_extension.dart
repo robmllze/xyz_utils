@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-extension SecondToNinthElement<T> on Iterable<T> {
+extension SecondToNinthElementOnIterableExtension<T> on Iterable<T> {
   /// Returns the second element in the list or the element at index 1.
   T get second => elementAt(1);
 

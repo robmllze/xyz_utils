@@ -22,7 +22,7 @@ String replaceAllData(String input, Map<Pattern, dynamic> data) {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension ReplaceDataExtension on String {
+extension ReplaceDataOnStringExtension on String {
   /// Replaces the keys of [data] in this String with the corresponding values.
   String replaceData(Map<String, dynamic> data) => replaceAllData(this, data);
 }

@@ -152,7 +152,7 @@ class HttpService {
 
 const CONTENT_TYPE_APPLICATION_JSON = {"Content-Type": "application/json"};
 
-extension FutureResponseHandleExceptions on Future<http.Response> {
+extension ResponseHandleExceptionsOnFutureExtension on Future<http.Response> {
   Future<http.Response> handleExceptions({
     final Duration timeout = const Duration(seconds: 30),
   }) {
@@ -175,7 +175,7 @@ extension FutureResponseHandleExceptions on Future<http.Response> {
   }
 }
 
-extension ResponseBodyJson on http.Response {
+extension BodyJsonOnResponseExtension on http.Response {
   dynamic get bodyJson {
     try {
       return jsonDecode(this.body);

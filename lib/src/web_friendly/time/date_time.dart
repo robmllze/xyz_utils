@@ -17,7 +17,7 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension IntlDateTime on DateTime {
+extension UtilsOnDateTimeExtension on DateTime {
   /// e.g. 4:52 PM
   String jm(String locale) => DateFormat.jm(locale).format(this);
 
@@ -56,8 +56,17 @@ extension IntlDateTime on DateTime {
   /// ''|single quote|(Literal)|'o''clock'
   ///
   /// For more info, see: https://api.flutter.dev/flutter/intl/DateFormat-class.html
-  String format(String pattern, String locale) =>
-      DateFormat(pattern, locale).format(this);
+  String format(String pattern, String locale) => DateFormat(pattern, locale).format(this);
+
+  /// e.g. August 8, 2023
+  String full([String? localeCode]) {
+    return DateFormat("MMMM d, y", localeCode).format(this);
+  }
+
+  /// e.g. Aug-8 23
+  String fullShort([String? localeCode]) {
+    return DateFormat("MMM/d/yyyy", localeCode).format(this);
+  }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -109,14 +118,10 @@ bool isSameDay(DateTime date1, DateTime date2) {
 bool isSameWeek(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
-  final week1 = DateTime.utc(a.year, a.month, a.day)
-          .difference(DateTime.utc(a.year, a.month))
-          .inDays ~/
-      7;
-  final week2 = DateTime.utc(b.year, b.month, b.day)
-          .difference(DateTime.utc(b.year, b.month))
-          .inDays ~/
-      7;
+  final week1 =
+      DateTime.utc(a.year, a.month, a.day).difference(DateTime.utc(a.year, a.month)).inDays ~/ 7;
+  final week2 =
+      DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(b.year, b.month)).inDays ~/ 7;
   return week1 == week2;
 }
 
@@ -147,18 +152,4 @@ DateTime? getFirstDate(Iterable<DateTime>? dates) {
       return a.microsecondsSinceEpoch < b.microsecondsSinceEpoch ? a : b;
     },
   );
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-extension DateTimeUtilsExtension on DateTime {
-  /// e.g. August 8, 2023
-  String full([String? localeCode]) {
-    return DateFormat("MMMM d, y", localeCode).format(this);
-  }
-
-  /// e.g. Aug-8 23
-  String fullShort([String? localeCode]) {
-    return DateFormat("MMM/d/yyyy", localeCode).format(this);
-  }
 }
