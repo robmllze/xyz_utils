@@ -51,11 +51,13 @@ class ScreenCalculator {
   late bool _isVertical;
 
   /// Whether the screen is neither horizontal nor vertical, i.e. a square.
-  bool get isNeitherHorizontalNorVertical => this._isNeitherHorizontalNorVertical;
+  bool get isNeitherHorizontalNorVertical =>
+      this._isNeitherHorizontalNorVertical;
   late bool _isNeitherHorizontalNorVertical;
 
   /// Whether the aspect ratio of the screen is that of a mobile phone.
-  bool get isAspectRatioMobile => this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
+  bool get isAspectRatioMobile =>
+      this.sizeVerticalBias.aspectRatio > MIN_MOBILE_ASPECT_RATIO;
 
   //
   //

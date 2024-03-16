@@ -28,14 +28,16 @@ String mapToCsv(Map input) {
 
 /// Converts a CSV string to a map.
 Map<int, List<String>> csvToMap(String input) {
-  
-  final processedInput = input.replaceAll(r'\,', '\u{F0001}').replaceAll(r'\"', '\u{F0002}');
+  final processedInput =
+      input.replaceAll(r'\,', '\u{F0001}').replaceAll(r'\"', '\u{F0002}');
   final lines = processedInput.split('\n');
   final res = <int, List<String>>{};
   for (var i = 0; i < lines.length; i++) {
     final line = lines[i];
-    var parts =
-        line.split(RegExp(r',(?=(?:[^"]*"[^"]*")*[^"]*$)')).map((part) => part.trim()).toList();
+    var parts = line
+        .split(RegExp(r',(?=(?:[^"]*"[^"]*")*[^"]*$)'))
+        .map((part) => part.trim())
+        .toList();
     parts = parts.map((e) {
       return e.replaceAll('\u{F0001}', ',').replaceAll('\u{F0002}', r'\"');
     }).toList();

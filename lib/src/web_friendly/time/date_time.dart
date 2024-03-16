@@ -19,16 +19,16 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 
 extension UtilsOnDateTimeExtension on DateTime {
   /// e.g. 4:52 PM
-  String jm(String locale) => DateFormat.jm(locale).format(this);
+  String fjm(String locale) => DateFormat.jm(locale).format(this);
 
   /// e.g. 11/13/2022
-  String yMd(String locale) => DateFormat.yMd(locale).format(this);
+  String fyMd(String locale) => DateFormat.yMd(locale).format(this);
 
   /// e.g. 16:52
-  String Hm(String locale) => DateFormat.Hm(locale).format(this);
+  String fHm(String locale) => DateFormat.Hm(locale).format(this);
 
   /// e.g. 13 November 2022
-  String dMMMMy(String locale) => DateFormat("d MMMM y", locale).format(this);
+  String fdMMMMy(String locale) => DateFormat("d MMMM y", locale).format(this);
 
   /// Returns a formatted DateTime string as per the [pattern]. Write a
   /// [pattern] from the following skeleton set:
@@ -56,7 +56,8 @@ extension UtilsOnDateTimeExtension on DateTime {
   /// ''|single quote|(Literal)|'o''clock'
   ///
   /// For more info, see: https://api.flutter.dev/flutter/intl/DateFormat-class.html
-  String format(String pattern, String locale) => DateFormat(pattern, locale).format(this);
+  String format(String pattern, String locale) =>
+      DateFormat(pattern, locale).format(this);
 
   /// e.g. August 8, 2023
   String full([String? localeCode]) {
@@ -124,10 +125,14 @@ bool isSameDay(DateTime date1, DateTime date2) {
 bool isSameWeek(DateTime date1, DateTime date2) {
   final a = date1.toUtc();
   final b = date2.toUtc();
-  final week1 =
-      DateTime.utc(a.year, a.month, a.day).difference(DateTime.utc(a.year, a.month)).inDays ~/ 7;
-  final week2 =
-      DateTime.utc(b.year, b.month, b.day).difference(DateTime.utc(b.year, b.month)).inDays ~/ 7;
+  final week1 = DateTime.utc(a.year, a.month, a.day)
+          .difference(DateTime.utc(a.year, a.month))
+          .inDays ~/
+      7;
+  final week2 = DateTime.utc(b.year, b.month, b.day)
+          .difference(DateTime.utc(b.year, b.month))
+          .inDays ~/
+      7;
   return week1 == week2;
 }
 

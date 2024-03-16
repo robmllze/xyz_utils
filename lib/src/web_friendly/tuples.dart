@@ -296,7 +296,8 @@ class Tuple9<T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 }
 
 /// Returns a tuple with nine elements.
-Tuple9<T1, T2, T3, T4, T5, T6, T7, T8, T9> getAs9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+Tuple9<T1, T2, T3, T4, T5, T6, T7, T8, T9>
+    getAs9<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
   Iterable<dynamic> source,
 ) {
   if (source.length < 9) {

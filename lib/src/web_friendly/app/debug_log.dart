@@ -184,8 +184,10 @@ void _debugLog({
     if (group == null || groups.contains(group)) {
       final colorPath = color != null ? AnsiStyle.italic + color : null;
       final colorTitle = color != null ? AnsiStyle.bold + color : null;
-      final path = (rec?.code != null ? "${rec!.code}" : "").withAnsiStyle(colorPath);
-      final title = "[".withAnsiStyle(colorTitle) + path + "]".withAnsiStyle(colorTitle);
+      final path =
+          (rec?.code != null ? "${rec!.code}" : "").withAnsiStyle(colorPath);
+      final title =
+          "[".withAnsiStyle(colorTitle) + path + "]".withAnsiStyle(colorTitle);
       final m = message.toString();
       final mStyled = m.withAnsiStyle(style);
       final resultUnstyled = "$icon $m";
