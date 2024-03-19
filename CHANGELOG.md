@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.47.0]
+
+- Released @ 2024-03-19 06:55:11.699544Z
+- Renamed replaceAllPatterns to replacePatterns
+
 ## [0.46.0]
 
 - Released @ 2024-03-19 04:29:25.691794Z
