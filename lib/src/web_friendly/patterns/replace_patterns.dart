@@ -21,37 +21,26 @@ dynamic replaceAllPatterns(
   String? Function(
     String key,
     dynamic value,
-    String? defaultValue,
+    String defaultValue,
   )? callback,
 }) {
   final o1 = RegExp.escape(opening);
   final c1 = RegExp.escape(closing);
   var output = input;
-
   final regex = RegExp("$o1(.*?)$c1");
   final matches = regex.allMatches(input);
-
   for (final match in matches) {
     final fullMatch = match.group(0)!;
     final keyWithDefault = match.group(1)!;
     final parts = keyWithDefault.split(delimiter);
-    final key = parts[0];
-    final defaultValue = parts.length > 1 ? parts[1] : null;
-
-    String? replacementValue;
-    if (data.containsKey(key)) {
-      replacementValue = data[key].toString();
-    } else if (defaultValue != null) {
-      replacementValue = defaultValue;
-    }
-
-    if (replacementValue != null) {
-      final temp = callback?.call(key, replacementValue, defaultValue);
-      if (temp != null) {
-        replacementValue = temp;
-      }
-      output = output.replaceFirst(fullMatch, replacementValue);
-    }
+    final e0 = parts.elementAtOrNull(0);
+    final e1 = parts.elementAtOrNull(1);
+    final key = (e1 ?? e0)!;
+    final defaultValue = e0 ?? key;
+    final value = data[key];
+    final replacementValue = value?.toString() ?? defaultValue;
+    callback?.call(key, value, defaultValue);
+    output = output.replaceFirst(fullMatch, replacementValue);
   }
 
   return output;
@@ -70,7 +59,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
     String? Function(
       String key,
       dynamic value,
-      String? defaultValue,
+      String defaultValue,
     )? callback,
   }) {
     return _replaceAllPatterns(

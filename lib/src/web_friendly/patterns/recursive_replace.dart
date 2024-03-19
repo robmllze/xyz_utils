@@ -28,7 +28,7 @@ Map recursiveReplace(
   String? Function(
     String key,
     dynamic value,
-    String? defaultValue,
+    String defaultValue,
   )? callback,
 }) {
   final data = expandFlattenedJson(
