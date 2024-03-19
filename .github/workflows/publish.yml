@@ -10,32 +10,21 @@
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
-name: xyz_utils
-description: This package helps speed up development by providing a set of utilities that are commonly used in Dart apps.
-repository: https://github.com/robmllze/xyz_utils
-version: 0.45.0
+name: Publish to pub.dev
 
 ## -----------------------------------------------------------------------------
 
-environment:
-
-  sdk: '>= 3.0.0 < 4.0.0'
-
-## -----------------------------------------------------------------------------
-
-dependencies:
-
-  analyzer: ^6.2.0
-  collection: ^1.18.0
-  equatable: ^2.0.5
-  http: ^1.2.0
-  intl: ^0.19.0
-  meta: ^1.10.0
-  path: ^1.8.3
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
 
 ## -----------------------------------------------------------------------------
 
-dev_dependencies:
-
-  lints: ^3.0.0
-  
+jobs:
+  publish:
+    permissions:
+      id-token: write # Required for authentication using OIDC
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    # with:
+    #   working-directory: path/to/package/within/repository
