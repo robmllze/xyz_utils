@@ -42,9 +42,8 @@ dynamic replaceAllPatterns(
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final value = (caseSensitive
-        ? data
-        : data.mapKeys((k) => k.toLowerCase()))[caseSensitive ? key : key.toLowerCase()];
+    final value = (caseSensitive ? data : data.mapKeys((k) => k.toLowerCase()))[
+        caseSensitive ? key : key.toLowerCase()];
     final replacementValue = value?.toString() ?? defaultValue;
     callback?.call(key, value, defaultValue);
     output = output.replaceFirst(fullMatch, replacementValue);
