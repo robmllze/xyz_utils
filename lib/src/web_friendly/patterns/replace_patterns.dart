@@ -16,7 +16,7 @@ import '/xyz_utils.dart';
 
 /// Replaces placeholders in a string with corresponding values from a provided
 /// map, supporting default values and custom delimiters.
-dynamic replaceAllPatterns(
+dynamic replacePatterns(
   String input,
   Map<dynamic, dynamic> data, {
   String opening = "<<<",
@@ -42,8 +42,9 @@ dynamic replaceAllPatterns(
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final value = (caseSensitive ? data : data.mapKeys((k) => k.toLowerCase()))[
-        caseSensitive ? key : key.toLowerCase()];
+    final value = (caseSensitive
+        ? data
+        : data.mapKeys((k) => k.toLowerCase()))[caseSensitive ? key : key.toLowerCase()];
     final replacementValue = value?.toString() ?? defaultValue;
     callback?.call(key, value, defaultValue);
     output = output.replaceFirst(fullMatch, replacementValue);
@@ -57,7 +58,7 @@ dynamic replaceAllPatterns(
 extension ReplaceAllPatternsOnStringExtension on String {
   /// Replaces placeholders in this string with corresponding values from a
   /// provided map, supporting default values and custom delimiters.
-  String replaceAllPatterns(
+  String replacePatterns(
     Map<String, dynamic> data, {
     String opening = "<<<",
     String closing = ">>>",
@@ -69,7 +70,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
       String defaultValue,
     )? callback,
   }) {
-    return _replaceAllPatterns(
+    return _replacePatterns(
       this,
       data,
       opening: opening,
@@ -83,4 +84,4 @@ extension ReplaceAllPatternsOnStringExtension on String {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-const _replaceAllPatterns = replaceAllPatterns;
+const _replacePatterns = replacePatterns;

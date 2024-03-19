@@ -3,7 +3,7 @@
 ## [0.46.0]
 
 - Released @ 2024-03-19 04:29:25.691794Z
-- Add caseSensitive parameter to recursiveReplace and replaceAllPatterns
+- Add caseSensitive parameter to recursiveReplace and replacePatterns
 
 ## [0.45.1]
 

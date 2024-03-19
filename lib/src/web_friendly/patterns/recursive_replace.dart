@@ -61,7 +61,7 @@ Map recursiveReplace(
         r.add(res);
       }
     } else if (inputValue is String) {
-      r = replaceAllPatterns(
+      r = replacePatterns(
         inputValue,
         data,
         opening: opening,
