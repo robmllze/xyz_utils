@@ -23,6 +23,7 @@ export 'collection_utils/more_collection_utils.dart';
 export 'collection_utils/null_filtered.dart';
 export 'collection_utils/var_args.dart';
 export 'extensions/join_with_last_separator_on_iterable_extension.dart';
+export 'extensions/map_keys_and_values_on_map_extension.dart';
 export 'extensions/non_nulls_on_map_extension.dart';
 export 'extensions/null_if_empty_extensions.dart';
 export 'extensions/split_by_last_occurence_of_on_string_extension.dart';

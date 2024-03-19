@@ -25,6 +25,7 @@ export 'web_friendly/collection_utils/more_collection_utils.dart';
 export 'web_friendly/collection_utils/null_filtered.dart';
 export 'web_friendly/collection_utils/var_args.dart';
 export 'web_friendly/extensions/join_with_last_separator_on_iterable_extension.dart';
+export 'web_friendly/extensions/map_keys_and_values_on_map_extension.dart';
 export 'web_friendly/extensions/non_nulls_on_map_extension.dart';
 export 'web_friendly/extensions/null_if_empty_extensions.dart';
 export 'web_friendly/extensions/split_by_last_occurence_of_on_string_extension.dart';

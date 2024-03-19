@@ -23,7 +23,7 @@ Please refer to the [API reference](https://pub.dev/documentation/xyz_utils/0.44
 
 ```yaml
 dependencies:
-  xyz_utils: 0.44.4
+  xyz_utils: any # or the latest version
 ```
 ## Contributing
 
