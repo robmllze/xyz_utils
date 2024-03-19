@@ -14,7 +14,6 @@
 ## macOS and Linux
 
 ### Fetching Generators
-
 ```bash
 rm -rf ___generators/
 git clone https://github.com/robmllze/___generators.git
@@ -23,7 +22,6 @@ rm -rf ___generators/.git
 ```
 
 ### Adding the Workflow
-
 ```bash
 rm -rf .github/
 git clone https://github.com/robmllze/pub.dev_package_workflow.git .github
@@ -31,7 +29,6 @@ rm -rf .github/.git
 ```
 
 ### Deleting .DS_Store files
-
 ```bash
 cd your/project/path
 find . -name '.DS_Store' -type f -delete
@@ -40,7 +37,6 @@ find . -name '.DS_Store' -type f -delete
 ## Windows
 
 ### Fetching Generators
-
 ```bash
 rmdir /s /q ___generators/
 git clone https://github.com/robmllze/___generators.git
