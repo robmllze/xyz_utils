@@ -10,6 +10,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+import '/xyz_utils.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
 /// Replaces placeholders in a string with corresponding values from a provided
 /// map, supporting default values and custom delimiters.
 dynamic replaceAllPatterns(
@@ -18,6 +22,7 @@ dynamic replaceAllPatterns(
   String opening = "<<<",
   String closing = ">>>",
   String delimiter = "||",
+  bool caseSensitive = true,
   String? Function(
     String key,
     dynamic value,
@@ -37,7 +42,9 @@ dynamic replaceAllPatterns(
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final value = data[key];
+    final value = (caseSensitive
+        ? data
+        : data.mapKeys((k) => k.toLowerCase()))[caseSensitive ? key : key.toLowerCase()];
     final replacementValue = value?.toString() ?? defaultValue;
     callback?.call(key, value, defaultValue);
     output = output.replaceFirst(fullMatch, replacementValue);
@@ -56,6 +63,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
     String opening = "<<<",
     String closing = ">>>",
     String delimiter = "||",
+    bool caseSensitive = true,
     String? Function(
       String key,
       dynamic value,
@@ -68,6 +76,7 @@ extension ReplaceAllPatternsOnStringExtension on String {
       opening: opening,
       closing: closing,
       delimiter: delimiter,
+      caseSensitive: caseSensitive,
       callback: callback,
     ).toString();
   }

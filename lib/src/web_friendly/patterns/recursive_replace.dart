@@ -25,6 +25,7 @@ Map recursiveReplace(
   String closing = ">>>",
   String separator = ".",
   String delimiter = "||",
+  bool caseSensitive = true,
   String? Function(
     String key,
     dynamic value,
@@ -66,6 +67,7 @@ Map recursiveReplace(
         opening: opening,
         closing: closing,
         delimiter: delimiter,
+        caseSensitive: caseSensitive,
         callback: callback,
       );
     } else {
