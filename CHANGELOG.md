@@ -2,7 +2,8 @@
 
 ## [0.47.0]
 
-- Released @ 2024-03-19 06:55:11.699544Z
+- Released @ 2024-03-19 06:56:28.070262Z
+- Renamed replaceAllPatterns to replacePatterns
 
 ## [0.46.0]
 
