@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.48.0]
+
+- Released @ 2024-03-20 00:46:14.861427Z
+- Fixed replacePatterns
+
 ## [0.47.0]
 
 - Released @ 2024-03-19 07:35:47.236058Z
