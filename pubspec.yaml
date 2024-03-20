@@ -11,9 +11,9 @@
 ##.title~
 
 name: xyz_utils
-description: This package helps speed up development by providing a set of utilities that are commonly used in Dart apps.
+description: This package provides a set of utilities that are commonly used in Dart apps. It is also the foundation for other packages in the 🇽🇾🇿 ecosystem.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.48.0
+version: 0.48.1
 
 ## -----------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/xyz_utils.svg)](https://pub.dev/packages/xyz_utils)
 
-This package helps speed up development by providing a set of utilities that are commonly used in Dart apps. It is also the foundation for other packages in the 🇽🇾🇿 ecosystem.
+This package provides a set of utilities that are commonly used in Dart apps. It is also the foundation for other packages in the 🇽🇾🇿 ecosystem.
 
 It includes utilities for working with collections and and more, as well as the following notable features:
 
