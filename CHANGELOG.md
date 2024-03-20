@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.48.2]
+
+- Released @ 2024-03-20 02:31:46.731497Z
+- Update analysis_options
+
 ## [0.48.1]
 
 - Released @ 2024-03-20 00:51:58.758859Z

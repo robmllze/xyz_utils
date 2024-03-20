@@ -14,7 +14,7 @@
 // the package is well documented and easy to use. Please refer to the API
 // reference for more information.
 
-import 'package:xyz_utils/xyz_utils.dart';
+import "package:xyz_utils/xyz_utils.dart";
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

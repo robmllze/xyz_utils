@@ -16,7 +16,7 @@ const int _kBillion = 1000000000;
 
 void _check(bool expr, String name, int value) {
   if (!expr) {
-    throw ArgumentError('Timestamp $name out of range: $value');
+    throw ArgumentError("Timestamp $name out of range: $value");
   }
 }
 
@@ -111,13 +111,13 @@ class FirestoreTimestamp implements Comparable<FirestoreTimestamp> {
 
   @override
   String toString() {
-    return 'Timestamp(seconds=$seconds, nanoseconds=$nanoseconds)';
+    return "Timestamp(seconds=$seconds, nanoseconds=$nanoseconds)";
   }
 
   static void _validateRange(int seconds, int nanoseconds) {
-    _check(nanoseconds >= 0, 'nanoseconds', nanoseconds);
-    _check(nanoseconds < _kBillion, 'nanoseconds', nanoseconds);
-    _check(seconds >= _kStartOfTime, 'seconds', seconds);
-    _check(seconds < _kEndOfTime, 'seconds', seconds);
+    _check(nanoseconds >= 0, "nanoseconds", nanoseconds);
+    _check(nanoseconds < _kBillion, "nanoseconds", nanoseconds);
+    _check(seconds >= _kStartOfTime, "seconds", seconds);
+    _check(seconds < _kEndOfTime, "seconds", seconds);
   }
 }

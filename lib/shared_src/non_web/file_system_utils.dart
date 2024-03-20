@@ -10,10 +10,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:io';
-import 'package:path/path.dart' as p;
+import "dart:io";
+import "package:path/path.dart" as p;
 
-import '/shared_src/web_friendly/paths.dart';
+import "/shared_src/web_friendly/paths.dart";
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -85,7 +85,7 @@ Future<File?> findFileByName(String fileName, String directoryPath) async {
   if (!await directory.exists()) return null;
   final entities = directory.listSync(recursive: true);
   for (final entity in entities) {
-    if (entity is File && entity.path.endsWith('/$fileName')) {
+    if (entity is File && entity.path.endsWith("/$fileName")) {
       return entity;
     }
   }
