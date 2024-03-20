@@ -13,10 +13,6 @@ It includes utilities for working with collections and and more, as well as the 
 
 Please refer to the [API reference](https://pub.dev/documentation/xyz_utils/0.44.4/web_friendly/web_friendly-library.html) for more information.
 
-## Documentation
-
-🔜 Documentation and video tutorials are coming soon. Feel free to contact me for more information.
-
 ## Installation
 
 #### Add this to your `pubspec.yaml` file:
@@ -36,7 +32,7 @@ Contributions are welcome. Here are a few ways you can help:
 
 ## License
 
-This package is released under the MIT License.
+This project is released under the MIT License. See [LICENSE](https://raw.githubusercontent.com/robmllze/xyz_utils/main/LICENSE) for more information.
 
 ## Contact
 

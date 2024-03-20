@@ -28,7 +28,7 @@ Map recursiveReplace(
   bool caseSensitive = true,
   String? Function(
     String key,
-    dynamic value,
+    dynamic suggestedReplacementValue,
     String defaultValue,
   )? callback,
 }) {

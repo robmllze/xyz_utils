@@ -16,23 +16,21 @@ import '/xyz_utils.dart';
 
 /// Replaces placeholders in a string with corresponding values from a provided
 /// map, supporting default values and custom delimiters.
-dynamic replacePatterns(
+String replacePatterns(
   String input,
-  Map<dynamic, dynamic> data, {
+  Map data, {
   String opening = "<<<",
   String closing = ">>>",
   String delimiter = "||",
   bool caseSensitive = true,
   String? Function(
     String key,
-    dynamic value,
+    dynamic suggestedReplacementValue,
     String defaultValue,
   )? callback,
 }) {
-  final o1 = RegExp.escape(opening);
-  final c1 = RegExp.escape(closing);
   var output = input;
-  final regex = RegExp("$o1(.*?)$c1");
+  final regex = RegExp("${RegExp.escape(opening)}(.*?)${RegExp.escape(closing)}");
   final matches = regex.allMatches(input);
   for (final match in matches) {
     final fullMatch = match.group(0)!;
@@ -42,10 +40,12 @@ dynamic replacePatterns(
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final value = (caseSensitive ? data : data.mapKeys((k) => k.toLowerCase()))[
-        caseSensitive ? key : key.toLowerCase()];
-    final replacementValue = value?.toString() ?? defaultValue;
-    callback?.call(key, value, defaultValue);
+    final data1 = caseSensitive ? data : data.mapKeys((k) => k.toString().toLowerCase());
+    final key1 = caseSensitive ? key : key.toLowerCase();
+    final suggestedReplacementValue = data1[key1];
+    final replacementValue = callback?.call(key, suggestedReplacementValue, defaultValue) ??
+        suggestedReplacementValue?.toString() ??
+        defaultValue;
     output = output.replaceFirst(fullMatch, replacementValue);
   }
 
@@ -58,14 +58,14 @@ extension ReplaceAllPatternsOnStringExtension on String {
   /// Replaces placeholders in this string with corresponding values from a
   /// provided map, supporting default values and custom delimiters.
   String replacePatterns(
-    Map<String, dynamic> data, {
+    Map data, {
     String opening = "<<<",
     String closing = ">>>",
     String delimiter = "||",
     bool caseSensitive = true,
     String? Function(
       String key,
-      dynamic value,
+      dynamic suggestedReplacementValue,
       String defaultValue,
     )? callback,
   }) {
