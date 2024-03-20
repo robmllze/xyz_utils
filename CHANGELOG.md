@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.48.1]
+
+- Released @ 2024-03-20 00:50:18.447895Z
+- Update description
+
 ## [0.48.0]
 
 - Released @ 2024-03-20 00:46:14.861427Z
