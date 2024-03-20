@@ -25,7 +25,7 @@ linter:
     prefer_const_constructors: true
     prefer_final_fields: true
     prefer_relative_imports: true
-    prefer_single_quotes: false
+    prefer_double_quotes: true
     require_trailing_commas: true
     unnecessary_this: false
     camel_case_types: false
