@@ -31,6 +31,6 @@ extension JoinWithLastSeparatorOnIterableExtension on Iterable {
 
     final lastTwo = list.sublist(list.length - 2).join(lastSeparator);
     final allButLastTwo = list.sublist(0, list.length - 2).join(separator);
-    return "$allButLastTwo$separator$lastTwo";
+    return '$allButLastTwo$separator$lastTwo';
   }
 }

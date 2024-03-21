@@ -21,7 +21,7 @@ String mapToCsv(Map input) {
     } else if (value is List) {
       value = value.join(',');
     }
-    output += '\"$key\",\"$value\"\n';
+    output += '"$key","$value"\n';
   }
   return output;
 }

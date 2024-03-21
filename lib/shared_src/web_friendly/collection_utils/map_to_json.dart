@@ -51,7 +51,7 @@ dynamic _mapToJson(
   }
   assert(
     false,
-    '[mapToJson] Unsupported type \"${input.runtimeType}\"',
+    '[mapToJson] Unsupported type "${input.runtimeType}"',
   );
   return input.toString();
 }

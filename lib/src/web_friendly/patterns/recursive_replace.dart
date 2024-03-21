@@ -46,17 +46,17 @@ Map recursiveReplace(
 
         final v = e.value;
         final res = $replace(k, v);
-        final localKey = "$separator$k";
+        final localKey = '$separator$k';
         data[localKey] = res;
         r[k] = res;
       }
     } else if (inputValue is List) {
       r = <dynamic>[];
       for (var n = 0; n < inputValue.length; n++) {
-        final k = "$inputKey$separator$n";
+        final k = '$inputKey$separator$n';
         final v = inputValue[n];
         final res = $replace(k, v);
-        final localKey = "$separator$k";
+        final localKey = '$separator$k';
         data[localKey] = res;
         r.add(res);
       }
