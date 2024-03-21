@@ -18,7 +18,6 @@
 rm -rf ___generators/
 git clone https://github.com/robmllze/___generators.git
 dart pub get -C ___generators
-rm -rf ___generators/.git
 ```
 
 ### Adding the Workflow
