@@ -13,7 +13,7 @@
 name: xyz_utils
 description: This package provides a set of utilities that are commonly used in Dart apps. It is also the foundation for other packages in the XYZ ecosystem.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.50.0
+version: 0.51.0
 
 ## -----------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ dependencies:
   equatable: ^2.0.5
   http: ^1.2.1
   intl: ^0.19.0
-  meta: ^1.12.0
+  meta: ^1.11.0
   path: ^1.9.0
 
 ## -----------------------------------------------------------------------------
