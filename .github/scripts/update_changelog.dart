@@ -15,16 +15,16 @@ import 'dart:io';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 void main(List<String> args) {
-  final version = args.isNotEmpty ? args[0] : "0.1.0";
-  final newReleaseNotes = args.length > 1 ? args[1] : "Initial release.";
-  final changelogPath = "CHANGELOG.md";
+  final version = args.isNotEmpty ? args[0] : '0.1.0';
+  final newReleaseNotes = args.length > 1 ? args[1] : 'Initial release.';
+  final changelogPath = 'CHANGELOG.md';
   final file = File(changelogPath);
   if (!file.existsSync()) {
-    print("$changelogPath does not exist.");
+    print('$changelogPath does not exist.');
     exit(1);
   }
   var contents = file.readAsStringSync();
-  contents = contents.replaceAll("# Changelog", "").trim();
+  contents = contents.replaceAll('# Changelog', '').trim();
   final sections = extractSections(contents);
   final versionExist = sections.where((e) => e.version == version).isNotEmpty;
   if (versionExist) {
@@ -40,18 +40,18 @@ void main(List<String> args) {
       ),
     );
   }
-  contents = "# Changelog\n\n${(sections.toList()..sort((a, b) {
+  contents = '# Changelog\n\n${(sections.toList()..sort((a, b) {
       return b.releasedAt.compareTo(a.releasedAt);
-    })).map((e) => e.toString()).join('\n')}";
+    })).map((e) => e.toString()).join('\n')}';
 
   file.writeAsStringSync(contents);
-  print("Changelog updated with version $version.");
+  print('Changelog updated with version $version.');
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 Set<VersionSection> extractSections(String contents) {
-  final headerPattern = RegExp(r"## \[\d+\.\d+\.\d+(\+\d+)?\]");
+  final headerPattern = RegExp(r'## \[\d+\.\d+\.\d+(\+\d+)?\]');
   final allVersionMatches = headerPattern.allMatches(contents).toList();
   final results = <VersionSection>{};
   for (var i = 0; i < allVersionMatches.length; i++) {
@@ -66,12 +66,12 @@ Set<VersionSection> extractSections(String contents) {
     final old = lines
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
-        .map((e) => e.startsWith("-") ? e.substring(1) : e)
+        .map((e) => e.startsWith('-') ? e.substring(1) : e)
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty);
     for (var line in old) {
-      if (line.contains("Released @")) {
-        final temp = line.split("Released @").last.trim();
+      if (line.contains('Released @')) {
+        final temp = line.split('Released @').last.trim();
         releasedAt = DateTime.tryParse(temp) ?? releasedAt;
       } else {
         updates.add(line);
