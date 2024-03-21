@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -105,9 +105,9 @@ bool isPrivateFileName(String filePath) {
 /// Example:
 /// ```dart
 /// final pathSets = [
-///   {"path1", "path2"},
-///   {"segmentA", "segmentB"},
-///   {"end1", "end2"},
+///   {'path1', 'path2'},
+///   {'segmentA', 'segmentB'},
+///   {'end1', 'end2'},
 /// ];
 /// final combinedPaths = combineSets(pathSets);
 /// print(combinedPaths);

@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -80,7 +80,7 @@ class DisposableValue<T> {
   /// ```dart
   /// final a = DisposableValue('hello');
   /// final b = a.pass;
-  /// print(b.value); // Prints "hello"
+  /// print(b.value); // Prints 'hello'
   /// a.dispose();
   /// print(b.value); // Throws an exception, because a was disposed
   /// ```

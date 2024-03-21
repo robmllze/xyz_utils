@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -93,9 +93,9 @@ class NotificationTopic extends Equatable {
 
   @override
   String toString() {
-    return "${this.name != null ? "${this.name}${this.blocked ? "__" : ""}" : ""}"
-        "${this.blocked ? "BLOCKED" : ""}"
-        "${this.subjectUid != null ? ":${this.subjectUid}" : ""}";
+    return '${this.name != null ? '${this.name}${this.blocked ? '__' : ''}' : ''}'
+        '${this.blocked ? 'BLOCKED' : ''}'
+        '${this.subjectUid != null ? ':${this.subjectUid}' : ''}';
   }
 
   //

@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -61,7 +61,7 @@ extension UtilsOnStringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// var example = "HelloWorld123";
+  /// var example = 'HelloWorld123';
   /// var components = example.extractLowercaseComponents();
   /// print(components); // Output: ['hello', 'world', '123']
   /// ```
@@ -140,7 +140,7 @@ extension UtilsOnStringExtension on String {
         .join(' ');
   }
 
-  /// Truncates the string to the given [length] and adds "..." at the end.
+  /// Truncates the string to the given [length] and adds '...' at the end.
   String truncToLength(int length) {
     return (this.length > length
         ? '${this.substring(0, length).trim()}...'

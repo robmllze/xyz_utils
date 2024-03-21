@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -51,7 +51,7 @@ final dynamic set = _VarArgsFunction<Set>((args1, args2) {
 
 /// **Example:**
 /// ```dart
-/// final Map a = map(1, 2, x: "x-axis", y: "y-axis", /* etc. */);
+/// final Map a = map(1, 2, x: 'x-axis', y: 'y-axis', /* etc. */);
 /// print(a);
 /// ```
 /// **Output:**
@@ -72,7 +72,7 @@ class _VarArgsFunction<T> {
   //
   //
 
-  static const _OFFSET = 'Symbol("'.length;
+  static const _OFFSET = "Symbol('".length;
 
   //
   //

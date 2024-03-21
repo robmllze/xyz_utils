@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -11,7 +11,7 @@
 //.title~
 
 /// An abstract class that provides a way to check if an object is defined as
-/// "valid", meaning its input is not null and not empty.
+/// 'valid', meaning its input is not null and not empty.
 abstract class ValidObject {
   const ValidObject();
   bool get valid;

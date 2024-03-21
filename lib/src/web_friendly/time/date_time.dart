@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -98,16 +98,16 @@ String timeAgo(DateTime date, String Function(String) tr, String locale) {
     return dayAgo(date, tr, locale);
   }
   if (delta.inDays > 1) {
-    return "${a.d}${tr("$K.d")}";
+    return '${a.d}${tr('$K.d')}';
   }
   if (delta.inHours > 1) {
-    return "${a.h}${tr("$K.h")}";
+    return '${a.h}${tr('$K.h')}';
   }
   if (delta.inMinutes > 1) {
-    return "${a.m}${tr("$K.m")}";
+    return '${a.m}${tr('$K.m')}';
   }
   if (delta.inSeconds > 30) {
-    return "${a.s}${tr("$K.s")}";
+    return '${a.s}${tr('$K.s')}';
   }
   return tr('$K.now');
 }

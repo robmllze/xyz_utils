@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -35,17 +35,17 @@
 /// ### Example Usage:
 /// ```dart
 /// final nestedJson = {
-///   "user": {
-///     "name": "Phillip Sherman",
-///     "address": {
-///       "street": "42 Wallaby Way",
-///       "city": "Sydney",
-///       "zip": "2000"
+///   'user': {
+///     'name': 'Phillip Sherman',
+///     'address': {
+///       'street': '42 Wallaby Way',
+///       'city': 'Sydney',
+///       'zip': '2000'
 ///     }
 ///   },
-///   "emails": [
-///     "p.sherman@sydneydental.com.au",
-///     "phillip.sherman@gmail.com"
+///   'emails': [
+///     'p.sherman@sydneydental.com.au',
+///     'phillip.sherman@gmail.com'
 ///   ]
 /// };
 ///
@@ -53,12 +53,12 @@
 /// print(flattened);
 /// // Output:
 /// // {
-/// //   "user.name": "hillip Sherman",
-/// //   "user.address.street": "42 Wallaby Way",
-/// //   "user.address.city": "Sydney",
-/// //   "user.address.zip": "2000",
-/// //   "emails.0": "p.sherman@sydneydental.com.au",
-/// //   "emails.1": "phillip.sherman@gmail.com"
+/// //   'user.name': 'hillip Sherman',
+/// //   'user.address.street': '42 Wallaby Way',
+/// //   'user.address.city': 'Sydney',
+/// //   'user.address.zip': '2000',
+/// //   'emails.0': 'p.sherman@sydneydental.com.au',
+/// //   'emails.1': 'phillip.sherman@gmail.com'
 /// // }
 /// ```
 Map flattenJson(Map input, {String separator = '.'}) {
@@ -69,12 +69,12 @@ Map flattenJson(Map input, {String separator = '.'}) {
         for (final entry in value.entries) {
           final k = entry.key;
           final v = entry.value;
-          final newPath = path.isEmpty ? k.toString() : "$path$separator$k";
+          final newPath = path.isEmpty ? k.toString() : '$path$separator$k';
           flatten(newPath, v);
         }
       } else if (value is List) {
         for (var i = 0; i < value.length; i++) {
-          flatten("$path$separator$i", value[i]);
+          flatten('$path$separator$i', value[i]);
         }
       } else {
         result[path] = value;

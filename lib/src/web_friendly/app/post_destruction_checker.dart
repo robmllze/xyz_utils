@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -21,7 +21,7 @@ final _finalizer = Finalizer<void Function()>((final a) => a());
 /// ```dart
 /// final object = <dynamic, dynamic>{};
 /// final checker = ObjectPostDestructionChecker(object, (){
-///   print("object has been destructed/no longer exists");
+///   print('object has been destructed/no longer exists');
 /// });
 /// ```
 class ObjectPostDestructionChecker {
@@ -57,7 +57,7 @@ class ObjectPostDestructionChecker {
 /// class YourClass extends PostDestructionChecker {
 ///   @override
 ///   void onPostDestruction() {
-///     print("Your class has been destructed/no longer exists");
+///     print('Your class has been destructed/no longer exists');
 ///   }
 /// }
 ///

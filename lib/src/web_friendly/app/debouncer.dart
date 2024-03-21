@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -22,7 +22,7 @@ import 'dart:async' show Timer;
 /// final _debouncer = Debouncer(
 ///   const Duration(seconds: 1),
 ///   onWaited: () {
-///     print("Hello World!");
+///     print('Hello World!');
 ///     bool _didPrint = true;
 ///   }
 /// );

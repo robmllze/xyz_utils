@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -21,7 +21,7 @@ extension ValueOfOnEnumExtension<T extends Enum> on Iterable<T> {
   /// For example:
   /// ```dart
   /// enum ExampleEnum { a, b, c }
-  /// final value = ExampleEnum.values.valueOf("b");
+  /// final value = ExampleEnum.values.valueOf('b');
   /// print(ExampleEnum.b == value); // true
   /// ```
   T? valueOf(String? value) {

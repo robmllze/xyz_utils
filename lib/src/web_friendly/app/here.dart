@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -65,7 +65,7 @@ class Here {
     return null;
   }
 
-  //Symbol? get _defaultGroup => this.group ?? (this.scope != null ? Symbol("#${this.scope}") : null);
+  //Symbol? get _defaultGroup => this.group ?? (this.scope != null ? Symbol('#${this.scope}') : null);
 
   //
   //
