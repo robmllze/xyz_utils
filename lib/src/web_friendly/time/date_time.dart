@@ -10,10 +10,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:intl/intl.dart";
+import 'package:intl/intl.dart';
 
-import "/shared_src/web_friendly/_all_web_friendly.g.dart";
-import "/src/web_friendly/_all_web_friendly.g.dart";
+import '/shared_src/web_friendly/_all_web_friendly.g.dart';
+import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -28,7 +28,7 @@ extension UtilsOnDateTimeExtension on DateTime {
   String fHm(String locale) => DateFormat.Hm(locale).format(this);
 
   /// e.g. 13 November 2022
-  String fdMMMMy(String locale) => DateFormat("d MMMM y", locale).format(this);
+  String fdMMMMy(String locale) => DateFormat('d MMMM y', locale).format(this);
 
   /// Returns a formatted DateTime string as per the [pattern]. Write a
   /// [pattern] from the following skeleton set:
@@ -61,12 +61,12 @@ extension UtilsOnDateTimeExtension on DateTime {
 
   /// e.g. August 8, 2023
   String full([String? localeCode]) {
-    return DateFormat("MMMM d, y", localeCode).format(this);
+    return DateFormat('MMMM d, y', localeCode).format(this);
   }
 
   /// e.g. Aug-8 23
   String fullShort([String? localeCode]) {
-    return DateFormat("MMM/d/yyyy", localeCode).format(this);
+    return DateFormat('MMM/d/yyyy', localeCode).format(this);
   }
 }
 
@@ -76,11 +76,11 @@ extension UtilsOnDateTimeExtension on DateTime {
 /// translation function [tr] to translate the string into the given [locale].
 String dayAgo(DateTime date, String Function(String) tr, String locale) {
   final delta = DateTime.now().difference(date);
-  const K = "time_ago";
+  const K = 'time_ago';
   if (delta.inDays == 1) {
-    return tr("$K.yesterday");
+    return tr('$K.yesterday');
   }
-  return DateFormat("MMMM d, y", locale).format(date);
+  return DateFormat('MMMM d, y', locale).format(date);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -90,9 +90,9 @@ String dayAgo(DateTime date, String Function(String) tr, String locale) {
 String timeAgo(DateTime date, String Function(String) tr, String locale) {
   final delta = DateTime.now().difference(date);
   final a = DurationFormattedEnglish(delta.inMicroseconds);
-  const K = "time_ago";
+  const K = 'time_ago';
   if (delta.inDays == 1) {
-    return tr("$K.yesterday");
+    return tr('$K.yesterday');
   }
   if (delta.inDays > 3) {
     return dayAgo(date, tr, locale);
@@ -109,7 +109,7 @@ String timeAgo(DateTime date, String Function(String) tr, String locale) {
   if (delta.inSeconds > 30) {
     return "${a.s}${tr("$K.s")}";
   }
-  return tr("$K.now");
+  return tr('$K.now');
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

@@ -10,8 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "extensions/utils_on_string_extension.dart";
-import "type_message_mixin.dart";
+import 'extensions/utils_on_string_extension.dart';
+import 'type_message_mixin.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -51,58 +51,58 @@ enum StringCaseType implements TypeMessageMixin {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Camel case example.
-const CAMEL_CASE_EXAMPLE = "camelCase";
+const CAMEL_CASE_EXAMPLE = 'camelCase';
 
 /// Lower dot case example.
-const LOWER_DOT_CASE_EXAMPLE = "lower.dot.case";
+const LOWER_DOT_CASE_EXAMPLE = 'lower.dot.case';
 
 /// Lower kebab case example.
-const LOWER_KEBAB_CASE_EXAMPLE = "lower-kebab-case";
+const LOWER_KEBAB_CASE_EXAMPLE = 'lower-kebab-case';
 
 /// Lower snake case example.
-const LOWER_SNAKE_CASE_EXAMPLE = "lower_snake_case";
+const LOWER_SNAKE_CASE_EXAMPLE = 'lower_snake_case';
 
 /// Pascal case example.
-const PASCAL_CASE_EXAMPLE = "PascalCase";
+const PASCAL_CASE_EXAMPLE = 'PascalCase';
 
 /// Path case example.
-const PATH_CASE_EXAMPLE = "path/case";
+const PATH_CASE_EXAMPLE = 'path/case';
 
 /// Upper dot case example.
-const UPPER_DOT_CASE_EXAMPLE = "UPPER.DOT.CASE";
+const UPPER_DOT_CASE_EXAMPLE = 'UPPER.DOT.CASE';
 
 /// Upper kebab case example.
-const UPPER_KEBAB_CASE_EXAMPLE = "UPPER-KEBAB-CASE";
+const UPPER_KEBAB_CASE_EXAMPLE = 'UPPER-KEBAB-CASE';
 
 /// Upper snake case example.
-const UPPER_SNAKE_CASE_EXAMPLE = "UPPER_SNAKE_CASE";
+const UPPER_SNAKE_CASE_EXAMPLE = 'UPPER_SNAKE_CASE';
 
 /// A key representing camel case.
-const CAMEL_CASE = "CAMEL_CASE";
+const CAMEL_CASE = 'CAMEL_CASE';
 
 /// A key representing lower dot case.
-const LOWER_DOT_CASE = "LOWER_DOT_CASE";
+const LOWER_DOT_CASE = 'LOWER_DOT_CASE';
 
 /// A key representing lower kebab case.
-const LOWER_KEBAB_CASE = "LOWER_KEBAB_CASE";
+const LOWER_KEBAB_CASE = 'LOWER_KEBAB_CASE';
 
 /// A key representing lower snake case.
-const LOWER_SNAKE_CASE = "LOWER_SNAKE_CASE";
+const LOWER_SNAKE_CASE = 'LOWER_SNAKE_CASE';
 
 /// A key representing pascal case.
-const PASCAL_CASE = "PASCAL_CASE";
+const PASCAL_CASE = 'PASCAL_CASE';
 
 /// A key representing path case.
-const PATH_CASE = "PATH_CASE";
+const PATH_CASE = 'PATH_CASE';
 
 /// A key representing upper dot case.
-const UPPER_DOT_CASE = "UPPER_DOT_CASE";
+const UPPER_DOT_CASE = 'UPPER_DOT_CASE';
 
 /// A key representing upper kebab case.
-const UPPER_KEBAB_CASE = "UPPER_KEBAB_CASE";
+const UPPER_KEBAB_CASE = 'UPPER_KEBAB_CASE';
 
 /// A key representing upper snake case.
-const UPPER_SNAKE_CASE = "UPPER_SNAKE_CASE";
+const UPPER_SNAKE_CASE = 'UPPER_SNAKE_CASE';
 
 const _CAMEL_CASE = CAMEL_CASE;
 const _LOWER_DOT_CASE = LOWER_DOT_CASE;

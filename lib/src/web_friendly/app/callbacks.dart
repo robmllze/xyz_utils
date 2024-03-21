@@ -10,9 +10,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "dart:async";
+import 'dart:async';
 
-import "/src/web_friendly/_all_web_friendly.g.dart";
+import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -49,7 +49,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   void Function() add(TCallback<T1> callback, {dynamic callbackKey}) {
     if (this._queue.isNotEmpty) {
       Here().debugLogAlert(
-        "Do not add callbacks while callbacks are executing. Call wait() first.",
+        'Do not add callbacks while callbacks are executing. Call wait() first.',
       );
     }
     final k = callbackKey ?? callback;
@@ -65,7 +65,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   bool exists(dynamic callbackKey) {
     if (this._queue.isNotEmpty) {
       Here().debugLogAlert(
-        "Do not check callbacks while callbacks are executing. Call wait() first.",
+        'Do not check callbacks while callbacks are executing. Call wait() first.',
       );
     }
     return this._callbacks.containsKey(callbackKey);
@@ -79,7 +79,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   bool remove(dynamic callbackKey) {
     if (this._queue.isNotEmpty) {
       Here().debugLogAlert(
-        "Do not remove callbacks while callbacks are executing. Call wait() first.",
+        'Do not remove callbacks while callbacks are executing. Call wait() first.',
       );
     }
     return this._callbacks.remove(callbackKey) != null;
@@ -89,7 +89,7 @@ class Callbacks<T1, T2 extends TCallback<T1>> {
   void clear() {
     if (this._queue.isNotEmpty) {
       Here().debugLogAlert(
-        "Do not clear callbacks while callbacks are executing. Call wait() first.",
+        'Do not clear callbacks while callbacks are executing. Call wait() first.',
       );
     }
     this._callbacks.clear();

@@ -10,9 +10,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:path/path.dart" as p;
+import 'package:path/path.dart' as p;
 
-import "debug_log.dart" as util_debug_log;
+import 'debug_log.dart' as util_debug_log;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -31,7 +31,7 @@ class Rec {
   //
 
   const Rec([
-    this.code = "",
+    this.code = '',
     this.group,
     this.options = const RecOptions({}),
   ]);
@@ -66,7 +66,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLog(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -78,7 +78,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogError(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -90,7 +90,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogAlert(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -102,7 +102,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogIgnore(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -114,7 +114,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogSuccess(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -126,7 +126,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogStart(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -138,7 +138,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogStop(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -150,7 +150,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogInfo(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -162,7 +162,7 @@ class Rec {
     Symbol? group,
   ]) {
     util_debug_log.debugLogMessage(
-      message ?? "???",
+      message ?? '???',
       group ?? this.group,
       this,
     );
@@ -173,7 +173,7 @@ class Rec {
   //
 
   @override
-  String toString() => this.code ?? "???";
+  String toString() => this.code ?? '???';
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

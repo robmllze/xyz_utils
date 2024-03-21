@@ -12,4 +12,4 @@
 
 library;
 
-export "shared_src/non_web/_all_non_web.g.dart";
+export 'shared_src/non_web/_all_non_web.g.dart';

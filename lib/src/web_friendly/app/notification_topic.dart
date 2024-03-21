@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:equatable/equatable.dart";
+import 'package:equatable/equatable.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -36,11 +36,11 @@ class NotificationTopic extends Equatable {
   });
 
   factory NotificationTopic.fromString(String? input) {
-    final a = input?.split(":");
-    final b = a?.elementAtOrNull(0)?.split("__");
+    final a = input?.split(':');
+    final b = a?.elementAtOrNull(0)?.split('__');
     final name = b?.elementAtOrNull(0);
     final subjectUid = a?.elementAtOrNull(1);
-    final blocked = b?.elementAtOrNull(1) == "BLOCKED";
+    final blocked = b?.elementAtOrNull(1) == 'BLOCKED';
     return NotificationTopic(
       name: name,
       subjectUid: subjectUid,

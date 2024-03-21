@@ -10,10 +10,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "dart:io";
-import "package:path/path.dart" as p;
+import 'dart:io';
+import 'package:path/path.dart' as p;
 
-import "/shared_src/web_friendly/paths.dart";
+import '/shared_src/web_friendly/paths.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -61,7 +61,7 @@ Future<void> writeFile(
 Future<void> clearFile(String filePath) async {
   final localSystemFilePath = toLocalSystemPathFormat(filePath);
   final file = File(localSystemFilePath);
-  await file.writeAsString("");
+  await file.writeAsString('');
 }
 
 /// Deletes the file located at [filePath].
@@ -85,7 +85,7 @@ Future<File?> findFileByName(String fileName, String directoryPath) async {
   if (!await directory.exists()) return null;
   final entities = directory.listSync(recursive: true);
   for (final entity in entities) {
-    if (entity is File && entity.path.endsWith("/$fileName")) {
+    if (entity is File && entity.path.endsWith('/$fileName')) {
       return entity;
     }
   }
@@ -119,15 +119,15 @@ Future<List<String>?> listFilePaths(
 String getDesktopPath() {
   try {
     if (Platform.isMacOS) {
-      return p.join("Users", Platform.environment["USER"]!, "Desktop");
+      return p.join('Users', Platform.environment['USER']!, 'Desktop');
     } else if (Platform.isWindows) {
-      return p.join(Platform.environment["USERPROFILE"]!, "Desktop");
+      return p.join(Platform.environment['USERPROFILE']!, 'Desktop');
     } else if (Platform.isLinux) {
-      return p.join("home", Platform.environment["USER"]!, "Desktop");
+      return p.join('home', Platform.environment['USER']!, 'Desktop');
     } else {
       throw false;
     }
   } catch (_) {
-    throw UnsupportedError("Unsupported platform");
+    throw UnsupportedError('Unsupported platform');
   }
 }

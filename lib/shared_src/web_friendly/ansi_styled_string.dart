@@ -256,7 +256,7 @@ extension WithAnsiStyleOnStringExtension on String {
   /// Adds the ANSI escape code to the string.
   String withAnsiStyleCode(int? code) {
     if (code == null) return this;
-    return "\u001b[${code}m$this\u001b[0m";
+    return '\u001b[${code}m$this\u001b[0m';
   }
 
   /// Adds an ANSI style to the string.

@@ -10,8 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/shared_src/web_friendly/_all_web_friendly.g.dart";
-import "/src/web_friendly/_all_web_friendly.g.dart";
+import '/shared_src/web_friendly/_all_web_friendly.g.dart';
+import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -59,7 +59,7 @@ class Here {
       final uri = Uri.tryParse(this.filePath!);
       if (uri != null && uri.pathSegments.isNotEmpty) {
         final last = uri.pathSegments.last;
-        return "$last.dart";
+        return '$last.dart';
       }
     }
     return null;
@@ -126,11 +126,11 @@ class Here {
   @override
   String toString() {
     return [
-      "File Path: $filePath",
-      "Scope: $scope",
-      "Line: $lineNumber",
-      "Column: $columnNumber",
-    ].join(", ");
+      'File Path: $filePath',
+      'Scope: $scope',
+      'Line: $lineNumber',
+      'Column: $columnNumber',
+    ].join(', ');
   }
 }
 
@@ -138,27 +138,27 @@ class Here {
 
 List<dynamic>? _here([int start = 1]) {
   final results = <dynamic>[null, null, null, null];
-  final stackTrace = StackTrace.current.toString().split("\n");
+  final stackTrace = StackTrace.current.toString().split('\n');
   for (var i = start; i < stackTrace.length; i++) {
     final line = stackTrace[i];
-    final [a, b] = line.split(" (");
-    final scope = a.split(RegExp(r"#\d+"))[1].trim();
-    if (scope.contains("<anonymous closure>")) continue;
-    final locationParts = b.substring(0, b.length - 1).split(":");
+    final [a, b] = line.split(' (');
+    final scope = a.split(RegExp(r'#\d+'))[1].trim();
+    if (scope.contains('<anonymous closure>')) continue;
+    final locationParts = b.substring(0, b.length - 1).split(':');
     final filePath = locationParts
-        .firstWhereOrNull((e) => e.contains(".dart"))
-        ?.replaceAll(".dart", "")
-        .replaceAll(".js", "");
+        .firstWhereOrNull((e) => e.contains('.dart'))
+        ?.replaceAll('.dart', '')
+        .replaceAll('.js', '');
     final file = filePath != null ? getBaseName(filePath) : null;
     int? lineNumber;
     int? columnNumber;
     for (final c in locationParts) {
       if (lineNumber == null) {
-        if (c.contains(RegExp(r"\d+"))) {
+        if (c.contains(RegExp(r'\d+'))) {
           lineNumber = int.tryParse(c);
         }
       } else if (columnNumber == null) {
-        if (c.contains(RegExp(r"\d+"))) {
+        if (c.contains(RegExp(r'\d+'))) {
           columnNumber = int.tryParse(c);
         }
       }
@@ -177,19 +177,19 @@ List<dynamic>? _here([int start = 1]) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 List<dynamic>? _hereWeb([int start = 1]) {
-  final stackTrace = StackTrace.current.toString().split("\n");
+  final stackTrace = StackTrace.current.toString().split('\n');
   for (var i = start + 1; i < stackTrace.length; i++) {
     final line = stackTrace[i];
-    final parts = line.split(" ").where((e) => e.isNotEmpty).toList();
+    final parts = line.split(' ').where((e) => e.isNotEmpty).toList();
     final skipParts = <int>[];
     final filePath = () {
       for (var p = 0; p < parts.length; p++) {
         final part = parts[p];
-        if (part.startsWith("packages") && part.contains(".dart")) {
+        if (part.startsWith('packages') && part.contains('.dart')) {
           final a = part
-              .replaceAll(RegExp("(packages)[\\/]"), "")
-              .replaceAll(".dart", "")
-              .replaceAll(".js", "");
+              .replaceAll(RegExp('(packages)[\\/]'), '')
+              .replaceAll('.dart', '')
+              .replaceAll('.js', '');
           skipParts.add(p);
           return a;
         }
@@ -199,7 +199,7 @@ List<dynamic>? _hereWeb([int start = 1]) {
     int? lineNumber;
     int? columnNumber;
     for (var p = 0; p < parts.length; p++) {
-      final pp = parts[p].split(":");
+      final pp = parts[p].split(':');
       if (pp.length == 2) {
         lineNumber = int.tryParse(pp[0]);
         columnNumber = int.tryParse(pp[1]);
@@ -217,8 +217,8 @@ List<dynamic>? _hereWeb([int start = 1]) {
       if (skipParts.contains(p)) continue;
       scope = parts[p];
     }
-    if (scope == "new") scope = "<new>";
-    final isAnonymous = parts.contains("<fn>");
+    if (scope == 'new') scope = '<new>';
+    final isAnonymous = parts.contains('<fn>');
     if (isAnonymous) continue;
     return [filePath, scope, null, null];
   }

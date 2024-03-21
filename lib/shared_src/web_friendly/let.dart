@@ -10,10 +10,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "dart:convert";
-import "dart:core";
+import 'dart:convert';
+import 'dart:core';
 
-import "_all_web_friendly.g.dart";
+import '_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -167,7 +167,7 @@ double? letDoubleOrNull(dynamic input) {
 bool? letBoolOrNull(dynamic input) {
   if (input is bool) return input;
   if (input is num) return input == 1;
-  if (input is String) return input.trim().toLowerCase() == "true";
+  if (input is String) return input.trim().toLowerCase() == 'true';
   return null;
 }
 
@@ -389,12 +389,12 @@ Iterable<String> letIterableFromCommaSeparatedString(String input) {
   var temp = input.trim();
   if (temp.isEmpty) return const [];
   if (temp.length > 1 &&
-      ((temp.startsWith("[") && temp.endsWith("]")) ||
-          (temp.startsWith("{") && temp.endsWith("}")) ||
-          (temp.startsWith("(") && temp.endsWith(")")))) {
+      ((temp.startsWith('[') && temp.endsWith(']')) ||
+          (temp.startsWith('{') && temp.endsWith('}')) ||
+          (temp.startsWith('(') && temp.endsWith(')')))) {
     temp = temp.substring(1, temp.length - 1);
   }
-  return temp.split(",").map((final e) => e.trim());
+  return temp.split(',').map((final e) => e.trim());
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

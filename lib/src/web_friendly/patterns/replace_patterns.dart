@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/xyz_utils.dart";
+import '/xyz_utils.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -19,9 +19,9 @@ import "/xyz_utils.dart";
 String replacePatterns(
   String input,
   Map data, {
-  String opening = "<<<",
-  String closing = ">>>",
-  String delimiter = "||",
+  String opening = '<<<',
+  String closing = '>>>',
+  String delimiter = '||',
   bool caseSensitive = true,
   String? Function(
     String key,
@@ -31,7 +31,7 @@ String replacePatterns(
 }) {
   var output = input;
   final regex =
-      RegExp("${RegExp.escape(opening)}(.*?)${RegExp.escape(closing)}");
+      RegExp('${RegExp.escape(opening)}(.*?)${RegExp.escape(closing)}');
   final matches = regex.allMatches(input);
   for (final match in matches) {
     final fullMatch = match.group(0)!;
@@ -62,9 +62,9 @@ extension ReplaceAllPatternsOnStringExtension on String {
   /// provided map, supporting default values and custom delimiters.
   String replacePatterns(
     Map data, {
-    String opening = "<<<",
-    String closing = ">>>",
-    String delimiter = "||",
+    String opening = '<<<',
+    String closing = '>>>',
+    String delimiter = '||',
     bool caseSensitive = true,
     String? Function(
       String key,

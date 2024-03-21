@@ -17,9 +17,9 @@ extension ParseDurationOnStringExtension on String {
 
   /// Tries to parse the string as a duration in the format `HH:MM:SS.SSS`.
   Duration? tryParseDuration() {
-    final a = this.split(":");
+    final a = this.split(':');
     if (a.length != 3) return null;
-    final b = a[2].split(".");
+    final b = a[2].split('.');
     if (b.length != 2) return null;
     final c = [...a.sublist(0, 2), ...b];
     if (c.length != 4) return null;
@@ -47,7 +47,7 @@ extension ParseDurationOnStringExtension on String {
   Duration parseDuration() {
     final duration = this.tryParseDuration();
     if (duration == null) {
-      throw ArgumentError("Invalid duration string: $this");
+      throw ArgumentError('Invalid duration string: $this');
     }
 
     return duration;

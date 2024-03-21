@@ -10,8 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/shared_src/web_friendly/_all_web_friendly.g.dart";
-import "/src/web_friendly/_all_web_friendly.g.dart";
+import '/shared_src/web_friendly/_all_web_friendly.g.dart';
+import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -23,7 +23,7 @@ void debugLog(
 ]) {
   _debugLog(
     message: message,
-    icon: "⚪️",
+    icon: '⚪️',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -38,7 +38,7 @@ void debugLogError(
 ]) {
   _debugLog(
     message: message,
-    icon: "🔴",
+    icon: '🔴',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -53,7 +53,7 @@ void debugLogAlert(
 ]) {
   _debugLog(
     message: message,
-    icon: "🟠",
+    icon: '🟠',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -68,7 +68,7 @@ void debugLogIgnore(
 ]) {
   _debugLog(
     message: message,
-    icon: "🟡",
+    icon: '🟡',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -84,7 +84,7 @@ void debugLogSuccess(
 ]) {
   _debugLog(
     message: message,
-    icon: "🟢",
+    icon: '🟢',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -99,7 +99,7 @@ void debugLogStart(
 ]) {
   _debugLog(
     message: message,
-    icon: "🔵",
+    icon: '🔵',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -114,7 +114,7 @@ void debugLogStop(
 ]) {
   _debugLog(
     message: message,
-    icon: "⚫",
+    icon: '⚫',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -129,7 +129,7 @@ void debugLogInfo(
 ]) {
   _debugLog(
     message: message,
-    icon: "🟣",
+    icon: '🟣',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -144,7 +144,7 @@ void debugLogMessage(
 ]) {
   _debugLog(
     message: message,
-    icon: "🟤",
+    icon: '🟤',
     group: group,
     rec: rec,
     color: AnsiStyle.fgLightBlack,
@@ -185,13 +185,13 @@ void _debugLog({
       final colorPath = color != null ? AnsiStyle.italic + color : null;
       final colorTitle = color != null ? AnsiStyle.bold + color : null;
       final path =
-          (rec?.code != null ? "${rec!.code}" : "").withAnsiStyle(colorPath);
+          (rec?.code != null ? '${rec!.code}' : '').withAnsiStyle(colorPath);
       final title =
-          "[".withAnsiStyle(colorTitle) + path + "]".withAnsiStyle(colorTitle);
+          '['.withAnsiStyle(colorTitle) + path + ']'.withAnsiStyle(colorTitle);
       final m = message.toString();
       final mStyled = m.withAnsiStyle(style);
-      final resultUnstyled = "$icon $m";
-      final resultStyled = "$icon $title $mStyled";
+      final resultUnstyled = '$icon $m';
+      final resultStyled = '$icon $title $mStyled';
       print(resultStyled);
       DebugLog.callbacks.callAll(resultUnstyled);
     }

@@ -13,7 +13,7 @@
 /// Expands a flattened JSON map, e.g. `{"a.b": 1}` to `{a.b: 1, b: 1}`.
 Map expandFlattenedJson(
   Map input, {
-  String separator = ".",
+  String separator = '.',
 }) {
   final res = {...input};
   var modified = true;

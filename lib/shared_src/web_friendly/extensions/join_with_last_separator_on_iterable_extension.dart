@@ -15,11 +15,11 @@ extension JoinWithLastSeparatorOnIterableExtension on Iterable {
   /// [separator] and [lastSeparator]. The [lastSeparator] is used to join the
   /// last two elements of the iterable.
   String joinWithLastSeparator({
-    String separator = ", ",
-    String lastSeparator = " & ",
+    String separator = ', ',
+    String lastSeparator = ' & ',
   }) {
     if (this.isEmpty) {
-      return "";
+      return '';
     }
     if (this.length == 1) {
       return this.first;

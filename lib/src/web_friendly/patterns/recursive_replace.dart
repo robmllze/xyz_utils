@@ -10,8 +10,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/shared_src/web_friendly/_all_web_friendly.g.dart";
-import "/src/web_friendly/_all_web_friendly.g.dart";
+import '/shared_src/web_friendly/_all_web_friendly.g.dart';
+import '/src/web_friendly/_all_web_friendly.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -21,10 +21,10 @@ import "/src/web_friendly/_all_web_friendly.g.dart";
 /// corresponding values.
 Map recursiveReplace(
   Map input, {
-  String opening = "<<<",
-  String closing = ">>>",
-  String separator = ".",
-  String delimiter = "||",
+  String opening = '<<<',
+  String closing = '>>>',
+  String separator = '.',
+  String delimiter = '||',
   bool caseSensitive = true,
   String? Function(
     String key,
@@ -76,6 +76,6 @@ Map recursiveReplace(
     return r;
   }
 
-  final res = $replace("", input);
+  final res = $replace('', input);
   return res;
 }

@@ -18,7 +18,7 @@ extension UtilsOnStringExtension on String {
   String toLowerSnakeCase() => this.toSnakeCase();
 
   /// Converts the string to snake_case.
-  String toSnakeCase() => this.extractLowercaseComponents().join("_");
+  String toSnakeCase() => this.extractLowercaseComponents().join('_');
 
   /// Converts the string to lower-kebab-case.
   String toUpperKebabCase() => this.toKebabCase().toUpperCase();
@@ -27,10 +27,10 @@ extension UtilsOnStringExtension on String {
   String toLowerKebabCase() => this.toKebabCase();
 
   /// Converts the string to kebab-case.
-  String toKebabCase() => this.extractLowercaseComponents().join("-");
+  String toKebabCase() => this.extractLowercaseComponents().join('-');
 
   /// Converts the string to dot.case.
-  String toDotCase() => this.extractLowercaseComponents().join(".");
+  String toDotCase() => this.extractLowercaseComponents().join('.');
 
   /// Converts the string to lower.dot.case. (alias for [toDotCase]).
   String toLowerDotCase() => this.toDotCase();
@@ -39,7 +39,7 @@ extension UtilsOnStringExtension on String {
   String toUpperDotCase() => this.toDotCase().toUpperCase();
 
   /// Converts the string to path/case.
-  String toPathCase([String separator = "/"]) =>
+  String toPathCase([String separator = '/']) =>
       this.extractLowercaseComponents().join(separator);
 
   /// Converts the string to camelCase.
@@ -97,10 +97,10 @@ extension UtilsOnStringExtension on String {
   }
 
   /// Returns `true` if the string is a digit.
-  bool get isDigit => RegExp(r"^[0-9]$").hasMatch(this);
+  bool get isDigit => RegExp(r'^[0-9]$').hasMatch(this);
 
   /// Returns `true` if the string is a letter.
-  bool get isLetter => RegExp(r"^[a-zA-Z]$").hasMatch(this);
+  bool get isLetter => RegExp(r'^[a-zA-Z]$').hasMatch(this);
 
   /// Returns `true` if the string is all uppercase.
   bool get isUpperCase =>
@@ -135,21 +135,21 @@ extension UtilsOnStringExtension on String {
   String withCapitalizedWords() {
     return this
         .trim()
-        .split(RegExp(r"[- ]+"))
+        .split(RegExp(r'[- ]+'))
         .map((e) => e.trim().toLowerCase().capitalize())
-        .join(" ");
+        .join(' ');
   }
 
   /// Truncates the string to the given [length] and adds "..." at the end.
   String truncToLength(int length) {
     return (this.length > length
-        ? "${this.substring(0, length).trim()}..."
+        ? '${this.substring(0, length).trim()}...'
         : this);
   }
 
   /// Replaces all whitespace characters with a single space.
   String withNormalizedWhitespace() {
-    return this.replaceAll(RegExp(r"[\s]+"), " ");
+    return this.replaceAll(RegExp(r'[\s]+'), ' ');
   }
 
   /// Converts the string to a [Uri] or returns `null` if the string is not a

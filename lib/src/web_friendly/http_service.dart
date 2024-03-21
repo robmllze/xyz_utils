@@ -10,10 +10,10 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "dart:convert";
-import "dart:typed_data" show Uint8List;
+import 'dart:convert';
+import 'dart:typed_data' show Uint8List;
 
-import "package:http/http.dart" as http;
+import 'package:http/http.dart' as http;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -150,10 +150,10 @@ class HttpService {
   Future<String?> getCurrentIpAddress() async {
     try {
       final response =
-          await http.get(Uri.parse("https://api.ipify.org?format=json"));
+          await http.get(Uri.parse('https://api.ipify.org?format=json'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
-        return jsonData["ip"];
+        return jsonData['ip'];
       }
     } catch (_) {}
     return null;
@@ -162,7 +162,7 @@ class HttpService {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-const CONTENT_TYPE_APPLICATION_JSON = {"Content-Type": "application/json"};
+const CONTENT_TYPE_APPLICATION_JSON = {'Content-Type': 'application/json'};
 
 extension ResponseHandleExceptionsOnFutureExtension on Future<http.Response> {
   /// Handles exceptions that occur during the request.
@@ -175,7 +175,7 @@ extension ResponseHandleExceptionsOnFutureExtension on Future<http.Response> {
           onTimeout: () => http.Response.bytes(
             [],
             408,
-            reasonPhrase: "Timed out after ${timeout.inSeconds} seconds",
+            reasonPhrase: 'Timed out after ${timeout.inSeconds} seconds',
           ),
         )
         .catchError(

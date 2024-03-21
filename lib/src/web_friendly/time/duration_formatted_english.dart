@@ -69,23 +69,23 @@ class DurationFormattedEnglish {
   //
 
   /// The formatted duration string with the week as the largest unit.
-  String get toW => (w != 0 ? "${w}w " : "");
+  String get toW => (w != 0 ? '${w}w ' : '');
 
   /// The formatted duration string with the day as the largest unit.
-  String get toD => toW + (d != 0 ? "${d}d " : "");
+  String get toD => toW + (d != 0 ? '${d}d ' : '');
 
   /// The formatted duration string with the hour as the largest unit.
-  String get toH => toD + (h != 0 ? "${h}h " : "");
+  String get toH => toD + (h != 0 ? '${h}h ' : '');
 
   /// The formatted duration string with the minute as the largest unit.
-  String get toM => toH + (m != 0 ? "${m}m " : "");
+  String get toM => toH + (m != 0 ? '${m}m ' : '');
 
   /// The formatted duration string with the second as the largest unit.
-  String get toS => toM + (s != 0 ? "${s}s " : "");
+  String get toS => toM + (s != 0 ? '${s}s ' : '');
 
   /// The formatted duration string with the millisecond as the largest unit.
-  String get toMs => toS + (ms != 0 ? "${ms}ms " : "");
+  String get toMs => toS + (ms != 0 ? '${ms}ms ' : '');
 
   /// The formatted duration string with the microsecond as the largest unit.
-  String get toUs => toMs + (us != 0 ? "$usμs " : "");
+  String get toUs => toMs + (us != 0 ? '$usμs ' : '');
 }

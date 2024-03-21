@@ -57,6 +57,6 @@ extension TryMergeOnIterableExtension<T> on Iterable<Iterable<T>?> {
 /// represents the group of users.
 String combinedOrderedStringId(List<String> ids) {
   final sorted = ids..sort((a, b) => a.compareTo(b));
-  final combined = sorted.join("_");
+  final combined = sorted.join('_');
   return combined;
 }

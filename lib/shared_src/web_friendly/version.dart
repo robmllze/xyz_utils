@@ -54,7 +54,7 @@ class Version {
   //
 
   factory Version.parse(String input) {
-    final components = input.split(RegExp(r"[\.\+]"));
+    final components = input.split(RegExp(r'[\.\+]'));
     int p(i) => i < components.length ? (int.tryParse(components[i]) ?? 0) : 0;
     return Version(
       major: p(0),
@@ -168,5 +168,5 @@ class Version {
 
   @override
   String toString() =>
-      "${this.major}.${this.minor}.${this.patch}+${this.build}";
+      '${this.major}.${this.minor}.${this.patch}+${this.build}';
 }

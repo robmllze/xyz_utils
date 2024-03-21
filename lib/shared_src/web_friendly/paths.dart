@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:path/path.dart" as p;
+import 'package:path/path.dart' as p;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -59,24 +59,24 @@ String getFileNameWithoutExtension(String filePath) {
 
 /// Replaces all forward slashes with the local path separator.
 String toLocalSystemPathFormat(String path) {
-  return path.split(RegExp(r"[\\/]")).join(p.separator);
+  return path.split(RegExp(r'[\\/]')).join(p.separator);
 }
 
 /// Replaces all backslashes with forward slashes.
 String toUnixSystemPathFormat(String path) {
-  return path.split(RegExp(r"[\\/]")).join("/");
+  return path.split(RegExp(r'[\\/]')).join('/');
 }
 
 /// Replaces all forward slashes with backslashes.
 String toWindowsSystemPathFormat(String path) {
-  return path.split(RegExp(r"[\\/]")).join("\\");
+  return path.split(RegExp(r'[\\/]')).join('\\');
 }
 
 /// Checks if the provided file is a private Dart file (starts with an
 /// underscore).
 bool isPrivateFileName(String filePath) {
   final fileName = getBaseName(filePath);
-  return fileName.startsWith("_");
+  return fileName.startsWith('_');
 }
 
 /// Checks if the file name matches the specified beginning and ending types.
@@ -88,9 +88,9 @@ bool isPrivateFileName(String filePath) {
 ) {
   final fileName = getBaseName(filePath);
   final a =
-      begType.isEmpty ? true : fileName.startsWith("${begType.toLowerCase()}_");
+      begType.isEmpty ? true : fileName.startsWith('${begType.toLowerCase()}_');
   final b =
-      endType.isEmpty ? true : fileName.endsWith(".$endType".toLowerCase());
+      endType.isEmpty ? true : fileName.endsWith('.$endType'.toLowerCase());
   final c = a && b;
   return (c, fileName);
 }
