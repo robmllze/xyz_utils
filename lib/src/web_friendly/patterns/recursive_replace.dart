@@ -21,20 +21,11 @@ import '/src/web_friendly/_all_web_friendly.g.dart';
 /// corresponding values.
 Map recursiveReplace(
   Map input, {
-  String opening = '<<<',
-  String closing = '>>>',
-  String separator = '.',
-  String delimiter = '||',
-  bool caseSensitive = true,
-  String? Function(
-    String key,
-    dynamic suggestedReplacementValue,
-    String defaultValue,
-  )? callback,
+  ReplacePatternsSettings settings = const ReplacePatternsSettings(),
 }) {
   final data = expandFlattenedJson(
-    flattenJson(input, separator: separator),
-    separator: separator,
+    flattenJson(input, separator: settings.separator),
+    separator: settings.separator,
   );
 
   dynamic $replace<T>(dynamic inputKey, dynamic inputValue) {
@@ -46,17 +37,17 @@ Map recursiveReplace(
 
         final v = e.value;
         final res = $replace(k, v);
-        final localKey = '$separator$k';
+        final localKey = '$settings.separator$k';
         data[localKey] = res;
         r[k] = res;
       }
     } else if (inputValue is List) {
       r = <dynamic>[];
       for (var n = 0; n < inputValue.length; n++) {
-        final k = '$inputKey$separator$n';
+        final k = '$inputKey$settings.separator$n';
         final v = inputValue[n];
         final res = $replace(k, v);
-        final localKey = '$separator$k';
+        final localKey = '$settings.separator$k';
         data[localKey] = res;
         r.add(res);
       }
@@ -64,11 +55,7 @@ Map recursiveReplace(
       r = replacePatterns(
         inputValue,
         data,
-        opening: opening,
-        closing: closing,
-        delimiter: delimiter,
-        caseSensitive: caseSensitive,
-        callback: callback,
+        settings: settings,
       );
     } else {
       r = inputValue;

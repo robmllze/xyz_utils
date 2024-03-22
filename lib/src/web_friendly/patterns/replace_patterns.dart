@@ -19,34 +19,24 @@ import '/xyz_utils.dart';
 String replacePatterns(
   String input,
   Map data, {
-  String opening = '<<<',
-  String closing = '>>>',
-  String delimiter = '||',
-  bool caseSensitive = true,
-  String? Function(
-    String key,
-    dynamic suggestedReplacementValue,
-    String defaultValue,
-  )? callback,
+  ReplacePatternsSettings settings = const ReplacePatternsSettings(),
 }) {
   var output = input;
-  final regex =
-      RegExp('${RegExp.escape(opening)}(.*?)${RegExp.escape(closing)}');
+  final regex = RegExp('${RegExp.escape(settings.opening)}(.*?)${RegExp.escape(settings.closing)}');
   final matches = regex.allMatches(input);
   for (final match in matches) {
     final fullMatch = match.group(0)!;
     final keyWithDefault = match.group(1)!;
-    final parts = keyWithDefault.split(delimiter);
+    final parts = keyWithDefault.split(settings.delimiter);
     final e0 = parts.elementAtOrNull(0);
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final data1 =
-        caseSensitive ? data : data.mapKeys((k) => k.toString().toLowerCase());
-    final key1 = caseSensitive ? key : key.toLowerCase();
+    final data1 = settings.caseSensitive ? data : data.mapKeys((k) => k.toString().toLowerCase());
+    final key1 = settings.caseSensitive ? key : key.toLowerCase();
     final suggestedReplacementValue = data1[key1];
     final replacementValue =
-        callback?.call(key, suggestedReplacementValue, defaultValue) ??
+        settings.callback?.call(key, suggestedReplacementValue, defaultValue) ??
             suggestedReplacementValue?.toString() ??
             defaultValue;
     output = output.replaceFirst(fullMatch, replacementValue);
@@ -62,24 +52,12 @@ extension ReplaceAllPatternsOnStringExtension on String {
   /// provided map, supporting default values and custom delimiters.
   String replacePatterns(
     Map data, {
-    String opening = '<<<',
-    String closing = '>>>',
-    String delimiter = '||',
-    bool caseSensitive = true,
-    String? Function(
-      String key,
-      dynamic suggestedReplacementValue,
-      String defaultValue,
-    )? callback,
+    ReplacePatternsSettings settings = const ReplacePatternsSettings(),
   }) {
     return _replacePatterns(
       this,
       data,
-      opening: opening,
-      closing: closing,
-      delimiter: delimiter,
-      caseSensitive: caseSensitive,
-      callback: callback,
+      settings: settings,
     ).toString();
   }
 }
@@ -87,3 +65,35 @@ extension ReplaceAllPatternsOnStringExtension on String {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 const _replacePatterns = replacePatterns;
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class ReplacePatternsSettings {
+  //
+  //
+  //
+
+  final String opening;
+  final String closing;
+  final String separator;
+  final String delimiter;
+  final bool caseSensitive;
+  final String? Function(
+    String key,
+    dynamic suggestedReplacementValue,
+    String defaultValue,
+  )? callback;
+
+  //
+  //
+  //
+
+  const ReplacePatternsSettings({
+    this.opening = '<<<',
+    this.closing = '>>>',
+    this.separator = '.',
+    this.delimiter = '||',
+    this.caseSensitive = true,
+    this.callback,
+  });
+}
