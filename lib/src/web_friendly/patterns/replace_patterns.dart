@@ -22,7 +22,8 @@ String replacePatterns(
   ReplacePatternsSettings settings = const ReplacePatternsSettings(),
 }) {
   var output = input;
-  final regex = RegExp('${RegExp.escape(settings.opening)}(.*?)${RegExp.escape(settings.closing)}');
+  final regex = RegExp(
+      '${RegExp.escape(settings.opening)}(.*?)${RegExp.escape(settings.closing)}',);
   final matches = regex.allMatches(input);
   for (final match in matches) {
     final fullMatch = match.group(0)!;
@@ -32,7 +33,9 @@ String replacePatterns(
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final data1 = settings.caseSensitive ? data : data.mapKeys((k) => k.toString().toLowerCase());
+    final data1 = settings.caseSensitive
+        ? data
+        : data.mapKeys((k) => k.toString().toLowerCase());
     final key1 = settings.caseSensitive ? key : key.toLowerCase();
     final suggestedReplacementValue = data1[key1];
     final replacementValue =
