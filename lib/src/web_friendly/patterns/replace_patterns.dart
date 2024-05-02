@@ -23,7 +23,8 @@ String replacePatterns(
 }) {
   var output = input;
   final regex = RegExp(
-      '${RegExp.escape(settings.opening)}(.*?)${RegExp.escape(settings.closing)}',);
+    '${RegExp.escape(settings.opening)}(.*?)${RegExp.escape(settings.closing)}',
+  );
   final matches = regex.allMatches(input);
   for (final match in matches) {
     final fullMatch = match.group(0)!;
