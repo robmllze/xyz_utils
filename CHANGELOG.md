@@ -4,7 +4,6 @@
 
 - Released @ 2024-05-02 07:07:10.164118Z
 - Add ReplacePatternsSettings
-- Small update
 
 ## [0.51.1]
 
