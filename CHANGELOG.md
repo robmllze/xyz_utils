@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.54.0]
+
+- Released @ 2024-05-20 02:32:22.508844Z
+- Update debouncer
+
 ## [0.53.0]
 
 - Released @ 2024-05-02 12:08:45.112200Z
