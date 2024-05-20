@@ -4,27 +4,25 @@
 ## 🇽🇾🇿 & Dev
 ##
 ## Copyright Ⓒ Robert Mollentze, xyzand.dev
-## 
+##
 ## Licensing details can be found in the LICENSE file in the root directory.
-## 
+##
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
 name: xyz_utils
 description: This package provides a set of utilities that are commonly used in Dart apps. It is also the foundation for other packages in the XYZ ecosystem.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.53.0
+version: 0.54.0
 
 ## -----------------------------------------------------------------------------
 
 environment:
-
-  sdk: '>= 3.3.1 < 4.0.0'
+  sdk: ">= 3.3.1 < 4.0.0"
 
 ## -----------------------------------------------------------------------------
 
 dependencies:
-
   analyzer: ^6.4.1
   collection: ^1.18.0
   equatable: ^2.0.5
@@ -36,6 +34,4 @@ dependencies:
 ## -----------------------------------------------------------------------------
 
 dev_dependencies:
-
   lints: ^3.0.0
-  
