@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.55.0]
+
+- Released @ 2024-05-26 05:43:08.843558Z
+- Updated merge.dart
+
 ## [0.54.0]
 
 - Released @ 2024-05-20 02:32:22.508844Z
