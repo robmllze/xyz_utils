@@ -10,26 +10,42 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+import 'dart:collection' show Queue;
+
 import 'package:collection/collection.dart' show mergeMaps;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Merges two lists or sets into one list or set.
-T mergeListsOrSets<T extends Iterable>(T a, dynamic b) {
-  final aa = a is List
-      ? List.of(a)
-      : a is Set
-          ? Set.of(a)
-          : null;
-  final bb = b is List
-      ? List.of(b)
-      : b is Set
-          ? Set.of(b)
-          : null;
-  if (aa == null) {
-    throw Error();
+/// Merges two Iterables into one. Supported Iterable types are List, Set, and
+/// Queue.
+T mergeListsSetsOrQueues<T extends Iterable>(T a, Iterable b) {
+  Iterable result;
+  if (a is List) {
+    result = List.of(a);
+    var index = 0;
+    for (var item in b) {
+      if (result.length <= index || result.elementAt(index) != item) {
+        (result as dynamic).add(item);
+      }
+      index++;
+    }
+  } else if (a is Set) {
+    result = Set.of(a);
+    (result as dynamic).addAll(b);
+  } else if (a is Queue) {
+    result = Queue.of(a);
+    var index = 0;
+    for (var item in b) {
+      if (result.length <= index || result.elementAt(index) != item) {
+        (result as dynamic).add(item);
+      }
+      index++;
+    }
+  } else {
+    throw ArgumentError('Unsupported Iterable type');
   }
-  return bb == null ? ((aa as dynamic)..add(b)) : ((aa as dynamic)..addAll(bb));
+
+  return result as T;
 }
 
 /// Merges two iterables into one iterable.
@@ -49,12 +65,12 @@ dynamic mergeDataDeep(
     return mergeMaps(
       a,
       b,
-      value: (final a, final b) {
+      value: (a, b) {
         if (a is Map && b is Map) {
           return mergeDataDeep(a, b, elseFilter);
         }
-        if (a is List || a is Set) {
-          return mergeListsOrSets<Iterable>(a as Iterable, b);
+        if (a is List || a is Set || a is Queue) {
+          return mergeListsSetsOrQueues<Iterable>(a, b);
         }
         if (a is Iterable) {
           return mergeIterables(a, b);
@@ -63,8 +79,8 @@ dynamic mergeDataDeep(
       },
     );
   }
-  if (a is List || a is Set) {
-    return mergeListsOrSets<Iterable>(a as Iterable, b);
+  if (a is List || a is Set || a is Queue) {
+    return mergeListsSetsOrQueues<Iterable>(a, b);
   }
   if (a is Iterable) {
     return mergeIterables(a, b);
