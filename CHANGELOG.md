@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.56.0]
+
+- Released @ 2024-06-10 02:20:24.170244Z
+- Add sub-package: location_utils_package
+
 ## [0.55.0]
 
 - Released @ 2024-05-26 05:43:08.843558Z

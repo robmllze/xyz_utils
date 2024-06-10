@@ -12,7 +12,8 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension CalculateGeometricCentereOnLocationPackageExtension on LocationUtilsPackage {
+extension CalculateGeometricCentereOnLocationPackageExtension
+    on LocationUtilsPackage {
   /// Calculates the geometric center of a set of locations.
   _TLocation calculateGeometricCenter(Set<_TLocation> locations) {
     if (locations.isEmpty) {
