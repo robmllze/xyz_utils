@@ -40,7 +40,8 @@ extension CalculateHavershire3DDistanceOnLocationPackageExtension
   double calculateHavershire3DDistance({
     required TLocationComponents location1,
     required TLocationComponents location2,
-    LocationUtilsPackageDistanceUnit unit = LocationUtilsPackageDistanceUnit.METRES,
+    LocationUtilsPackageDistanceUnit unit =
+        LocationUtilsPackageDistanceUnit.METRES,
     LocationUtilsPackageRadius radius = LocationUtilsPackageRadius.EARTH,
   }) {
     final lat1 = location1.latitude;
