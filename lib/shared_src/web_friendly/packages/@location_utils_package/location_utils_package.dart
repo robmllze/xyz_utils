@@ -48,27 +48,25 @@ final class LocationUtilsPackage {
   // without polluting the global namespace.
 
   /// The distance unit of miles.
-  static const DISTANCE_MILES = LocationUtilsPaclageDistancUnit.MILES;
+  static const DISTANCE_MILES = LocationUtilsPackageDistanceUnit.MILES;
 
   /// The distance unit of kilometres.
-  static const DISTANCE_KILOMETRES = LocationUtilsPaclageDistancUnit.KILOMETRES;
+  static const DISTANCE_KILOMETRES = LocationUtilsPackageDistanceUnit.KILOMETRES;
 
   /// The distance unit of metres.
-  static const DISTANCE_METRES = LocationUtilsPaclageDistancUnit.METRES;
+  static const DISTANCE_METRES = LocationUtilsPackageDistanceUnit.METRES;
 
   /// The distance unit of nautical miles.
-  static const DISTANCE_NAUTICAL_MILES =
-      LocationUtilsPaclageDistancUnit.NAUTICAL_MILES;
+  static const DISTANCE_NAUTICAL_MILES = LocationUtilsPackageDistanceUnit.NAUTICAL_MILES;
 
   /// The distance unit of feet.
-  static const DISTANCE_FEET = LocationUtilsPaclageDistancUnit.FEET;
+  static const DISTANCE_FEET = LocationUtilsPackageDistanceUnit.FEET;
 
   /// The distance unit of yards.
-  static const DISTANCE_YARDS = LocationUtilsPaclageDistancUnit.YARDS;
+  static const DISTANCE_YARDS = LocationUtilsPackageDistanceUnit.YARDS;
 
   /// The distance unit of astronomical units.
-  static const DISTANCE_ASTRONOMICAL_UNITS =
-      LocationUtilsPaclageDistancUnit.ASTRONOMICAL_UNITS;
+  static const DISTANCE_ASTRONOMICAL_UNITS = LocationUtilsPackageDistanceUnit.ASTRONOMICAL_UNITS;
 
   /// The radius of the Earth.
   static const RADIUS_EARTH = LocationUtilsPackageRadius.EARTH;

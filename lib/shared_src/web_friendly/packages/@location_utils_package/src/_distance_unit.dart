@@ -12,7 +12,7 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-enum LocationUtilsPaclageDistancUnit {
+enum LocationUtilsPackageDistanceUnit {
   METRES,
   KILOMETRES,
   MILES,

@@ -12,8 +12,7 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension CalculateHavershire3DDistanceOnLocationPackageExtension
-    on LocationUtilsPackage {
+extension CalculateHavershire3DDistanceOnLocationPackageExtension on LocationUtilsPackage {
   /// Calculate the distance between two locations using the Haversine formula
   /// and optionally the elevation difference.
   ///
@@ -38,10 +37,9 @@ extension CalculateHavershire3DDistanceOnLocationPackageExtension
   /// - `unit` - The unit of distance to return. Default is `LocationPackageDistanceUnit.METRES`.
   /// - `radius` - The radius of the sphere. Default is `LocationPackageSphereRadius.EARTH`.
   double calculateHavershire3DDistance({
-    required LocationUtilsPackageLocation location1,
-    required LocationUtilsPackageLocation location2,
-    LocationUtilsPaclageDistancUnit unit =
-        LocationUtilsPaclageDistancUnit.METRES,
+    required TLocation location1,
+    required TLocation location2,
+    LocationUtilsPackageDistanceUnit unit = LocationUtilsPackageDistanceUnit.METRES,
     LocationUtilsPackageRadius radius = LocationUtilsPackageRadius.EARTH,
   }) {
     final lat1 = location1.latitude;
@@ -72,20 +70,20 @@ extension CalculateHavershire3DDistanceOnLocationPackageExtension
 
     // Convert the distance based on the requested unit.
     switch (unit) {
-      case LocationUtilsPaclageDistancUnit.KILOMETRES:
+      case LocationUtilsPackageDistanceUnit.KILOMETRES:
         return d3d / 1000;
-      case LocationUtilsPaclageDistancUnit.MILES:
+      case LocationUtilsPackageDistanceUnit.MILES:
         return d3d / 1609.34;
-      case LocationUtilsPaclageDistancUnit.NAUTICAL_MILES:
+      case LocationUtilsPackageDistanceUnit.NAUTICAL_MILES:
         return d3d / 1852;
-      case LocationUtilsPaclageDistancUnit.FEET:
+      case LocationUtilsPackageDistanceUnit.FEET:
         return d3d * 3.28084; // 1 metre = 3.28084 feet
-      case LocationUtilsPaclageDistancUnit.YARDS:
+      case LocationUtilsPackageDistanceUnit.YARDS:
         return d3d * 1.09361; // 1 metre = 1.09361 yards
-      case LocationUtilsPaclageDistancUnit.ASTRONOMICAL_UNITS:
+      case LocationUtilsPackageDistanceUnit.ASTRONOMICAL_UNITS:
         return d3d /
             149597870700; // 1 AU = 149,597,870,700 meters (approximate mean Earth-Sun distance)
-      case LocationUtilsPaclageDistancUnit.METRES:
+      case LocationUtilsPackageDistanceUnit.METRES:
       default:
         return d3d;
     }

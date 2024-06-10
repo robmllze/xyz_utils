@@ -12,8 +12,4 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-typedef LocationUtilsPackageLocation = ({
-  double longitude,
-  double latitude,
-  double altitude
-});
+typedef TLocation = ({double longitude, double latitude, double altitude});
