@@ -12,16 +12,15 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension CalculateBestCentereOnLocationPackageExtension
-    on LocationUtilsPackage {
+extension CalculateBestCentereOnLocationPackageExtension on LocationUtilsPackage {
   /// Calculates the best center for a set of [locations]. This is the geometric
   /// center unless the distance to the closest marker is greater than the
   /// [threshold], then the closest marker is used. The [distanceUnit] is the unit of
   /// the threshold.
-  _TLocation calculateBestCenter({
-    required Set<_TLocation> locations,
+  LocationUtilsPackageLocation calculateBestCenter({
+    required Set<LocationUtilsPackageLocation> locations,
     required double threshold,
-    required _DistanceUnit distanceUnit,
+    required LocationUtilsPaclageDistancUnit distanceUnit,
   }) {
     if (locations.isEmpty) {
       return (

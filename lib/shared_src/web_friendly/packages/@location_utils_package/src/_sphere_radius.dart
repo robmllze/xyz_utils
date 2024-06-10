@@ -12,7 +12,7 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-enum _SphereRadius {
+enum LocationUtilsPackageRadius {
   //
   //
   //
@@ -31,7 +31,7 @@ enum _SphereRadius {
   //
   //
 
-  const _SphereRadius(this.radius);
+  const LocationUtilsPackageRadius(this.radius);
 
   //
   //

@@ -48,32 +48,32 @@ final class LocationUtilsPackage {
   // without polluting the global namespace.
 
   /// The distance unit of miles.
-  static const DISTANCE_MILES = _DistanceUnit.MILES;
+  static const DISTANCE_MILES = LocationUtilsPaclageDistancUnit.MILES;
 
   /// The distance unit of kilometres.
-  static const DISTANCE_KILOMETRES = _DistanceUnit.KILOMETRES;
+  static const DISTANCE_KILOMETRES = LocationUtilsPaclageDistancUnit.KILOMETRES;
 
   /// The distance unit of metres.
-  static const DISTANCE_METRES = _DistanceUnit.METRES;
+  static const DISTANCE_METRES = LocationUtilsPaclageDistancUnit.METRES;
 
   /// The distance unit of nautical miles.
-  static const DISTANCE_NAUTICAL_MILES = _DistanceUnit.NAUTICAL_MILES;
+  static const DISTANCE_NAUTICAL_MILES = LocationUtilsPaclageDistancUnit.NAUTICAL_MILES;
 
   /// The distance unit of feet.
-  static const DISTANCE_FEET = _DistanceUnit.FEET;
+  static const DISTANCE_FEET = LocationUtilsPaclageDistancUnit.FEET;
 
   /// The distance unit of yards.
-  static const DISTANCE_YARDS = _DistanceUnit.YARDS;
+  static const DISTANCE_YARDS = LocationUtilsPaclageDistancUnit.YARDS;
 
   /// The distance unit of astronomical units.
-  static const DISTANCE_ASTRONOMICAL_UNITS = _DistanceUnit.ASTRONOMICAL_UNITS;
+  static const DISTANCE_ASTRONOMICAL_UNITS = LocationUtilsPaclageDistancUnit.ASTRONOMICAL_UNITS;
 
   /// The radius of the Earth.
-  static const RADIUS_EARTH = _SphereRadius.EARTH;
+  static const RADIUS_EARTH = LocationUtilsPackageRadius.EARTH;
 
   /// The radius of the Moon.
-  static const RADIUS_EARTH_MOON = _SphereRadius.EARTH_MOON;
+  static const RADIUS_EARTH_MOON = LocationUtilsPackageRadius.EARTH_MOON;
 
   /// The radius of Mars.
-  static const RADIUS_MARS = _SphereRadius.MARS;
+  static const RADIUS_MARS = LocationUtilsPackageRadius.MARS;
 }
