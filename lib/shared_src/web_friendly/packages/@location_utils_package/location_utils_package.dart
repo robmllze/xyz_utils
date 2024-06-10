@@ -57,7 +57,8 @@ final class LocationUtilsPackage {
   static const DISTANCE_METRES = LocationUtilsPaclageDistancUnit.METRES;
 
   /// The distance unit of nautical miles.
-  static const DISTANCE_NAUTICAL_MILES = LocationUtilsPaclageDistancUnit.NAUTICAL_MILES;
+  static const DISTANCE_NAUTICAL_MILES =
+      LocationUtilsPaclageDistancUnit.NAUTICAL_MILES;
 
   /// The distance unit of feet.
   static const DISTANCE_FEET = LocationUtilsPaclageDistancUnit.FEET;
@@ -66,7 +67,8 @@ final class LocationUtilsPackage {
   static const DISTANCE_YARDS = LocationUtilsPaclageDistancUnit.YARDS;
 
   /// The distance unit of astronomical units.
-  static const DISTANCE_ASTRONOMICAL_UNITS = LocationUtilsPaclageDistancUnit.ASTRONOMICAL_UNITS;
+  static const DISTANCE_ASTRONOMICAL_UNITS =
+      LocationUtilsPaclageDistancUnit.ASTRONOMICAL_UNITS;
 
   /// The radius of the Earth.
   static const RADIUS_EARTH = LocationUtilsPackageRadius.EARTH;
