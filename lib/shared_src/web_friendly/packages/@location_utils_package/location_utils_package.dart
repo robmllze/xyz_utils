@@ -18,7 +18,7 @@ part 'src/_calculate_havershire_3d_distance.dart';
 part 'src/_calculate_zoom_to_fit.dart';
 part 'src/_distance_unit.dart';
 part 'src/_sphere_radius.dart';
-part 'src/_t_location.dart';
+part 'src/_t_location_components.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 

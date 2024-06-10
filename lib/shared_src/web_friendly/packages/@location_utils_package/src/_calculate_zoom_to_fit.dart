@@ -19,7 +19,7 @@ extension CalculateZoomToFitOnLocationPackageExtension on LocationUtilsPackage {
   /// is a multiplier to adjust the zoom level. The [minZoom] and [maxZoom] are
   /// the minimum and maximum zoom levels to clamp the result.
   double calculateZoomToFit(
-    Iterable<TLocation> locations, {
+    Iterable<TLocationComponents> locations, {
     double factor = 1.0,
     double minZoom = 10.0,
     double maxZoom = 20.0,

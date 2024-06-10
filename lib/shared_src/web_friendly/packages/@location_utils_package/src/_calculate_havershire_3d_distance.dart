@@ -38,10 +38,9 @@ extension CalculateHavershire3DDistanceOnLocationPackageExtension
   /// - `unit` - The unit of distance to return. Default is `LocationPackageDistanceUnit.METRES`.
   /// - `radius` - The radius of the sphere. Default is `LocationPackageSphereRadius.EARTH`.
   double calculateHavershire3DDistance({
-    required TLocation location1,
-    required TLocation location2,
-    LocationUtilsPackageDistanceUnit unit =
-        LocationUtilsPackageDistanceUnit.METRES,
+    required TLocationComponents location1,
+    required TLocationComponents location2,
+    LocationUtilsPackageDistanceUnit unit = LocationUtilsPackageDistanceUnit.METRES,
     LocationUtilsPackageRadius radius = LocationUtilsPackageRadius.EARTH,
   }) {
     final lat1 = location1.latitude;

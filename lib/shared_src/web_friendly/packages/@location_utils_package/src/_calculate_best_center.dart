@@ -18,8 +18,8 @@ extension CalculateBestCentereOnLocationPackageExtension
   /// center unless the distance to the closest marker is greater than the
   /// [threshold], then the closest marker is used. The [distanceUnit] is the unit of
   /// the threshold.
-  TLocation calculateBestCenter({
-    required Set<TLocation> locations,
+  TLocationComponents calculateBestCenter({
+    required Set<TLocationComponents> locations,
     required double threshold,
     required LocationUtilsPackageDistanceUnit distanceUnit,
   }) {
