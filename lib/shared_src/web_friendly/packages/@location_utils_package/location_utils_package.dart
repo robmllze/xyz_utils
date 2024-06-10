@@ -51,13 +51,15 @@ final class LocationUtilsPackage {
   static const DISTANCE_MILES = LocationUtilsPackageDistanceUnit.MILES;
 
   /// The distance unit of kilometres.
-  static const DISTANCE_KILOMETRES = LocationUtilsPackageDistanceUnit.KILOMETRES;
+  static const DISTANCE_KILOMETRES =
+      LocationUtilsPackageDistanceUnit.KILOMETRES;
 
   /// The distance unit of metres.
   static const DISTANCE_METRES = LocationUtilsPackageDistanceUnit.METRES;
 
   /// The distance unit of nautical miles.
-  static const DISTANCE_NAUTICAL_MILES = LocationUtilsPackageDistanceUnit.NAUTICAL_MILES;
+  static const DISTANCE_NAUTICAL_MILES =
+      LocationUtilsPackageDistanceUnit.NAUTICAL_MILES;
 
   /// The distance unit of feet.
   static const DISTANCE_FEET = LocationUtilsPackageDistanceUnit.FEET;
@@ -66,7 +68,8 @@ final class LocationUtilsPackage {
   static const DISTANCE_YARDS = LocationUtilsPackageDistanceUnit.YARDS;
 
   /// The distance unit of astronomical units.
-  static const DISTANCE_ASTRONOMICAL_UNITS = LocationUtilsPackageDistanceUnit.ASTRONOMICAL_UNITS;
+  static const DISTANCE_ASTRONOMICAL_UNITS =
+      LocationUtilsPackageDistanceUnit.ASTRONOMICAL_UNITS;
 
   /// The radius of the Earth.
   static const RADIUS_EARTH = LocationUtilsPackageRadius.EARTH;

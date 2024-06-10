@@ -12,7 +12,8 @@ part of '../location_utils_package.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension CalculateHavershire3DDistanceOnLocationPackageExtension on LocationUtilsPackage {
+extension CalculateHavershire3DDistanceOnLocationPackageExtension
+    on LocationUtilsPackage {
   /// Calculate the distance between two locations using the Haversine formula
   /// and optionally the elevation difference.
   ///
@@ -39,7 +40,8 @@ extension CalculateHavershire3DDistanceOnLocationPackageExtension on LocationUti
   double calculateHavershire3DDistance({
     required TLocation location1,
     required TLocation location2,
-    LocationUtilsPackageDistanceUnit unit = LocationUtilsPackageDistanceUnit.METRES,
+    LocationUtilsPackageDistanceUnit unit =
+        LocationUtilsPackageDistanceUnit.METRES,
     LocationUtilsPackageRadius radius = LocationUtilsPackageRadius.EARTH,
   }) {
     final lat1 = location1.latitude;
