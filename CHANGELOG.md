@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.58.0]
+
+- Released @ 2024-06-23 04:39:19.016054Z
+- Organize source code structure and refactor
+
 ## [0.57.1]
 
 - Released @ 2024-06-23 04:28:16.242352Z
