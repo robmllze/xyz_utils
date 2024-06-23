@@ -8,4 +8,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-typedef TLocationComponents = ({double longitude, double latitude, double altitude});
+typedef TLocationComponents = ({
+  double longitude,
+  double latitude,
+  double altitude
+});

@@ -42,7 +42,8 @@ extension CalculateZoomToFitOnLocationPackageExtension on LocationUtils {
     }
     final lngDelta = maxLng - minLng;
     // Estimate zoom level based on longitude span.
-    final estimate = max(0.0, 1.0 - log(lngDelta) / log(2.0) + (log(360) / log(2.0)) - 1);
+    final estimate =
+        max(0.0, 1.0 - log(lngDelta) / log(2.0) + (log(360) / log(2.0)) - 1);
     // Apply the factor and clamp the zoom level.
     final zoom = max(minZoom, min(maxZoom, estimate)) * factor;
     return zoom;
