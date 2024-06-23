@@ -4,7 +4,6 @@
 
 - Released @ 2024-06-23 04:28:16.242352Z
 - Fix exports
-- Organize source code structure and refactor
 
 ## [0.57.0]
 
