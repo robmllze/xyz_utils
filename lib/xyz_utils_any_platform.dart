@@ -12,6 +12,6 @@
 
 library;
 
-export 'xyz_utils_any_platform.dart';
-
-export '/src/_all_src.g.dart';
+export 'src_any_platform/_any_platform_none.dart'
+    if (dart.library.io) 'src_any_platform/_any_platform_io.dart'
+    if (dart.library.html) 'src_any_platform/_any_platform_html.dart';

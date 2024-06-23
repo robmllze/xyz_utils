@@ -3,15 +3,33 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
-//
-// Licensing details can be found in the LICENSE file in the root directory.
+// Licencing details are in the LICENSE file in the root directory.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-library;
+enum DistanceUnit {
+  //
+  //
+  //
 
-export 'xyz_utils_any_platform.dart';
+  METRES(1.0),
+  KILOMETRES(1.0 / 1000.0),
+  MILES(1.0 / 1609.34),
+  NAUTICAL_MILES(1.0 / 1852.0),
+  FEET(3.28084),
+  YARDS(1.09361),
+  ASTRONOMICAL_UNITS(1.0 / 149597870700);
 
-export '/src/_all_src.g.dart';
+  //
+  //
+  //
+
+  final double conversion;
+
+  //
+  //
+  //
+
+  const DistanceUnit(this.conversion);
+}

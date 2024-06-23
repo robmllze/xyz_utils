@@ -12,6 +12,4 @@
 
 library;
 
-export 'xyz_utils_any_platform.dart';
-
 export '/src/_all_src.g.dart';

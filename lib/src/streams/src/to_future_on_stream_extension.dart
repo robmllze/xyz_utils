@@ -10,8 +10,11 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-library;
+import 'stream_to_future.dart';
 
-export 'xyz_utils_any_platform.dart';
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export '/src/_all_src.g.dart';
+extension ToFutureOnStreamExtension<T> on Stream<T> {
+  /// Waits for the first value from the [Stream] and returns it as a [Future].
+  Future<T> toFuture() => streamToFuture(this);
+}
