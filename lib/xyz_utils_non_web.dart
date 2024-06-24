@@ -12,7 +12,6 @@
 
 library;
 
-export 'xyz_utils_any_platform.dart';
+export 'xyz_utils.dart';
 
 export '/src_non_web/_all_src_non_web.g.dart';
-export '/src/_all_src.g.dart';

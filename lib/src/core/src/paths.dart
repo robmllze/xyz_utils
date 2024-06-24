@@ -14,20 +14,20 @@ import 'package:path/path.dart' as p;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Returns the base name of a given file path.
+/// Returns the base name of a given file [path].
 String getBaseName(String path) {
   final localSystemFilePath = toLocalSystemPathFormat(path);
   return p.basename(localSystemFilePath);
 }
 
-/// Returns the directory path of a given file path.
+/// Returns the directory path of a given file [path].
 String getDirPath(String path) {
   final localSystemFilePath = toLocalSystemPathFormat(path);
   return p.dirname(localSystemFilePath);
 }
 
-/// Checks if the provided path contains any of the specified components. This
-/// operation is case-insensitive.
+/// Checks if the provided [path] contains any of the specified [components].
+/// This operation is case-insensitive.
 bool pathContainsComponent(String path, Set<String> components) {
   final localSystemFilePath = toLocalSystemPathFormat(path);
   final a = p.split(localSystemFilePath).map((e) => e.toLowerCase());
@@ -39,7 +39,7 @@ bool pathContainsComponent(String path, Set<String> components) {
   return false;
 }
 
-/// Checks if the provided path matches any of the specified path patterns.
+/// Checks if the provided [path] matches any of the specified [pathPatterns].
 bool matchesAnyPathPattern(String path, Set<String> pathPatterns) {
   if (pathPatterns.isNotEmpty) {
     final localSystemFilePath = toLocalSystemPathFormat(path);
@@ -51,48 +51,68 @@ bool matchesAnyPathPattern(String path, Set<String> pathPatterns) {
   return true;
 }
 
-/// Converts the given path to a consistent, local path format.
+/// Checks if the provided [filePath] matches any of the specified [extensions].
+///
+/// Notes:
+///
+/// - If the [extensions] set is empty, the function will return true.
+/// - Specify [caseSensitive] as false to ignore case.
+bool matchesAnyExtension(
+  String filePath,
+  Set<String> extensions, {
+  bool caseSensitive = true,
+}) {
+  if (extensions.isEmpty) return true;
+  final extension = p.extension(filePath);
+  return extensions.any((e) {
+    final a = caseSensitive ? extension : extension.toLowerCase();
+    final b = caseSensitive ? e : e.toLowerCase();
+    return a == b;
+  });
+}
+
+/// Converts the given [filePath] to a consistent, local path format.
 String getFileNameWithoutExtension(String filePath) {
   final localSystemFilePath = toLocalSystemPathFormat(filePath);
   return p.basenameWithoutExtension(localSystemFilePath);
 }
 
-/// Replaces all forward slashes with the local path separator.
+/// Replaces all forward slashes in [path] with the local path separator.
 String toLocalSystemPathFormat(String path) {
   return path.split(RegExp(r'[\\/]')).join(p.separator);
 }
 
-/// Replaces all backslashes with forward slashes.
+/// Replaces all backslashes in [path] with forward slashes.
 String toUnixSystemPathFormat(String path) {
   return path.split(RegExp(r'[\\/]')).join('/');
 }
 
-/// Replaces all forward slashes with backslashes.
+/// Replaces all forward slashes in [path] with backslashes.
 String toWindowsSystemPathFormat(String path) {
   return path.split(RegExp(r'[\\/]')).join('\\');
 }
 
-/// Checks if the provided file is a private Dart file (starts with an
+/// Checks if the provided [filePath] is a private file (starts with an
 /// underscore).
 bool isPrivateFileName(String filePath) {
   final fileName = getBaseName(filePath);
   return fileName.startsWith('_');
 }
 
-/// Checks if the file name matches the specified beginning and ending types.
+/// Checks if the file name extracted from [filePath] matches the specified
+/// beginning type [begType] and ending type [endType].
+///
 /// Returns a tuple with the match status and the file name.
-(bool, String) isMatchingFileName(
+({bool status, String fileName}) isMatchingFileName(
   String filePath,
   String begType,
   String endType,
 ) {
   final fileName = getBaseName(filePath);
-  final a =
-      begType.isEmpty ? true : fileName.startsWith('${begType.toLowerCase()}_');
-  final b =
-      endType.isEmpty ? true : fileName.endsWith('.$endType'.toLowerCase());
+  final a = begType.isEmpty ? true : fileName.startsWith('${begType.toLowerCase()}_');
+  final b = endType.isEmpty ? true : fileName.endsWith('.$endType'.toLowerCase());
   final c = a && b;
-  return (c, fileName);
+  return (status: c, fileName: fileName);
 }
 
 /// Combines multiple [pathSets] into a single set, returning all possible
