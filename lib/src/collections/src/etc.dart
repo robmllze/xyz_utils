@@ -60,3 +60,10 @@ String combinedOrderedStringId(List<String> ids) {
   final combined = sorted.join('_');
   return combined;
 }
+
+extension TakeLastOnIterableExtension on Iterable<String> {
+  /// Takes the last [count] elements from the iterable.
+  Iterable<String> takeLast(int count) {
+    return this.toList().reversed.take(count).toList().reversed;
+  }
+}
