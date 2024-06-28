@@ -147,9 +147,16 @@ String convertToStringCaseType(
   }
 }
 
-extension ConvertStringOnStringCaseTypeExtension on StringCaseType {
-  /// Converts a string to a specific case type.
-  String convertString(String value) {
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension ConvertOnStringCaseTypeExtension on StringCaseType {
+  /// Converts [value] to a specific case type.
+  String convert(String value) {
     return convertToStringCaseType(value, this);
+  }
+
+  /// Converts [values] to a specific case type.
+  Iterable<String> convertAll(Iterable<String> values) {
+    return values.map((e) => this.convert(e));
   }
 }
