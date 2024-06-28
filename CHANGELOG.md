@@ -2,9 +2,10 @@
 
 ## [0.59.0]
 
-- Released @ 2024-06-25 03:10:45.298703Z
+- Released @ 2024-06-28 03:31:38.345695Z
 - Fix dependencies
 - Update
+- Improve string case conversion logic and performance
 
 ## [0.58.1]
 
