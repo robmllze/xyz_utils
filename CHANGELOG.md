@@ -4,7 +4,6 @@
 
 - Released @ 2024-07-01 02:20:40.165555Z
 - Fix dependencies
-- Improve string case conversion logic and performance
 
 ## [0.58.1]
 
