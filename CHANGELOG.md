@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.60.0]
+
+- Released @ 2024-07-01 02:21:39.328821Z
+- Improve string case conversion logic and performance
+
 ## [0.59.0]
 
 - Released @ 2024-07-01 02:20:40.165555Z
