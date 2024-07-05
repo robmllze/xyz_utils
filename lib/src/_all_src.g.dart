@@ -25,6 +25,7 @@ export 'collections/src/non_nulls_on_map_extension.dart';
 export 'collections/src/null_filtered.dart';
 export 'collections/src/null_if_empty_extensions.dart';
 export 'collections/src/second_to_ninth_element_on_iterable_extension.dart';
+export 'collections/src/set_nested_value_on_map_extension.dart';
 export 'collections/src/unique_entries.dart';
 export 'core/src/ansi_styled_string.dart';
 export 'core/src/callbacks.dart';
