@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.61.0]
+
+- Released @ 2024-07-05 03:29:49.291759Z
+- Add setNestedValueOnMapExtension to collections
+
 ## [0.60.0]
 
 - Released @ 2024-07-01 02:21:39.328821Z
