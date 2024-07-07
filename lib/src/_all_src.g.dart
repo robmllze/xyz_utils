@@ -40,6 +40,7 @@ export 'core/src/paths.dart';
 export 'core/src/post_destruction_checker.dart';
 export 'core/src/rec.dart';
 export 'core/src/screen_calculator.dart';
+export 'core/src/try_or_null_on_function_extension.dart';
 export 'core/src/type_message_mixin.dart';
 export 'core/src/value_of_on_enum_extension.dart';
 export 'core/src/version.dart';
