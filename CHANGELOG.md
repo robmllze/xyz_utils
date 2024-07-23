@@ -2,7 +2,7 @@
 
 ## [0.62.0]
 
-- Released @ 2024-07-23 12:10:44.772348Z
+- Released @ 2024-07-23 12:39:24.404765Z
 - Add tryOrNull extension to Function class
 - Update
 
