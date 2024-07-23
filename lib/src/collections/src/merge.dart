@@ -14,6 +14,7 @@ import 'dart:collection' show Queue;
 
 import 'package:collection/collection.dart' show mergeMaps;
 
+import '../../../xyz_utils.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -89,36 +90,16 @@ dynamic mergeDataDeep(
   return elseFilter?.call(b) ?? b;
 }
 
-/// Merges all [jsons].
-Map<String, dynamic> mergeJson(List<Map<String, dynamic>> jsons) {
-  var merged = <String, dynamic>{};
-  for (final map in jsons) {
-    final temp = letMap<String, dynamic>(_mergeJson(merged, map));
+/// Merges all [maps] deeply.
+Map<K, V> mergeMapsDeep<K, V>(List<Map<K, V>> maps) {
+  var a = <K, V>{};
+  for (final b in maps) {
+    final temp = letMap<K, V>(mergeDataDeep(a, b));
     if (temp != null) {
-      merged = temp;
+      a = temp;
     }
   }
-  return merged;
-}
-
-Map<String, dynamic> _mergeJson(
-    Map<String, dynamic> map1, Map<String, dynamic> map2,) {
-  final result = Map<String, dynamic>.from(map1);
-
-  map2.forEach((key, value) {
-    if (result.containsKey(key)) {
-      if (value is Map<String, dynamic> &&
-          result[key] is Map<String, dynamic>) {
-        result[key] = _mergeJson(result[key], value);
-      } else {
-        result[key] = value;
-      }
-    } else {
-      result[key] = value;
-    }
-  });
-
-  return result;
+  return a;
 }
 
 /// Merges two data structures deeply and tries to perform toJson on objects.
