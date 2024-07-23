@@ -39,15 +39,13 @@ extension StringCaseConversionsOnStringExtension on String {
   String toUpperDotCase() => this.toDotCase().toUpperCase();
 
   /// Converts the string to path/case.
-  String toPathCase([String separator = '/']) =>
-      this.extractLowercaseComponents().join(separator);
+  String toPathCase([String separator = '/']) => this.extractLowercaseComponents().join(separator);
 
   /// Converts the string to camelCase.
   String toCamelCase() => this.toPascalCase().withFirstLetterAsLowerCase();
 
   /// Converts the string to PascalCase.
-  String toPascalCase() =>
-      this.extractLowercaseComponents().map((e) => e.capitalize()).join();
+  String toPascalCase() => this.extractLowercaseComponents().map((e) => e.capitalize()).join();
 
   /// Extracts and returns a list of lowercase components from the string.
   ///
@@ -62,12 +60,12 @@ extension StringCaseConversionsOnStringExtension on String {
   ///
   /// Example:
   /// ```dart
-  /// var example = 'HelloWorld123+456';
-  /// var components = example.extractLowercaseComponents(special = const {'+'});
+  /// var example = 'HelloWorld123.456';
+  /// var components = example.extractLowercaseComponents(special = const {'.'});
   /// print(components); // Output: ['hello', 'world', '123+456']
   /// ```
   List<String> extractLowercaseComponents({
-    Set<String> special = const {'+'},
+    Set<String> special = const {'.'},
   }) {
     if (this.isEmpty) return [this];
     final words = <String>[];
@@ -109,12 +107,10 @@ extension StringCaseConversionsOnStringExtension on String {
   bool get isLetter => RegExp(r'^[a-zA-Z]$').hasMatch(this);
 
   /// Returns `true` if the string is all uppercase.
-  bool get isUpperCase =>
-      this == this.toUpperCase() && this != this.toLowerCase();
+  bool get isUpperCase => this == this.toUpperCase() && this != this.toLowerCase();
 
   /// Returns `true` if the string is all lowercase.
-  bool get isLowerCase =>
-      this == this.toLowerCase() && this != this.toUpperCase();
+  bool get isLowerCase => this == this.toLowerCase() && this != this.toUpperCase();
 
   /// Capitalizes the first letter of the string.
   ///

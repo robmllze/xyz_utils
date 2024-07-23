@@ -88,6 +88,15 @@ dynamic mergeDataDeep(
   return elseFilter?.call(b) ?? b;
 }
 
+/// Merges all [maps] deeply.
+Map mergeMapsDeep(List<Map> maps) {
+  var merged = {};
+  for (final map in maps) {
+    merged = mergeDataDeep(merged, map);
+  }
+  return merged;
+}
+
 /// Merges two data structures deeply and tries to perform toJson on objects.
 dynamic mergeDataDeepIncludeCallsToJson(dynamic a, dynamic b) {
   return mergeDataDeep(a, b, tryToJson);
