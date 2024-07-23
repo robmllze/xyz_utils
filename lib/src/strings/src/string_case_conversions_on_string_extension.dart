@@ -39,49 +39,53 @@ extension StringCaseConversionsOnStringExtension on String {
   String toUpperDotCase() => this.toDotCase().toUpperCase();
 
   /// Converts the string to path/case.
-  String toPathCase([String separator = '/']) =>
-      this.extractLowercaseComponents().join(separator);
+  String toPathCase([String separator = '/']) => this.extractLowercaseComponents().join(separator);
 
   /// Converts the string to camelCase.
   String toCamelCase() => this.toPascalCase().withFirstLetterAsLowerCase();
 
   /// Converts the string to PascalCase.
-  String toPascalCase() =>
-      this.extractLowercaseComponents().map((e) => e.capitalize()).join();
+  String toPascalCase() => this.extractLowercaseComponents().map((e) => e.capitalize()).join();
 
   /// Extracts and returns a list of lowercase components from the string.
   ///
   /// This method identifies components based on transitions between lowercase
   /// and uppercase letters, between letters and digits, within sequences of
-  /// uppercase letters, and at any non-alphanumeric characters.
-  /// Each identified component is converted to lowercase.
+  /// uppercase letters (including [special] characters), and at any
+  /// non-alphanumeric characters. Each identified component is converted to
+  /// lowercase.
   ///
   /// The method is useful for parsing strings formatted in camelCase, PascalCase,
   /// snake_case, kebab-case, or other mixed-case styles into a list of lowercase words or segments.
   ///
   /// Example:
   /// ```dart
-  /// var example = 'HelloWorld123';
-  /// var components = example.extractLowercaseComponents();
-  /// print(components); // Output: ['hello', 'world', '123']
+  /// var example = 'HelloWorld123+456';
+  /// var components = example.extractLowercaseComponents(special = const {'+'});
+  /// print(components); // Output: ['hello', 'world', '123+456']
   /// ```
-  List<String> extractLowercaseComponents() {
+  List<String> extractLowercaseComponents({
+    Set<String> special = const {'+'},
+  }) {
     if (this.isEmpty) return [this];
     final words = <String>[];
     var currentWord = StringBuffer();
     String? a;
     for (var n = 0; n < this.length; n++) {
       final b = this[n];
-      if (b.isLetter || b.isDigit) {
-        if (a != null &&
-            ((a.isLowerCase && b.isUpperCase) ||
-                (a.isDigit && b.isLetter) ||
-                (a.isLetter && b.isDigit) ||
-                (a.isUpperCase &&
-                    b.isUpperCase &&
-                    (n + 1 < this.length && this[n + 1].isLowerCase)))) {
-          words.add(currentWord.toString().toLowerCase());
-          currentWord = StringBuffer();
+      final bIsLetter = b.isLetter || special.contains(b);
+      if (bIsLetter || b.isDigit) {
+        if (a != null) {
+          final aIsLetter = a.isLetter || special.contains(a);
+          if ((a.isLowerCase && b.isUpperCase) ||
+              (a.isDigit && bIsLetter) ||
+              (aIsLetter && b.isDigit) ||
+              (a.isUpperCase &&
+                  b.isUpperCase &&
+                  (n + 1 < this.length && this[n + 1].isLowerCase))) {
+            words.add(currentWord.toString().toLowerCase());
+            currentWord = StringBuffer();
+          }
         }
         currentWord.write(b);
       } else if (currentWord.isNotEmpty) {
@@ -103,12 +107,10 @@ extension StringCaseConversionsOnStringExtension on String {
   bool get isLetter => RegExp(r'^[a-zA-Z]$').hasMatch(this);
 
   /// Returns `true` if the string is all uppercase.
-  bool get isUpperCase =>
-      this == this.toUpperCase() && this != this.toLowerCase();
+  bool get isUpperCase => this == this.toUpperCase() && this != this.toLowerCase();
 
   /// Returns `true` if the string is all lowercase.
-  bool get isLowerCase =>
-      this == this.toLowerCase() && this != this.toUpperCase();
+  bool get isLowerCase => this == this.toLowerCase() && this != this.toUpperCase();
 
   /// Capitalizes the first letter of the string.
   ///
