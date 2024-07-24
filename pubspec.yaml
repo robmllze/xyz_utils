@@ -3,7 +3,7 @@
 ##
 ## 🇽🇾🇿 & Dev
 ##
-## Copyright Ⓒ Robert Mollentze, xyzand.dev
+## Copyright Ⓒ Robert Mollentze
 ##
 ## Licensing details can be found in the LICENSE file in the root directory.
 ##
@@ -11,9 +11,9 @@
 ##.title~
 
 name: xyz_utils
-description: This package provides a set of utilities that are commonly used in Dart apps. It is also the foundation for other packages in the XYZ ecosystem.
+description: This package provides a set of utilities to facilitate the development of Dart apps. It also includes many utilities used by other packages in the XYZ ecosystem.
 repository: https://github.com/robmllze/xyz_utils
-version: 0.62.0
+version: 0.63.0
 
 ## -----------------------------------------------------------------------------
 

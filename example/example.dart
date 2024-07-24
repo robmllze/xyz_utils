@@ -3,7 +3,7 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
+// Copyright Ⓒ Robert Mollentze
 //
 // Licensing details can be found in the LICENSE file in the root directory.
 //
@@ -20,5 +20,5 @@ import 'package:xyz_utils/xyz_utils.dart';
 
 void main() async {
   // Print the current file name.
-  print(Here().fileName);
+  print(Here().fileName); // prints 'example.dart'
 }

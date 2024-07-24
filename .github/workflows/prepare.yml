@@ -3,10 +3,10 @@
 ##
 ## 🇽🇾🇿 & Dev
 ##
-## Copyright Ⓒ Robert Mollentze, xyzand.dev
-## 
+## Copyright Ⓒ Robert Mollentze
+##
 ## Licensing details can be found in the LICENSE file in the root directory.
-## 
+##
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1.2
 
@@ -43,19 +43,19 @@ jobs:
           VERSION=$(grep "version:" pubspec.yaml | sed 's/version: //')
           echo "Extracted version: $VERSION"
           echo "::set-output name=extracted_version::$VERSION"
-      
+
       - name: Get commit messages
         id: get_commits
         run: |
           COMMIT_MESSAGES=$(git log --format=%B -n 1 HEAD)
           echo "::set-output name=messages::${COMMIT_MESSAGES}"
-      
+
       - name: Update CHANGELOG.md
         run: |
           RELEASE_NOTES="${{ steps.get_commits.outputs.messages }}"
           dart run .github/scripts/update_changelog.dart "${{ steps.get_version.outputs.extracted_version }}" "$RELEASE_NOTES"
         shell: bash
-      
+
       - name: Commit and push changes
         run: |
           git config user.name github-actions

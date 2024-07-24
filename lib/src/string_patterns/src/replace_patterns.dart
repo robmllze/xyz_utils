@@ -3,7 +3,7 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
+// Copyright Ⓒ Robert Mollentze
 //
 // Licensing details can be found in the LICENSE file in the root directory.
 //
@@ -30,9 +30,8 @@ String replacePatterns(
     final e1 = parts.elementAtOrNull(1);
     final key = (e1 ?? e0)!;
     final defaultValue = e0 ?? key;
-    final data1 = settings.caseSensitive
-        ? data
-        : data.map((k, v) => MapEntry(k.toString().toLowerCase(), v));
+    final data1 =
+        settings.caseSensitive ? data : data.map((k, v) => MapEntry(k.toString().toLowerCase(), v));
     final key1 = settings.caseSensitive ? key : key.toLowerCase();
     final suggestedReplacementValue = data1[key1];
     final replacementValue =

@@ -3,7 +3,7 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
+// Copyright Ⓒ Robert Mollentze
 //
 // Licensing details can be found in the LICENSE file in the root directory.
 //
@@ -14,4 +14,4 @@ library;
 
 export 'xyz_utils_any_platform.dart';
 
-export '/src/_all_src.g.dart';
+export 'src/_index.g.dart';

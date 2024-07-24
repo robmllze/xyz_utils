@@ -3,7 +3,7 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
+// Copyright Ⓒ Robert Mollentze
 //
 // Licensing details can be found in the LICENSE file in the root directory.
 //
@@ -159,14 +159,12 @@ class Version {
   //
 
   @override
-  bool operator ==(Object other) =>
-      other is Version ? this.isEqualTo(other) : false;
+  bool operator ==(Object other) => other is Version ? this.isEqualTo(other) : false;
 
   //
   //
   //
 
   @override
-  String toString() =>
-      '${this.major}.${this.minor}.${this.patch}+${this.build}';
+  String toString() => '${this.major}.${this.minor}.${this.patch}+${this.build}';
 }

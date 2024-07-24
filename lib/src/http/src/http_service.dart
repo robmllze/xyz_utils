@@ -3,7 +3,7 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
+// Copyright Ⓒ Robert Mollentze
 //
 // Licensing details can be found in the LICENSE file in the root directory.
 //
@@ -36,9 +36,7 @@ class HttpService {
     Duration timeout = const Duration(seconds: 30),
     Map<String, String>? headers,
   }) async {
-    return await http
-        .get(url, headers: headers)
-        .handleExceptions(timeout: timeout);
+    return await http.get(url, headers: headers).handleExceptions(timeout: timeout);
   }
 
   //
@@ -52,9 +50,7 @@ class HttpService {
     Duration timeout = const Duration(seconds: 30),
     Map<String, String>? headers,
   }) async {
-    final response = await http
-        .get(url, headers: headers)
-        .handleExceptions(timeout: timeout);
+    final response = await http.get(url, headers: headers).handleExceptions(timeout: timeout);
     return (response, response.bodyJson);
   }
 
@@ -69,9 +65,7 @@ class HttpService {
     Duration timeout = const Duration(seconds: 30),
     Map<String, String>? headers,
   }) async {
-    final response = await http
-        .get(url, headers: headers)
-        .handleExceptions(timeout: timeout);
+    final response = await http.get(url, headers: headers).handleExceptions(timeout: timeout);
     return (response, response.bodyBytes);
   }
 
@@ -87,9 +81,7 @@ class HttpService {
   }) async {
     final url = composedRequest.$1;
     final body = composedRequest.$2;
-    return await http
-        .post(url, headers: headers, body: body)
-        .handleExceptions(timeout: timeout);
+    return await http.post(url, headers: headers, body: body).handleExceptions(timeout: timeout);
   }
 
   //
@@ -149,8 +141,7 @@ class HttpService {
   /// Returns the current IP address of the device.
   Future<String?> getCurrentIpAddress() async {
     try {
-      final response =
-          await http.get(Uri.parse('https://api.ipify.org?format=json'));
+      final response = await http.get(Uri.parse('https://api.ipify.org?format=json'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         return jsonData['ip'];

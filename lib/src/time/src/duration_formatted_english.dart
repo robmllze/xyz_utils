@@ -3,7 +3,7 @@
 //
 // 🇽🇾🇿 & Dev
 //
-// Copyright Ⓒ Robert Mollentze, xyzand.dev
+// Copyright Ⓒ Robert Mollentze
 //
 // Licensing details can be found in the LICENSE file in the root directory.
 //
@@ -17,12 +17,7 @@ class DurationFormattedEnglish {
   //
 
   DurationFormattedEnglish(int microseconds) {
-    const MS = 1000,
-        S = 1000 * MS,
-        M = 60 * S,
-        H = 60 * M,
-        D = 24 * H,
-        W = 7 * D;
+    const MS = 1000, S = 1000 * MS, M = 60 * S, H = 60 * M, D = 24 * H, W = 7 * D;
     late final int tms, ts, tm, th, td, tw;
     w = microseconds ~/ W;
     tw = microseconds - W * w;
