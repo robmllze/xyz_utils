@@ -23,13 +23,13 @@ Use this package as a dependency by adding it to your `pubspec.yaml` file (see [
 
 This is an open-source project, and contributions are welcome from everyone, regardless of experience level. Contributing to projects is a great way to learn, share knowledge, and showcase your skills to the community. Join the discussions to ask questions, report bugs, suggest features, share ideas, or find out how you can contribute.
 
-### Join GitHub Discussion:
+### Join GitHub Discussions:
 
 💬 https://github.com/robmllze/xyz_utils/discussions/
 
-### Join Reddit Discussion:
+### Join Reddit Discussions:
 
-💬 https://www.reddit.com/user/robmllze/m/xyz_utils_package/
+💬 https://www.reddit.com/r/xyz_utils/
 
 ### Chief Maintainer:
 
