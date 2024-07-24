@@ -25,13 +25,13 @@ This is an open-source project, and contributions are welcome from everyone, reg
 
 ### Join GitHub Discussion:
 
-💬 https://github.com/robmllze/xyz_utils/discussions/1
+💬 https://github.com/robmllze/xyz_utils/discussions/
 
 ### Join Reddit Discussion:
 
 💬 https://www.reddit.com/user/robmllze/m/xyz_utils_package/
 
-### Contact Chief Contributor:
+### Chief Maintainer:
 
 📧 Email _Robert Mollentze_ at robmllze@gmail.com
 
