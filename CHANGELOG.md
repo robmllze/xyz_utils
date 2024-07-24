@@ -2,7 +2,7 @@
 
 ## [0.63.0]
 
-- Released @ 2024-07-24 06:07:10.885373Z
+- Released @ 2024-07-24 06:09:51.627490Z
 - Update readme and refactor
 
 ## [0.62.0]
