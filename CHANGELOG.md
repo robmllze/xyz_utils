@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.63.0]
+
+- Released @ 2024-07-24 06:07:10.885373Z
+- Update readme and refactor
+
 ## [0.62.0]
 
 - Released @ 2024-07-24 05:32:56.927044Z

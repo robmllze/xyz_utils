@@ -15,7 +15,9 @@ extension MapWithDefaultOnMapExtension<K, V> on Map<K, V> {
   /// [defaultValue] for all values that are null. If [defaultValue] is null,
   /// it simply returns a copy of the original map.
   Map<K, dynamic> mapWithDefault(dynamic defaultValue) {
-    return defaultValue != null ? this.map((k, v) => MapEntry(k, v ?? defaultValue)) : Map.of(this);
+    return defaultValue != null
+        ? this.map((k, v) => MapEntry(k, v ?? defaultValue))
+        : Map.of(this);
   }
 
   /// Filters the map's entries based on a list of included values.
