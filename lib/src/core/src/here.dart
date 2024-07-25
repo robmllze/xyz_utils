@@ -142,38 +142,42 @@ class Here {
 
 List<dynamic>? _here([int start = 1]) {
   final results = <dynamic>[null, null, null, null];
-  final stackTrace = StackTrace.current.toString().split('\n');
-  for (var i = start; i < stackTrace.length; i++) {
-    final line = stackTrace[i];
-    final [a, b] = line.split(' (');
-    final scope = a.split(RegExp(r'#\d+'))[1].trim();
-    if (scope.contains('<anonymous closure>')) continue;
-    final locationParts = b.substring(0, b.length - 1).split(':');
-    final filePath = locationParts
-        .firstWhereOrNull((e) => e.contains('.dart'))
-        ?.replaceAll('.dart', '')
-        .replaceAll('.js', '');
-    final file = filePath != null ? getBaseName(filePath) : null;
-    int? lineNumber;
-    int? columnNumber;
-    for (final c in locationParts) {
-      if (lineNumber == null) {
-        if (c.contains(RegExp(r'\d+'))) {
-          lineNumber = int.tryParse(c);
-        }
-      } else if (columnNumber == null) {
-        if (c.contains(RegExp(r'\d+'))) {
-          columnNumber = int.tryParse(c);
+  try {
+    final stackTrace = StackTrace.current.toString().split('\n');
+    for (var i = start; i < stackTrace.length; i++) {
+      final line = stackTrace[i];
+      final [a, b] = line.split(' (');
+      final scope = a.split(RegExp(r'#\d+'))[1].trim();
+      if (scope.contains('<anonymous closure>')) continue;
+      final locationParts = b.substring(0, b.length - 1).split(':');
+      final filePath = locationParts
+          .firstWhereOrNull((e) => e.contains('.dart'))
+          ?.replaceAll('.dart', '')
+          .replaceAll('.js', '');
+      final file = filePath != null ? getBaseName(filePath) : null;
+      int? lineNumber;
+      int? columnNumber;
+      for (final c in locationParts) {
+        if (lineNumber == null) {
+          if (c.contains(RegExp(r'\d+'))) {
+            lineNumber = int.tryParse(c);
+          }
+        } else if (columnNumber == null) {
+          if (c.contains(RegExp(r'\d+'))) {
+            columnNumber = int.tryParse(c);
+          }
         }
       }
+      if (filePath != null && lineNumber != null && columnNumber != null) {
+        results[0] = file;
+        results[1] = scope;
+        results[2] = lineNumber;
+        results[3] = columnNumber;
+        break;
+      }
     }
-    if (filePath != null && lineNumber != null && columnNumber != null) {
-      results[0] = file;
-      results[1] = scope;
-      results[2] = lineNumber;
-      results[3] = columnNumber;
-      return results;
-    }
+  } catch (_) {
+    // Do nothing.
   }
   return results;
 }
@@ -181,50 +185,59 @@ List<dynamic>? _here([int start = 1]) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 List<dynamic>? _hereWeb([int start = 1]) {
-  final stackTrace = StackTrace.current.toString().split('\n');
-  for (var i = start + 1; i < stackTrace.length; i++) {
-    final line = stackTrace[i];
-    final parts = line.split(' ').where((e) => e.isNotEmpty).toList();
-    final skipParts = <int>[];
-    final filePath = () {
+  final results = <dynamic>[null, null, null, null];
+  try {
+    final stackTrace = StackTrace.current.toString().split('\n');
+    for (var i = start + 1; i < stackTrace.length; i++) {
+      final line = stackTrace[i];
+      final parts = line.split(' ').where((e) => e.isNotEmpty).toList();
+      final skipParts = <int>[];
+      final filePath = () {
+        for (var p = 0; p < parts.length; p++) {
+          final part = parts[p];
+          if (part.startsWith('packages') && part.contains('.dart')) {
+            final a = part
+                .replaceAll(RegExp('(packages)[\\/]'), '')
+                .replaceAll('.dart', '')
+                .replaceAll('.js', '');
+            skipParts.add(p);
+            return a;
+          }
+        }
+      }();
+      if (filePath == null) continue;
+      int? lineNumber;
+      int? columnNumber;
       for (var p = 0; p < parts.length; p++) {
-        final part = parts[p];
-        if (part.startsWith('packages') && part.contains('.dart')) {
-          final a = part
-              .replaceAll(RegExp('(packages)[\\/]'), '')
-              .replaceAll('.dart', '')
-              .replaceAll('.js', '');
-          skipParts.add(p);
-          return a;
+        final pp = parts[p].split(':');
+        if (pp.length == 2) {
+          lineNumber = int.tryParse(pp[0]);
+          columnNumber = int.tryParse(pp[1]);
+          if (lineNumber != null && columnNumber != null) {
+            skipParts.add(p);
+            break;
+          } else {
+            lineNumber = null;
+            columnNumber = null;
+          }
         }
       }
-    }();
-    if (filePath == null) continue;
-    int? lineNumber;
-    int? columnNumber;
-    for (var p = 0; p < parts.length; p++) {
-      final pp = parts[p].split(':');
-      if (pp.length == 2) {
-        lineNumber = int.tryParse(pp[0]);
-        columnNumber = int.tryParse(pp[1]);
-        if (lineNumber != null && columnNumber != null) {
-          skipParts.add(p);
-          break;
-        } else {
-          lineNumber = null;
-          columnNumber = null;
-        }
+      String? scope;
+      for (var p = 0; p < parts.length; p++) {
+        if (skipParts.contains(p)) continue;
+        scope = parts[p];
       }
+      if (scope == 'new') scope = '<new>';
+      final isAnonymous = parts.contains('<fn>');
+      if (isAnonymous) continue;
+      results[0] = filePath;
+      results[1] = scope;
+      results[2] = null;
+      results[3] = null;
+      break;
     }
-    String? scope;
-    for (var p = 0; p < parts.length; p++) {
-      if (skipParts.contains(p)) continue;
-      scope = parts[p];
-    }
-    if (scope == 'new') scope = '<new>';
-    final isAnonymous = parts.contains('<fn>');
-    if (isAnonymous) continue;
-    return [filePath, scope, null, null];
+  } catch (_) {
+    // Do nothing.
   }
-  return [null, null, null, null];
+  return results;
 }
