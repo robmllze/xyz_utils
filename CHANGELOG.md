@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.64.0]
+
+- Released @ 2024-07-25 05:07:05.883528Z
+- Refactor _here and _hereWeb methods for better readability and maintainability
+
 ## [0.63.2]
 
 - Released @ 2024-07-24 07:12:48.541839Z
